@@ -1,0 +1,29 @@
+kkkkkk
+
+    // 7. Success response
+    res.json({
+      status: "success",
+      message: "Airtime sent successfully",
+      vtpass: vtpassRes.data,
+    });
+
+  } catch (err) {
+    console.error("🔥 VTPASS FULL ERROR:");
+    console.error(err.response?.data || err.message || err);
+
+    // Safety refund
+    if (req.body?.userId && req.body?.amount) {
+      await pool.query(
+        "UPDATE wallets SET balance = balance + $1 WHERE user_id = $2",
+        [req.body.amount, req.body.userId]
+      );
+    }
+
+    res.status(500).json({
+      error: "VTpass system error",
+      vtpass: err.response?.data || err.message || err,
+    });
+  }
+});
+
+module.exports = router;

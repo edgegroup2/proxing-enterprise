@@ -1,0 +1,39 @@
+require("dotenv").config();
+const express = require("express");
+const cors = require("cors");
+
+const app = express();
+app.use(cors());
+app.use(express.json());
+
+// Routes
+const smsRoutes = require("./routes/smsRoutes");
+const vtpassRoutes = require("./routes/vtpassRoutes");
+const walletRoutes = require("./routes/walletRoutes");
+const kycRoutes = require("./routes/kycRoutes");
+const chatRoutes = require("./routes/chatRoutes");
+const monnifyWebhook = require("./routes/monnify/webhook");
+
+// Mount routes
+app.use("/api/sms", smsRoutes);
+app.use("/api/vtpass", vtpassRoutes);
+app.use("/api/monnify", walletRoutes);
+app.use("/api/monnify/webhook", monnifyWebhook);
+app.use("/api/kyc", kycRoutes);
+app.use("/api/chat", chatRoutes);
+
+// Health check
+app.get("/api/health", (req, res) => {
+  res.json({
+    status: "ok",
+    app: "ProxiNG",
+    uptime: process.uptime(),
+    time: new Date().toISOString()
+  });
+});
+
+// Start server (ONLY ONCE)
+const PORT = process.env.PORT || 4000;
+app.listen(PORT, "0.0.0.0", () => {
+  console.log(`ProxiNG API running on port ${PORT}`);
+});

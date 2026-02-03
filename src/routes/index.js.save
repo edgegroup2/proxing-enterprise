@@ -1,0 +1,11 @@
+K// src/routes/index.js
+const express = require("express");
+const router = express.Router();
+
+router.use("/auth", require("./auth"));
+router.use("/wallet", require("./wallet"));
+router.use("/monnify", require("./monnify"));
+router.use("/vtpass", require("./vtpass"));
+router.use("/funding", require("./funding"));
+
+module.exports = router;

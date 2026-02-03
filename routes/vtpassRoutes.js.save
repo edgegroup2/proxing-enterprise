@@ -1,0 +1,122 @@
+
+const express = require('express');
+const { v4: uuidv4 } = require('uuid');
+
+const router = express.Router();
+
+const VTPASS_BASE_URL = 'https://vtpass.com/api';
+
+function getVtpassHeaders() {
+  return {
+    'api-key': process.env.VTPASS_API_KEY,
+    'secret-key': process.env.VTPASS_SECRET_KEY,
+    'Content-Type': 'application/json',
+  };
+}
+
+function generateRequestId() {
+  return `PROX${Date.now()}${uuidv4().slice(0, 8)}`;
+}
+
+async function makeVtpassRequest(endpoint, payload) {
+  const request_id = generateRequestId();
+  const url = `${VTPASS_BASE_URL}/${endpoint}`;
+  const body = { ...payload, request_id };
+
+  console.log('[VTpass] Sending:', url, body);
+
+  const response = await fetch(url, {
+    method: 'POST',
+    headers: getVtpassHeaders(),
+    body: JSON.stringify(body),
+  });
+
+  const data = await response.json();
+  console.log('[VTpass] Response:', data);
+
+  return data;
+}
+
+function verifyApiKey(req, res, next) {
+  const apiKey = req.headers['x-api-key'];
+  if (!apiKey || apiKey !== process.env.PROXING_API_KEY) {
+    return res.status(401).json({ error: 'Invalid API key' });
+  }
+  next();
+}
+
+/* ================= ROUTES ================= */
+
+router.post('/airtime', verifyApiKey, async (req, res) => {
+  const { serviceID, phone, amount } = req.body;
+  const result = await makeVtpassRequest('pay', {
+    serviceID,
+    phone,
+    amount: Number(amount),
+  });
+  res.json(result);
+});
+
+router.post('/data', verifyApiKey, async (req, res) => {
+  const { serviceID, phone, variation_code } = req.body;
+  const result = await makeVtpassRequest('pay', {
+    serviceID,
+    phone,
+    variation_code,
+  });
+  res.json(result);
+});
+
+router.post('/electricity', verifyApiKey, async (req, res) => {
+  const { serviceID, billersCode, variation_code, amount } = req.body;
+  const result = await makeVtpassRequest('pay', {
+    serviceID,
+    billersCode,
+    variation_code,
+    amount: Number(amount),
+  });
+  res.json(result);
+});
+
+router.post('/tv', verifyApiKey, async (req, res) => {
+  const { serviceID, billersCode, variation_code } = req.body;
+  const result = await makeVtpassRequest('pay', {
+    serviceID,
+    billersCode,
+    variation_code,
+  });
+  res.json(result);
+});
+
+router.post('/waec', verifyApiKey, async (req, res) => {
+  const result = await makeVtpassRequest('pay', {
+    serviceID: 'waec',
+    variation_code: 'waec',
+  });
+  res.json(result);
+});
+
+router.post('/verify-customer', verifyApiKey, async (req, res) => {
+  const { serviceID, billersCode, type } = req.body;
+
+  const response = await fetch(`${VTPASS_BASE_URL}/merchant-verify`, {
+    method: 'POST',
+    headers: getVtpassHeaders(),
+    body: JSON.stringify({ serviceID, billersCode, type }),
+  });
+
+  const data = await response.json();
+  res.json(data);
+});
+
+router.get('/variations/:serviceID', verifyApiKey, async (req, res) => {
+  const { serviceID } = req.params;
+  const response = await fetch(
+    `${VTPASS_BASE_URL}/service-variations?serviceID=${serviceID}`,
+    { headers: getVtpassHeaders() }
+  );
+  const data = await response.json();
+  res.json(data);
+});
+
+module.exports = router;

@@ -1,0 +1,113 @@
+const express = require("express");
+const router = express.Router();
+
+const vtpass = require("../../services/vtpassService");
+const wallet = require("../../services/walletService");
+const treasury = require("../../services/treasuryService");
+const { saveMemory } = require("../../services/memoryService");
+const { v4: uuidv4 } = require("uuid");
+
+router.post("/", async (req, res) => {
+  try {
+    const { userId, intent, entities } = req.body;
+    const request_id = uuidv4();
+
+    const cost = parseInt(entities.amount);
+
+    // 1. Check user wallet
+    const balance = await wallet.getBalance(userId);
+
+    if (balance < cost) {
+      return res.json({
+        status: "error",
+        message: "Insufficient wallet balance"
+      });
+    }
+
+    // 2. Check platform treasury
+    const floatBalance = await treasury.getFloat();
+
+    if (floatBalance < cost) {
+      return res.json({
+        status: "error",
+        message: "Service temporarily unavailable"
+      });
+    }
+
+    // 3. Debit user wallet
+    await wallet.debit(userId, cost);
+
+    // 4. Debit platform float
+    await treasury.decreaseFloat(cost);
+
+    let result;
+
+    // 5. Execute via VTpass
+    if (intent === "buy-airtime") {
+      result = await vtpass.buyAirtime(
+        entities.phone,
+        entities.amount,
+        request_id,
+        entities.network
+      );
+    }
+
+    if (intent === "buy-data") {
+      result = await vtpass.buyData(
+        entities.phone,
+        entities.variation_code,
+        entities.amount,
+        request_id,
+        entities.network
+      );
+    }
+
+    if (intent === "buy-electricity") {
+      result = await vtpass.payElectricity(
+        entities.meter,
+        entities.disco,
+        entities.variation_code,
+        entities.amount,
+        request_id
+      );
+    }
+
+    if (intent === "buy-tv") {
+      result = await vtpass.payTV(
+        entities.card,
+        entities.serviceID,
+        entities.variation_code,
+        entities.amount,
+        request_id
+      );
+    }
+
+    // 6. Save memory (optional)
+    if (entities.label) {
+      await saveMemory(
+        userId,
+        entities.label,
+        entities.phone || entities.meter || entities.card,
+        entities.network || entities.disco || entities.serviceID,
+        intent,
+        entities.amount
+      );
+    }
+
+    // 7. Return receipt
+    res.json({
+      status: "success",
+      request_id: request_id,
+      receipt: result
+    });
+
+  } catch (err) {
+    console.error(err);
+    res.json({
+      status: "error",
+      message: "Transaction failed"
+    });
+  }
+});
+
+module.exports = router;
