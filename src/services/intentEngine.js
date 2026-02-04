@@ -1,14 +1,15 @@
-function detectIntent(text) {
-  // Absolute safety guard
-  if (!text || typeof text !== "string") {
-    return "UNKNOWN";
-  }
+function normalize(text) {
+  return text.toLowerCase().trim();
+}
 
-  const msg = text.toLowerCase();
+function detectIntent(message) {
+  const text = normalize(message);
 
-  if (msg.includes("buy") && msg.includes("data")) return "BUY_DATA";
-  if (msg.includes("buy") && msg.includes("airtime")) return "BUY_AIRTIME";
-  if (msg.includes("balance")) return "CHECK_BALANCE";
+  if (text.includes("airtime")) return "BUY_AIRTIME";
+  if (text.includes("data") || text.includes("gb")) return "BUY_DATA";
+  if (text.includes("electricity") || text.includes("nepa")) return "PAY_ELECTRICITY";
+  if (text.includes("dstv") || text.includes("gotv")) return "PAY_TV";
+  if (text.includes("balance")) return "CHECK_WALLET";
 
   return "UNKNOWN";
 }
