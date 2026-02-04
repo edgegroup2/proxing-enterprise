@@ -1,88 +1,96 @@
 const axios = require('axios');
-const { v4: uuidv4 } = require("uuid");
 
-const BASE_URL = 'https://vtpass.com/api';
+const VTPASS_BASE_URL = "https://vtpass.com/api";
+const VTPASS_API_KEY = process.env.VTPASS_API_KEY;
+const VTPASS_SECRET_KEY = process.env.VTPASS_SECRET_KEY;
+const VTPASS_PRIMARY_KEY = process.env.VTPASS_PRIMARY_KEY;
 
 const headers = {
-  'Content-Type': 'application/json',
-  'api-key': process.env.VTPASS_API_KEY,
-  'secret-key': process.env.VTPASS_SECRET_KEY,
-  'primary-key': process.env.VTPASS_PRIMARY_KEY
+  'api-key': VTPASS_API_KEY,
+  'secret-key': VTPASS_SECRET_KEY,
+  'primary-key': VTPASS_PRIMARY_KEY
 };
 
-// Airtime
-async function buyAirtime(phone, amount, network) {
-  const request_id = uuidv4();
-  const payload = {
-    serviceID: network,
-    phone,
-    amount,
-    request_id
-  };
-
-  const res = await axios.post(`${BASE_URL}/pay`, payload, { headers });
-if (res.data.code !== "000") {
-  throw new Error("VTpass failed: " + res.data.response_description);
-} 
- return res.data;
+// -------------------------
+// ELECTRICITY VERIFY
+// -------------------------
+async function verifyElectricity({ disco, meter }) {
+  return axios.post(
+    `${VTPASS_BASE_URL}/merchant-verify`,
+    {
+      serviceID: disco.toLowerCase(),
+      billersCode: meter
+    },
+    { headers }
+  );
 }
 
-// Data
-async function buyData(phone, variation_code, amount,  network) {
-const request_id = uuidv4(); 
- const payload = {
-    serviceID: network,
-    billersCode: phone,
-    variation_code,
-    amount,
-    request_id
-  };
-
-  const res = await axios.post(`${BASE_URL}/pay`, payload, { headers });
-  if (res.data.code !== "000") {
-  throw new Error("VTpass failed: " + res.data.response_description);
-}return res.data;
+// -------------------------
+// DSTV / GOTV VERIFY
+// -------------------------
+async function verifyTV({ iuc, service }) {
+  return axios.post(
+    `${VTPASS_BASE_URL}/merchant-verify`,
+    {
+      serviceID: service,
+      billersCode: iuc
+    },
+    { headers }
+  );
 }
 
-// Electricity
-async function payElectricity(meter, disco, variation_code, amount) {
-const request_id = uuidv4(); 
- const payload = {
-    serviceID: disco,
-    billersCode: meter,
-    variation_code,
-    amount,
-    request_id
-  };
-
-  const res = await axios.post(`${BASE_URL}/pay`, payload, { headers });
-if (res.data.code !== "000") {
-  throw new Error("VTpass failed: " + res.data.response_description);
-}  
-return res.data;
+// -------------------------
+// ELECTRICITY PAY
+// -------------------------
+async function payElectricity({ disco, meter, amount }) {
+  return axios.post(
+    `${VTPASS_BASE_URL}/pay`,
+    {
+      serviceID: disco.toLowerCase(),
+      billersCode: meter,
+      amount,
+      request_id: "PRX-" + Date.now()
+    },
+    { headers }
+  );
 }
 
-// TV
-async function payTV(card, serviceID, variation_code, amount) {
-const request_id = uuidv4(); 
- const payload = {
-    serviceID,
-    billersCode: card,
-    variation_code,
-    amount,
-    request_id
-  };
+// -------------------------
+// DSTV / GOTV PAY
+// -------------------------
+async function payDSTV({ iuc, plan }) {
+  return axios.post(
+    `${VTPASS_BASE_URL}/pay`,
+    {
+      serviceID: "dstv",
+      billersCode: iuc,
+      variation_code: plan,
+      request_id: "PRX-" + Date.now()
+    },
+    { headers }
+  );
+}
 
-  const res = await axios.post(`${BASE_URL}/pay`, payload, { headers });
-if (res.data.code !== "000") {
-  throw new Error("VTpass failed: " + res.data.response_description);
-} 
- return res.data;
+// -------------------------
+// DATA
+// -------------------------
+async function buyData({ network, amount, phone }) {
+  return axios.post(
+    `${VTPASS_BASE_URL}/pay`,
+    {
+      serviceID: network.toLowerCase() + "-data",
+      amount,
+      phone,
+      request_id: "PRX-" + Date.now()
+    },
+    { headers }
+  );
 }
 
 module.exports = {
-  buyAirtime,
-  buyData,
+  verifyElectricity,
+  verifyTV,
   payElectricity,
-  payTV
+  payDSTV,
+  buyData
 };
