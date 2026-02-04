@@ -1,23 +1,24 @@
-require("dotenv").config();
-const express = require("express");
+const express = require('express');
+const cors = require('cors');
+require('dotenv').config();
+
 const app = express();
 
-console.log("🔥 MAIN INDEX LOADED");
+// Middleware
+app.use(cors());
+app.use(express.json()); // must be before routes
 
-app.use(express.json());
+// Routes
+const smsRoutes = require('./routes/sms');
+app.use('/api', smsRoutes);
 
-// SMS
-app.use("/api/sms", require("./routes/sms"));
-
-// Main router
-app.use("/api", require("./routes"));
-
-// Root
-app.get("/", (req, res) => {
-  res.send("ProxiNG API is running");
+// Health
+app.get('/', (req, res) => {
+  res.send('ProxiNG API running');
 });
 
+// Server
 const PORT = process.env.PORT || 4000;
 app.listen(PORT, () => {
-  console.log("🚀 Server running on", PORT);
+  console.log(`🚀 ProxiNG server running on port ${PORT}`);
 });

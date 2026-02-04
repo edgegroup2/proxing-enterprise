@@ -1,22 +1,32 @@
-const express = require("express");
+const express = require('express');
 const router = express.Router();
-const { processSms } = require("../services/smsProcessor");
 
-router.post("/inbound", async (req, res) => {
-  try {
-    const { msisdn, message } = req.body;
+router.post('/sms', (req, res) => {
+  // Support all common SMS forwarder formats
+  const from =
+    req.body.from ||
+    req.body.sender ||
+    req.body.number ||
+    "unknown";
 
-    const result = await processSms(msisdn, message);
+  const message =
+    req.body.message ||
+    req.body.text ||
+    req.body.body ||
+    "empty";
 
-    res.json({
-      success: true,
-      received: { msisdn, message },
-      result
-    });
-  } catch (err) {
-    console.error("SMS ERROR:", err);
-    res.status(500).json({ error: "SMS processing failed" });
-  }
+  console.log("📩 SMS RECEIVED");
+  console.log("From:", from);
+  console.log("Message:", message);
+  console.log("Raw payload:", req.body);
+
+  // AI brain hook point
+  // NLP → intent → VTpass → wallet → reply
+
+  res.status(200).json({
+    status: "ok",
+    received: true
+  });
 });
 
 module.exports = router;
