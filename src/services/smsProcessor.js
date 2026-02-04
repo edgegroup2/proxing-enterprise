@@ -1,44 +1,15 @@
-const parseIntent = require("./intentEngine");
-const vtpass = require("./vtpassService");
-const wallet = require("./walletService");
+const { detectIntent } = require("./intentEngine");
 
-module.exports = async function processCommand(from, sms) {
-  const intent = parseIntent(sms);
+async function processSms(msisdn, message) {
+  console.log("SMS FROM:", msisdn);
+  console.log("SMS TEXT:", message);
 
-  if (intent.intent === "error") {
-    return { status: "error", message: intent.message };
-  }
+  const intent = detectIntent(message);
 
-  // Wallet check
-  const balance = await wallet.getBalanceByPhone(from);
-  if (balance < (intent.amount || 0)) {
-    return { status: "error", message: "Insufficient wallet balance" };
-  }
+  // Later: route to vtpass, wallet, monnify etc
+  return {
+    intent
+  };
+}
 
-  if (intent.intent === "airtime") {
-    return await vtpass.buyAirtime({
-      phone: from,
-      amount: intent.amount,
-      network: intent.network
-    });
-  }
-
-  if (intent.intent === "data") {
-    return await vtpass.buyData({
-      phone: from,
-      network: intent.network,
-      plan: intent.plan
-    });
-  }
-
-  if (intent.intent === "electricity") {
-    return await vtpass.buyPower({
-      phone: from,
-      amount: intent.amount,
-      meter: intent.meter,
-      disco: intent.disco
-    });
-  }
-
-  return { status: "error", message: "Unsupported" };
-};
+module.exports = { processSms };

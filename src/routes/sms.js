@@ -1,25 +1,27 @@
-// src/routes/sms.js
 const express = require("express");
 const router = express.Router();
-const processCommand = require("../services/smsProcessor");
+const { processSms } = require("../services/smsProcessor");
 
+// SMS inbound endpoint
 router.post("/inbound", async (req, res) => {
   try {
-    const { from, sms } = req.body;
+    const { msisdn, message } = req.body;
 
-    console.log("SMS FROM:", from);
-    console.log("SMS TEXT:", sms);
+    if (!msisdn || !message) {
+      return res.status(400).json({
+        error: "msisdn and message are required"
+      });
+    }
 
-    const result = await processCommand(from, sms);
+    const result = await processSms(msisdn, message);
 
-    // We DO NOT send SMS back (VTpass already notifies user)
     res.json({
-      status: "ok",
+      success: true,
+      received: { msisdn, message },
       result
     });
-
   } catch (err) {
-    console.error(err);
+    console.error("SMS ERROR:", err.message);
     res.status(500).json({ error: "SMS processing failed" });
   }
 });

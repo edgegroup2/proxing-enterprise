@@ -1,12 +1,13 @@
 const express = require("express");
 const router = express.Router();
 
-router.use("/funding", require("./funding"));
-router.use("/monnify", require("./monnify"));
-router.use("/vtpass", require("./vtpass"));
-
+// Health check
 router.get("/health", (req, res) => {
-  res.json({ ok: true });
+  res.json({
+    ok: true,
+    service: "ProxiNG",
+    time: new Date().toISOString()
+  });
 });
 
 module.exports = router;
