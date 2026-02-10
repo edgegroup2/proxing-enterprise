@@ -1,54 +1,22 @@
-curl http://127.0.0.1:4000/healthrequire("dotenv").config(); const express = require("express"); 
-const cors = require("cors"); const { v4: uuidv4 } = require("uuid"); const pool = 
-require("./db");
-
-const app = express();
-app.use(cors());
-app.use(express.json());
-
-console.log("🔥 SINGLE FILE MODE");
-
-// HEALTH
-app.get("/ping", (req, res) => {
-  res.json({ ok: true, root: true });
+   KKKKKK: new Date().toISOString(),cKMKK
+  });KKK
 });
 
-// FUNDING
-app.get("/api/funding/ping", (req, res) => {
-  res.json({ ok: true, router: "funding" });
-});
+/**
+ * ===============================
+ * SERVER START
+ * ===============================
+ */
+app.listen(PORT, "0.0.0.0", () => {
+  console.log(`🚀 ProxiNG Backend running on port ${PORT}`);
 
-app.post("/api/funding/initiate", async (req, res) => {
-  try {
-    const { userId, amount } = req.body;
-
-    if (!userId || !amount) {
-      return res.status(400).json({
-        error: "userId and amount required",
-      });
+  // Start background jobs safely after boot
+  setTimeout(() => {
+    try {
+      startCrons();
+      console.log("⏱️ Cron jobs started");
+    } catch (err) {
+      console.error("❌ Failed to start crons:", err.message);
     }
-
-    const reference = "FD-" + uuidv4();
-
-    const result = await pool.query(
-      `
-      INSERT INTO fundings (user_id, reference, amount, provider, status)
-      VALUES ($1, $2, $3, $4, $5)
-      RETURNING *
-      `,
-      [userId, reference, amount, "monnify", "pending"]
-    );
-
-    res.json({
-      status: "ok",
-      funding: result.rows[0],
-    });
-  } catch (err) {
-    console.error("FUNDING ERROR:", err);
-    res.status(500).json({ error: err.message });
-  }
-});
-
-app.listen(4000, () => {
-  console.log("Server running on 4000");
+  }, 3000);
 });

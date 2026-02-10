@@ -1,52 +1,44 @@
 const axios = require("axios");
 
-const MONNIFY_BASE = "https://api.monnify.com/api/v2";
-const API_KEY = process.env.MONNIFY_API_KEY;
-const SECRET_KEY = process.env.MONNIFY_SECRET_KEY;
-const CONTRACT_CODE = process.env.MONNIFY_CONTRACT_CODE;
+const BASE_URL = "https://api.monnify.com/api/v1";
 
-let tokenCache = null;
-
-async function getToken() {
-  if (tokenCache) return tokenCache;
+async function getAccessToken() {
+  const auth = Buffer.from(
+    `${process.env.MONNIFY_API_KEY}:${process.env.MONNIFY_SECRET_KEY}`
+  ).toString("base64");
 
   const res = await axios.post(
-    "https://api.monnify.com/api/v1/auth/login",
+    `${BASE_URL}/auth/login`,
     {},
-    {
-      auth: {
-        username: API_KEY,
-        password: SECRET_KEY
-      }
-    }
+    { headers: { Authorization: `Basic ${auth}` } }
   );
 
-  tokenCache = res.data.responseBody.accessToken;
-  return tokenCache;
+  return res.data.responseBody.accessToken;
 }
 
-async function createReservedAccount(user) {
-  const token = await getToken();
+async function createVirtualAccount({ userId, email, name }) {
+  const token = await getAccessToken();
 
   const res = await axios.post(
-    `${MONNIFY_BASE}/bank-transfer/reserved-accounts`,
+    `${BASE_URL}/bank-transfer/reserved-accounts`,
     {
-      accountReference: user.id,
-      accountName: user.full_name,
-      customerEmail: `${user.phone}@proxing.online`,
-      customerName: user.full_name,
-      bvn: user.bvn,
-      contractCode: CONTRACT_CODE,
-      getAllAvailableBanks: true
+      accountReference: `USER_${userId}`,
+      accountName: name,
+      customerEmail: email,
+      contractCode: process.env.MONNIFY_CONTRACT_CODE,
+      currencyCode: "NGN",
+      incomeSplitConfig: [],
+      metaData: { user_id: userId },
     },
     {
       headers: {
-        Authorization: `Bearer ${token}`
-      }
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "application/json",
+      },
     }
   );
 
   return res.data.responseBody;
 }
 
-module.exports = { createReservedAccount };
+module.exports = { createVirtualAccount };

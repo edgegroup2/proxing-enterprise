@@ -1,83 +1,116 @@
 const axios = require("axios");
+const db = require("../db");
 
-const VTPASS_BASE_URL = "https://vtpass.com/api";
-const VTPASS_API_KEY = process.env.VTPASS_API_KEY;
-const VTPASS_SECRET_KEY = process.env.VTPASS_SECRET_KEY;
-const VTPASS_PUBLIC_KEY = process.env.VTPASS_PUBLIC_KEY; // same as primary
+const VTPASS_URL = process.env.VTPASS_BASE_URL + "/pay";
 
-// ---------- Helpers ----------
-
-function vtpassHeaders() {
-  return {
-    "Content-Type": "application/json",
-    "api-key": VTPASS_API_KEY,
-    "secret-key": VTPASS_SECRET_KEY,
-    "public-key": VTPASS_PUBLIC_KEY,
-    "primary-key": VTPASS_PUBLIC_KEY
-  };
-}
-
-function generateRequestId() {
-  const timestamp = Date.now().toString(36);
-  const random = Math.random().toString(36).substring(2, 8);
-  return `PX${timestamp}${random}`.toUpperCase();
-}
-
-// ---------- VERIFY ----------
-
-async function verifyService({ serviceID, billersCode, type = null }) {
-  const payload = {
-    serviceID,
-    billersCode
-  };
-
-  if (type) payload.type = type;
-
-  return axios.post(
-    `${VTPASS_BASE_URL}/merchant-verify`,
-    payload,
-    { headers: vtpassHeaders() }
-  );
-}
-
-// ---------- PAY (UNIVERSAL) ----------
-
-async function payService(payload) {
-  return axios.post(
-    `${VTPASS_BASE_URL}/pay`,
-    payload,
-    { headers: vtpassHeaders() }
-  );
-}
-
-// ---------- MAIN ADAPTER ----------
-
-async function executeVTpass(intent) {
-  const request_id = generateRequestId();
-
-  // VERIFY FLOW
-  if (intent.action === "verify") {
-    return verifyService({
-      serviceID: intent.serviceID,
-      billersCode: intent.billersCode,
-      type: intent.variation_code || null
-    });
-  }
-
-  // PAYMENT FLOW
-  const payload = {
-    request_id,
-    serviceID: intent.serviceID
-  };
-
-  if (intent.amount) payload.amount = intent.amount;
-  if (intent.phone) payload.phone = intent.phone;
-  if (intent.billersCode) payload.billersCode = intent.billersCode;
-  if (intent.variation_code) payload.variation_code = intent.variation_code;
-
-  return payService(payload);
-}
-
-module.exports = {
-  executeVTpass
+const headers = {
+  "Content-Type": "application/json",
+  "api-key": process.env.VTPASS_API_KEY,
+  "secret-key": process.env.VTPASS_SECRET_KEY,
+  "public-key": process.env.VTPASS_PUBLIC_KEY,
+  "primary-key": process.env.VTPASS_PUBLIC_KEY,
 };
+
+async function processVTPassPurchase({
+  request_id,
+  service_id,
+  product_type,
+  phone,
+  amount = 0,
+  variation_code = null,
+}) {
+  const client = await db.getClient();
+
+  try {
+    await client.query("BEGIN");
+
+    // 1️⃣ Lock wallet
+    const walletRes = await client.query(
+      `SELECT balance FROM wallets WHERE user_id = 1 FOR UPDATE`
+    );
+
+    if (walletRes.rowCount === 0) {
+      throw new Error("Wallet not found");
+    }
+
+    const balance = Number(walletRes.rows[0].balance);
+
+    if (balance < amount) {
+      throw new Error("Insufficient wallet balance");
+    }
+
+    // 2️⃣ Insert pending transaction
+    await client.query(
+      `
+      INSERT INTO transactions
+      (request_id, service_id, product_type, phone, amount, variation_code, status)
+      VALUES ($1,$2,$3,$4,$5,$6,'PENDING')
+      `,
+      [request_id, service_id, product_type, phone, amount, variation_code]
+    );
+
+    // 3️⃣ Debit wallet
+    await client.query(
+      `
+      UPDATE wallets
+      SET balance = balance - $1
+      WHERE user_id = 1
+      `,
+      [amount]
+    );
+
+    // 4️⃣ VTpass call
+    const payload = {
+      request_id,
+      serviceID: service_id,
+      phone,
+      ...(amount > 0 && { amount }),
+      ...(variation_code && { variation_code }),
+    };
+
+    const vtpassRes = await axios.post(VTPASS_URL, payload, { headers });
+
+    const vtData = vtpassRes.data;
+
+    if (vtData?.code !== "000") {
+      throw new Error("VTpass failed");
+    }
+
+    // 5️⃣ Mark success
+    await client.query(
+      `
+      UPDATE transactions
+      SET status = 'SUCCESS',
+          provider_reference = $1,
+          raw_response = $2
+      WHERE request_id = $3
+      `,
+      [
+        vtData?.content?.transactions?.transactionId || null,
+        vtData,
+        request_id,
+      ]
+    );
+
+    await client.query("COMMIT");
+
+    return { success: true, data: vtData };
+  } catch (err) {
+    await client.query("ROLLBACK");
+
+    await client.query(
+      `
+      UPDATE transactions
+      SET status = 'FAILED'
+      WHERE request_id = $1
+      `,
+      [request_id]
+    );
+
+    throw err;
+  } finally {
+    client.release();
+  }
+}
+
+module.exports = { processVTPassPurchase };

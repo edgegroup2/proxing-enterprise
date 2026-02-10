@@ -1,0 +1,85 @@
+const crypto = require("crypto");
+const express = require("express");
+const router = express.Router();
+
+const {
+  createTransaction,
+  markTransactionSuccess,
+  isTransactionSuccessful,
+} = require("../services/transactionService");
+
+const { creditWallet } = require("../services/walletService");
+const logger = require("../logger");
+
+// IMPORTANT: raw body required for Paystack signature
+router.post(
+  "/",
+  express.raw({ type: "application/json" }),
+  async (req, res) => {
+    try {
+      const signature = req.headers["x-paystack-signature"];
+      if (!signature) {
+        return res.status(400).send("Missing signature");
+      }
+
+      const hash = crypto
+        .createHmac("sha512", process.env.PAYSTACK_WEBHOOK_SECRET)
+        .update(req.body)
+        .digest("hex");
+
+      if (hash !== signature) {
+        logger.error("Invalid Paystack signature");
+        return res.status(401).send("Invalid signature");
+      }
+
+      const event = JSON.parse(req.body.toString());
+
+      if (event.event !== "charge.success") {
+        return res.sendStatus(200);
+      }
+
+      const data = event.data;
+      const reference = data.reference;
+      const amount = data.amount / 100; // kobo → naira
+      const email = data.customer.email;
+      const userId = data.metadata?.user_id;
+
+      if (!userId) {
+	  logger.error({ reference }, "Missing user_id in Paystack metadata");
+ 	 return res.sendStatus(200);
+	}
+
+      // HARD DUPLICATE PROTECTION
+      if (await isTransactionSuccessful(reference)) {
+        logger.warn({ reference }, "Duplicate Paystack webhook ignored");
+        return res.sendStatus(200);
+      }
+
+      await createTransaction({
+        userId,
+        reference,
+        amount,
+        channel: "paystack",
+        type: "wallet_funding",
+        provider: "paystack",
+        meta: data,
+      });
+
+      await creditWallet({ userId, amount });
+
+      await markTransactionSuccess(reference);
+
+      logger.info(
+        { reference, email, amount },
+        "Wallet funded via Paystack"
+      );
+
+      res.sendStatus(200);
+    } catch (err) {
+      logger.error(err, "Paystack webhook error");
+      res.sendStatus(500);
+    }
+  }
+);
+
+module.exports = router;

@@ -1,19 +1,24 @@
-const axios = require("axios");
+const { vtpass } = require("./vtpassClient");
 
-const VTPASS_BASE_URL = "https://vtpass.com/api";
-const headers = {
-  "api-key": process.env.VTPASS_API_KEY,
-  "secret-key": process.env.VTPASS_SECRET_KEY,
-  "public-key": process.env.VTPASS_PUBLIC_KEY,
-  "primary-key": process.env.VTPASS_PUBLIC_KEY
-};
-
+/**
+ * Get VTpass wallet balance
+ */
 async function getVTpassBalance() {
-  const res = await axios.get(
-    `${VTPASS_BASE_URL}/balance`,
-    { headers }
-  );
-  return res.data.balance;
+  const res = await vtpass.get("/balance");
+
+  if (res.data?.code !== "000") {
+    throw new Error(
+      `VTpass error: ${res.data?.message || "Unknown error"}`
+    );
+  }
+
+  const balance = res.data?.content?.balance;
+
+  if (balance === undefined) {
+    throw new Error("VTpass balance missing in response");
+  }
+
+  return Number(balance);
 }
 
 module.exports = { getVTpassBalance };

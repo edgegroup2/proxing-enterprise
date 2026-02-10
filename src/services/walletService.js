@@ -1,43 +1,63 @@
-// src/services/walletService.js
-const db = require('../db');
+const db = require("../db");
 
 /**
- * Get wallet by phone number
+ * Fetch wallet by user_id
  */
-async function getWalletByPhone(phone) {
+async function getWallet(userId) {
   const { rows } = await db.query(
-    'SELECT * FROM wallets WHERE phone = $1',
-    [phone]
+    `SELECT * FROM wallets WHERE user_id = $1`,
+    [userId]
   );
   return rows[0];
 }
 
 /**
- * Debit wallet
+ * Ensure sufficient balance before spending
  */
-async function debitWallet(userId, amount) {
-  await db.query(
-    `UPDATE wallets
-     SET balance = balance - $1
-     WHERE user_id = $2`,
-    [amount, userId]
-  );
+async function assertSufficientBalance(userId, amount) {
+  const wallet = await getWallet(userId);
+
+  if (!wallet) {
+    throw new Error("Wallet not found");
+  }
+
+  if (Number(wallet.balance) < Number(amount)) {
+    throw new Error("Insufficient wallet balance");
+  }
+
+  return wallet;
 }
 
 /**
- * Credit wallet
+ * Debit wallet safely (transactional)
  */
-async function creditWallet(userId, amount) {
-  await db.query(
-    `UPDATE wallets
-     SET balance = balance + $1
-     WHERE user_id = $2`,
-    [amount, userId]
-  );
+async function debitWallet({ userId, amount, reference, type, meta }) {
+  return db.tx(async (t) => {
+    await t.query(
+      `INSERT INTO transactions
+       (reference, user_id, amount, type, status, meta)
+       VALUES ($1, $2, $3, $4, 'PENDING', $5)`,
+      [reference, userId, amount, type, meta]
+    );
+
+    await t.query(
+      `UPDATE wallets
+       SET balance = balance - $1
+       WHERE user_id = $2`,
+      [amount, userId]
+    );
+
+    await t.query(
+      `UPDATE transactions
+       SET status = 'SUCCESS'
+       WHERE reference = $1`,
+      [reference]
+    );
+  });
 }
 
 module.exports = {
-  getWalletByPhone,
+  getWallet,
+  assertSufficientBalance,
   debitWallet,
-  creditWallet
 };
