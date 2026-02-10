@@ -1,0 +1,22 @@
+# dependencies
+node_modules/
+
+# env & secrets
+.env
+.env.*
+ecosystem.config.js
+
+# logs
+*.log
+pm2.log
+logs/
+log/
+
+# runtime
+.pids
+.pid
+.DS_Store
+
+# temp / backups
+*.save
+*.bak
