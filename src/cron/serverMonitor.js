@@ -25,7 +25,7 @@ async function checkServerHealth() {
   try {
     const res = await axios.get(HEALTH_URL, { timeout: 5000 });
 
-    if (res.data?.status !== "ok") {
+if (String(res.data?.status || '').toLowerCase() !== 'ok') {
       throw new Error("Health endpoint returned non-ok status");
     }
 
@@ -51,6 +51,34 @@ async function checkServerHealth() {
   }
 }
 
+function startServerMonitor() {
+  if (!ENABLE_CRONS) {
+    logger.info({ type: 'SERVER_MONITOR_DISABLED' }, 'Server monitor disabled by ENV');
+    return;
+  }
+
+  logger.info({ type: 'SERVER_MONITOR_STARTED' }, 'Server monitor started');
+
+  // Run once immediately
+  checkServerHealth().catch((err) => {
+    logger.error(
+      { error: err.message, stack: err.stack },
+      'Initial server health check failed'
+    );
+  });
+
+  // Then run every 60 seconds
+  setInterval(() => {
+    checkServerHealth().catch((err) => {
+      logger.error(
+        { error: err.message, stack: err.stack },
+        'Server monitor tick failed'
+      );
+    });
+  }, 60_000);
+}
+
 module.exports = {
   checkServerHealth,
+  startServerMonitor,
 };

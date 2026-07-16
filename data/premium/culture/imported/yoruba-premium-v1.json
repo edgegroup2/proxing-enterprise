@@ -1,0 +1,107 @@
+{
+  "language": {
+    "code": "yo",
+    "name": "Yoruba",
+    "native_name": "Yorùbá"
+  },
+  "audience": "diaspora_kids",
+  "topics": [
+    {
+      "title": "Family & Home Premium",
+      "slug": "family-home-premium",
+      "level": "beginner",
+      "sort_order": 100,
+      "description": "Premium Yoruba lessons for family communication at home.",
+      "lessons": [
+        {
+          "title": "Talking to Mum and Dad",
+          "lesson_type": "lesson",
+          "estimated_minutes": 8,
+          "content": {
+            "category": "family"
+          },
+          "items": [
+            {
+              "item_type": "flashcard",
+              "prompt": "How do you say Mother?",
+              "native_text": "Ìyá",
+              "translation": "Mother",
+              "pronunciation": "ee-yah"
+            },
+            {
+              "item_type": "flashcard",
+              "prompt": "How do you say Father?",
+              "native_text": "Bàbá",
+              "translation": "Father",
+              "pronunciation": "bah-bah"
+            },
+            {
+              "item_type": "quiz",
+              "prompt": "What is 'Mother' in Yoruba?",
+              "options": ["Ìyá", "Bàbá", "Ọmọ"],
+              "answer": "Ìyá",
+              "explanation": "Ìyá means Mother."
+            }
+          ]
+        },
+        {
+          "title": "Home Objects",
+          "lesson_type": "lesson",
+          "estimated_minutes": 10,
+          "content": {
+            "category": "home"
+          },
+          "items": [
+            {
+              "item_type": "flashcard",
+              "prompt": "Chair",
+              "native_text": "Àga",
+              "translation": "Chair",
+              "pronunciation": "ah-gah"
+            },
+            {
+              "item_type": "flashcard",
+              "prompt": "Door",
+              "native_text": "Ilẹ̀kùn",
+              "translation": "Door",
+              "pronunciation": "ee-leh-koon"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Conversation Premium",
+      "slug": "conversation-premium",
+      "level": "intermediate",
+      "sort_order": 101,
+      "description": "Premium speaking practice.",
+      "lessons": [
+        {
+          "title": "Greeting Elders Properly",
+          "lesson_type": "lesson",
+          "estimated_minutes": 12,
+          "content": {
+            "category": "conversation"
+          },
+          "items": [
+            {
+              "item_type": "flashcard",
+              "prompt": "Good morning (to elder)",
+              "native_text": "Ẹ káàárọ̀",
+              "translation": "Good morning",
+              "pronunciation": "eh kaa-roh"
+            },
+            {
+              "item_type": "quiz",
+              "prompt": "Which greeting is respectful for elders?",
+              "options": ["Ẹ káàárọ̀", "Báwo", "Hello"],
+              "answer": "Ẹ káàárọ̀",
+              "explanation": "Formal Yoruba greetings show respect."
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,57 @@
+[
+  {
+    "exam_type": "jamb",
+    "subject": "Physics",
+    "topic": "Electric Circuits",
+    "year": 2026,
+    "question": "The unit of resistance is",
+    "options": ["Volt", "Ampere", "Ohm", "Watt"],
+    "answer": "Ohm",
+    "explanation": "Resistance is measured in ohms.",
+    "source": "JAMB Premium Pack v1"
+  },
+  {
+    "exam_type": "jamb",
+    "subject": "Physics",
+    "topic": "Electric Current",
+    "year": 2026,
+    "question": "Electric current is the rate of flow of",
+    "options": ["atoms", "electrons", "protons", "neutrons"],
+    "answer": "electrons",
+    "explanation": "Current is flow of electric charge, mainly electrons.",
+    "source": "JAMB Premium Pack v1"
+  },
+  {
+    "exam_type": "jamb",
+    "subject": "Physics",
+    "topic": "Ohm's Law",
+    "year": 2026,
+    "question": "Ohm's law is expressed as",
+    "options": ["P = VI", "V = IR", "F = ma", "Q = mcΔθ"],
+    "answer": "V = IR",
+    "explanation": "Voltage equals current times resistance.",
+    "source": "JAMB Premium Pack v1"
+  },
+  {
+    "exam_type": "jamb",
+    "subject": "Physics",
+    "topic": "Series Circuit",
+    "year": 2026,
+    "question": "In a series circuit, the same quantity through all components is",
+    "options": ["voltage", "current", "resistance", "power"],
+    "answer": "current",
+    "explanation": "Current remains constant in series connection.",
+    "source": "JAMB Premium Pack v1"
+  },
+  {
+    "exam_type": "jamb",
+    "subject": "Physics",
+    "topic": "Parallel Circuit",
+    "year": 2026,
+    "question": "In a parallel circuit, the same across each branch is",
+    "options": ["resistance", "current", "voltage", "power"],
+    "answer": "voltage",
+    "explanation": "Voltage is equal across parallel branches.",
+    "source": "JAMB Premium Pack v1"
+  }
+]

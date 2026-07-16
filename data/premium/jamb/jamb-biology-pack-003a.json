@@ -1,0 +1,227 @@
+[
+  {
+    "year": 2003,
+    "examType": "JAMB",
+    "subject": "Biology",
+    "question": "The basic structural and functional unit of life is the",
+    "options": ["Tissue", "Cell", "Organ", "Organ system"],
+    "correctAnswer": 1,
+    "explanation": "The cell is the smallest structural and functional unit of living organisms."
+  },
+  {
+    "year": 2004,
+    "examType": "JAMB",
+    "subject": "Biology",
+    "question": "The process by which green plants lose water vapour is called",
+    "options": ["Respiration", "Transpiration", "Photosynthesis", "Diffusion"],
+    "correctAnswer": 1,
+    "explanation": "Transpiration is the loss of water vapour from aerial parts of plants, mainly through stomata."
+  },
+  {
+    "year": 2005,
+    "examType": "JAMB",
+    "subject": "Biology",
+    "question": "Which organ in humans is responsible for filtering blood?",
+    "options": ["Heart", "Kidney", "Liver", "Lungs"],
+    "correctAnswer": 1,
+    "explanation": "The kidneys filter blood to remove waste products and form urine."
+  },
+  {
+    "year": 2006,
+    "examType": "JAMB",
+    "subject": "Biology",
+    "question": "The site of gaseous exchange in humans is the",
+    "options": ["Bronchus", "Alveolus", "Trachea", "Larynx"],
+    "correctAnswer": 1,
+    "explanation": "Alveoli are tiny air sacs in the lungs where oxygen and carbon dioxide exchange occurs."
+  },
+  {
+    "year": 2007,
+    "examType": "JAMB",
+    "subject": "Biology",
+    "question": "Which process leads to variation in sexually reproducing organisms?",
+    "options": ["Binary fission", "Meiosis", "Budding", "Mitosis"],
+    "correctAnswer": 1,
+    "explanation": "Meiosis introduces variation through crossing over and independent assortment."
+  },
+  {
+    "year": 2008,
+    "examType": "JAMB",
+    "subject": "Biology",
+    "question": "The green pigment in plants responsible for trapping light energy is",
+    "options": ["Xanthophyll", "Chlorophyll", "Carotene", "Anthocyanin"],
+    "correctAnswer": 1,
+    "explanation": "Chlorophyll absorbs sunlight for photosynthesis."
+  },
+  {
+    "year": 2009,
+    "examType": "JAMB",
+    "subject": "Biology",
+    "question": "The movement of molecules from a region of high concentration to low concentration is",
+    "options": ["Osmosis", "Diffusion", "Active transport", "Translocation"],
+    "correctAnswer": 1,
+    "explanation": "Diffusion is passive movement down a concentration gradient."
+  },
+  {
+    "year": 2010,
+    "examType": "JAMB",
+    "subject": "Biology",
+    "question": "Which blood component transports oxygen?",
+    "options": ["Platelets", "Red blood cells", "White blood cells", "Plasma"],
+    "correctAnswer": 1,
+    "explanation": "Red blood cells contain haemoglobin which transports oxygen."
+  },
+  {
+    "year": 2011,
+    "examType": "JAMB",
+    "subject": "Biology",
+    "question": "The organ that produces insulin is the",
+    "options": ["Liver", "Pancreas", "Kidney", "Spleen"],
+    "correctAnswer": 1,
+    "explanation": "The pancreas secretes insulin to regulate blood sugar."
+  },
+  {
+    "year": 2012,
+    "examType": "JAMB",
+    "subject": "Biology",
+    "question": "The transfer of hereditary traits from parents to offspring is known as",
+    "options": ["Variation", "Inheritance", "Adaptation", "Mutation"],
+    "correctAnswer": 1,
+    "explanation": "Inheritance is the passing of genetic information from parents to offspring."
+  },
+  {
+    "year": 2013,
+    "examType": "JAMB",
+    "subject": "Biology",
+    "question": "Which structure in flowering plants develops into fruit after fertilization?",
+    "options": ["Ovule", "Ovary", "Stigma", "Style"],
+    "correctAnswer": 1,
+    "explanation": "The ovary develops into the fruit after fertilization."
+  },
+  {
+    "year": 2014,
+    "examType": "JAMB",
+    "subject": "Biology",
+    "question": "The excretory organ in insects is the",
+    "options": ["Nephridium", "Malpighian tubule", "Kidney", "Contractile vacuole"],
+    "correctAnswer": 1,
+    "explanation": "Malpighian tubules remove nitrogenous waste in insects."
+  },
+  {
+    "year": 2015,
+    "examType": "JAMB",
+    "subject": "Biology",
+    "question": "Which type of joint allows movement in all directions?",
+    "options": ["Hinge joint", "Ball and socket joint", "Pivot joint", "Gliding joint"],
+    "correctAnswer": 1,
+    "explanation": "Ball and socket joints permit movement in multiple directions."
+  },
+  {
+    "year": 2016,
+    "examType": "JAMB",
+    "subject": "Biology",
+    "question": "The process by which organisms maintain stable internal conditions is",
+    "options": ["Respiration", "Homeostasis", "Adaptation", "Nutrition"],
+    "correctAnswer": 1,
+    "explanation": "Homeostasis maintains internal balance despite external changes."
+  },
+  {
+    "year": 2017,
+    "examType": "JAMB",
+    "subject": "Biology",
+    "question": "The powerhouse of the cell is the",
+    "options": ["Nucleus", "Mitochondrion", "Ribosome", "Golgi apparatus"],
+    "correctAnswer": 1,
+    "explanation": "Mitochondria generate energy through respiration."
+  },
+  {
+    "year": 2018,
+    "examType": "JAMB",
+    "subject": "Biology",
+    "question": "Which organ is mainly responsible for detoxification?",
+    "options": ["Heart", "Liver", "Kidney", "Lungs"],
+    "correctAnswer": 1,
+    "explanation": "The liver detoxifies harmful substances."
+  },
+  {
+    "year": 2019,
+    "examType": "JAMB",
+    "subject": "Biology",
+    "question": "The reproductive cell in males is the",
+    "options": ["Ovum", "Sperm cell", "Zygote", "Embryo"],
+    "correctAnswer": 1,
+    "explanation": "Sperm cells are male gametes."
+  },
+  {
+    "year": 2020,
+    "examType": "JAMB",
+    "subject": "Biology",
+    "question": "Which kingdom contains fungi?",
+    "options": ["Protista", "Fungi", "Monera", "Plantae"],
+    "correctAnswer": 1,
+    "explanation": "Fungi belong to Kingdom Fungi."
+  },
+  {
+    "year": 2021,
+    "examType": "JAMB",
+    "subject": "Biology",
+    "question": "The structure that carries urine out of the body is the",
+    "options": ["Ureter", "Urethra", "Nephron", "Bladder"],
+    "correctAnswer": 1,
+    "explanation": "The urethra carries urine out of the body."
+  },
+  {
+    "year": 2022,
+    "examType": "JAMB",
+    "subject": "Biology",
+    "question": "The movement response of plants toward light is called",
+    "options": ["Geotropism", "Phototropism", "Hydrotropism", "Thigmotropism"],
+    "correctAnswer": 1,
+    "explanation": "Phototropism is plant growth in response to light."
+  },
+  {
+    "year": 2023,
+    "examType": "JAMB",
+    "subject": "Biology",
+    "question": "The organ responsible for hearing is the",
+    "options": ["Eye", "Ear", "Nose", "Tongue"],
+    "correctAnswer": 1,
+    "explanation": "The ear detects sound vibrations."
+  },
+  {
+    "year": 2006,
+    "examType": "JAMB",
+    "subject": "Biology",
+    "question": "The process of taking in food by organisms is",
+    "options": ["Respiration", "Nutrition", "Excretion", "Circulation"],
+    "correctAnswer": 1,
+    "explanation": "Nutrition involves obtaining and using food."
+  },
+  {
+    "year": 2011,
+    "examType": "JAMB",
+    "subject": "Biology",
+    "question": "The largest part of the human brain is the",
+    "options": ["Cerebellum", "Cerebrum", "Medulla", "Hypothalamus"],
+    "correctAnswer": 1,
+    "explanation": "The cerebrum controls intelligence, memory, and voluntary actions."
+  },
+  {
+    "year": 2015,
+    "examType": "JAMB",
+    "subject": "Biology",
+    "question": "The process of shedding the exoskeleton in insects is",
+    "options": ["Metamorphosis", "Moulting", "Fertilization", "Budding"],
+    "correctAnswer": 1,
+    "explanation": "Moulting allows insects to grow."
+  },
+  {
+    "year": 2024,
+    "examType": "JAMB",
+    "subject": "Biology",
+    "question": "The organ that receives light in the human eye is the",
+    "options": ["Lens", "Retina", "Cornea", "Iris"],
+    "correctAnswer": 1,
+    "explanation": "The retina contains photoreceptors that detect light."
+  }
+]

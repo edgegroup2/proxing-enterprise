@@ -1,0 +1,113 @@
+[
+  {
+    "exam_type": "jamb",
+    "subject": "Government",
+    "topic": "Meaning of Government",
+    "year": 2026,
+    "question": "Government as an institution refers to the",
+    "options": ["process of making goods", "machinery through which a state is ruled", "study of past events", "system of religious worship"],
+    "correct_index": 1,
+    "explanation": "Government as an institution is the machinery or agency through which the affairs of a state are administered.",
+    "source": "JAMB Premium Pack v1"
+  },
+  {
+    "exam_type": "jamb",
+    "subject": "Government",
+    "topic": "Sovereignty",
+    "year": 2026,
+    "question": "Sovereignty means the",
+    "options": ["right to vote in elections", "supreme power of the state", "division of government into arms", "freedom of the press"],
+    "correct_index": 1,
+    "explanation": "Sovereignty is the supreme authority of a state to make and enforce laws without external control.",
+    "source": "JAMB Premium Pack v1"
+  },
+  {
+    "exam_type": "jamb",
+    "subject": "Government",
+    "topic": "Democracy",
+    "year": 2026,
+    "question": "A major feature of democracy is",
+    "options": ["one-party rule", "military decree", "periodic free and fair elections", "rule by traditional chiefs"],
+    "correct_index": 2,
+    "explanation": "Democracy allows citizens to choose their leaders through periodic free and fair elections.",
+    "source": "JAMB Premium Pack v1"
+  },
+  {
+    "exam_type": "jamb",
+    "subject": "Government",
+    "topic": "Separation of Powers",
+    "year": 2026,
+    "question": "The doctrine of separation of powers means that",
+    "options": ["power is shared among different arms of government", "all powers belong to the president", "judges make all laws", "citizens control the army"],
+    "correct_index": 0,
+    "explanation": "Separation of powers divides government authority among the legislature, executive and judiciary.",
+    "source": "JAMB Premium Pack v1"
+  },
+  {
+    "exam_type": "jamb",
+    "subject": "Government",
+    "topic": "Rule of Law",
+    "year": 2026,
+    "question": "The rule of law implies that",
+    "options": ["leaders are above the law", "only soldiers obey the law", "everyone is equal before the law", "courts are controlled by political parties"],
+    "correct_index": 2,
+    "explanation": "Rule of law means that all persons, including rulers and citizens, are subject to the law.",
+    "source": "JAMB Premium Pack v1"
+  },
+  {
+    "exam_type": "jamb",
+    "subject": "Government",
+    "topic": "Constitution",
+    "year": 2026,
+    "question": "A constitution is best described as",
+    "options": ["a list of political parties", "a body of rules guiding a state", "a record of election results", "a military command"],
+    "correct_index": 1,
+    "explanation": "A constitution is the body of fundamental rules and principles by which a country is governed.",
+    "source": "JAMB Premium Pack v1"
+  },
+  {
+    "exam_type": "jamb",
+    "subject": "Government",
+    "topic": "Citizenship",
+    "year": 2026,
+    "question": "Citizenship by birth is acquired through",
+    "options": ["naturalization", "registration", "descent or place of birth", "appointment into public office"],
+    "correct_index": 2,
+    "explanation": "Citizenship by birth is obtained through being born in a country or having parents who are citizens, depending on the constitution.",
+    "source": "JAMB Premium Pack v1"
+  },
+  {
+    "exam_type": "jamb",
+    "subject": "Government",
+    "topic": "Political Parties",
+    "year": 2026,
+    "question": "The main aim of a political party is to",
+    "options": ["win political power", "conduct population census", "interpret court judgments", "collect taxes directly"],
+    "correct_index": 0,
+    "explanation": "Political parties seek to win elections and control government in order to implement their programmes.",
+    "source": "JAMB Premium Pack v1"
+  },
+  {
+    "exam_type": "jamb",
+    "subject": "Government",
+    "topic": "Electoral System",
+    "year": 2026,
+    "question": "An electoral commission is responsible for",
+    "options": ["making laws", "conducting elections", "appointing ministers", "declaring war"],
+    "correct_index": 1,
+    "explanation": "An electoral commission organizes, supervises and conducts elections.",
+    "source": "JAMB Premium Pack v1"
+  },
+  {
+    "exam_type": "jamb",
+    "subject": "Government",
+    "topic": "Federalism",
+    "year": 2026,
+    "question": "Federalism involves the division of powers between",
+    "options": ["religious leaders and citizens", "central and component governments", "army and police", "judges and lawyers"],
+    "correct_index": 1,
+    "explanation": "Federalism divides governmental powers between the central government and state or regional governments.",
+    "source": "JAMB Premium Pack v1"
+  }
+]
+

@@ -1,0 +1,40 @@
+'use strict';
+
+const express = require('express');
+const router = express.Router();
+
+const authRoutes = require('./auth');
+const memberRoutes = require('./members');
+const studentRoutes = require('./students');
+const classRoutes = require('./classes');
+const subjectRoutes = require('./subjects');
+const enrollmentRoutes = require('./enrollments');
+const timetableRoutes = require('./timetable');
+const attendanceRoutes = require('./attendance');
+const examRoutes = require('./exams');
+const resultRoutes = require('./results');
+const reportRoutes = require('./reports');
+
+const {
+  requireSchoolAuth,
+} = require('../../middlewares/school/schoolAuthMiddleware');
+
+const {
+  getSchoolDashboardController,
+} = require('../../controllers/school/dashboard/schoolDashboardController');
+
+router.use('/auth', authRoutes);
+router.use('/members', memberRoutes);
+router.use('/students', studentRoutes);
+router.use('/classes', classRoutes);
+router.use('/subjects', subjectRoutes);
+router.use('/enrollments', enrollmentRoutes);
+router.use('/timetable', timetableRoutes);
+router.use('/attendance', attendanceRoutes);
+router.use('/exams', examRoutes);
+router.use('/results', resultRoutes);
+router.use('/reports', reportRoutes);
+
+router.get('/dashboard', requireSchoolAuth, getSchoolDashboardController);
+
+module.exports = router;

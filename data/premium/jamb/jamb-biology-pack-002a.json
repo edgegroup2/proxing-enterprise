@@ -1,0 +1,352 @@
+[
+  {
+    "year": 2003,
+    "examType": "JAMB",
+    "subject": "Biology",
+    "question": "The process by which green plants manufacture food using sunlight is known as",
+    "options": [
+      "Respiration",
+      "Photosynthesis",
+      "Transpiration",
+      "Fermentation"
+    ],
+    "correctAnswer": 1,
+    "explanation": "Photosynthesis is the process by which green plants use sunlight, chlorophyll, water, and carbon dioxide to manufacture food."
+  },
+  {
+    "year": 2005,
+    "examType": "JAMB",
+    "subject": "Biology",
+    "question": "The functional unit of the kidney is the",
+    "options": [
+      "Neuron",
+      "Nephron",
+      "Alveolus",
+      "Glomerulus"
+    ],
+    "correctAnswer": 1,
+    "explanation": "The nephron is the structural and functional unit of the kidney responsible for filtration and urine formation."
+  },
+  {
+    "year": 2008,
+    "examType": "JAMB",
+    "subject": "Biology",
+    "question": "Diffusion is the movement of particles from",
+    "options": [
+      "Low concentration to high concentration",
+      "High concentration to low concentration",
+      "One organ to another",
+      "Blood to tissues only"
+    ],
+    "correctAnswer": 1,
+    "explanation": "Diffusion is the net movement of particles from a region of higher concentration to a region of lower concentration."
+  },
+  {
+    "year": 2010,
+    "examType": "JAMB",
+    "subject": "Biology",
+    "question": "Which organelle is responsible for energy production in the cell?",
+    "options": [
+      "Nucleus",
+      "Mitochondrion",
+      "Ribosome",
+      "Golgi body"
+    ],
+    "correctAnswer": 1,
+    "explanation": "Mitochondria are the powerhouse of the cell where cellular respiration occurs to release energy."
+  },
+  {
+    "year": 2013,
+    "examType": "JAMB",
+    "subject": "Biology",
+    "question": "The transport tissue responsible for movement of manufactured food in plants is",
+    "options": [
+      "Xylem",
+      "Phloem",
+      "Cambium",
+      "Epidermis"
+    ],
+    "correctAnswer": 1,
+    "explanation": "Phloem transports manufactured food from leaves to other parts of the plant."
+  },
+  {
+    "year": 2015,
+    "examType": "JAMB",
+    "subject": "Biology",
+    "question": "A change in gene structure is called",
+    "options": [
+      "Variation",
+      "Mutation",
+      "Adaptation",
+      "Selection"
+    ],
+    "correctAnswer": 1,
+    "explanation": "Mutation refers to a permanent change in the nucleotide sequence or structure of a gene."
+  },
+  {
+    "year": 2016,
+    "examType": "JAMB",
+    "subject": "Biology",
+    "question": "The male reproductive organ in flowering plants is",
+    "options": [
+      "Carpel",
+      "Stamen",
+      "Ovule",
+      "Petal"
+    ],
+    "correctAnswer": 1,
+    "explanation": "The stamen is the male reproductive organ consisting of anther and filament."
+  },
+  {
+    "year": 2017,
+    "examType": "JAMB",
+    "subject": "Biology",
+    "question": "Which blood cells are primarily responsible for body defense?",
+    "options": [
+      "Red blood cells",
+      "White blood cells",
+      "Platelets",
+      "Plasma cells"
+    ],
+    "correctAnswer": 1,
+    "explanation": "White blood cells defend the body against infections and foreign substances."
+  },
+  {
+    "year": 2019,
+    "examType": "JAMB",
+    "subject": "Biology",
+    "question": "The movement of water molecules through a selectively permeable membrane is",
+    "options": [
+      "Diffusion",
+      "Osmosis",
+      "Respiration",
+      "Translocation"
+    ],
+    "correctAnswer": 1,
+    "explanation": "Osmosis is the movement of water molecules from higher water potential to lower water potential through a selectively permeable membrane."
+  },
+  {
+    "year": 2021,
+    "examType": "JAMB",
+    "subject": "Biology",
+    "question": "The part of the human brain responsible for balance and coordination is the",
+    "options": [
+      "Cerebrum",
+      "Cerebellum",
+      "Medulla oblongata",
+      "Hypothalamus"
+    ],
+    "correctAnswer": 1,
+    "explanation": "The cerebellum coordinates muscular activity and maintains posture and balance."
+  },
+  {
+    "year": 2022,
+    "examType": "JAMB",
+    "subject": "Biology",
+    "question": "The process of shedding old skin in arthropods is called",
+    "options": [
+      "Metamorphosis",
+      "Moulting",
+      "Mutation",
+      "Ecdysis"
+    ],
+    "correctAnswer": 1,
+    "explanation": "Moulting is the shedding of the exoskeleton to allow growth."
+  },
+  {
+    "year": 2006,
+    "examType": "JAMB",
+    "subject": "Biology",
+    "question": "The basic unit of heredity is the",
+    "options": [
+      "Chromosome",
+      "Gene",
+      "Nucleus",
+      "Cell"
+    ],
+    "correctAnswer": 1,
+    "explanation": "Genes are units of heredity that carry information for inherited traits."
+  },
+  {
+    "year": 2009,
+    "examType": "JAMB",
+    "subject": "Biology",
+    "question": "Which process produces gametes?",
+    "options": [
+      "Mitosis",
+      "Meiosis",
+      "Binary fission",
+      "Budding"
+    ],
+    "correctAnswer": 1,
+    "explanation": "Meiosis reduces chromosome number by half to produce gametes."
+  },
+  {
+    "year": 2011,
+    "examType": "JAMB",
+    "subject": "Biology",
+    "question": "Plants lose water mainly through",
+    "options": [
+      "Roots",
+      "Stomata",
+      "Stem",
+      "Flowers"
+    ],
+    "correctAnswer": 1,
+    "explanation": "Most water loss in plants occurs through stomata during transpiration."
+  },
+  {
+    "year": 2018,
+    "examType": "JAMB",
+    "subject": "Biology",
+    "question": "The pigment responsible for photosynthesis is",
+    "options": [
+      "Melanin",
+      "Chlorophyll",
+      "Haemoglobin",
+      "Carotene"
+    ],
+    "correctAnswer": 1,
+    "explanation": "Chlorophyll absorbs light energy required for photosynthesis."
+  },
+  {
+    "year": 2014,
+    "examType": "JAMB",
+    "subject": "Biology",
+    "question": "Which kingdom includes bacteria?",
+    "options": [
+      "Protista",
+      "Monera",
+      "Fungi",
+      "Plantae"
+    ],
+    "correctAnswer": 1,
+    "explanation": "Bacteria belong to Kingdom Monera in the traditional classification system."
+  },
+  {
+    "year": 2012,
+    "examType": "JAMB",
+    "subject": "Biology",
+    "question": "The exchange of genetic material between homologous chromosomes occurs during",
+    "options": [
+      "Interphase",
+      "Crossing over",
+      "Replication",
+      "Fertilization"
+    ],
+    "correctAnswer": 1,
+    "explanation": "Crossing over occurs during meiosis and increases genetic variation."
+  },
+  {
+    "year": 2020,
+    "examType": "JAMB",
+    "subject": "Biology",
+    "question": "The liquid part of blood is",
+    "options": [
+      "Serum",
+      "Plasma",
+      "Platelets",
+      "Lymph"
+    ],
+    "correctAnswer": 1,
+    "explanation": "Plasma is the liquid component of blood that transports cells and dissolved substances."
+  },
+  {
+    "year": 2007,
+    "examType": "JAMB",
+    "subject": "Biology",
+    "question": "Which organ is mainly responsible for detoxification?",
+    "options": [
+      "Heart",
+      "Liver",
+      "Kidney",
+      "Pancreas"
+    ],
+    "correctAnswer": 1,
+    "explanation": "The liver detoxifies harmful substances in the body."
+  },
+  {
+    "year": 2004,
+    "examType": "JAMB",
+    "subject": "Biology",
+    "question": "The smallest living unit of an organism is the",
+    "options": [
+      "Tissue",
+      "Cell",
+      "Organ",
+      "System"
+    ],
+    "correctAnswer": 1,
+    "explanation": "The cell is the basic structural and functional unit of life."
+  },
+  {
+    "year": 2023,
+    "examType": "JAMB",
+    "subject": "Biology",
+    "question": "The process by which offspring resemble their parents is",
+    "options": [
+      "Adaptation",
+      "Inheritance",
+      "Variation",
+      "Mutation"
+    ],
+    "correctAnswer": 1,
+    "explanation": "Inheritance is the transmission of genetic traits from parents to offspring."
+  },
+  {
+    "year": 2010,
+    "examType": "JAMB",
+    "subject": "Biology",
+    "question": "Respiration in cells mainly releases",
+    "options": [
+      "Water",
+      "Energy",
+      "Carbon dioxide",
+      "Oxygen"
+    ],
+    "correctAnswer": 1,
+    "explanation": "Cellular respiration breaks down food to release usable energy."
+  },
+  {
+    "year": 2016,
+    "examType": "JAMB",
+    "subject": "Biology",
+    "question": "The joint between skull bones is",
+    "options": [
+      "Ball and socket",
+      "Immovable joint",
+      "Hinge joint",
+      "Pivot joint"
+    ],
+    "correctAnswer": 1,
+    "explanation": "Bones of the skull are joined by immovable joints called sutures."
+  },
+  {
+    "year": 2018,
+    "examType": "JAMB",
+    "subject": "Biology",
+    "question": "Which structure carries urine from kidney to bladder?",
+    "options": [
+      "Urethra",
+      "Ureter",
+      "Nephron",
+      "Tubule"
+    ],
+    "correctAnswer": 1,
+    "explanation": "The ureter transports urine from the kidney to the bladder."
+  },
+  {
+    "year": 2024,
+    "examType": "JAMB",
+    "subject": "Biology",
+    "question": "Which process involves fusion of male and female gametes?",
+    "options": [
+      "Meiosis",
+      "Fertilization",
+      "Pollination",
+      "Budding"
+    ],
+    "correctAnswer": 1,
+    "explanation": "Fertilization is the fusion of male and female gametes to form a zygote."
+  }
+]

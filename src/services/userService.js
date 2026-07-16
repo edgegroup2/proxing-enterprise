@@ -1,28 +1,30 @@
 const db = require("../db");
 
 /**
- * Find user by Telegram chat ID
+ * Get user by ID
  */
-async function getUserByTelegramId(telegramId) {
+async function getUserById(id) {
   const { rows } = await db.query(
-    `SELECT id, phone FROM users WHERE telegram_id = $1`,
-    [String(telegramId)]
+    "SELECT id, phone, email, role, status FROM users WHERE id = $1",
+    [id]
   );
 
   return rows[0] || null;
 }
 
 /**
- * Link Telegram account to a user (run once)
+ * Get user by phone
  */
-async function linkTelegramToUser(userId, telegramId) {
-  await db.query(
-    `UPDATE users SET telegram_id = $1 WHERE id = $2`,
-    [String(telegramId), userId]
+async function getUserByPhone(phone) {
+  const { rows } = await db.query(
+    "SELECT id, phone, email, role, status FROM users WHERE phone = $1",
+    [phone]
   );
+
+  return rows[0] || null;
 }
 
 module.exports = {
-  getUserByTelegramId,
-  linkTelegramToUser,
+  getUserById,
+  getUserByPhone,
 };

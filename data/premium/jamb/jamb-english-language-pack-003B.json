@@ -1,0 +1,292 @@
+[
+  {
+    "exam_type": "jamb",
+    "subject": "English Language",
+    "topic": "Oral English",
+    "year": 2026,
+    "question": "Which word has the same vowel sound as 'beat'?",
+    "options": ["bit", "bet", "bead", "bat"],
+    "answer": "bead",
+    "explanation": "'Beat' and 'bead' both contain the /iː/ vowel sound.",
+    "source": "JAMB English Premium Pack 003B"
+  },
+  {
+    "exam_type": "jamb",
+    "subject": "English Language",
+    "topic": "Word Stress",
+    "year": 2026,
+    "question": "Which syllable is stressed in the word 'education'?",
+    "options": ["First", "Second", "Third", "Fourth"],
+    "answer": "Third",
+    "explanation": "ed-u-CA-tion has stress on the third syllable.",
+    "source": "JAMB English Premium Pack 003B"
+  },
+  {
+    "exam_type": "jamb",
+    "subject": "English Language",
+    "topic": "Punctuation",
+    "year": 2026,
+    "question": "Choose the correctly punctuated sentence.",
+    "options": [
+      "However I decided to stay.",
+      "However, I decided to stay.",
+      "However I, decided to stay.",
+      "However; I decided, to stay."
+    ],
+    "answer": "However, I decided to stay.",
+    "explanation": "A comma follows the introductory adverb 'However'.",
+    "source": "JAMB English Premium Pack 003B"
+  },
+  {
+    "exam_type": "jamb",
+    "subject": "English Language",
+    "topic": "Homophones",
+    "year": 2026,
+    "question": "Choose the correct word: The sailor raised the ______.",
+    "options": ["sail", "sale", "cell", "seal"],
+    "answer": "sail",
+    "explanation": "A sailor raises a sail, not a sale.",
+    "source": "JAMB English Premium Pack 003B"
+  },
+  {
+    "exam_type": "jamb",
+    "subject": "English Language",
+    "topic": "Comprehension Logic",
+    "year": 2026,
+    "question": "If all musicians are artists and some artists are teachers, which conclusion is valid?",
+    "options": [
+      "All teachers are musicians",
+      "Some musicians may be teachers",
+      "No musicians are teachers",
+      "All artists are musicians"
+    ],
+    "answer": "Some musicians may be teachers",
+    "explanation": "A possible overlap exists between musicians and teachers through artists.",
+    "source": "JAMB English Premium Pack 003B"
+  },
+  {
+    "exam_type": "jamb",
+    "subject": "English Language",
+    "topic": "Lexis and Structure",
+    "year": 2026,
+    "question": "Neither the manager nor the workers ______ ready for the inspection.",
+    "options": ["was", "is", "were", "be"],
+    "answer": "were",
+    "explanation": "The verb agrees with the nearest plural subject 'workers'.",
+    "source": "JAMB English Premium Pack 003B"
+  },
+  {
+    "exam_type": "jamb",
+    "subject": "English Language",
+    "topic": "Summary Skills",
+    "year": 2026,
+    "question": "A good summary should be",
+    "options": ["brief and accurate", "long and detailed", "full of examples", "opinionated"],
+    "answer": "brief and accurate",
+    "explanation": "Summary writing focuses on brevity and accuracy.",
+    "source": "JAMB English Premium Pack 003B"
+  },
+  {
+    "exam_type": "jamb",
+    "subject": "English Language",
+    "topic": "Sentence Interpretation",
+    "year": 2026,
+    "question": "If someone says 'He is on cloud nine', it means he is",
+    "options": ["very sad", "extremely happy", "very tired", "angry"],
+    "answer": "extremely happy",
+    "explanation": "'On cloud nine' means extremely happy.",
+    "source": "JAMB English Premium Pack 003B"
+  },
+  {
+    "exam_type": "jamb",
+    "subject": "English Language",
+    "topic": "Idioms",
+    "year": 2026,
+    "question": "To 'burn the midnight oil' means to",
+    "options": ["waste fuel", "work late into the night", "start a fire", "be careless"],
+    "answer": "work late into the night",
+    "explanation": "The idiom refers to studying or working late.",
+    "source": "JAMB English Premium Pack 003B"
+  },
+  {
+    "exam_type": "jamb",
+    "subject": "English Language",
+    "topic": "Concord",
+    "year": 2026,
+    "question": "Each of the students ______ submitted the assignment.",
+    "options": ["have", "has", "were", "are"],
+    "answer": "has",
+    "explanation": "'Each' takes a singular verb.",
+    "source": "JAMB English Premium Pack 003B"
+  },
+  {
+    "exam_type": "jamb",
+    "subject": "English Language",
+    "topic": "Vocabulary",
+    "year": 2026,
+    "question": "Choose the word nearest in meaning to 'abundant'.",
+    "options": ["scarce", "plentiful", "rare", "tiny"],
+    "answer": "plentiful",
+    "explanation": "Abundant means existing in large quantities.",
+    "source": "JAMB English Premium Pack 003B"
+  },
+  {
+    "exam_type": "jamb",
+    "subject": "English Language",
+    "topic": "Antonyms",
+    "year": 2026,
+    "question": "Choose the opposite of 'hostile'.",
+    "options": ["aggressive", "friendly", "violent", "harsh"],
+    "answer": "friendly",
+    "explanation": "Friendly is the opposite of hostile.",
+    "source": "JAMB English Premium Pack 003B"
+  },
+  {
+    "exam_type": "jamb",
+    "subject": "English Language",
+    "topic": "Sentence Completion",
+    "year": 2026,
+    "question": "If I ______ you, I would apologize immediately.",
+    "options": ["am", "was", "were", "be"],
+    "answer": "were",
+    "explanation": "Subjunctive mood requires 'were'.",
+    "source": "JAMB English Premium Pack 003B"
+  },
+  {
+    "exam_type": "jamb",
+    "subject": "English Language",
+    "topic": "Tenses",
+    "year": 2026,
+    "question": "By this time tomorrow, they ______ the journey.",
+    "options": ["complete", "completed", "will complete", "will have completed"],
+    "answer": "will have completed",
+    "explanation": "Future perfect tense indicates completion before a future time.",
+    "source": "JAMB English Premium Pack 003B"
+  },
+  {
+    "exam_type": "jamb",
+    "subject": "English Language",
+    "topic": "Figures of Speech",
+    "year": 2026,
+    "question": "'The stars danced in the sky' is an example of",
+    "options": ["metaphor", "personification", "simile", "hyperbole"],
+    "answer": "personification",
+    "explanation": "Human action is given to stars.",
+    "source": "JAMB English Premium Pack 003B"
+  },
+  {
+    "exam_type": "jamb",
+    "subject": "English Language",
+    "topic": "Prepositions",
+    "year": 2026,
+    "question": "She is interested ______ learning French.",
+    "options": ["on", "at", "in", "for"],
+    "answer": "in",
+    "explanation": "Correct expression is 'interested in'.",
+    "source": "JAMB English Premium Pack 003B"
+  },
+  {
+    "exam_type": "jamb",
+    "subject": "English Language",
+    "topic": "Phrasal Verbs",
+    "year": 2026,
+    "question": "The event was ______ because of bad weather.",
+    "options": ["called off", "called in", "called on", "called up"],
+    "answer": "called off",
+    "explanation": "'Called off' means cancelled.",
+    "source": "JAMB English Premium Pack 003B"
+  },
+  {
+    "exam_type": "jamb",
+    "subject": "English Language",
+    "topic": "Register",
+    "year": 2026,
+    "question": "The term 'plaintiff' belongs to the ______ register.",
+    "options": ["medical", "legal", "banking", "engineering"],
+    "answer": "legal",
+    "explanation": "Plaintiff is a legal term.",
+    "source": "JAMB English Premium Pack 003B"
+  },
+  {
+    "exam_type": "jamb",
+    "subject": "English Language",
+    "topic": "Spelling",
+    "year": 2026,
+    "question": "Choose the correctly spelt word.",
+    "options": ["accomodation", "accommodation", "acommodation", "accomodaton"],
+    "answer": "accommodation",
+    "explanation": "Correct spelling is accommodation.",
+    "source": "JAMB English Premium Pack 003B"
+  },
+  {
+    "exam_type": "jamb",
+    "subject": "English Language",
+    "topic": "Synonyms",
+    "year": 2026,
+    "question": "Choose the nearest meaning of 'reluctant'.",
+    "options": ["willing", "hesitant", "excited", "certain"],
+    "answer": "hesitant",
+    "explanation": "Reluctant means unwilling or hesitant.",
+    "source": "JAMB English Premium Pack 003B"
+  },
+  {
+    "exam_type": "jamb",
+    "subject": "English Language",
+    "topic": "Comprehension",
+    "year": 2026,
+    "question": "Read: 'The roads were flooded, so commuters arrived late.' Why did commuters arrive late?",
+    "options": ["Vehicle breakdown", "Flooded roads", "Strike action", "Traffic lights failure"],
+    "answer": "Flooded roads",
+    "explanation": "The sentence directly states the reason.",
+    "source": "JAMB English Premium Pack 003B"
+  },
+  {
+    "exam_type": "jamb",
+    "subject": "English Language",
+    "topic": "Stress",
+    "year": 2026,
+    "question": "Which syllable is stressed in 'important'?",
+    "options": ["First", "Second", "Third", "None"],
+    "answer": "Second",
+    "explanation": "im-POR-tant.",
+    "source": "JAMB English Premium Pack 003B"
+  },
+  {
+    "exam_type": "jamb",
+    "subject": "English Language",
+    "topic": "Grammar",
+    "year": 2026,
+    "question": "Choose the correct sentence.",
+    "options": [
+      "She doesn't likes apples.",
+      "She don't like apples.",
+      "She doesn't like apples.",
+      "She not like apples."
+    ],
+    "answer": "She doesn't like apples.",
+    "explanation": "Correct auxiliary + base verb structure.",
+    "source": "JAMB English Premium Pack 003B"
+  },
+  {
+    "exam_type": "jamb",
+    "subject": "English Language",
+    "topic": "Usage",
+    "year": 2026,
+    "question": "Choose the correct expression.",
+    "options": ["fewer water", "less water", "less bottles", "fewer sugar"],
+    "answer": "less water",
+    "explanation": "Less is used with uncountable nouns.",
+    "source": "JAMB English Premium Pack 003B"
+  },
+  {
+    "exam_type": "jamb",
+    "subject": "English Language",
+    "topic": "Lexis",
+    "year": 2026,
+    "question": "A person who compiles dictionaries is called a",
+    "options": ["biographer", "lexicographer", "editor", "critic"],
+    "answer": "lexicographer",
+    "explanation": "A lexicographer compiles dictionaries.",
+    "source": "JAMB English Premium Pack 003B"
+  }
+]

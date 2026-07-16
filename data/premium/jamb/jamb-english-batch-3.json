@@ -1,0 +1,449 @@
+[
+  {
+    "exam_type":"jamb",
+    "subject":"English Language",
+    "topic":"Lexis and Structure",
+    "year":2026,
+    "question":"The chairman refused to ______ his earlier statement.",
+    "options":["withdraw","remove","pull","cancel out"],
+    "answer":"withdraw",
+    "explanation":"'Withdraw a statement' is the correct expression.",
+    "source":"JAMB Premium Pack v1"
+  },
+  {
+    "exam_type":"jamb",
+    "subject":"English Language",
+    "topic":"Concord",
+    "year":2026,
+    "question":"Either John or his friends ______ coming.",
+    "options":["is","was","are","be"],
+    "answer":"are",
+    "explanation":"Verb agrees with nearest noun ('friends').",
+    "source":"JAMB Premium Pack v1"
+  },
+  {
+    "exam_type":"jamb",
+    "subject":"English Language",
+    "topic":"Idioms",
+    "year":2026,
+    "question":"To 'call it a day' means to",
+    "options":["announce a holiday","stop working","begin a meeting","travel home"],
+    "answer":"stop working",
+    "explanation":"Common idiom meaning to stop an activity.",
+    "source":"JAMB Premium Pack v1"
+  },
+  {
+    "exam_type":"jamb",
+    "subject":"English Language",
+    "topic":"Antonyms",
+    "year":2026,
+    "question":"Choose the opposite of 'optimistic'.",
+    "options":["hopeful","pessimistic","joyful","active"],
+    "answer":"pessimistic",
+    "explanation":"Opposite meaning.",
+    "source":"JAMB Premium Pack v1"
+  },
+  {
+    "exam_type":"jamb",
+    "subject":"English Language",
+    "topic":"Register",
+    "year":2026,
+    "question":"Which term belongs to education register?",
+    "options":["syllabus","ledger","verdict","diagnosis"],
+    "answer":"syllabus",
+    "explanation":"Educational terminology.",
+    "source":"JAMB Premium Pack v1"
+  },
+
+  {
+    "exam_type":"jamb",
+    "subject":"English Language",
+    "topic":"Vocabulary",
+    "year":2026,
+    "question":"Nearest meaning of 'diligent'.",
+    "options":["lazy","careful","hardworking","careless"],
+    "answer":"hardworking",
+    "explanation":"Diligent means hardworking.",
+    "source":"JAMB Premium Pack v1"
+  },
+  {
+    "exam_type":"jamb",
+    "subject":"English Language",
+    "topic":"Sentence Completion",
+    "year":2026,
+    "question":"The doctor advised him to cut down ______ sugar.",
+    "options":["in","with","on","at"],
+    "answer":"on",
+    "explanation":"Correct phrasal usage is 'cut down on'.",
+    "source":"JAMB Premium Pack v1"
+  },
+  {
+    "exam_type":"jamb",
+    "subject":"English Language",
+    "topic":"Tenses",
+    "year":2026,
+    "question":"She ______ to school before the rain started.",
+    "options":["has gone","had gone","goes","will go"],
+    "answer":"had gone",
+    "explanation":"Past perfect for earlier past action.",
+    "source":"JAMB Premium Pack v1"
+  },
+  {
+    "exam_type":"jamb",
+    "subject":"English Language",
+    "topic":"Figures of Speech",
+    "year":2026,
+    "question":"'Time is money' is an example of",
+    "options":["simile","metaphor","hyperbole","personification"],
+    "answer":"metaphor",
+    "explanation":"Direct comparison without 'like' or 'as'.",
+    "source":"JAMB Premium Pack v1"
+  },
+  {
+    "exam_type":"jamb",
+    "subject":"English Language",
+    "topic":"Concord",
+    "year":2026,
+    "question":"One of the girls ______ absent.",
+    "options":["are","were","is","be"],
+    "answer":"is",
+    "explanation":"'One' is singular.",
+    "source":"JAMB Premium Pack v1"
+  },
+
+  {
+    "exam_type":"jamb",
+    "subject":"English Language",
+    "topic":"Idioms",
+    "year":2026,
+    "question":"To 'keep an eye on' means to",
+    "options":["watch carefully","close your eyes","look sideways","ignore"],
+    "answer":"watch carefully",
+    "explanation":"Standard idiomatic meaning.",
+    "source":"JAMB Premium Pack v1"
+  },
+  {
+    "exam_type":"jamb",
+    "subject":"English Language",
+    "topic":"Spelling",
+    "year":2026,
+    "question":"Choose the correctly spelt word.",
+    "options":["seperate","separrate","separate","seperete"],
+    "answer":"separate",
+    "explanation":"Correct spelling.",
+    "source":"JAMB Premium Pack v1"
+  },
+  {
+    "exam_type":"jamb",
+    "subject":"English Language",
+    "topic":"Prepositions",
+    "year":2026,
+    "question":"The students were divided ______ groups.",
+    "options":["in","into","between","for"],
+    "answer":"into",
+    "explanation":"Correct preposition.",
+    "source":"JAMB Premium Pack v1"
+  },
+  {
+    "exam_type":"jamb",
+    "subject":"English Language",
+    "topic":"Sentence Interpretation",
+    "year":2026,
+    "question":"If someone is 'at sea', the person is",
+    "options":["travelling","confused","wealthy","dangerous"],
+    "answer":"confused",
+    "explanation":"Idiomatic expression.",
+    "source":"JAMB Premium Pack v1"
+  },
+  {
+    "exam_type":"jamb",
+    "subject":"English Language",
+    "topic":"Vocabulary",
+    "year":2026,
+    "question":"Nearest meaning of 'ancient'.",
+    "options":["modern","old","young","brief"],
+    "answer":"old",
+    "explanation":"Ancient means very old.",
+    "source":"JAMB Premium Pack v1"
+  },
+
+  {
+    "exam_type":"jamb",
+    "subject":"English Language",
+    "topic":"Grammar",
+    "year":2026,
+    "question":"Choose the correct sentence.",
+    "options":["He don't like rice","He doesn't likes rice","He doesn't like rice","He don't likes rice"],
+    "answer":"He doesn't like rice",
+    "explanation":"Correct subject-verb agreement.",
+    "source":"JAMB Premium Pack v1"
+  },
+  {
+    "exam_type":"jamb",
+    "subject":"English Language",
+    "topic":"Antonyms",
+    "year":2026,
+    "question":"Opposite of 'expand'.",
+    "options":["extend","contract","increase","stretch"],
+    "answer":"contract",
+    "explanation":"Correct antonym.",
+    "source":"JAMB Premium Pack v1"
+  },
+  {
+    "exam_type":"jamb",
+    "subject":"English Language",
+    "topic":"Comprehension",
+    "year":2026,
+    "question":"The emotional attitude of a writer is called",
+    "options":["theme","tone","plot","register"],
+    "answer":"tone",
+    "explanation":"Definition of tone.",
+    "source":"JAMB Premium Pack v1"
+  },
+  {
+    "exam_type":"jamb",
+    "subject":"English Language",
+    "topic":"Concord",
+    "year":2026,
+    "question":"My trousers ______ dirty.",
+    "options":["is","are","was","be"],
+    "answer":"are",
+    "explanation":"Plural noun.",
+    "source":"JAMB Premium Pack v1"
+  },
+  {
+    "exam_type":"jamb",
+    "subject":"English Language",
+    "topic":"Lexis",
+    "year":2026,
+    "question":"Nearest meaning of 'swift'.",
+    "options":["slow","fast","careful","gentle"],
+    "answer":"fast",
+    "explanation":"Swift means fast.",
+    "source":"JAMB Premium Pack v1"
+  },
+
+  {
+    "exam_type":"jamb",
+    "subject":"English Language",
+    "topic":"Register",
+    "year":2026,
+    "question":"A 'verdict' belongs to",
+    "options":["medicine","law","education","banking"],
+    "answer":"law",
+    "explanation":"Legal terminology.",
+    "source":"JAMB Premium Pack v1"
+  },
+  {
+    "exam_type":"jamb",
+    "subject":"English Language",
+    "topic":"Idioms",
+    "year":2026,
+    "question":"To 'let the cat out of the bag' means",
+    "options":["release an animal","reveal a secret","lie openly","cause trouble"],
+    "answer":"reveal a secret",
+    "explanation":"Common idiom.",
+    "source":"JAMB Premium Pack v1"
+  },
+  {
+    "exam_type":"jamb",
+    "subject":"English Language",
+    "topic":"Punctuation",
+    "year":2026,
+    "question":"Which punctuation marks omitted words?",
+    "options":["colon","ellipsis","semicolon","apostrophe"],
+    "answer":"ellipsis",
+    "explanation":"Three dots indicate omission.",
+    "source":"JAMB Premium Pack v1"
+  },
+  {
+    "exam_type":"jamb",
+    "subject":"English Language",
+    "topic":"Grammar",
+    "year":2026,
+    "question":"Passive form of 'They elected him chairman.'",
+    "options":["He was elected chairman","He is elect chairman","Chairman elected him","He was electing chairman"],
+    "answer":"He was elected chairman",
+    "explanation":"Correct passive voice.",
+    "source":"JAMB Premium Pack v1"
+  },
+  {
+    "exam_type":"jamb",
+    "subject":"English Language",
+    "topic":"Vocabulary",
+    "year":2026,
+    "question":"A person who composes music is a",
+    "options":["composer","director","actor","author"],
+    "answer":"composer",
+    "explanation":"Correct occupational noun.",
+    "source":"JAMB Premium Pack v1"
+  },
+
+  {
+    "exam_type":"jamb",
+    "subject":"English Language",
+    "topic":"Lexis",
+    "year":2026,
+    "question":"Nearest meaning of 'scarce'.",
+    "options":["rare","plenty","many","available"],
+    "answer":"rare",
+    "explanation":"Scarce means limited.",
+    "source":"JAMB Premium Pack v1"
+  },
+  {
+    "exam_type":"jamb",
+    "subject":"English Language",
+    "topic":"Sentence Completion",
+    "year":2026,
+    "question":"Scarcely had she sat down ______ the bell rang.",
+    "options":["when","than","that","then"],
+    "answer":"when",
+    "explanation":"Standard expression.",
+    "source":"JAMB Premium Pack v1"
+  },
+  {
+    "exam_type":"jamb",
+    "subject":"English Language",
+    "topic":"Concord",
+    "year":2026,
+    "question":"The news ______ surprising.",
+    "options":["are","is","were","be"],
+    "answer":"is",
+    "explanation":"'News' is singular.",
+    "source":"JAMB Premium Pack v1"
+  },
+  {
+    "exam_type":"jamb",
+    "subject":"English Language",
+    "topic":"Figures of Speech",
+    "year":2026,
+    "question":"'He fought like a lion' is",
+    "options":["simile","metaphor","hyperbole","personification"],
+    "answer":"simile",
+    "explanation":"Uses 'like' comparison.",
+    "source":"JAMB Premium Pack v1"
+  },
+  {
+    "exam_type":"jamb",
+    "subject":"English Language",
+    "topic":"Vocabulary",
+    "year":2026,
+    "question":"Nearest meaning of 'generous'.",
+    "options":["kind","selfish","wicked","greedy"],
+    "answer":"kind",
+    "explanation":"Generous means giving/kind.",
+    "source":"JAMB Premium Pack v1"
+  },
+
+  {
+    "exam_type":"jamb",
+    "subject":"English Language",
+    "topic":"Comprehension",
+    "year":2026,
+    "question":"A writer's personal opinion in a passage may indicate",
+    "options":["bias","grammar","syntax","theme only"],
+    "answer":"bias",
+    "explanation":"Bias reflects opinion.",
+    "source":"JAMB Premium Pack v1"
+  },
+  {
+    "exam_type":"jamb",
+    "subject":"English Language",
+    "topic":"Grammar",
+    "year":2026,
+    "question":"Choose correct indirect speech: 'I will come,' he said.",
+    "options":["He said he will come","He said he would come","He says he would come","He said I would come"],
+    "answer":"He said he would come",
+    "explanation":"Backshift in reported speech.",
+    "source":"JAMB Premium Pack v1"
+  },
+  {
+    "exam_type":"jamb",
+    "subject":"English Language",
+    "topic":"Register",
+    "year":2026,
+    "question":"An 'invoice' belongs to",
+    "options":["commerce","medicine","education","law"],
+    "answer":"commerce",
+    "explanation":"Business terminology.",
+    "source":"JAMB Premium Pack v1"
+  },
+  {
+    "exam_type":"jamb",
+    "subject":"English Language",
+    "topic":"Lexis",
+    "year":2026,
+    "question":"Nearest meaning of 'brisk'.",
+    "options":["slow","quick","careless","weak"],
+    "answer":"quick",
+    "explanation":"Brisk means quick/active.",
+    "source":"JAMB Premium Pack v1"
+  },
+  {
+    "exam_type":"jamb",
+    "subject":"English Language",
+    "topic":"Sentence Interpretation",
+    "year":2026,
+    "question":"If a person is 'in hot water', the person is",
+    "options":["bathing","in trouble","cooking","angry"],
+    "answer":"in trouble",
+    "explanation":"Idiom meaning trouble.",
+    "source":"JAMB Premium Pack v1"
+  },
+
+  {
+    "exam_type":"jamb",
+    "subject":"English Language",
+    "topic":"Spelling",
+    "year":2026,
+    "question":"Choose correctly spelt word.",
+    "options":["accomodation","accommodation","acommodation","acomodation"],
+    "answer":"accommodation",
+    "explanation":"Correct spelling.",
+    "source":"JAMB Premium Pack v1"
+  },
+  {
+    "exam_type":"jamb",
+    "subject":"English Language",
+    "topic":"Grammar",
+    "year":2026,
+    "question":"The comparative of 'good' is",
+    "options":["gooder","better","best","more good"],
+    "answer":"better",
+    "explanation":"Irregular adjective.",
+    "source":"JAMB Premium Pack v1"
+  },
+  {
+    "exam_type":"jamb",
+    "subject":"English Language",
+    "topic":"Concord",
+    "year":2026,
+    "question":"Neither the boys nor the teacher ______ ready.",
+    "options":["are","is","were","be"],
+    "answer":"is",
+    "explanation":"Nearest noun agreement.",
+    "source":"JAMB Premium Pack v1"
+  },
+  {
+    "exam_type":"jamb",
+    "subject":"English Language",
+    "topic":"Vocabulary",
+    "year":2026,
+    "question":"Nearest meaning of 'honest'.",
+    "options":["truthful","wicked","silent","quiet"],
+    "answer":"truthful",
+    "explanation":"Correct synonym.",
+    "source":"JAMB Premium Pack v1"
+  },
+  {
+    "exam_type":"jamb",
+    "subject":"English Language",
+    "topic":"Idioms",
+    "year":2026,
+    "question":"To 'break the ice' means",
+    "options":["freeze water","start conversation","cause conflict","run away"],
+    "answer":"start conversation",
+    "explanation":"Common idiom.",
+    "source":"JAMB Premium Pack v1"
+  }
+]

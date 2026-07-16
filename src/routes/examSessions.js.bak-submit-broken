@@ -1,0 +1,1016 @@
+'use strict';
+
+const express = require('express');
+const router = express.Router();
+const db = require('../db');
+const { requireAuth } = require('../middleware/auth');
+
+function clampLimit(value, fallback = 40, max = 100) {
+  const n = parseInt(value || fallback, 10);
+  if (Number.isNaN(n) || n < 1) return fallback;
+  return Math.min(n, max);
+}
+
+function durationForExam(examType) {
+  return examType === 'jamb' ? 40 : 60;
+}
+
+const getStartParams = (req) => ({
+  examType: String(req.body?.exam_type || req.query.exam_type || 'jamb').toLowerCase(),
+  subjectName: String(req.body?.subject || req.query.subject || '').trim(),
+  subjectId: req.body?.subject_id || req.query.subject_id || null,
+  topicId: req.body?.topic_id || req.query.topic_id || null,
+  topicName: req.body?.topic || req.query.topic || null,
+  mode: String(req.body?.mode || req.query.mode || 'premium').toLowerCase(),
+  studentId: req.user?.id || req.body?.student_id || req.query.student_id || null,
+  limit: clampLimit(req.body?.question_count || req.body?.limit || req.query.limit, 40, 100),
+});
+
+/**
+ * Start exam session
+ * GET /api/exam-sessions/start?exam_type=jamb&subject=Economics&limit=40
+ * Supports subject_id, topic_id, count/limit, mode
+ */
+router.get('/start', requireAuth, async (req, res) => {
+  try {
+let {
+  examType,
+  subjectName,
+  subjectId,
+  topicId,
+  topicName,
+  mode,
+  studentId,
+  limit
+} = getStartParams(req);
+    const durationMinutes = durationForExam(examType);
+
+    if (!examType || (!subjectName && !subjectId)) {
+      return res.status(400).json({
+        success: false,
+        error: 'exam_type and subject or subject_id are required',
+      });
+    }
+
+if (!topicId && topicName) {
+  const topicResolve = await db.query(
+    `
+    SELECT t.id, t.name
+    FROM topics t
+    JOIN subjects s ON s.id = t.subject_id
+    WHERE LOWER(TRIM(t.name)) = LOWER(TRIM($1))
+      AND (
+        ($2::uuid IS NOT NULL AND t.subject_id = $2::uuid)
+        OR ($2::uuid IS NULL AND LOWER(TRIM(s.name)) = LOWER(TRIM($3)))
+      )
+    LIMIT 1
+    `,
+    [topicName, subjectId, subjectName]
+  );
+
+  if (topicResolve.rows.length) {
+    topicId = topicResolve.rows[0].id;
+    topicName = topicResolve.rows[0].name;
+  }
+}
+
+    let questions;
+
+if (mode === 'premium' || mode === 'random') {
+  questions = await db.query(
+    `
+SELECT
+  pq.id,
+  pq.question AS item,
+  pq.answer,
+  pq.explanation,
+  1 AS difficulty,
+  NULL AS year,
+  'past_questions' AS source,
+      NULL AS topic_id,
+      COALESCE(pq.topic, 'Past Questions') AS topic,
+      COALESCE(
+        jsonb_agg(
+          jsonb_build_object(
+            'id', md5(pq.id::text || '-' || opt.key),
+            'label', opt.key,
+            'text', opt.value
+          )
+          ORDER BY opt.key
+        ) FILTER (WHERE opt.value IS NOT NULL),
+        '[]'::jsonb
+      ) AS options
+    FROM past_questions pq
+LEFT JOIN LATERAL (
+  SELECT key, value
+  FROM jsonb_each_text(pq.options)
+  WHERE jsonb_typeof(pq.options) = 'object'
+
+  UNION ALL
+
+  SELECT
+    chr(64 + ordinality::int) AS key,
+    value::text AS value
+  FROM jsonb_array_elements_text(pq.options) WITH ORDINALITY AS arr(value, ordinality)
+  WHERE jsonb_typeof(pq.options) = 'array'
+) AS opt(key, value) ON true
+    WHERE lower(trim(pq.exam_type)) = lower($1)
+      AND lower(trim(pq.subject)) = lower($2)
+AND (
+  $3::text IS NULL
+  OR lower(trim(pq.topic)) = lower(trim($3::text))
+  OR lower(trim(pq.topic)) LIKE '%' || lower(trim($3::text)) || '%'
+  OR lower(trim($3::text)) LIKE '%' || lower(trim(pq.topic)) || '%'
+)
+    GROUP BY pq.id, pq.question, pq.explanation, pq.topic
+    HAVING COUNT(opt.value) >= 2
+    ORDER BY random()
+    LIMIT $4
+    `,
+    [examType, subjectName, topicName || null, limit]
+  );
+    } else {
+      questions = await db.query(
+        `
+        SELECT
+          q.id,
+          COALESCE(q.question, q.stem) AS question,
+          q.explanation,
+          q.difficulty,
+          q.year,
+          q.source,
+          q.topic_id,
+          t.name AS topic,
+          COALESCE(
+            json_agg(
+              json_build_object(
+                'id', qo.id,
+                'label', qo.label,
+                'text', qo.text
+              )
+              ORDER BY qo.label
+            ) FILTER (WHERE qo.id IS NOT NULL),
+            '[]'
+          ) AS options
+        FROM questions q
+        JOIN subjects s ON s.id = q.subject_id
+        LEFT JOIN topics t ON t.id = q.topic_id
+        LEFT JOIN question_options qo ON qo.question_id = q.id
+        WHERE LOWER(q.exam_type) = LOWER($1)
+          AND (
+            ($2::uuid IS NOT NULL AND q.subject_id = $2::uuid)
+            OR
+            ($2::uuid IS NULL AND LOWER(s.name) = LOWER($3))
+          )
+          AND q.is_active = true
+
+AND (
+  ($4::uuid IS NOT NULL AND q.topic_id = $4::uuid)
+  OR
+  ($4::uuid IS NULL AND $5::text IS NOT NULL AND LOWER(TRIM(t.name)) = LOWER(TRIM($5::text)))
+  OR
+  ($4::uuid IS NULL AND $5::text IS NULL)
+)
+
+) GROUP BY q.id, t.name HAVING COUNT(qo.id) >= 2 ORDER BY random() LIMIT $5 `,
+       [examType, subjectId, subjectName, topicId, limit, topicName] 
+      );
+    }
+
+if ((topicId || topicName) && questions.rows.length === 0) {
+  return res.json({
+    success: false,
+    empty: true,
+    fallback_used: false,
+    reason: 'NO_TOPIC_QUESTIONS',
+    message: 'No questions found for this exact topic',
+    data: {
+      questions: [],
+      exam_type: examType,
+      subject: subjectName,
+      topic: topicName,
+      topic_id: topicId
+    }
+  });
+}
+
+console.log('[TOPIC_FILTER_TEST]', {
+  examType,
+  subjectId,
+  subjectName,
+  topicId,
+  topicName,
+  questionCount: questions.rows.length,
+  firstTopic: questions.rows[0]?.topic
+});
+
+    const sessionResult = await db.query(
+      `
+INSERT INTO exam_sessions (
+  student_id,
+  exam_type,
+  subject,
+  total_questions,
+  duration_minutes,
+  status,
+  expires_at,
+  questions
+)
+VALUES ($1, $2, $3, $4, $5, 'in-progress', now() + ($5::int * interval '1 minute'), $6)
+RETURNING id, expires_at
+      `,
+      [
+        studentId,
+        examType,
+        subjectName || subjectId,
+        questions.rows.length,
+        durationMinutes,
+        JSON.stringify(questions.rows)
+      ]
+    );
+
+    return res.json({
+      success: true,
+      data: {
+        session_id: sessionResult.rows[0].id,
+        exam_type: examType,
+        subject: subjectName || subjectId,
+        question_count: questions.rows.length,
+        duration_minutes: durationMinutes,
+        expires_at: sessionResult.rows[0].expires_at,
+        questions: questions.rows,
+      },
+    });
+  } catch (err) {
+    console.error('[EXAM_SESSION_START_ERROR]', err);
+    return res.status(500).json({
+      success: false,
+      error: err.message || 'Failed to start exam session',
+    });
+  }
+});
+
+router.post('/start', requireAuth, async (req, res) => {
+  req.query = { ...req.query, ...req.body };
+  return router.handle(req, res);
+});
+
+router.post('/:id/next', requireAuth, async (req, res) => {
+  try {
+    const sessionId = String(req.params.id);
+    const userId = String(req.user.id);
+
+    const sessionResult = await db.query(
+      `SELECT * FROM exam_sessions WHERE id = $1 AND student_id = $2 LIMIT 1`,
+      [sessionId, userId]
+    );
+
+    if (!sessionResult.rows.length) {
+      return res.status(404).json({ success: false, error: 'Session not found' });
+    }
+
+    const session = sessionResult.rows[0];
+
+    const answeredResult = await db.query(
+      `SELECT question_id FROM student_question_attempts WHERE exam_session_id = $1`,
+      [sessionId]
+    );
+
+    const answeredIds = answeredResult.rows.map(r => r.question_id);
+
+    const sessionQuestions = Array.isArray(session.questions)
+      ? session.questions
+      : Array.isArray(session.questions?.questions)
+        ? session.questions.questions
+        : [];
+
+    const nextQuestion = sessionQuestions.find(q => !answeredIds.includes(q.id));
+
+    if (!nextQuestion) {
+      return res.json({
+        success: true,
+        completed: true,
+        data: {
+          session_id: sessionId,
+          next_question: null,
+          current_index: answeredIds.length,
+          remaining: 0
+        }
+      });
+    }
+
+    return res.json({
+      success: true,
+      completed: false,
+      data: {
+        session_id: sessionId,
+        next_question: nextQuestion,
+        current_index: answeredIds.length + 1,
+        remaining: Math.max(sessionQuestions.length - answeredIds.length - 1, 0)
+      }
+    });
+  } catch (err) {
+    console.error('[EXAM_SESSION_NEXT_ERROR]', err);
+    return res.status(500).json({ success: false, error: err.message });
+  }
+});
+
+/**
+ * Submit exam answers
+ * POST /api/exam-sessions/submit
+ */
+router.post('/submit', async (req, res) => {
+  try {
+    const { session_id, answers = [] } = req.body || {};
+
+    if (!session_id) {
+      return res.status(400).json({ success: false, error: 'session_id is required' });
+    }
+
+    if (!Array.isArray(answers) || answers.length === 0) {
+      return res.status(400).json({ success: false, error: 'answers array is required' });
+    }
+
+    const sessionResult = await db.query(
+      `SELECT * FROM exam_sessions WHERE id = $1 LIMIT 1`,
+      [session_id]
+    );
+
+    if (!sessionResult.rows.length) {
+      return res.status(404).json({ success: false, error: 'Exam session not found' });
+    }
+
+    const session = sessionResult.rows[0];
+
+    if (session.status === 'completed') {
+      return res.status(400).json({ success: false, error: 'Exam session already completed' });
+    }
+
+    const sessionQuestions = Array.isArray(session.questions)
+      ? session.questions
+      : Array.isArray(session.questions?.questions)
+        ? session.questions.questions
+        : [];
+
+    const norm = (v) =>
+      String(v ?? '')
+        .trim()
+        .toLowerCase()
+        .replace(/\s+/g, ' ')
+        .replace(/[.,;:]+$/g, '');
+
+    await db.query(
+      `DELETE FROM student_question_attempts WHERE exam_session_id = $1`,
+      [session_id]
+    );
+
+    let correct = 0;
+    const review = [];
+
+    for (const answer of answers) {
+      const questionId = answer.question_id;
+      const selectedOptionId = answer.selected_option_id || answer.option_id || null;
+      const selectedOptionLabel = answer.selected_option_label || answer.option_label || answer.label || null;
+      const selectedOptionText = answer.selected_option_text || answer.answer || answer.value || null;
+      const responseTime = answer.response_time || answer.response_time_sec || 0;
+
+
+const sessionQ = sessionQuestions.find(x => String(x.id) === String(questionId));
+
+const canonicalQuestion = await db.query(`
+  SELECT
+    'questions' AS source_table,
+    q.id,
+    COALESCE(q.question, q.stem) AS question,
+    q.explanation,
+    q.subject_id,
+    q.topic_id,
+    q.exam_type,
+    NULL::text AS answer,
+    correct_option.id AS correct_option_id,
+    correct_option.label AS correct_option_label,
+    correct_option.text AS correct_option_text,
+    t.name AS topic
+  FROM questions q
+  LEFT JOIN topics t ON t.id = q.topic_id
+  LEFT JOIN question_options correct_option
+    ON correct_option.question_id = q.id
+   AND correct_option.is_correct = true
+  WHERE q.id = $1
+
+  UNION ALL
+
+  SELECT
+    'past_questions' AS source_table,
+    pq.id,
+    pq.question AS question,
+    pq.explanation,
+    s.id AS subject_id,
+    NULL::uuid AS topic_id,
+    LOWER(pq.exam_type) AS exam_type,
+    pq.answer::text AS answer,
+    NULL::uuid AS correct_option_id,
+    NULL::text AS correct_option_label,
+    pq.answer::text AS correct_option_text,
+    COALESCE(pq.topic, 'Past Questions') AS topic
+  FROM past_questions pq
+  JOIN subjects s ON LOWER(TRIM(s.name)) = LOWER(TRIM(pq.subject))
+  WHERE pq.id = $1
+
+  LIMIT 1
+`, [questionId]);
+
+let q = canonicalQuestion.rows[0] || sessionQ;
+
+console.log("[QUESTION_OBJECT]", {
+    id: q?.id,
+    source_table: q?.source_table,
+    source_question_id: q?.source_question_id,
+    topic_id: q?.topic_id,
+    subject_id: q?.subject_id,
+    topic: q?.topic,
+    question: q?.question || q?.stem
+});
+
+if (!q || !q.id) {
+  console.warn('[ATTEMPT_METADATA_MISS]', {
+    reason: 'question_not_found',
+    session_id,
+    question_id: questionId
+  });
+  continue;
+}
+
+if (!q.subject_id && session.subject) {
+  const subjectResolve = await db.query(
+    `SELECT id FROM subjects WHERE LOWER(TRIM(name)) = LOWER(TRIM($1)) LIMIT 1`,
+    [session.subject]
+  );
+
+  q.subject_id = subjectResolve.rows[0]?.id || null;
+}
+
+if (!q.exam_type) {
+  q.exam_type = session.exam_type || null;
+}
+
+if (!q.topic_id && sessionQ?.topic_id) {
+  q.topic_id = sessionQ.topic_id;
+}
+
+if (!q.topic && sessionQ?.topic) {
+  q.topic = sessionQ.topic;
+}
+
+if (!q.subject_id) {
+  console.warn('[ATTEMPT_METADATA_MISS]', {
+    reason: 'missing_subject_id',
+    session_id,
+    question_id: questionId
+  });
+  continue;
+}
+
+const options = Array.isArray(q.options) ? q.options : [];
+
+const selected = options.find(o =>
+  (selectedOptionId && String(o.id || '') === String(selectedOptionId)) ||
+  (selectedOptionLabel && String(o.label || '').toUpperCase() === String(selectedOptionLabel).toUpperCase()) ||
+  (selectedOptionText && norm(o.text || '') === norm(selectedOptionText))
+);
+
+const answerKey =
+  q.correct_option_text ||
+  q.correct_option_label ||
+  q.correct_option_id ||
+  q.answer ||
+  q.correct_answer ||
+  null;
+
+const correctOption = options.find(o =>
+  o.is_correct === true ||
+  norm(o.text || '') === norm(answerKey || '') ||
+  String(o.label || '').toUpperCase() === String(answerKey || '').toUpperCase() ||
+  String(o.id || '') === String(answerKey || '')
+);
+
+const selectedValue =
+  selected?.text ||
+  selectedOptionText ||
+  selected?.label ||
+  selectedOptionLabel ||
+  selected?.id ||
+  selectedOptionId ||
+  null;
+
+const correctValue =
+  correctOption?.text ||
+  correctOption?.label ||
+  correctOption?.id ||
+  answerKey ||
+  null;
+
+const isCorrect = Boolean(
+  selectedValue &&
+  correctValue &&
+  (
+    norm(selectedValue) === norm(correctValue) ||
+    String(selectedValue || '').trim().toUpperCase() === String(correctValue || '').trim().toUpperCase()
+  )
+);
+
+console.log('[ATTEMPT_SCORE_DEBUG]', {
+  questionId: q.id,
+  sourceTable: q.source_table,
+  topic: q.topic_name || q.topic,
+  selectedValue,
+  correctValue,
+  answerKey,
+  isCorrect
+});
+
+if (isCorrect) correct++;
+
+await db.query(
+  `
+  INSERT INTO student_question_attempts (
+    exam_session_id,
+    user_id,
+    student_id,
+    question_id,
+    source_table,
+    source_question_id,
+    topic_id,
+    topic_name,
+    subject_id,
+    selected_option_id,
+    is_correct,
+    response_time,
+    created_at
+  )
+  VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11::boolean,$12,now())
+  `,
+  [
+    session.id,
+    session.student_id,
+    session.student_id,
+    q.source_table === 'questions' ? q.id : null,
+    q.source_table || 'questions',
+    q.source_table === 'questions' ? q.id : questionId,
+    q.topic_id || null,
+    q.topic_name || q.topic || null,
+    q.subject_id || null,
+    selected?.id || selectedOptionId || null,
+    isCorrect,
+    responseTime
+  ]
+);
+
+review.push({
+  question_id: q.id,
+  item: q.item || q.stem || q.question,
+  topic: q.topic_name || q.topic,
+  selected_option_id: selected?.id || selectedOptionId || null,
+  selected_option_label: selected?.label || selectedOptionLabel || null,
+  selected_option_text: selected?.text || selectedOptionText || null,
+  correct_option_id: correctOption?.id || null,
+  correct_option_label: correctOption?.label || null,
+  correct_option_text: correctOption?.text || answerKey || null,
+  is_correct: isCorrect,
+  explanation: q.explanation || null,
+  options
+});
+    const total = answers.length;
+    const wrong = total - correct;
+    const scorePercent = total ? Number(((correct / total) * 100).toFixed(2)) : 0;
+
+    await db.query(
+      `UPDATE exam_sessions
+       SET total_questions = $1,
+           correct_answers = $2,
+           wrong_answers = $3,
+           score_percent = $4,
+           completed_at = now(),
+           status = 'completed'
+       WHERE id = $5`,
+      [total, correct, wrong, scorePercent, session_id]
+    );
+
+    return res.json({
+      success: true,
+      data: {
+        session_id,
+        attempt_id: session_id,
+        total,
+        correct,
+        wrong,
+        score_percent: scorePercent,
+        review
+      }
+    });
+  } catch (err) {
+    console.error('[EXAM_SESSION_SUBMIT_ERROR]', err);
+    return res.status(500).json({
+      success: false,
+      error: err.message || 'Failed to submit exam session'
+    });
+  }
+});
+
+/**
+ * Session history
+ * GET /api/exam-sessions/history/:student_id
+ */
+router.get('/history/:student_id', async (req, res) => {
+  try {
+    const studentId = req.params.student_id;
+    const limit = clampLimit(req.query.limit, 20, 100);
+
+    const result = await db.query(
+      `
+      SELECT
+        id,
+        exam_type,
+        subject,
+        started_at,
+        completed_at,
+        duration_minutes,
+        total_questions,
+        correct_answers,
+        wrong_answers,
+        score_percent,
+        status
+      FROM exam_sessions
+      WHERE student_id = $1
+      ORDER BY started_at DESC
+      LIMIT $2
+      `,
+      [studentId, limit]
+    );
+
+    return res.json({
+      success: true,
+      data: result.rows,
+    });
+  } catch (err) {
+    console.error('[EXAM_SESSION_HISTORY_ERROR]', err);
+    return res.status(500).json({
+      success: false,
+      error: err.message || 'Failed to fetch history',
+    });
+  }
+});
+
+/**
+ * Review one session
+ * GET /api/exam-sessions/:session_id
+ */
+router.get('/:session_id', async (req, res) => {
+  try {
+const sessionId = req.params.session_id;
+
+if (!sessionId || sessionId === 'undefined' || sessionId === 'null') {
+  return res.status(400).json({
+    success: false,
+    error: 'session id required'
+  });
+}
+
+if (!/^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i.test(sessionId)) {
+  return res.status(400).json({
+    success: false,
+    error: 'invalid session id'
+  });
+}
+
+    const session = await db.query(
+      `
+      SELECT *
+      FROM exam_sessions
+      WHERE id = $1
+      LIMIT 1
+      `,
+      [sessionId]
+    );
+
+    if (!session.rows.length) {
+      return res.status(404).json({
+        success: false,
+        error: 'Session not found',
+      });
+    }
+
+    const attempts = await db.query(
+      `
+      SELECT
+        a.id AS attempt_id,
+        a.question_id,
+        a.selected_option_id,
+        a.is_correct,
+        a.response_time,
+        a.created_at,
+        q.stem,
+        q.explanation,
+        t.name AS topic,
+        correct_option.id AS correct_option_id,
+        correct_option.label AS correct_label,
+        correct_option.text AS correct_text,
+        selected_option.label AS selected_label,
+        selected_option.text AS selected_text
+      FROM student_question_attempts a
+      JOIN questions q ON q.id = a.question_id
+      LEFT JOIN topics t ON t.id = q.topic_id
+      LEFT JOIN question_options correct_option
+        ON correct_option.question_id = q.id
+       AND correct_option.is_correct = true
+      LEFT JOIN question_options selected_option
+        ON selected_option.id = a.selected_option_id
+      WHERE a.exam_session_id = $1
+      ORDER BY a.created_at ASC
+      `,
+      [sessionId]
+    );
+
+    return res.json({
+      success: true,
+data: {
+  session: session.rows[0],
+  questions: session.rows[0].questions || [],
+  attempts: attempts.rows
+      },
+    });
+  } catch (err) {
+    console.error('[EXAM_SESSION_REVIEW_ERROR]', err);
+    return res.status(500).json({
+      success: false,
+      error: err.message || 'Failed to fetch session review',
+    });
+  }
+});
+
+/**
+ * Student analytics
+ * GET /api/exam-sessions/analytics/:student_id
+ */
+router.get('/analytics/:student_id', async (req, res) => {
+  try {
+    const studentId = req.params.student_id;
+
+    const summary = await db.query(
+      `
+      SELECT
+        COUNT(*)::int AS sessions,
+        COALESCE(AVG(score_percent), 0)::numeric(5,2) AS average_score,
+        COALESCE(MAX(score_percent), 0)::numeric(5,2) AS best_score,
+        COALESCE(SUM(total_questions), 0)::int AS total_questions,
+        COALESCE(SUM(correct_answers), 0)::int AS total_correct
+      FROM exam_sessions
+      WHERE student_id = $1
+        AND status = 'completed'
+      `,
+      [studentId]
+    );
+
+    const topicAccuracy = await db.query(
+      `
+      SELECT
+        COALESCE(t.name, 'Unknown') AS topic,
+        COUNT(*)::int AS answered,
+        SUM(CASE WHEN a.is_correct THEN 1 ELSE 0 END)::int AS correct,
+        ROUND(
+          100.0 * SUM(CASE WHEN a.is_correct THEN 1 ELSE 0 END) / NULLIF(COUNT(*), 0),
+          2
+        ) AS accuracy_percent,
+        ROUND(AVG(COALESCE(a.response_time, 0)), 2) AS avg_response_time
+      FROM student_question_attempts a
+      LEFT JOIN questions q ON q.id = a.question_id
+      LEFT JOIN topics t ON t.id = q.topic_id
+      WHERE a.student_id = $1
+      GROUP BY t.name
+      ORDER BY accuracy_percent ASC NULLS FIRST, answered DESC
+      `,
+      [studentId]
+    );
+
+    const recentSessions = await db.query(
+      `
+      SELECT
+        id,
+        exam_type,
+        subject,
+        started_at,
+        completed_at,
+        total_questions,
+        correct_answers,
+        wrong_answers,
+        score_percent,
+        status
+      FROM exam_sessions
+      WHERE student_id = $1
+      ORDER BY started_at DESC
+      LIMIT 10
+      `,
+      [studentId]
+    );
+
+    return res.json({
+      success: true,
+      data: {
+        summary: summary.rows[0],
+        weak_topics: topicAccuracy.rows.slice(0, 5),
+        accuracy_by_topic: topicAccuracy.rows,
+        recent_sessions: recentSessions.rows,
+      },
+    });
+  } catch (err) {
+    console.error('[EXAM_SESSION_ANALYTICS_ERROR]', err);
+    return res.status(500).json({
+      success: false,
+      error: err.message || 'Failed to fetch analytics',
+    });
+  }
+});
+
+/**
+ * Session history
+ * GET /api/exam-sessions/history/:student_id
+ */
+router.get('/history/:student_id', async (req, res) => {
+  try {
+    const { student_id } = req.params;
+
+    const history = await db.query(`
+      SELECT
+        id,
+        exam_type,
+        subject,
+        total_questions,
+        correct_answers,
+        wrong_answers,
+        score_percent,
+        started_at,
+        completed_at,
+        duration_minutes,
+        status
+      FROM exam_sessions
+      WHERE student_id = $1
+      ORDER BY started_at DESC
+      LIMIT 100
+    `, [student_id]);
+
+    return res.json({
+      success: true,
+      data: history.rows
+    });
+
+  } catch (err) {
+    console.error('[SESSION_HISTORY_ERROR]', err);
+
+    return res.status(500).json({
+      success: false,
+      error: err.message || 'Failed to fetch history'
+    });
+  }
+});
+
+/**
+ * Review session
+ * GET /api/exam-sessions/:session_id
+ */
+router.get('/:session_id', async (req, res) => {
+  try {
+    const { session_id } = req.params;
+
+    const session = await db.query(`
+      SELECT *
+      FROM exam_sessions
+      WHERE id = $1
+      LIMIT 1
+    `, [session_id]);
+
+    if (!session.rows.length) {
+      return res.status(404).json({
+        success: false,
+        error: 'Session not found'
+      });
+    }
+
+    const review = await db.query(`
+      SELECT
+        sqa.question_id,
+        q.stem,
+        q.explanation,
+        q.topic_id,
+        t.name AS topic,
+        sqa.selected_option_id,
+        sqa.is_correct,
+        sqa.response_time,
+
+        (
+          SELECT id
+          FROM question_options
+          WHERE question_id = q.id
+          AND is_correct = true
+          LIMIT 1
+        ) AS correct_option_id,
+
+        (
+          SELECT text
+          FROM question_options
+          WHERE id = sqa.selected_option_id
+          LIMIT 1
+        ) AS selected_option_text,
+
+        (
+          SELECT text
+          FROM question_options
+          WHERE question_id = q.id
+          AND is_correct = true
+          LIMIT 1
+        ) AS correct_option_text
+
+      FROM student_question_attempts sqa
+      JOIN questions q ON q.id = sqa.question_id
+      LEFT JOIN topics t ON t.id = q.topic_id
+
+      WHERE sqa.exam_session_id = $1
+
+      ORDER BY sqa.created_at ASC
+    `, [session_id]);
+
+    return res.json({
+      success: true,
+      data: {
+        session: session.rows[0],
+        review: review.rows
+      }
+    });
+
+  } catch (err) {
+    console.error('[SESSION_REVIEW_ERROR]', err);
+
+    return res.status(500).json({
+      success: false,
+      error: err.message || 'Failed to fetch review'
+    });
+  }
+});
+
+/**
+ * Topic mastery analytics
+ * GET /api/exam-sessions/topics/:student_id
+ */
+router.get('/topics/:student_id', async (req, res) => {
+  try {
+    const { student_id } = req.params;
+
+    const result = await db.query(
+      `
+      SELECT
+        COALESCE(sqa.topic_name, t.name, 'Unknown') AS topic,
+        COUNT(*)::int AS attempts,
+        SUM(CASE WHEN sqa.is_correct THEN 1 ELSE 0 END)::int AS correct,
+        ROUND(
+          100.0 * SUM(CASE WHEN sqa.is_correct THEN 1 ELSE 0 END) / NULLIF(COUNT(*), 0),
+          2
+        ) AS accuracy
+      FROM student_question_attempts sqa
+      LEFT JOIN topics t ON t.id = sqa.topic_id
+      WHERE sqa.student_id = $1
+        AND COALESCE(sqa.topic_name, t.name, '') <> ''
+      GROUP BY COALESCE(sqa.topic_name, t.name, 'Unknown')
+      HAVING COUNT(*) >= 5
+      ORDER BY accuracy DESC, attempts DESC
+      `,
+      [student_id]
+    );
+
+    const rows = result.rows;
+
+    const strongest = rows
+      .filter((r) => Number(r.accuracy) >= 60)
+      .slice(0, 5);
+
+    const weakest = rows
+      .filter((r) => Number(r.accuracy) < 60)
+      .sort((a, b) => Number(a.accuracy) - Number(b.accuracy))
+      .slice(0, 5);
+
+    return res.json({
+      success: true,
+      data: {
+        strongest,
+        weakest,
+        all_topics: rows
+      }
+    });
+  } catch (err) {
+    console.error('[TOPIC_MASTERY_ERROR]', err);
+    return res.status(500).json({
+      success: false,
+      error: err.message || 'Failed to fetch topic mastery'
+    });
+  }
+});
+
+module.exports = router;

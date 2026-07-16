@@ -1,0 +1,281 @@
+[
+  {
+    "exam_type":"jamb",
+    "subject":"Chemistry",
+    "topic":"Stoichiometry",
+    "year":2026,
+    "question":"One mole of a substance contains",
+    "options":["6.02 × 10^23 particles","22.4 particles","10^6 particles","1 particle"],
+    "answer":"6.02 × 10^23 particles",
+    "explanation":"Avogadro's constant.",
+    "source":"JAMB Premium Chemistry Pack 004A"
+  },
+  {
+    "exam_type":"jamb",
+    "subject":"Chemistry",
+    "topic":"Stoichiometry",
+    "year":2026,
+    "question":"The molar volume of a gas at STP is",
+    "options":["11.2 dm³","22.4 dm³","44.8 dm³","24 dm³"],
+    "answer":"22.4 dm³",
+    "explanation":"Standard molar gas volume.",
+    "source":"JAMB Premium Chemistry Pack 004A"
+  },
+  {
+    "exam_type":"jamb",
+    "subject":"Chemistry",
+    "topic":"Stoichiometry",
+    "year":2026,
+    "question":"Relative molecular mass is the sum of",
+    "options":["atomic masses","protons","neutrons","electron numbers"],
+    "answer":"atomic masses",
+    "explanation":"Mr = sum of relative atomic masses.",
+    "source":"JAMB Premium Chemistry Pack 004A"
+  },
+  {
+    "exam_type":"jamb",
+    "subject":"Chemistry",
+    "topic":"Stoichiometry",
+    "year":2026,
+    "question":"The formula mass of NaCl is",
+    "options":["58.5","35.5","23","46"],
+    "answer":"58.5",
+    "explanation":"Na = 23, Cl = 35.5.",
+    "source":"JAMB Premium Chemistry Pack 004A"
+  },
+  {
+    "exam_type":"jamb",
+    "subject":"Chemistry",
+    "topic":"Stoichiometry",
+    "year":2026,
+    "question":"Empirical formula represents the",
+    "options":["actual number of atoms","simplest whole number ratio","mass ratio","ionic charge"],
+    "answer":"simplest whole number ratio",
+    "explanation":"Empirical formula shows simplest ratio.",
+    "source":"JAMB Premium Chemistry Pack 004A"
+  },
+
+  {
+    "exam_type":"jamb",
+    "subject":"Chemistry",
+    "topic":"Redox",
+    "year":2026,
+    "question":"Oxidation involves",
+    "options":["gain of electrons","loss of electrons","gain of neutrons","loss of protons"],
+    "answer":"loss of electrons",
+    "explanation":"OIL RIG.",
+    "source":"JAMB Premium Chemistry Pack 004A"
+  },
+  {
+    "exam_type":"jamb",
+    "subject":"Chemistry",
+    "topic":"Redox",
+    "year":2026,
+    "question":"Reduction means",
+    "options":["loss of oxygen","gain of electrons","loss of neutrons","gain of mass"],
+    "answer":"gain of electrons",
+    "explanation":"Reduction = electron gain.",
+    "source":"JAMB Premium Chemistry Pack 004A"
+  },
+  {
+    "exam_type":"jamb",
+    "subject":"Chemistry",
+    "topic":"Redox",
+    "year":2026,
+    "question":"A reducing agent",
+    "options":["gains electrons","loses electrons","is unchanged","gains protons"],
+    "answer":"loses electrons",
+    "explanation":"It donates electrons.",
+    "source":"JAMB Premium Chemistry Pack 004A"
+  },
+  {
+    "exam_type":"jamb",
+    "subject":"Chemistry",
+    "topic":"Redox",
+    "year":2026,
+    "question":"Rusting is an example of",
+    "options":["reduction","oxidation","neutralization","electrolysis"],
+    "answer":"oxidation",
+    "explanation":"Iron reacts with oxygen.",
+    "source":"JAMB Premium Chemistry Pack 004A"
+  },
+  {
+    "exam_type":"jamb",
+    "subject":"Chemistry",
+    "topic":"Redox",
+    "year":2026,
+    "question":"An oxidizing agent",
+    "options":["gains electrons","loses electrons","is reduced","both A and C"],
+    "answer":"both A and C",
+    "explanation":"Oxidizing agents accept electrons and are reduced.",
+    "source":"JAMB Premium Chemistry Pack 004A"
+  },
+
+  {
+    "exam_type":"jamb",
+    "subject":"Chemistry",
+    "topic":"Energetics",
+    "year":2026,
+    "question":"An exothermic reaction",
+    "options":["absorbs heat","releases heat","has no heat change","freezes always"],
+    "answer":"releases heat",
+    "explanation":"Heat is given out.",
+    "source":"JAMB Premium Chemistry Pack 004A"
+  },
+  {
+    "exam_type":"jamb",
+    "subject":"Chemistry",
+    "topic":"Energetics",
+    "year":2026,
+    "question":"An endothermic process",
+    "options":["releases heat","absorbs heat","produces light only","creates mass"],
+    "answer":"absorbs heat",
+    "explanation":"Heat is taken in.",
+    "source":"JAMB Premium Chemistry Pack 004A"
+  },
+  {
+    "exam_type":"jamb",
+    "subject":"Chemistry",
+    "topic":"Energetics",
+    "year":2026,
+    "question":"Combustion is usually",
+    "options":["endothermic","exothermic","neutral","reversible"],
+    "answer":"exothermic",
+    "explanation":"Burning releases energy.",
+    "source":"JAMB Premium Chemistry Pack 004A"
+  },
+  {
+    "exam_type":"jamb",
+    "subject":"Chemistry",
+    "topic":"Energetics",
+    "year":2026,
+    "question":"The SI unit of energy is",
+    "options":["joule","pascal","newton","watt"],
+    "answer":"joule",
+    "explanation":"Energy unit = J.",
+    "source":"JAMB Premium Chemistry Pack 004A"
+  },
+  {
+    "exam_type":"jamb",
+    "subject":"Chemistry",
+    "topic":"Energetics",
+    "year":2026,
+    "question":"Photosynthesis is",
+    "options":["exothermic","endothermic","neutral","oxidative"],
+    "answer":"endothermic",
+    "explanation":"Requires energy from sunlight.",
+    "source":"JAMB Premium Chemistry Pack 004A"
+  },
+
+  {
+    "exam_type":"jamb",
+    "subject":"Chemistry",
+    "topic":"Rates of Reaction",
+    "year":2026,
+    "question":"Increasing temperature generally",
+    "options":["slows reaction","speeds reaction","stops reaction","has no effect"],
+    "answer":"speeds reaction",
+    "explanation":"More energetic collisions.",
+    "source":"JAMB Premium Chemistry Pack 004A"
+  },
+  {
+    "exam_type":"jamb",
+    "subject":"Chemistry",
+    "topic":"Rates of Reaction",
+    "year":2026,
+    "question":"Catalysts",
+    "options":["are consumed","change reaction rate without being consumed","slow all reactions","change equilibrium position"],
+    "answer":"change reaction rate without being consumed",
+    "explanation":"Catalysts lower activation energy.",
+    "source":"JAMB Premium Chemistry Pack 004A"
+  },
+  {
+    "exam_type":"jamb",
+    "subject":"Chemistry",
+    "topic":"Rates of Reaction",
+    "year":2026,
+    "question":"Powdered solids react faster due to larger",
+    "options":["mass","surface area","density","volume"],
+    "answer":"surface area",
+    "explanation":"More exposed particles.",
+    "source":"JAMB Premium Chemistry Pack 004A"
+  },
+  {
+    "exam_type":"jamb",
+    "subject":"Chemistry",
+    "topic":"Rates of Reaction",
+    "year":2026,
+    "question":"Enzymes are",
+    "options":["metals","biological catalysts","salts","bases"],
+    "answer":"biological catalysts",
+    "explanation":"Natural catalysts in living systems.",
+    "source":"JAMB Premium Chemistry Pack 004A"
+  },
+  {
+    "exam_type":"jamb",
+    "subject":"Chemistry",
+    "topic":"Rates of Reaction",
+    "year":2026,
+    "question":"Higher concentration increases rate because of",
+    "options":["less collision","more collision","less energy","no particles"],
+    "answer":"more collision",
+    "explanation":"Collision frequency rises.",
+    "source":"JAMB Premium Chemistry Pack 004A"
+  },
+
+  {
+    "exam_type":"jamb",
+    "subject":"Chemistry",
+    "topic":"Equilibrium",
+    "year":2026,
+    "question":"Dynamic equilibrium occurs in a",
+    "options":["closed system","open system","vacuum","containerless system"],
+    "answer":"closed system",
+    "explanation":"Matter must not escape.",
+    "source":"JAMB Premium Chemistry Pack 004A"
+  },
+  {
+    "exam_type":"jamb",
+    "subject":"Chemistry",
+    "topic":"Equilibrium",
+    "year":2026,
+    "question":"A catalyst in equilibrium",
+    "options":["changes yield","speeds both forward and backward reactions","stops reaction","changes temperature"],
+    "answer":"speeds both forward and backward reactions",
+    "explanation":"Equilibrium reached faster.",
+    "source":"JAMB Premium Chemistry Pack 004A"
+  },
+  {
+    "exam_type":"jamb",
+    "subject":"Chemistry",
+    "topic":"Equilibrium",
+    "year":2026,
+    "question":"Increasing pressure favors side with",
+    "options":["more gas molecules","fewer gas molecules","equal molecules only","liquids"],
+    "answer":"fewer gas molecules",
+    "explanation":"Le Chatelier principle.",
+    "source":"JAMB Premium Chemistry Pack 004A"
+  },
+  {
+    "exam_type":"jamb",
+    "subject":"Chemistry",
+    "topic":"Equilibrium",
+    "year":2026,
+    "question":"Le Chatelier’s principle predicts response to",
+    "options":["disturbance","temperature only","pressure only","catalysts only"],
+    "answer":"disturbance",
+    "explanation":"System opposes imposed change.",
+    "source":"JAMB Premium Chemistry Pack 004A"
+  },
+  {
+    "exam_type":"jamb",
+    "subject":"Chemistry",
+    "topic":"Equilibrium",
+    "year":2026,
+    "question":"Ammonia synthesis uses",
+    "options":["Haber process","contact process","fractional distillation","electrolysis"],
+    "answer":"Haber process",
+    "explanation":"Industrial ammonia production.",
+    "source":"JAMB Premium Chemistry Pack 004A"
+  }
+]

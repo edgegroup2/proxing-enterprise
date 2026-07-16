@@ -1,0 +1,373 @@
+[
+  {
+    "method": "GET",
+    "localPath": "/",
+    "fullPath": "/",
+    "file": "src/routes/index.js",
+    "mountBase": ""
+  },
+  {
+    "method": "GET",
+    "localPath": "/admin/summary",
+    "fullPath": "/api/admin/admin/summary",
+    "file": "src/routes/admin.js",
+    "mountBase": "/api/admin"
+  },
+  {
+    "method": "GET",
+    "localPath": "/admin/transactions",
+    "fullPath": "/api/admin/admin/transactions",
+    "file": "src/routes/admin.js",
+    "mountBase": "/api/admin"
+  },
+  {
+    "method": "GET",
+    "localPath": "/admin/users",
+    "fullPath": "/api/admin/admin/users",
+    "file": "src/routes/admin.js",
+    "mountBase": "/api/admin"
+  },
+  {
+    "method": "GET",
+    "localPath": "/admin/wallets",
+    "fullPath": "/api/admin/admin/wallets",
+    "file": "src/routes/admin.js",
+    "mountBase": "/api/admin"
+  },
+  {
+    "method": "POST",
+    "localPath": "/reconcile",
+    "fullPath": "/api/admin/reconcile",
+    "file": "src/routes/adminAudit.js",
+    "mountBase": "/api/admin"
+  },
+  {
+    "method": "POST",
+    "localPath": "/reconcile-commissions",
+    "fullPath": "/api/admin/reconcile-commissions",
+    "file": "src/routes/adminReconcile.js",
+    "mountBase": "/api/admin"
+  },
+  {
+    "method": "GET",
+    "localPath": "/withdrawals",
+    "fullPath": "/api/admin/withdrawals",
+    "file": "src/routes/adminWithdrawals.js",
+    "mountBase": "/api/admin"
+  },
+  {
+    "method": "POST",
+    "localPath": "/withdrawals/:id/lock",
+    "fullPath": "/api/admin/withdrawals/:id/lock",
+    "file": "src/routes/adminWithdrawals.js",
+    "mountBase": "/api/admin"
+  },
+  {
+    "method": "POST",
+    "localPath": "/withdrawals/:id/retry",
+    "fullPath": "/api/admin/withdrawals/:id/retry",
+    "file": "src/routes/adminWithdrawals.js",
+    "mountBase": "/api/admin"
+  },
+  {
+    "method": "POST",
+    "localPath": "/withdrawals/:id/unlock",
+    "fullPath": "/api/admin/withdrawals/:id/unlock",
+    "file": "src/routes/adminWithdrawals.js",
+    "mountBase": "/api/admin"
+  },
+  {
+    "method": "POST",
+    "localPath": "/login",
+    "fullPath": "/api/auth/login",
+    "file": "src/routes/auth.js",
+    "mountBase": "/api/auth"
+  },
+  {
+    "method": "GET",
+    "localPath": "/categories",
+    "fullPath": "/api/discovery/categories",
+    "file": "src/routes/discovery.js",
+    "mountBase": "/api/discovery"
+  },
+  {
+    "method": "GET",
+    "localPath": "/online",
+    "fullPath": "/api/discovery/online",
+    "file": "src/routes/discovery.js",
+    "mountBase": "/api/discovery"
+  },
+  {
+    "method": "GET",
+    "localPath": "/streams/scheduled",
+    "fullPath": "/api/discovery/streams/scheduled",
+    "file": "src/routes/discovery.js",
+    "mountBase": "/api/discovery"
+  },
+  {
+    "method": "POST",
+    "localPath": "/orders/:id/confirm-delivery",
+    "fullPath": "/api/escrow/orders/:id/confirm-delivery",
+    "file": "src/routes/escrow.js",
+    "mountBase": "/api/escrow"
+  },
+  {
+    "method": "POST",
+    "localPath": "/orders/:id/dispute",
+    "fullPath": "/api/escrow/orders/:id/dispute",
+    "file": "src/routes/escrow.js",
+    "mountBase": "/api/escrow"
+  },
+  {
+    "method": "POST",
+    "localPath": "/orders/:id/refund",
+    "fullPath": "/api/escrow/orders/:id/refund",
+    "file": "src/routes/escrow.js",
+    "mountBase": "/api/escrow"
+  },
+  {
+    "method": "POST",
+    "localPath": "/initiate",
+    "fullPath": "/api/funding/initiate",
+    "file": "src/routes/funding.js",
+    "mountBase": "/api/funding"
+  },
+  {
+    "method": "GET",
+    "localPath": "/ping",
+    "fullPath": "/api/funding/ping",
+    "file": "src/routes/funding.js",
+    "mountBase": "/api/funding"
+  },
+  {
+    "method": "POST",
+    "localPath": "/auction/bid",
+    "fullPath": "/api/live/auction/bid",
+    "file": "src/routes/live.js",
+    "mountBase": "/api/live"
+  },
+  {
+    "method": "POST",
+    "localPath": "/auction/start",
+    "fullPath": "/api/live/auction/start",
+    "file": "src/routes/live.js",
+    "mountBase": "/api/live"
+  },
+  {
+    "method": "POST",
+    "localPath": "/flash/start",
+    "fullPath": "/api/live/flash/start",
+    "file": "src/routes/live.js",
+    "mountBase": "/api/live"
+  },
+  {
+    "method": "POST",
+    "localPath": "/streams/go-live",
+    "fullPath": "/api/live/streams/go-live",
+    "file": "src/routes/live.js",
+    "mountBase": "/api/live"
+  },
+  {
+    "method": "POST",
+    "localPath": "/streams/schedule",
+    "fullPath": "/api/live/streams/schedule",
+    "file": "src/routes/live.js",
+    "mountBase": "/api/live"
+  },
+  {
+    "method": "POST",
+    "localPath": "/generate-account",
+    "fullPath": "/api/monnify/generate-account",
+    "file": "src/routes/monnify.js",
+    "mountBase": "/api/monnify"
+  },
+  {
+    "method": "POST",
+    "localPath": "/generate",
+    "fullPath": "/api/paystack/generate",
+    "file": "src/routes/paystackVA.js",
+    "mountBase": "/api/paystack"
+  },
+  {
+    "method": "POST",
+    "localPath": "/init",
+    "fullPath": "/api/paystack/init",
+    "file": "src/routes/paystack.js",
+    "mountBase": "/api/paystack"
+  },
+  {
+    "method": "GET",
+    "localPath": "/verify/:reference",
+    "fullPath": "/api/paystack/verify/:reference",
+    "file": "src/routes/paystack.js",
+    "mountBase": "/api/paystack"
+  },
+  {
+    "method": "POST",
+    "localPath": "/webhook",
+    "fullPath": "/api/paystack/webhook",
+    "file": "src/routes/paystack.js",
+    "mountBase": "/api/paystack"
+  },
+  {
+    "method": "POST",
+    "localPath": "/heartbeat",
+    "fullPath": "/api/provider/heartbeat",
+    "file": "src/routes/provider.js",
+    "mountBase": "/api/provider"
+  },
+  {
+    "method": "POST",
+    "localPath": "/offline",
+    "fullPath": "/api/provider/offline",
+    "file": "src/routes/provider.js",
+    "mountBase": "/api/provider"
+  },
+  {
+    "method": "POST",
+    "localPath": "/online",
+    "fullPath": "/api/provider/online",
+    "file": "src/routes/provider.js",
+    "mountBase": "/api/provider"
+  },
+  {
+    "method": "POST",
+    "localPath": "/end",
+    "fullPath": "/api/sessions/end",
+    "file": "src/routes/sessions.js",
+    "mountBase": "/api/sessions"
+  },
+  {
+    "method": "POST",
+    "localPath": "/instant",
+    "fullPath": "/api/sessions/instant",
+    "file": "src/routes/sessions.js",
+    "mountBase": "/api/sessions"
+  },
+  {
+    "method": "POST",
+    "localPath": "/",
+    "fullPath": "/api/sms",
+    "file": "src/routes/sms.js",
+    "mountBase": "/api/sms"
+  },
+  {
+    "method": "POST",
+    "localPath": "/sms",
+    "fullPath": "/api/sms/sms",
+    "file": "src/routes/sms.js",
+    "mountBase": "/api/sms"
+  },
+  {
+    "method": "GET",
+    "localPath": "/me",
+    "fullPath": "/api/user/me",
+    "file": "src/routes/user.js",
+    "mountBase": "/api/user"
+  },
+  {
+    "method": "PUT",
+    "localPath": "/update",
+    "fullPath": "/api/user/update",
+    "file": "src/routes/user.js",
+    "mountBase": "/api/user"
+  },
+  {
+    "method": "POST",
+    "localPath": "/airtime",
+    "fullPath": "/api/vtpass/airtime",
+    "file": "src/routes/vtpass.js",
+    "mountBase": "/api/vtpass"
+  },
+  {
+    "method": "POST",
+    "localPath": "/data",
+    "fullPath": "/api/vtpass/data",
+    "file": "src/routes/vtpass.js",
+    "mountBase": "/api/vtpass"
+  },
+  {
+    "method": "POST",
+    "localPath": "/electricity",
+    "fullPath": "/api/vtpass/electricity",
+    "file": "src/routes/vtpass.js",
+    "mountBase": "/api/vtpass"
+  },
+  {
+    "method": "POST",
+    "localPath": "/merchant-verify",
+    "fullPath": "/api/vtpass/merchant-verify",
+    "file": "src/routes/vtpass.js",
+    "mountBase": "/api/vtpass"
+  },
+  {
+    "method": "POST",
+    "localPath": "/purchase",
+    "fullPath": "/api/vtpass/purchase",
+    "file": "src/routes/vtpass.js",
+    "mountBase": "/api/vtpass"
+  },
+  {
+    "method": "GET",
+    "localPath": "/service-variations",
+    "fullPath": "/api/vtpass/service-variations",
+    "file": "src/routes/vtpass.js",
+    "mountBase": "/api/vtpass"
+  },
+  {
+    "method": "POST",
+    "localPath": "/tv",
+    "fullPath": "/api/vtpass/tv",
+    "file": "src/routes/vtpass.js",
+    "mountBase": "/api/vtpass"
+  },
+  {
+    "method": "GET",
+    "localPath": "/",
+    "fullPath": "/api/wallet",
+    "file": "src/routes/wallet.js",
+    "mountBase": "/api/wallet"
+  },
+  {
+    "method": "POST",
+    "localPath": "/disable",
+    "fullPath": "/disable",
+    "file": "src/routes/admin/fundingControl.js",
+    "mountBase": ""
+  },
+  {
+    "method": "POST",
+    "localPath": "/enable",
+    "fullPath": "/enable",
+    "file": "src/routes/admin/fundingControl.js",
+    "mountBase": ""
+  },
+  {
+    "method": "POST",
+    "localPath": "/request",
+    "fullPath": "/request",
+    "file": "src/routes/match.js",
+    "mountBase": ""
+  },
+  {
+    "method": "GET",
+    "localPath": "/status",
+    "fullPath": "/status",
+    "file": "src/routes/admin/fundingControl.js",
+    "mountBase": ""
+  },
+  {
+    "method": "POST",
+    "localPath": "/webhook",
+    "fullPath": "/webhook",
+    "file": "src/routes/monnifyWebhook.js",
+    "mountBase": ""
+  },
+  {
+    "method": "POST",
+    "localPath": "/withdraw",
+    "fullPath": "/withdraw",
+    "file": "src/routes/withdrawal.js",
+    "mountBase": ""
+  }
+]

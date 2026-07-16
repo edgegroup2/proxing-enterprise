@@ -1,0 +1,282 @@
+[
+  {
+    "exam_type": "jamb",
+    "subject": "Biology",
+    "topic": "Cell Biology",
+    "year": 2026,
+    "question": "The basic structural and functional unit of life is the",
+    "options": ["tissue", "organ", "cell", "organelle"],
+    "answer": "cell",
+    "explanation": "The cell is the smallest unit capable of carrying out all life processes.",
+    "source": "JAMB Premium Biology Pack 001A"
+  },
+  {
+    "exam_type": "jamb",
+    "subject": "Biology",
+    "topic": "Cell Biology",
+    "year": 2026,
+    "question": "The organelle responsible for energy production in the cell is the",
+    "options": ["ribosome", "mitochondrion", "nucleus", "golgi apparatus"],
+    "answer": "mitochondrion",
+    "explanation": "Mitochondria are the sites of cellular respiration and ATP production.",
+    "source": "JAMB Premium Biology Pack 001A"
+  },
+  {
+    "exam_type": "jamb",
+    "subject": "Biology",
+    "topic": "Cell Biology",
+    "year": 2026,
+    "question": "The cell membrane is mainly responsible for",
+    "options": ["protein synthesis", "selective transport of substances", "cell division", "food storage"],
+    "answer": "selective transport of substances",
+    "explanation": "The plasma membrane regulates movement of substances into and out of the cell.",
+    "source": "JAMB Premium Biology Pack 001A"
+  },
+  {
+    "exam_type": "jamb",
+    "subject": "Biology",
+    "topic": "Nutrition",
+    "year": 2026,
+    "question": "Photosynthesis occurs mainly in the",
+    "options": ["root hair", "chloroplast", "vacuole", "nucleus"],
+    "answer": "chloroplast",
+    "explanation": "Chloroplasts contain chlorophyll used in photosynthesis.",
+    "source": "JAMB Premium Biology Pack 001A"
+  },
+  {
+    "exam_type": "jamb",
+    "subject": "Biology",
+    "topic": "Nutrition",
+    "year": 2026,
+    "question": "The gas released during photosynthesis is",
+    "options": ["carbon dioxide", "oxygen", "nitrogen", "hydrogen"],
+    "answer": "oxygen",
+    "explanation": "Oxygen is released as a by-product of photosynthesis.",
+    "source": "JAMB Premium Biology Pack 001A"
+  },
+  {
+    "exam_type": "jamb",
+    "subject": "Biology",
+    "topic": "Nutrition",
+    "year": 2026,
+    "question": "The end product of protein digestion is",
+    "options": ["glucose", "fatty acids", "amino acids", "glycerol"],
+    "answer": "amino acids",
+    "explanation": "Proteins are broken down into amino acids during digestion.",
+    "source": "JAMB Premium Biology Pack 001A"
+  },
+  {
+    "exam_type": "jamb",
+    "subject": "Biology",
+    "topic": "Transport System",
+    "year": 2026,
+    "question": "The blood vessel that carries blood away from the heart is the",
+    "options": ["vein", "artery", "capillary", "venule"],
+    "answer": "artery",
+    "explanation": "Arteries carry blood away from the heart.",
+    "source": "JAMB Premium Biology Pack 001A"
+  },
+  {
+    "exam_type": "jamb",
+    "subject": "Biology",
+    "topic": "Transport System",
+    "year": 2026,
+    "question": "The pigment that carries oxygen in red blood cells is",
+    "options": ["chlorophyll", "haemoglobin", "melanin", "keratin"],
+    "answer": "haemoglobin",
+    "explanation": "Haemoglobin binds oxygen for transport in the bloodstream.",
+    "source": "JAMB Premium Biology Pack 001A"
+  },
+  {
+    "exam_type": "jamb",
+    "subject": "Biology",
+    "topic": "Respiration",
+    "year": 2026,
+    "question": "Aerobic respiration requires",
+    "options": ["nitrogen", "oxygen", "carbon dioxide", "sunlight"],
+    "answer": "oxygen",
+    "explanation": "Aerobic respiration uses oxygen to release energy from food.",
+    "source": "JAMB Premium Biology Pack 001A"
+  },
+  {
+    "exam_type": "jamb",
+    "subject": "Biology",
+    "topic": "Respiration",
+    "year": 2026,
+    "question": "The main respiratory organ in humans is the",
+    "options": ["heart", "kidney", "lungs", "liver"],
+    "answer": "lungs",
+    "explanation": "Gas exchange in humans occurs in the lungs.",
+    "source": "JAMB Premium Biology Pack 001A"
+  },
+  {
+    "exam_type": "jamb",
+    "subject": "Biology",
+    "topic": "Excretion",
+    "year": 2026,
+    "question": "The organ responsible for urine formation is the",
+    "options": ["liver", "kidney", "skin", "lungs"],
+    "answer": "kidney",
+    "explanation": "Kidneys filter blood and form urine.",
+    "source": "JAMB Premium Biology Pack 001A"
+  },
+  {
+    "exam_type": "jamb",
+    "subject": "Biology",
+    "topic": "Coordination",
+    "year": 2026,
+    "question": "The control center of the nervous system is the",
+    "options": ["spinal cord", "brain", "nerve", "neuron"],
+    "answer": "brain",
+    "explanation": "The brain coordinates body activities and responses.",
+    "source": "JAMB Premium Biology Pack 001A"
+  },
+  {
+    "exam_type": "jamb",
+    "subject": "Biology",
+    "topic": "Reproduction",
+    "year": 2026,
+    "question": "Fusion of male and female gametes is called",
+    "options": ["pollination", "fertilization", "implantation", "ovulation"],
+    "answer": "fertilization",
+    "explanation": "Fertilization is the union of male and female gametes.",
+    "source": "JAMB Premium Biology Pack 001A"
+  },
+  {
+    "exam_type": "jamb",
+    "subject": "Biology",
+    "topic": "Genetics",
+    "year": 2026,
+    "question": "The basic unit of heredity is the",
+    "options": ["chromosome", "gene", "cell", "nucleus"],
+    "answer": "gene",
+    "explanation": "Genes carry hereditary information.",
+    "source": "JAMB Premium Biology Pack 001A"
+  },
+  {
+    "exam_type": "jamb",
+    "subject": "Biology",
+    "topic": "Genetics",
+    "year": 2026,
+    "question": "DNA stands for",
+    "options": [
+      "Deoxyribonucleic Acid",
+      "Dioxyribonucleic Acid",
+      "Deoxyribose Nuclear Acid",
+      "Dynamic Nuclear Acid"
+    ],
+    "answer": "Deoxyribonucleic Acid",
+    "explanation": "DNA is the molecule carrying genetic information.",
+    "source": "JAMB Premium Biology Pack 001A"
+  },
+  {
+    "exam_type": "jamb",
+    "subject": "Biology",
+    "topic": "Ecology",
+    "year": 2026,
+    "question": "A group of organisms of the same species living together is called",
+    "options": ["community", "ecosystem", "population", "habitat"],
+    "answer": "population",
+    "explanation": "Population refers to organisms of the same species in a given area.",
+    "source": "JAMB Premium Biology Pack 001A"
+  },
+  {
+    "exam_type": "jamb",
+    "subject": "Biology",
+    "topic": "Ecology",
+    "year": 2026,
+    "question": "Green plants are known as",
+    "options": ["consumers", "producers", "decomposers", "parasites"],
+    "answer": "producers",
+    "explanation": "Green plants produce food through photosynthesis.",
+    "source": "JAMB Premium Biology Pack 001A"
+  },
+  {
+    "exam_type": "jamb",
+    "subject": "Biology",
+    "topic": "Evolution",
+    "year": 2026,
+    "question": "The theory of evolution by natural selection was proposed by",
+    "options": ["Mendel", "Pasteur", "Darwin", "Lamarck"],
+    "answer": "Darwin",
+    "explanation": "Charles Darwin proposed natural selection.",
+    "source": "JAMB Premium Biology Pack 001A"
+  },
+  {
+    "exam_type": "jamb",
+    "subject": "Biology",
+    "topic": "Classification",
+    "year": 2026,
+    "question": "The scientific naming system using genus and species is called",
+    "options": ["taxonomy", "binomial nomenclature", "classification", "grouping"],
+    "answer": "binomial nomenclature",
+    "explanation": "Binomial nomenclature gives organisms two scientific names.",
+    "source": "JAMB Premium Biology Pack 001A"
+  },
+  {
+    "exam_type": "jamb",
+    "subject": "Biology",
+    "topic": "Microorganisms",
+    "year": 2026,
+    "question": "An example of a beneficial microorganism is",
+    "options": ["Salmonella", "Lactobacillus", "Plasmodium", "Vibrio"],
+    "answer": "Lactobacillus",
+    "explanation": "Lactobacillus is useful in fermentation and digestion.",
+    "source": "JAMB Premium Biology Pack 001A"
+  },
+  {
+    "exam_type": "jamb",
+    "subject": "Biology",
+    "topic": "Human Health",
+    "year": 2026,
+    "question": "Malaria is caused by",
+    "options": ["virus", "bacterium", "protozoan", "fungus"],
+    "answer": "protozoan",
+    "explanation": "Malaria is caused by Plasmodium, a protozoan parasite.",
+    "source": "JAMB Premium Biology Pack 001A"
+  },
+  {
+    "exam_type": "jamb",
+    "subject": "Biology",
+    "topic": "Plant Biology",
+    "year": 2026,
+    "question": "Water absorption in plants occurs mainly through the",
+    "options": ["stem", "leaf", "root hairs", "flowers"],
+    "answer": "root hairs",
+    "explanation": "Root hairs increase surface area for water absorption.",
+    "source": "JAMB Premium Biology Pack 001A"
+  },
+  {
+    "exam_type": "jamb",
+    "subject": "Biology",
+    "topic": "Plant Biology",
+    "year": 2026,
+    "question": "Loss of water vapor from leaves is called",
+    "options": ["respiration", "translocation", "transpiration", "diffusion"],
+    "answer": "transpiration",
+    "explanation": "Transpiration is water loss through stomata.",
+    "source": "JAMB Premium Biology Pack 001A"
+  },
+  {
+    "exam_type": "jamb",
+    "subject": "Biology",
+    "topic": "Enzymes",
+    "year": 2026,
+    "question": "Enzymes are mainly composed of",
+    "options": ["proteins", "fats", "carbohydrates", "minerals"],
+    "answer": "proteins",
+    "explanation": "Most enzymes are proteins that catalyze reactions.",
+    "source": "JAMB Premium Biology Pack 001A"
+  },
+  {
+    "exam_type": "jamb",
+    "subject": "Biology",
+    "topic": "Homeostasis",
+    "year": 2026,
+    "question": "Maintenance of constant internal environment is called",
+    "options": ["adaptation", "metabolism", "homeostasis", "circulation"],
+    "answer": "homeostasis",
+    "explanation": "Homeostasis keeps internal body conditions stable.",
+    "source": "JAMB Premium Biology Pack 001A"
+  }
+]

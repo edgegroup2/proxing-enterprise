@@ -1,0 +1,94 @@
+{
+  "language": {
+    "code": "yo",
+    "name": "Yoruba",
+    "native_name": "Yorùbá"
+  },
+  "audience": "diaspora_kids",
+  "topics": [
+    {
+      "title": "Family & Relationships Premium",
+      "slug": "family-relationships-premium-v2",
+      "level": "beginner",
+      "sort_order": 10,
+      "description": "Premium Yoruba family learning for diaspora children",
+      "lessons": [
+        {
+          "title": "Home Objects",
+          "lesson_type": "micro",
+          "sort_order": 1,
+          "is_premium": true,
+          "estimated_minutes": 6,
+          "content": {
+            "summary": "Learn Yoruba names for common home objects"
+          },
+          "items": [
+            {
+              "item_type": "flashcard",
+              "prompt": "Chair",
+              "native_text": "Àga",
+              "translation": "Chair"
+            },
+            {
+              "item_type": "flashcard",
+              "prompt": "Door",
+              "native_text": "Ilẹ̀kùn",
+              "translation": "Door"
+            }
+          ]
+        },
+        {
+          "title": "Talking to Mum and Dad",
+          "lesson_type": "micro",
+          "sort_order": 2,
+          "is_premium": true,
+          "estimated_minutes": 8,
+          "content": {
+            "summary": "Family conversations in Yoruba"
+          },
+          "items": [
+            {
+              "item_type": "flashcard",
+              "prompt": "Good morning Mum",
+              "native_text": "Ẹ káàárọ̀ Màmá",
+              "translation": "Good morning Mum"
+            },
+            {
+              "item_type": "flashcard",
+              "prompt": "Good evening Dad",
+              "native_text": "Ẹ kúalẹ́ Bàbá",
+              "translation": "Good evening Dad"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Conversation Premium",
+      "slug": "conversation-premium-v2",
+      "level": "intermediate",
+      "sort_order": 11,
+      "description": "Real Yoruba speaking practice",
+      "lessons": [
+        {
+          "title": "Greeting Elders Properly",
+          "lesson_type": "micro",
+          "sort_order": 1,
+          "is_premium": true,
+          "estimated_minutes": 7,
+          "content": {
+            "summary": "Respectful Yoruba greetings"
+          },
+          "items": [
+            {
+              "item_type": "flashcard",
+              "prompt": "Good afternoon sir",
+              "native_text": "Ẹ káàsán sir",
+              "translation": "Good afternoon sir"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

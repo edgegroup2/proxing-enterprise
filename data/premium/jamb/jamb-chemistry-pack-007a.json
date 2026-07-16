@@ -1,0 +1,386 @@
+[
+  {
+    "exam_type": "jamb",
+    "subject": "Chemistry",
+    "topic": "Acids, Bases and Salts",
+    "year": 2026,
+    "question": "An Arrhenius acid is a substance that",
+    "options": [
+      "accepts protons",
+      "donates hydroxide ions",
+      "produces hydrogen ions in aqueous solution",
+      "shares electron pairs"
+    ],
+    "answer": "produces hydrogen ions in aqueous solution",
+    "explanation": "According to Arrhenius, acids ionize in water to release H+ ions.",
+    "source": "JAMB Premium Chemistry Pack 007A"
+  },
+  {
+    "exam_type": "jamb",
+    "subject": "Chemistry",
+    "topic": "Acids, Bases and Salts",
+    "year": 2026,
+    "question": "A substance with pH 2 is",
+    "options": [
+      "strongly acidic",
+      "weakly acidic",
+      "neutral",
+      "alkaline"
+    ],
+    "answer": "strongly acidic",
+    "explanation": "Low pH values indicate strong acidity.",
+    "source": "JAMB Premium Chemistry Pack 007A"
+  },
+  {
+    "exam_type": "jamb",
+    "subject": "Chemistry",
+    "topic": "Indicators",
+    "year": 2026,
+    "question": "Methyl orange turns ____ in acidic medium.",
+    "options": [
+      "yellow",
+      "red",
+      "blue",
+      "green"
+    ],
+    "answer": "red",
+    "explanation": "Methyl orange is red in acid and yellow in alkaline medium.",
+    "source": "JAMB Premium Chemistry Pack 007A"
+  },
+  {
+    "exam_type": "jamb",
+    "subject": "Chemistry",
+    "topic": "Neutralization",
+    "year": 2026,
+    "question": "Neutralization is the reaction between",
+    "options": [
+      "acid and metal",
+      "acid and base",
+      "metal and salt",
+      "base and salt"
+    ],
+    "answer": "acid and base",
+    "explanation": "Neutralization produces salt and water.",
+    "source": "JAMB Premium Chemistry Pack 007A"
+  },
+  {
+    "exam_type": "jamb",
+    "subject": "Chemistry",
+    "topic": "Salts",
+    "year": 2026,
+    "question": "Common salt is chemically known as",
+    "options": [
+      "sodium carbonate",
+      "sodium chloride",
+      "calcium chloride",
+      "potassium nitrate"
+    ],
+    "answer": "sodium chloride",
+    "explanation": "Table salt is NaCl.",
+    "source": "JAMB Premium Chemistry Pack 007A"
+  },
+  {
+    "exam_type": "jamb",
+    "subject": "Chemistry",
+    "topic": "Water of Crystallization",
+    "year": 2026,
+    "question": "Blue vitriol is",
+    "options": [
+      "CuSO4·5H2O",
+      "Na2CO3·10H2O",
+      "MgSO4·7H2O",
+      "CaSO4·2H2O"
+    ],
+    "answer": "CuSO4·5H2O",
+    "explanation": "Blue vitriol is hydrated copper(II) sulfate.",
+    "source": "JAMB Premium Chemistry Pack 007A"
+  },
+  {
+    "exam_type": "jamb",
+    "subject": "Chemistry",
+    "topic": "Hardness of Water",
+    "year": 2026,
+    "question": "Temporary hardness of water is caused by",
+    "options": [
+      "chlorides",
+      "bicarbonates",
+      "sulfates",
+      "nitrates"
+    ],
+    "answer": "bicarbonates",
+    "explanation": "Temporary hardness is due to dissolved calcium/magnesium bicarbonates.",
+    "source": "JAMB Premium Chemistry Pack 007A"
+  },
+  {
+    "exam_type": "jamb",
+    "subject": "Chemistry",
+    "topic": "Water Treatment",
+    "year": 2026,
+    "question": "Hard water can be softened by",
+    "options": [
+      "filtration only",
+      "boiling",
+      "freezing",
+      "distillation of air"
+    ],
+    "answer": "boiling",
+    "explanation": "Boiling removes temporary hardness.",
+    "source": "JAMB Premium Chemistry Pack 007A"
+  },
+  {
+    "exam_type": "jamb",
+    "subject": "Chemistry",
+    "topic": "Solutions",
+    "year": 2026,
+    "question": "A saturated solution is one that",
+    "options": [
+      "contains no solute",
+      "contains maximum solute at a given temperature",
+      "contains only solvent",
+      "always forms crystals"
+    ],
+    "answer": "contains maximum solute at a given temperature",
+    "explanation": "Saturated solutions cannot dissolve more solute under stated conditions.",
+    "source": "JAMB Premium Chemistry Pack 007A"
+  },
+  {
+    "exam_type": "jamb",
+    "subject": "Chemistry",
+    "topic": "Solubility",
+    "year": 2026,
+    "question": "Solubility generally increases with temperature for most",
+    "options": [
+      "gases",
+      "liquids",
+      "solids",
+      "metals"
+    ],
+    "answer": "solids",
+    "explanation": "Most solid solutes become more soluble at higher temperatures.",
+    "source": "JAMB Premium Chemistry Pack 007A"
+  },
+  {
+    "exam_type": "jamb",
+    "subject": "Chemistry",
+    "topic": "Colloids",
+    "year": 2026,
+    "question": "Milk is an example of",
+    "options": [
+      "true solution",
+      "suspension",
+      "colloid",
+      "element"
+    ],
+    "answer": "colloid",
+    "explanation": "Milk is an emulsion colloid.",
+    "source": "JAMB Premium Chemistry Pack 007A"
+  },
+  {
+    "exam_type": "jamb",
+    "subject": "Chemistry",
+    "topic": "Suspensions",
+    "year": 2026,
+    "question": "Particles in a suspension",
+    "options": [
+      "never settle",
+      "settle on standing",
+      "are invisible",
+      "are dissolved completely"
+    ],
+    "answer": "settle on standing",
+    "explanation": "Suspension particles are large enough to settle.",
+    "source": "JAMB Premium Chemistry Pack 007A"
+  },
+  {
+    "exam_type": "jamb",
+    "subject": "Chemistry",
+    "topic": "Separation Techniques",
+    "year": 2026,
+    "question": "A mixture of sand and water can be separated by",
+    "options": [
+      "distillation",
+      "chromatography",
+      "filtration",
+      "electrolysis"
+    ],
+    "answer": "filtration",
+    "explanation": "Filtration separates insoluble solids from liquids.",
+    "source": "JAMB Premium Chemistry Pack 007A"
+  },
+  {
+    "exam_type": "jamb",
+    "subject": "Chemistry",
+    "topic": "Distillation",
+    "year": 2026,
+    "question": "Fractional distillation separates liquids based on differences in",
+    "options": [
+      "color",
+      "boiling points",
+      "density only",
+      "taste"
+    ],
+    "answer": "boiling points",
+    "explanation": "Fractional distillation exploits boiling point differences.",
+    "source": "JAMB Premium Chemistry Pack 007A"
+  },
+  {
+    "exam_type": "jamb",
+    "subject": "Chemistry",
+    "topic": "Chromatography",
+    "year": 2026,
+    "question": "Paper chromatography is useful for separating",
+    "options": [
+      "metals",
+      "colored substances",
+      "gases only",
+      "all salts"
+    ],
+    "answer": "colored substances",
+    "explanation": "Chromatography separates mixture components based on movement rates.",
+    "source": "JAMB Premium Chemistry Pack 007A"
+  },
+  {
+    "exam_type": "jamb",
+    "subject": "Chemistry",
+    "topic": "Atomic Structure",
+    "year": 2026,
+    "question": "The number of protons in an atom is its",
+    "options": [
+      "mass number",
+      "atomic number",
+      "isotopic number",
+      "neutron number"
+    ],
+    "answer": "atomic number",
+    "explanation": "Atomic number equals proton count.",
+    "source": "JAMB Premium Chemistry Pack 007A"
+  },
+  {
+    "exam_type": "jamb",
+    "subject": "Chemistry",
+    "topic": "Isotopes",
+    "year": 2026,
+    "question": "Isotopes of an element differ in number of",
+    "options": [
+      "protons",
+      "electrons",
+      "neutrons",
+      "shells"
+    ],
+    "answer": "neutrons",
+    "explanation": "Isotopes have same atomic number but different neutron counts.",
+    "source": "JAMB Premium Chemistry Pack 007A"
+  },
+  {
+    "exam_type": "jamb",
+    "subject": "Chemistry",
+    "topic": "Periodic Table",
+    "year": 2026,
+    "question": "Elements in the same group have similar",
+    "options": [
+      "mass numbers",
+      "chemical properties",
+      "colors",
+      "densities"
+    ],
+    "answer": "chemical properties",
+    "explanation": "Same valence electron configuration gives similar behavior.",
+    "source": "JAMB Premium Chemistry Pack 007A"
+  },
+  {
+    "exam_type": "jamb",
+    "subject": "Chemistry",
+    "topic": "Chemical Bonding",
+    "year": 2026,
+    "question": "An ionic bond forms through",
+    "options": [
+      "electron sharing",
+      "electron transfer",
+      "proton transfer",
+      "neutron exchange"
+    ],
+    "answer": "electron transfer",
+    "explanation": "Ionic bonding involves transfer and electrostatic attraction.",
+    "source": "JAMB Premium Chemistry Pack 007A"
+  },
+  {
+    "exam_type": "jamb",
+    "subject": "Chemistry",
+    "topic": "Covalent Bonding",
+    "year": 2026,
+    "question": "Covalent bonding involves",
+    "options": [
+      "sharing electrons",
+      "transferring neutrons",
+      "losing protons",
+      "gaining ions"
+    ],
+    "answer": "sharing electrons",
+    "explanation": "Covalent bonds arise from shared electron pairs.",
+    "source": "JAMB Premium Chemistry Pack 007A"
+  },
+  {
+    "exam_type": "jamb",
+    "subject": "Chemistry",
+    "topic": "Gas Laws",
+    "year": 2026,
+    "question": "At constant temperature, pressure is inversely proportional to volume according to",
+    "options": [
+      "Charles' law",
+      "Boyle's law",
+      "Avogadro's law",
+      "Dalton's law"
+    ],
+    "answer": "Boyle's law",
+    "explanation": "Boyle's law states PV = constant.",
+    "source": "JAMB Premium Chemistry Pack 007A"
+  },
+  {
+    "exam_type": "jamb",
+    "subject": "Chemistry",
+    "topic": "Charles' Law",
+    "year": 2026,
+    "question": "At constant pressure, gas volume increases with",
+    "options": [
+      "decreasing temperature",
+      "increasing temperature",
+      "increasing pressure",
+      "loss of molecules only"
+    ],
+    "answer": "increasing temperature",
+    "explanation": "Charles' law relates volume directly to temperature.",
+    "source": "JAMB Premium Chemistry Pack 007A"
+  },
+  {
+    "exam_type": "jamb",
+    "subject": "Chemistry",
+    "topic": "Mole Concept",
+    "year": 2026,
+    "question": "One mole contains",
+    "options": [
+      "6.02 × 10^23 particles",
+      "1000 particles",
+      "1.00 × 10^3 atoms",
+      "infinite particles"
+    ],
+    "answer": "6.02 × 10^23 particles",
+    "explanation": "Avogadro's constant defines one mole.",
+    "source": "JAMB Premium Chemistry Pack 007A"
+  },
+  {
+    "exam_type": "jamb",
+    "subject": "Chemistry",
+    "topic": "Stoichiometry",
+    "year": 2026,
+    "question": "The balanced equation for hydrogen burning in oxygen forms",
+    "options": [
+      "CO2",
+      "H2O",
+      "NH3",
+      "HCl"
+    ],
+    "answer": "H2O",
+    "explanation": "Hydrogen combusts in oxygen to form water.",
+    "source": "JAMB Premium Chemistry Pack 007A"
+  }
+]

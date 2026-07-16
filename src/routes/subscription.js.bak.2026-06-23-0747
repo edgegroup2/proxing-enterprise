@@ -1,0 +1,410 @@
+'use strict';
+
+const express = require('express');
+const router = express.Router();
+
+const db = require('../db');
+const { requireAuth } = require('../middleware/auth');
+const walletService = require('../services/walletService');
+
+function getUserId(req) {
+  return String(
+    req.user?.id ||
+    req.user?.user_id ||
+    req.user?.userId ||
+    req.user?.sub ||
+    ''
+  ).trim();
+}
+
+function planAmount(plan) {
+  return Number(plan.amount_ngn || plan.amount || 0);
+}
+
+function addPeriod(startDate, interval) {
+  const end = new Date(startDate);
+
+  switch (String(interval || '').toLowerCase()) {
+    case 'monthly':
+    case 'month':
+      end.setMonth(end.getMonth() + 1);
+      break;
+    case 'term':
+      end.setMonth(end.getMonth() + 3);
+      break;
+    case 'yearly':
+    case 'year':
+      end.setFullYear(end.getFullYear() + 1);
+      break;
+    default:
+      end.setMonth(end.getMonth() + 1);
+  }
+
+  return end;
+}
+
+/**
+ * GET /api/subscription/me
+ */
+router.get('/me', requireAuth, async (req, res) => {
+  try {
+    const userId = getUserId(req);
+
+    if (!userId) {
+      return res.status(401).json({
+        success: false,
+        error: 'Invalid auth user'
+      });
+    }
+
+    const result = await db.query(
+      `
+      SELECT
+        us.*,
+        sp.code AS plan_code,
+        sp.name AS plan_name,
+        sp.amount_ngn,
+        sp.interval,
+        (us.status = 'active' AND us.ends_at > now()) AS premium
+      FROM user_subscriptions us
+      JOIN subscription_plans sp ON sp.id = us.plan_id
+      WHERE us.user_id = $1
+      ORDER BY us.ends_at DESC
+      LIMIT 1
+      `,
+      [userId]
+    );
+
+    const row = result.rows[0] || null;
+
+    return res.json({
+      success: true,
+      premium: !!row?.premium,
+      subscription: row
+        ? {
+            id: row.id,
+            plan_id: row.plan_id,
+            plan_code: row.plan_code,
+            plan_name: row.plan_name,
+            amount_ngn: row.amount_ngn,
+            interval: row.interval,
+            status: row.status,
+            provider: row.provider,
+            provider_reference: row.provider_reference,
+            starts_at: row.starts_at,
+            ends_at: row.ends_at,
+            auto_renew: row.auto_renew
+          }
+        : null
+    });
+  } catch (err) {
+    console.error('SUBSCRIPTION_ME_ERROR', err);
+    return res.status(500).json({
+      success: false,
+      error: err.message
+    });
+  }
+});
+
+router.post('/activate', requireAuth, async (req, res) => {
+  const client = await db.connect();
+
+  try {
+    const userId = getUserId(req);
+
+    if (!userId) {
+      return res.status(401).json({
+        success: false,
+        error: 'Invalid auth user'
+      });
+    }
+
+    const {
+      plan_code,
+      payment_method,
+      return_to = '/learn'
+    } = req.body || {};
+
+    if (!plan_code) {
+      return res.status(400).json({
+        success: false,
+        error: 'plan_code is required'
+      });
+    }
+
+    if (!payment_method) {
+      return res.status(400).json({
+        success: false,
+        error: 'payment_method is required'
+      });
+    }
+
+    await client.query('BEGIN');
+
+    const userCheck = await client.query(
+      `SELECT id FROM users WHERE id = $1 LIMIT 1`,
+      [userId]
+    );
+
+    if (!userCheck.rows.length) {
+      await client.query('ROLLBACK');
+      return res.status(401).json({
+        success: false,
+        error: 'Authenticated user not found',
+        user_id: userId
+      });
+    }
+
+    const planResult = await client.query(
+      `
+      SELECT *
+      FROM subscription_plans
+      WHERE code = $1
+        AND is_active = true
+      LIMIT 1
+      `,
+      [plan_code]
+    );
+
+    if (!planResult.rows.length) {
+      await client.query('ROLLBACK');
+      return res.status(404).json({
+        success: false,
+        error: 'Subscription plan not found'
+      });
+    }
+
+    const plan = planResult.rows[0];
+    const amount = planAmount(plan);
+
+    if (!amount || amount <= 0) {
+      await client.query('ROLLBACK');
+      return res.status(400).json({
+        success: false,
+        error: 'Invalid subscription amount'
+      });
+    }
+
+    const existingActiveResult = await client.query(
+      `
+      SELECT *
+      FROM user_subscriptions
+      WHERE user_id = $1
+        AND status = 'active'
+        AND ends_at > now()
+      ORDER BY ends_at DESC
+      LIMIT 1
+      `,
+      [userId]
+    );
+
+    const now = new Date();
+
+    const startAt = existingActiveResult.rows.length
+      ? new Date(existingActiveResult.rows[0].ends_at)
+      : now;
+
+    const endAt = addPeriod(startAt, plan.interval);
+
+    const reference = `sub_${userId}_${plan.code}_${Date.now()}`;
+
+    if (payment_method === 'wallet') {
+      try {
+        await walletService.debitWallet(
+          userId,
+          amount,
+          reference,
+          'purchase',
+          'wallet',
+          {
+            channel: 'wallet',
+            service: 'subscription',
+            product_type: 'subscription',
+            plan_code: plan.code,
+            plan_id: plan.id,
+            amount_ngn: amount
+          },
+          client
+        );
+      } catch (walletErr) {
+        await client.query('ROLLBACK');
+
+        const msg = String(walletErr.message || '');
+
+        if (msg.toLowerCase().includes('insufficient')) {
+          return res.status(402).json({
+            success: false,
+            code: 'INSUFFICIENT_WALLET_BALANCE',
+            error: 'Insufficient wallet balance'
+          });
+        }
+
+        return res.status(400).json({
+          success: false,
+          error: msg || 'Wallet debit failed'
+        });
+      }
+
+      const subResult = await client.query(
+        `
+        INSERT INTO user_subscriptions (
+          user_id,
+          plan_id,
+          status,
+          provider,
+          provider_reference,
+          starts_at,
+          ends_at,
+          auto_renew,
+          created_at,
+          updated_at
+        )
+        VALUES ($1, $2, 'active', 'wallet', $3, $4, $5, false, now(), now())
+        RETURNING *
+        `,
+        [userId, plan.id, reference, startAt, endAt]
+      );
+
+      const subscription = subResult.rows[0];
+
+      await client.query(
+        `
+        INSERT INTO subscription_events (
+          user_subscription_id,
+          user_id,
+          event_type,
+          provider,
+          provider_reference,
+          payload,
+          created_at
+        )
+        VALUES ($1, $2, 'paid', 'wallet', $3, $4::jsonb, now())
+        `,
+        [
+          subscription.id,
+          userId,
+          reference,
+          JSON.stringify({
+            plan_code: plan.code,
+            plan_id: plan.id,
+            amount_ngn: amount,
+            payment_method: 'wallet',
+            return_to
+          })
+        ]
+      );
+
+      const walletResult = await client.query(
+        `
+        SELECT balance
+        FROM wallets
+        WHERE user_id = $1
+        LIMIT 1
+        `,
+        [userId]
+      );
+
+      const walletBalance = Number(walletResult.rows[0]?.balance || 0);
+
+      await client.query('COMMIT');
+
+      return res.json({
+        success: true,
+        premium: true,
+        subscription: {
+          id: subscription.id,
+          plan_id: subscription.plan_id,
+          plan_code: plan.code,
+          status: subscription.status,
+          starts_at: subscription.starts_at,
+          ends_at: subscription.ends_at
+        },
+        wallet: {
+          balance: walletBalance,
+          balance_naira: walletBalance
+        },
+        transaction_reference: reference,
+        return_to
+      });
+    }
+
+    const pendingResult = await client.query(
+      `
+      INSERT INTO user_subscriptions (
+        user_id,
+        plan_id,
+        status,
+        provider,
+        provider_reference,
+        starts_at,
+        ends_at,
+        auto_renew,
+        created_at,
+        updated_at
+      )
+      VALUES ($1, $2, 'pending', $3, NULL, now(), now(), false, now(), now())
+      RETURNING *
+      `,
+      [userId, plan.id, payment_method]
+    );
+
+    const pendingSub = pendingResult.rows[0];
+
+    await client.query(
+      `
+      INSERT INTO subscription_events (
+        user_subscription_id,
+        user_id,
+        event_type,
+        provider,
+        provider_reference,
+        payload,
+        created_at
+      )
+      VALUES ($1, $2, 'initiated', $3, NULL, $4::jsonb, now())
+      `,
+      [
+        pendingSub.id,
+        userId,
+        payment_method,
+        JSON.stringify({
+          plan_code: plan.code,
+          plan_id: plan.id,
+          amount_ngn: amount,
+          return_to
+        })
+      ]
+    );
+
+    await client.query('COMMIT');
+
+    return res.json({
+      success: true,
+      premium: false,
+      pending: true,
+      payment_method,
+      subscription: {
+        id: pendingSub.id,
+        plan_code: plan.code,
+        status: pendingSub.status
+      },
+      return_to,
+      message: `Initiate ${payment_method} payment using your existing payment flow`
+    });
+  } catch (err) {
+    try {
+      await client.query('ROLLBACK');
+    } catch (_) {}
+
+    console.error('SUBSCRIPTION_ACTIVATE_ERROR', err);
+
+    return res.status(500).json({
+      success: false,
+      error: err.message
+    });
+  } finally {
+    client.release();
+  }
+});
+
+module.exports = router;

@@ -1,26 +1,46 @@
-const express = require("express");
-const pool = require("./db");
+'use strict';
+
+const express = require('express');
+const pool = require('./db');
+const walletService = require('./services/walletService');
+
 const router = express.Router();
 
-router.post("/webhook", async (req, res) => {
-  const { amountPaid, customerEmail, transactionReference } = req.body.eventData;
+router.post('/webhook', async (req, res) => {
+  try {
+    const eventData = req.body?.eventData || {};
+    const amountPaid = Number(eventData.amountPaid || 0);
+    const customerEmail = eventData.customerEmail;
+    const transactionReference = eventData.transactionReference;
 
-  const user = await pool.query(
-    "SELECT * FROM users WHERE email=$1",
-    [customerEmail]
-  );
+    if (!customerEmail || !transactionReference || !Number.isFinite(amountPaid) || amountPaid <= 0) {
+      return res.sendStatus(200);
+    }
 
-  await pool.query(
-    "UPDATE wallets SET balance = balance + $1 WHERE user_id=$2",
-    [amountPaid, user.rows[0].id]
-  );
+    const userResult = await pool.query(
+      'SELECT id FROM users WHERE email = $1 LIMIT 1',
+      [customerEmail]
+    );
 
-  await pool.query(
-    "INSERT INTO transactions(user_id,type,amount,status,reference,provider) VALUES($1,'funding',$2,'success',$3,'monnify')",
-    [user.rows[0].id, amountPaid, transactionReference]
-  );
+    if (userResult.rowCount === 0) {
+      return res.sendStatus(200);
+    }
 
-  res.sendStatus(200);
+    const userId = userResult.rows[0].id;
+
+    // Idempotent wallet credit via safe wallet engine wrapper
+    await walletService.creditWallet(
+      userId,
+      amountPaid,
+      transactionReference,
+      'monnify'
+    );
+
+    return res.sendStatus(200);
+  } catch (err) {
+    console.error('monnify webhook error:', err);
+    return res.sendStatus(200);
+  }
 });
 
 module.exports = router;

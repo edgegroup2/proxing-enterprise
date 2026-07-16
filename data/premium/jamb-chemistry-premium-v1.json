@@ -1,0 +1,113 @@
+[
+  {
+    "exam_type": "jamb",
+    "subject": "Chemistry",
+    "topic": "Atomic Structure",
+    "year": 2026,
+    "question": "An atom has 11 protons and 12 neutrons. What is its mass number?",
+    "options": ["11", "12", "23", "24"],
+    "correct_index": 2,
+    "explanation": "Mass number = number of protons + number of neutrons = 11 + 12 = 23.",
+    "source": "JAMB Premium Pack v1"
+  },
+  {
+    "exam_type": "jamb",
+    "subject": "Chemistry",
+    "topic": "Periodic Table",
+    "year": 2026,
+    "question": "Elements in the same group of the periodic table have the same number of",
+    "options": ["neutrons", "electron shells", "valence electrons", "protons"],
+    "correct_index": 2,
+    "explanation": "Elements in the same group have the same number of valence electrons, which gives them similar chemical properties.",
+    "source": "JAMB Premium Pack v1"
+  },
+  {
+    "exam_type": "jamb",
+    "subject": "Chemistry",
+    "topic": "Chemical Bonding",
+    "year": 2026,
+    "question": "The bond formed by sharing electrons between atoms is called",
+    "options": ["ionic bond", "covalent bond", "metallic bond", "hydrogen bond"],
+    "correct_index": 1,
+    "explanation": "A covalent bond is formed when atoms share electrons.",
+    "source": "JAMB Premium Pack v1"
+  },
+  {
+    "exam_type": "jamb",
+    "subject": "Chemistry",
+    "topic": "Acids and Bases",
+    "year": 2026,
+    "question": "Which of the following turns blue litmus paper red?",
+    "options": ["Acid", "Base", "Salt", "Water"],
+    "correct_index": 0,
+    "explanation": "Acids turn blue litmus paper red.",
+    "source": "JAMB Premium Pack v1"
+  },
+  {
+    "exam_type": "jamb",
+    "subject": "Chemistry",
+    "topic": "Separation Techniques",
+    "year": 2026,
+    "question": "The method used to separate an insoluble solid from a liquid is",
+    "options": ["evaporation", "filtration", "distillation", "crystallization"],
+    "correct_index": 1,
+    "explanation": "Filtration separates an insoluble solid from a liquid using a filter medium.",
+    "source": "JAMB Premium Pack v1"
+  },
+  {
+    "exam_type": "jamb",
+    "subject": "Chemistry",
+    "topic": "Mole Concept",
+    "year": 2026,
+    "question": "How many moles are present in 44 g of carbon dioxide? [C = 12, O = 16]",
+    "options": ["0.5 mole", "1 mole", "2 moles", "44 moles"],
+    "correct_index": 1,
+    "explanation": "Molar mass of CO₂ = 12 + 2(16) = 44 g/mol. Therefore, 44 g contains 1 mole.",
+    "source": "JAMB Premium Pack v1"
+  },
+  {
+    "exam_type": "jamb",
+    "subject": "Chemistry",
+    "topic": "Oxidation and Reduction",
+    "year": 2026,
+    "question": "Oxidation is best described as",
+    "options": ["gain of electrons", "loss of electrons", "loss of oxygen", "gain of hydrogen"],
+    "correct_index": 1,
+    "explanation": "Oxidation involves loss of electrons.",
+    "source": "JAMB Premium Pack v1"
+  },
+  {
+    "exam_type": "jamb",
+    "subject": "Chemistry",
+    "topic": "Organic Chemistry",
+    "year": 2026,
+    "question": "The functional group of alcohols is",
+    "options": ["-COOH", "-OH", "-CHO", "-CO-"],
+    "correct_index": 1,
+    "explanation": "Alcohols contain the hydroxyl functional group, -OH.",
+    "source": "JAMB Premium Pack v1"
+  },
+  {
+    "exam_type": "jamb",
+    "subject": "Chemistry",
+    "topic": "Electrolysis",
+    "year": 2026,
+    "question": "During electrolysis, positive ions move towards the",
+    "options": ["anode", "cathode", "salt bridge", "electrolyte"],
+    "correct_index": 1,
+    "explanation": "Positive ions, called cations, move to the cathode where they gain electrons.",
+    "source": "JAMB Premium Pack v1"
+  },
+  {
+    "exam_type": "jamb",
+    "subject": "Chemistry",
+    "topic": "Rates of Reaction",
+    "year": 2026,
+    "question": "Increasing the temperature of a reacting system usually increases the rate of reaction because particles",
+    "options": ["move slower", "collide less often", "have more kinetic energy", "become heavier"],
+    "correct_index": 2,
+    "explanation": "Higher temperature gives particles more kinetic energy, leading to more frequent effective collisions.",
+    "source": "JAMB Premium Pack v1"
+  }
+]
+

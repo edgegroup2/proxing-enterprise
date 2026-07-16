@@ -1,0 +1,352 @@
+[
+  {
+    "year": 2004,
+    "examType": "JAMB",
+    "subject": "Biology",
+    "question": "The part of the cell that controls all activities is the",
+    "options": [
+      "Mitochondrion",
+      "Nucleus",
+      "Ribosome",
+      "Golgi apparatus"
+    ],
+    "correctAnswer": 1,
+    "explanation": "The nucleus controls cellular activities because it contains genetic material."
+  },
+  {
+    "year": 2005,
+    "examType": "JAMB",
+    "subject": "Biology",
+    "question": "Water moves across a selectively permeable membrane by",
+    "options": [
+      "Diffusion",
+      "Osmosis",
+      "Active transport",
+      "Respiration"
+    ],
+    "correctAnswer": 1,
+    "explanation": "Osmosis is the movement of water molecules through a selectively permeable membrane."
+  },
+  {
+    "year": 2006,
+    "examType": "JAMB",
+    "subject": "Biology",
+    "question": "The structure responsible for movement in Amoeba is",
+    "options": [
+      "Cilia",
+      "Pseudopodia",
+      "Flagellum",
+      "Tentacles"
+    ],
+    "correctAnswer": 1,
+    "explanation": "Amoeba moves and captures food using pseudopodia."
+  },
+  {
+    "year": 2007,
+    "examType": "JAMB",
+    "subject": "Biology",
+    "question": "The organ responsible for hearing in humans is the",
+    "options": [
+      "Eye",
+      "Ear",
+      "Nose",
+      "Tongue"
+    ],
+    "correctAnswer": 1,
+    "explanation": "The ear detects sound waves and helps maintain balance."
+  },
+  {
+    "year": 2008,
+    "examType": "JAMB",
+    "subject": "Biology",
+    "question": "The process by which green plants manufacture food is",
+    "options": [
+      "Respiration",
+      "Photosynthesis",
+      "Transpiration",
+      "Excretion"
+    ],
+    "correctAnswer": 1,
+    "explanation": "Photosynthesis uses sunlight to make food from carbon dioxide and water."
+  },
+  {
+    "year": 2009,
+    "examType": "JAMB",
+    "subject": "Biology",
+    "question": "The site of protein synthesis is the",
+    "options": [
+      "Mitochondrion",
+      "Ribosome",
+      "Nucleus",
+      "Golgi body"
+    ],
+    "correctAnswer": 1,
+    "explanation": "Ribosomes are responsible for protein synthesis."
+  },
+  {
+    "year": 2010,
+    "examType": "JAMB",
+    "subject": "Biology",
+    "question": "Which blood vessel carries blood away from the heart?",
+    "options": [
+      "Vein",
+      "Artery",
+      "Capillary",
+      "Venule"
+    ],
+    "correctAnswer": 1,
+    "explanation": "Arteries carry blood away from the heart."
+  },
+  {
+    "year": 2011,
+    "examType": "JAMB",
+    "subject": "Biology",
+    "question": "The reproductive organ in male flowering plants is the",
+    "options": [
+      "Carpel",
+      "Stamen",
+      "Ovule",
+      "Sepal"
+    ],
+    "correctAnswer": 1,
+    "explanation": "The stamen is the male reproductive organ in flowering plants."
+  },
+  {
+    "year": 2012,
+    "examType": "JAMB",
+    "subject": "Biology",
+    "question": "The hormone responsible for male secondary sexual characteristics is",
+    "options": [
+      "Estrogen",
+      "Testosterone",
+      "Insulin",
+      "Progesterone"
+    ],
+    "correctAnswer": 1,
+    "explanation": "Testosterone controls male secondary sexual characteristics."
+  },
+  {
+    "year": 2013,
+    "examType": "JAMB",
+    "subject": "Biology",
+    "question": "The organ that stores urine temporarily is the",
+    "options": [
+      "Kidney",
+      "Urinary bladder",
+      "Ureter",
+      "Urethra"
+    ],
+    "correctAnswer": 1,
+    "explanation": "The urinary bladder stores urine before excretion."
+  },
+  {
+    "year": 2014,
+    "examType": "JAMB",
+    "subject": "Biology",
+    "question": "The movement of mineral salts from soil into root hairs is by",
+    "options": [
+      "Diffusion",
+      "Active transport",
+      "Osmosis",
+      "Respiration"
+    ],
+    "correctAnswer": 1,
+    "explanation": "Active transport is used to absorb mineral salts against concentration gradient."
+  },
+  {
+    "year": 2015,
+    "examType": "JAMB",
+    "subject": "Biology",
+    "question": "Which organ is responsible for detoxification?",
+    "options": [
+      "Kidney",
+      "Liver",
+      "Heart",
+      "Lungs"
+    ],
+    "correctAnswer": 1,
+    "explanation": "The liver removes toxins from the bloodstream."
+  },
+  {
+    "year": 2016,
+    "examType": "JAMB",
+    "subject": "Biology",
+    "question": "The process of releasing energy from food is",
+    "options": [
+      "Photosynthesis",
+      "Respiration",
+      "Digestion",
+      "Excretion"
+    ],
+    "correctAnswer": 1,
+    "explanation": "Respiration releases usable energy from food."
+  },
+  {
+    "year": 2017,
+    "examType": "JAMB",
+    "subject": "Biology",
+    "question": "The site of gaseous exchange in fish is",
+    "options": [
+      "Lungs",
+      "Gills",
+      "Skin",
+      "Fins"
+    ],
+    "correctAnswer": 1,
+    "explanation": "Fish exchange gases through gills."
+  },
+  {
+    "year": 2018,
+    "examType": "JAMB",
+    "subject": "Biology",
+    "question": "The blood cells responsible for immunity are",
+    "options": [
+      "Red blood cells",
+      "White blood cells",
+      "Platelets",
+      "Plasma"
+    ],
+    "correctAnswer": 1,
+    "explanation": "White blood cells defend the body against infection."
+  },
+  {
+    "year": 2019,
+    "examType": "JAMB",
+    "subject": "Biology",
+    "question": "The process by which plants lose water is",
+    "options": [
+      "Respiration",
+      "Transpiration",
+      "Photosynthesis",
+      "Diffusion"
+    ],
+    "correctAnswer": 1,
+    "explanation": "Plants lose water mainly through transpiration."
+  },
+  {
+    "year": 2020,
+    "examType": "JAMB",
+    "subject": "Biology",
+    "question": "Which structure contains chlorophyll?",
+    "options": [
+      "Mitochondrion",
+      "Chloroplast",
+      "Nucleus",
+      "Vacuole"
+    ],
+    "correctAnswer": 1,
+    "explanation": "Chloroplast contains chlorophyll used in photosynthesis."
+  },
+  {
+    "year": 2021,
+    "examType": "JAMB",
+    "subject": "Biology",
+    "question": "The organ that pumps blood is the",
+    "options": [
+      "Lung",
+      "Heart",
+      "Kidney",
+      "Liver"
+    ],
+    "correctAnswer": 1,
+    "explanation": "The heart pumps blood throughout the body."
+  },
+  {
+    "year": 2022,
+    "examType": "JAMB",
+    "subject": "Biology",
+    "question": "The largest organ in the human body is the",
+    "options": [
+      "Liver",
+      "Skin",
+      "Brain",
+      "Lung"
+    ],
+    "correctAnswer": 1,
+    "explanation": "The skin is the largest organ in the body."
+  },
+  {
+    "year": 2023,
+    "examType": "JAMB",
+    "subject": "Biology",
+    "question": "The process of fusion of gametes is called",
+    "options": [
+      "Pollination",
+      "Fertilization",
+      "Budding",
+      "Mitosis"
+    ],
+    "correctAnswer": 1,
+    "explanation": "Fertilization is the fusion of male and female gametes."
+  },
+  {
+    "year": 2003,
+    "examType": "JAMB",
+    "subject": "Biology",
+    "question": "The functional unit of the kidney is the",
+    "options": [
+      "Neuron",
+      "Nephron",
+      "Glomerulus",
+      "Tubule"
+    ],
+    "correctAnswer": 1,
+    "explanation": "The nephron is the functional unit of the kidney."
+  },
+  {
+    "year": 2006,
+    "examType": "JAMB",
+    "subject": "Biology",
+    "question": "Which organ is responsible for coordination in humans?",
+    "options": [
+      "Heart",
+      "Brain",
+      "Liver",
+      "Kidney"
+    ],
+    "correctAnswer": 1,
+    "explanation": "The brain coordinates body functions."
+  },
+  {
+    "year": 2011,
+    "examType": "JAMB",
+    "subject": "Biology",
+    "question": "The movement of food in plants occurs through",
+    "options": [
+      "Xylem",
+      "Phloem",
+      "Cambium",
+      "Cortex"
+    ],
+    "correctAnswer": 1,
+    "explanation": "Phloem transports food substances in plants."
+  },
+  {
+    "year": 2015,
+    "examType": "JAMB",
+    "subject": "Biology",
+    "question": "The division of the nucleus is known as",
+    "options": [
+      "Cytokinesis",
+      "Karyokinesis",
+      "Meiosis",
+      "Mitosis"
+    ],
+    "correctAnswer": 1,
+    "explanation": "Karyokinesis is nuclear division."
+  },
+  {
+    "year": 2024,
+    "examType": "JAMB",
+    "subject": "Biology",
+    "question": "The process by which organisms remove waste products is",
+    "options": [
+      "Respiration",
+      "Excretion",
+      "Nutrition",
+      "Digestion"
+    ],
+    "correctAnswer": 1,
+    "explanation": "Excretion removes metabolic waste products."
+  }
+]

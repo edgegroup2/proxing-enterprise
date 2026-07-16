@@ -1,0 +1,402 @@
+[
+  {
+    "exam_type": "JAMB",
+    "subject": "Commerce",
+    "topic": "Banking",
+    "year": 2026,
+    "question": "A bank statement is primarily used by an account holder to",
+    "options": [
+      "apply for insurance",
+      "verify transactions in the account",
+      "register a company",
+      "pay customs duty"
+    ],
+    "answer": "verify transactions in the account",
+    "explanation": "A bank statement provides a record of transactions for reconciliation and verification.",
+    "source": "ProxiNG Premium Commerce Pack 008A"
+  },
+  {
+    "exam_type": "JAMB",
+    "subject": "Commerce",
+    "topic": "Retail Trade",
+    "year": 2026,
+    "question": "A multiple shop mainly benefits from",
+    "options": [
+      "bulk purchasing economies",
+      "high transport delays",
+      "limited customer reach",
+      "independent pricing by each branch"
+    ],
+    "answer": "bulk purchasing economies",
+    "explanation": "Multiple shops gain cost advantages by buying goods in large quantities centrally.",
+    "source": "ProxiNG Premium Commerce Pack 008A"
+  },
+  {
+    "exam_type": "JAMB",
+    "subject": "Commerce",
+    "topic": "Insurance",
+    "year": 2026,
+    "question": "Premium in insurance refers to",
+    "options": [
+      "the compensation paid after loss",
+      "the regular payment made for coverage",
+      "the insured property itself",
+      "the legal contract clause"
+    ],
+    "answer": "the regular payment made for coverage",
+    "explanation": "Premium is the amount paid periodically to maintain insurance protection.",
+    "source": "ProxiNG Premium Commerce Pack 008A"
+  },
+  {
+    "exam_type": "JAMB",
+    "subject": "Commerce",
+    "topic": "Transportation",
+    "year": 2026,
+    "question": "Road transport is particularly suitable for",
+    "options": [
+      "door-to-door delivery",
+      "bulk crude oil export",
+      "intercontinental passenger flights",
+      "deep sea freight"
+    ],
+    "answer": "door-to-door delivery",
+    "explanation": "Road transport offers flexibility and direct access to destinations.",
+    "source": "ProxiNG Premium Commerce Pack 008A"
+  },
+  {
+    "exam_type": "JAMB",
+    "subject": "Commerce",
+    "topic": "Warehousing",
+    "year": 2026,
+    "question": "One importance of warehousing is to",
+    "options": [
+      "stabilize supply of goods",
+      "eliminate production",
+      "ban exports",
+      "reduce banking services"
+    ],
+    "answer": "stabilize supply of goods",
+    "explanation": "Warehouses help store goods for future distribution, ensuring steady supply.",
+    "source": "ProxiNG Premium Commerce Pack 008A"
+  },
+  {
+    "exam_type": "JAMB",
+    "subject": "Commerce",
+    "topic": "Advertising",
+    "year": 2026,
+    "question": "A slogan in advertising is mainly intended to",
+    "options": [
+      "make a product memorable",
+      "replace packaging",
+      "increase taxation",
+      "reduce competition by law"
+    ],
+    "answer": "make a product memorable",
+    "explanation": "Slogans help reinforce brand identity and recall.",
+    "source": "ProxiNG Premium Commerce Pack 008A"
+  },
+  {
+    "exam_type": "JAMB",
+    "subject": "Commerce",
+    "topic": "Documents Used in Trade",
+    "year": 2026,
+    "question": "A receipt serves as evidence that",
+    "options": [
+      "payment has been made",
+      "goods are imported",
+      "insurance claim is approved",
+      "company shares were issued"
+    ],
+    "answer": "payment has been made",
+    "explanation": "Receipts acknowledge payment received.",
+    "source": "ProxiNG Premium Commerce Pack 008A"
+  },
+  {
+    "exam_type": "JAMB",
+    "subject": "Commerce",
+    "topic": "Wholesaling",
+    "year": 2026,
+    "question": "Cash-and-carry wholesalers usually sell",
+    "options": [
+      "strictly for cash with no delivery service",
+      "only imported luxury goods",
+      "only on credit",
+      "only to final consumers"
+    ],
+    "answer": "strictly for cash with no delivery service",
+    "explanation": "Customers pay cash and transport goods themselves.",
+    "source": "ProxiNG Premium Commerce Pack 008A"
+  },
+  {
+    "exam_type": "JAMB",
+    "subject": "Commerce",
+    "topic": "Partnership",
+    "year": 2026,
+    "question": "The maximum membership of an ordinary partnership in Nigeria is traditionally",
+    "options": [
+      "2",
+      "20",
+      "50",
+      "Unlimited"
+    ],
+    "answer": "20",
+    "explanation": "Traditional commerce exam treatment places ordinary partnership membership at up to 20 persons.",
+    "source": "ProxiNG Premium Commerce Pack 008A"
+  },
+  {
+    "exam_type": "JAMB",
+    "subject": "Commerce",
+    "topic": "Communication",
+    "year": 2026,
+    "question": "A circular letter is commonly used to",
+    "options": [
+      "send the same message to many recipients",
+      "record insurance claims",
+      "authorize imports",
+      "register trademarks"
+    ],
+    "answer": "send the same message to many recipients",
+    "explanation": "Circular letters communicate uniform information to multiple recipients.",
+    "source": "ProxiNG Premium Commerce Pack 008A"
+  },
+  {
+    "exam_type": "JAMB",
+    "subject": "Commerce",
+    "topic": "International Trade",
+    "year": 2026,
+    "question": "Balance of trade refers to the difference between",
+    "options": [
+      "invisible exports and imports",
+      "visible exports and visible imports",
+      "tax revenue and expenditure",
+      "bank deposits and withdrawals"
+    ],
+    "answer": "visible exports and visible imports",
+    "explanation": "Balance of trade compares merchandise exports and imports.",
+    "source": "ProxiNG Premium Commerce Pack 008A"
+  },
+  {
+    "exam_type": "JAMB",
+    "subject": "Commerce",
+    "topic": "Stock Exchange",
+    "year": 2026,
+    "question": "A bullish market describes a period of",
+    "options": [
+      "rising security prices",
+      "falling security prices",
+      "market closure",
+      "zero transactions"
+    ],
+    "answer": "rising security prices",
+    "explanation": "A bullish market reflects optimism and rising prices.",
+    "source": "ProxiNG Premium Commerce Pack 008A"
+  },
+  {
+    "exam_type": "JAMB",
+    "subject": "Commerce",
+    "topic": "E-Commerce",
+    "year": 2026,
+    "question": "An online payment gateway mainly facilitates",
+    "options": [
+      "electronic transaction processing",
+      "warehouse construction",
+      "share issuance",
+      "goods manufacturing"
+    ],
+    "answer": "electronic transaction processing",
+    "explanation": "Payment gateways securely process online financial transactions.",
+    "source": "ProxiNG Premium Commerce Pack 008A"
+  },
+  {
+    "exam_type": "JAMB",
+    "subject": "Commerce",
+    "topic": "Marketing",
+    "year": 2026,
+    "question": "Product life cycle begins with",
+    "options": [
+      "introduction",
+      "decline",
+      "growth",
+      "maturity"
+    ],
+    "answer": "introduction",
+    "explanation": "Products typically move from introduction to growth, maturity, and decline.",
+    "source": "ProxiNG Premium Commerce Pack 008A"
+  },
+  {
+    "exam_type": "JAMB",
+    "subject": "Commerce",
+    "topic": "Consumer Protection",
+    "year": 2026,
+    "question": "A consumer watchdog agency mainly exists to",
+    "options": [
+      "protect buyer interests",
+      "increase import tariffs",
+      "manage transport fleets",
+      "regulate stockbrokers"
+    ],
+    "answer": "protect buyer interests",
+    "explanation": "Consumer agencies protect the public from unfair trade practices.",
+    "source": "ProxiNG Premium Commerce Pack 008A"
+  },
+  {
+    "exam_type": "JAMB",
+    "subject": "Commerce",
+    "topic": "Sales Promotion",
+    "year": 2026,
+    "question": "A coupon is commonly used as a",
+    "options": [
+      "sales promotion tool",
+      "bank statement",
+      "insurance certificate",
+      "warehouse receipt"
+    ],
+    "answer": "sales promotion tool",
+    "explanation": "Coupons encourage purchases through discounts or offers.",
+    "source": "ProxiNG Premium Commerce Pack 008A"
+  },
+  {
+    "exam_type": "JAMB",
+    "subject": "Commerce",
+    "topic": "Business Finance",
+    "year": 2026,
+    "question": "An overdraft is a short-term facility granted by",
+    "options": [
+      "commercial banks",
+      "insurance firms",
+      "transport unions",
+      "stockbrokers"
+    ],
+    "answer": "commercial banks",
+    "explanation": "Overdrafts allow customers withdraw beyond current balances temporarily.",
+    "source": "ProxiNG Premium Commerce Pack 008A"
+  },
+  {
+    "exam_type": "JAMB",
+    "subject": "Commerce",
+    "topic": "Company Formation",
+    "year": 2026,
+    "question": "Promoters of a company are responsible for",
+    "options": [
+      "bringing the company into existence",
+      "issuing insurance claims",
+      "managing customs operations",
+      "conducting elections"
+    ],
+    "answer": "bringing the company into existence",
+    "explanation": "Promoters handle formation procedures before incorporation.",
+    "source": "ProxiNG Premium Commerce Pack 008A"
+  },
+  {
+    "exam_type": "JAMB",
+    "subject": "Commerce",
+    "topic": "Marine Insurance",
+    "year": 2026,
+    "question": "A marine insurance policy covering a single voyage is called",
+    "options": [
+      "voyage policy",
+      "life policy",
+      "fire policy",
+      "floating charge"
+    ],
+    "answer": "voyage policy",
+    "explanation": "Voyage policies cover specific sea journeys.",
+    "source": "ProxiNG Premium Commerce Pack 008A"
+  },
+  {
+    "exam_type": "JAMB",
+    "subject": "Commerce",
+    "topic": "Trade Associations",
+    "year": 2026,
+    "question": "One major function of trade associations is to",
+    "options": [
+      "represent member interests",
+      "print currency",
+      "regulate elections",
+      "collect customs duties"
+    ],
+    "answer": "represent member interests",
+    "explanation": "Trade associations advocate for members within specific sectors.",
+    "source": "ProxiNG Premium Commerce Pack 008A"
+  },
+  {
+    "exam_type": "JAMB",
+    "subject": "Commerce",
+    "topic": "Credit Instruments",
+    "year": 2026,
+    "question": "A promissory note is a",
+    "options": [
+      "written promise to pay",
+      "warehouse storage document",
+      "transport permit",
+      "share certificate"
+    ],
+    "answer": "written promise to pay",
+    "explanation": "Promissory notes are negotiable instruments promising payment.",
+    "source": "ProxiNG Premium Commerce Pack 008A"
+  },
+  {
+    "exam_type": "JAMB",
+    "subject": "Commerce",
+    "topic": "Branding",
+    "year": 2026,
+    "question": "A trademark primarily protects a product's",
+    "options": [
+      "brand identity",
+      "insurance value",
+      "transport route",
+      "warehouse cost"
+    ],
+    "answer": "brand identity",
+    "explanation": "Trademarks legally protect distinguishing brand marks.",
+    "source": "ProxiNG Premium Commerce Pack 008A"
+  },
+  {
+    "exam_type": "JAMB",
+    "subject": "Commerce",
+    "topic": "Public Enterprises",
+    "year": 2026,
+    "question": "Privatization involves",
+    "options": [
+      "transfer of public enterprise ownership to private investors",
+      "government taking over private firms",
+      "creating trade barriers",
+      "reducing exports"
+    ],
+    "answer": "transfer of public enterprise ownership to private investors",
+    "explanation": "Privatization shifts ownership/control from public to private sector.",
+    "source": "ProxiNG Premium Commerce Pack 008A"
+  },
+  {
+    "exam_type": "JAMB",
+    "subject": "Commerce",
+    "topic": "Hire Purchase",
+    "year": 2026,
+    "question": "Hire purchase is suitable for buyers who",
+    "options": [
+      "want installment payment arrangements",
+      "must pay cash immediately",
+      "buy only imports",
+      "avoid ownership entirely"
+    ],
+    "answer": "want installment payment arrangements",
+    "explanation": "Hire purchase spreads payments over time while possession begins earlier.",
+    "source": "ProxiNG Premium Commerce Pack 008A"
+  },
+  {
+    "exam_type": "JAMB",
+    "subject": "Commerce",
+    "topic": "Franchising",
+    "year": 2026,
+    "question": "The payment made by a franchisee for use of a franchisor's system is commonly called",
+    "options": [
+      "royalty",
+      "premium bond",
+      "dividend",
+      "debenture"
+    ],
+    "answer": "royalty",
+    "explanation": "Franchise agreements commonly involve royalty payments.",
+    "source": "ProxiNG Premium Commerce Pack 008A"
+  }
+]

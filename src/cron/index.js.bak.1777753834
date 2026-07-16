@@ -1,0 +1,141 @@
+'use strict';
+
+const logger = require('../utils/logger');
+
+function safeLoad(name, path, exportName) {
+  try {
+    const mod = require(path);
+    const fn = exportName ? mod?.[exportName] : mod;
+
+    console.log(`🧩 CRON_MODULE_LOAD ${name}`, {
+      path,
+      exportName,
+      type: typeof fn,
+      keys: mod && typeof mod === 'object' ? Object.keys(mod) : []
+    });
+
+    return typeof fn === 'function' ? fn : null;
+  } catch (e) {
+    console.error(`❌ CRON_MODULE_LOAD_FAILED ${name}:`, e.message);
+    logger.error({
+      type: 'CRON_MODULE_LOAD_FAILED',
+      name,
+      path,
+      error: e.message,
+      stack: e.stack
+    });
+    return null;
+  }
+}
+
+function safeStart(name, fn) {
+  if (typeof fn !== 'function') {
+    console.warn(`⚠️ CRON_SKIP ${name}: not a function`);
+    logger.warn({ type: 'CRON_SKIP', name, reason: 'not_a_function' });
+    return false;
+  }
+
+  try {
+    console.log(`🚀 CRON_STARTING ${name}`);
+    fn();
+    console.log(`✅ CRON_STARTED ${name}`);
+    logger.info({ type: 'CRON_STARTED', name });
+    return true;
+  } catch (e) {
+    console.error(`❌ CRON_START_FAILED ${name}:`, e.message);
+    logger.error({
+      type: 'CRON_START_FAILED',
+      name,
+      error: e.message,
+      stack: e.stack
+    });
+    return false;
+  }
+}
+
+const startVtpassFloatCron = safeLoad(
+  'vtpassFloatCron',
+  './vtpassFloatCron',
+  'startVtpassFloatCron'
+);
+
+const startTokenRecoveryCron = safeLoad(
+  'tokenRecoveryCron',
+  './tokenRecoveryCron',
+  'startTokenRecoveryCron'
+);
+
+const startVtpassAutoFund = safeLoad(
+  'vtpassAutoFund',
+  './vtpassAutoFund',
+  'startVtpassAutoFund'
+);
+
+const startHeartbeat = safeLoad(
+  'heartbeat',
+  './heartbeat',
+  'startHeartbeat'
+);
+
+const startDailyRevenueReport = safeLoad(
+  'dailyRevenueReport',
+  './dailyRevenueReport',
+  'startDailyRevenueReport'
+);
+
+const startReconciliationCron = safeLoad(
+  'reconciliationCron',
+  './reconciliationCron',
+  'startReconciliationCron'
+);
+
+const startServerMonitor =
+  safeLoad('serverMonitor', './serverMonitor', 'startServerMonitor') ||
+  safeLoad('serverMonitor.checkServerHealth', './serverMonitor', 'checkServerHealth');
+
+function initialiseCron() {
+  const enabled = String(process.env.ENABLE_CRONS || 'false') === 'true';
+
+  console.log('🔎 INITIALISE_CRON_ENTERED', {
+    enabled,
+    ENABLE_CRONS: process.env.ENABLE_CRONS,
+    NODE_APP_INSTANCE: process.env.NODE_APP_INSTANCE
+  });
+
+  if (!enabled) {
+    logger.info({ type: 'CRON_DISABLED' }, 'Cron disabled by ENV');
+    return;
+  }
+
+  if (
+    process.env.NODE_APP_INSTANCE &&
+    process.env.NODE_APP_INSTANCE !== '0'
+  ) {
+    logger.info(
+      {
+        type: 'CRON_CLUSTER_GUARD',
+        instance: process.env.NODE_APP_INSTANCE
+      },
+      'Cron disabled on this instance'
+    );
+    return;
+  }
+
+  logger.info({ type: 'CRON_INIT_START' }, 'Initialising cron jobs...');
+
+  const results = {
+    vtpassFloatCron: safeStart('vtpassFloatCron', startVtpassFloatCron),
+    vtpassAutoFund: safeStart('vtpassAutoFund', startVtpassAutoFund),
+    heartbeat: safeStart('heartbeat', startHeartbeat),
+    dailyRevenueReport: safeStart('dailyRevenueReport', startDailyRevenueReport),
+    reconciliationCron: safeStart('reconciliationCron', startReconciliationCron),
+    serverMonitor: safeStart('serverMonitor', startServerMonitor),
+    tokenRecoveryCron: safeStart('tokenRecoveryCron', startTokenRecoveryCron)
+  };
+
+  logger.info({ type: 'CRON_INIT_DONE', results }, 'All cron jobs initialised');
+  console.log('✅ CRON_INIT_DONE', results);
+}
+
+module.exports = initialiseCron;
+module.exports.initialiseCron = initialiseCron;

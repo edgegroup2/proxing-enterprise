@@ -1,0 +1,282 @@
+[
+  {
+    "exam_type": "jamb",
+    "subject": "Biology",
+    "topic": "Ecology",
+    "year": 2026,
+    "question": "The relationship in which both organisms benefit is known as",
+    "options": ["parasitism", "commensalism", "mutualism", "predation"],
+    "answer": "mutualism",
+    "explanation": "Mutualism is an ecological relationship where both participating organisms benefit.",
+    "source": "JAMB Premium Biology Pack 007B"
+  },
+  {
+    "exam_type": "jamb",
+    "subject": "Biology",
+    "topic": "Genetics",
+    "year": 2026,
+    "question": "The basic unit of heredity is the",
+    "options": ["chromosome", "gene", "nucleus", "allele"],
+    "answer": "gene",
+    "explanation": "A gene is the functional unit of heredity responsible for transmitting traits.",
+    "source": "JAMB Premium Biology Pack 007B"
+  },
+  {
+    "exam_type": "jamb",
+    "subject": "Biology",
+    "topic": "Human Physiology",
+    "year": 2026,
+    "question": "The hormone responsible for lowering blood sugar level is",
+    "options": ["adrenaline", "thyroxine", "insulin", "glucagon"],
+    "answer": "insulin",
+    "explanation": "Insulin lowers blood glucose by promoting uptake and storage of glucose.",
+    "source": "JAMB Premium Biology Pack 007B"
+  },
+  {
+    "exam_type": "jamb",
+    "subject": "Biology",
+    "topic": "Cell Biology",
+    "year": 2026,
+    "question": "The organelle responsible for packaging proteins is the",
+    "options": ["ribosome", "Golgi apparatus", "mitochondrion", "lysosome"],
+    "answer": "Golgi apparatus",
+    "explanation": "The Golgi apparatus modifies, packages, and transports proteins.",
+    "source": "JAMB Premium Biology Pack 007B"
+  },
+  {
+    "exam_type": "jamb",
+    "subject": "Biology",
+    "topic": "Nutrition",
+    "year": 2026,
+    "question": "The vitamin essential for blood clotting is",
+    "options": ["Vitamin A", "Vitamin C", "Vitamin D", "Vitamin K"],
+    "answer": "Vitamin K",
+    "explanation": "Vitamin K is required for synthesis of clotting factors.",
+    "source": "JAMB Premium Biology Pack 007B"
+  },
+  {
+    "exam_type": "jamb",
+    "subject": "Biology",
+    "topic": "Plant Physiology",
+    "year": 2026,
+    "question": "Water movement from roots to leaves occurs mainly through",
+    "options": ["phloem", "xylem", "stomata", "cortex"],
+    "answer": "xylem",
+    "explanation": "Xylem conducts water and dissolved minerals upward in plants.",
+    "source": "JAMB Premium Biology Pack 007B"
+  },
+  {
+    "exam_type": "jamb",
+    "subject": "Biology",
+    "topic": "Reproduction",
+    "year": 2026,
+    "question": "Fusion of male and female gametes is called",
+    "options": ["implantation", "fertilization", "ovulation", "pollination"],
+    "answer": "fertilization",
+    "explanation": "Fertilization is the union of male and female gametes to form a zygote.",
+    "source": "JAMB Premium Biology Pack 007B"
+  },
+  {
+    "exam_type": "jamb",
+    "subject": "Biology",
+    "topic": "Microbiology",
+    "year": 2026,
+    "question": "The causative organism of malaria is",
+    "options": ["Trypanosoma", "Plasmodium", "Bacteria", "Virus"],
+    "answer": "Plasmodium",
+    "explanation": "Malaria is caused by protozoan parasites of the genus Plasmodium.",
+    "source": "JAMB Premium Biology Pack 007B"
+  },
+  {
+    "exam_type": "jamb",
+    "subject": "Biology",
+    "topic": "Evolution",
+    "year": 2026,
+    "question": "The theory of natural selection was proposed by",
+    "options": ["Mendel", "Pasteur", "Darwin", "Lamarck"],
+    "answer": "Darwin",
+    "explanation": "Charles Darwin proposed evolution through natural selection.",
+    "source": "JAMB Premium Biology Pack 007B"
+  },
+  {
+    "exam_type": "jamb",
+    "subject": "Biology",
+    "topic": "Ecology",
+    "year": 2026,
+    "question": "Organisms that manufacture their own food are called",
+    "options": ["consumers", "decomposers", "autotrophs", "parasites"],
+    "answer": "autotrophs",
+    "explanation": "Autotrophs synthesize their own food, usually by photosynthesis.",
+    "source": "JAMB Premium Biology Pack 007B"
+  },
+  {
+    "exam_type": "jamb",
+    "subject": "Biology",
+    "topic": "Human Physiology",
+    "year": 2026,
+    "question": "The part of the eye that controls the amount of light entering is the",
+    "options": ["retina", "iris", "lens", "cornea"],
+    "answer": "iris",
+    "explanation": "The iris regulates pupil size and controls light entry.",
+    "source": "JAMB Premium Biology Pack 007B"
+  },
+  {
+    "exam_type": "jamb",
+    "subject": "Biology",
+    "topic": "Transport System",
+    "year": 2026,
+    "question": "The blood vessels that carry blood away from the heart are",
+    "options": ["veins", "arteries", "capillaries", "venules"],
+    "answer": "arteries",
+    "explanation": "Arteries transport blood away from the heart.",
+    "source": "JAMB Premium Biology Pack 007B"
+  },
+  {
+    "exam_type": "jamb",
+    "subject": "Biology",
+    "topic": "Cell Division",
+    "year": 2026,
+    "question": "Cell division that produces gametes is known as",
+    "options": ["mitosis", "binary fission", "meiosis", "cytokinesis"],
+    "answer": "meiosis",
+    "explanation": "Meiosis produces haploid gametes for sexual reproduction.",
+    "source": "JAMB Premium Biology Pack 007B"
+  },
+  {
+    "exam_type": "jamb",
+    "subject": "Biology",
+    "topic": "Plant Reproduction",
+    "year": 2026,
+    "question": "The transfer of pollen grains from anther to stigma is called",
+    "options": ["fertilization", "pollination", "germination", "budding"],
+    "answer": "pollination",
+    "explanation": "Pollination is the transfer of pollen to the receptive stigma.",
+    "source": "JAMB Premium Biology Pack 007B"
+  },
+  {
+    "exam_type": "jamb",
+    "subject": "Biology",
+    "topic": "Excretion",
+    "year": 2026,
+    "question": "The main nitrogenous waste in humans is",
+    "options": ["ammonia", "urea", "uric acid", "carbon dioxide"],
+    "answer": "urea",
+    "explanation": "Humans convert toxic ammonia to urea for excretion.",
+    "source": "JAMB Premium Biology Pack 007B"
+  },
+  {
+    "exam_type": "jamb",
+    "subject": "Biology",
+    "topic": "Classification",
+    "year": 2026,
+    "question": "The scientific naming of organisms is called",
+    "options": ["taxonomy", "binomial nomenclature", "classification", "phylogeny"],
+    "answer": "binomial nomenclature",
+    "explanation": "Binomial nomenclature assigns each organism a genus and species name.",
+    "source": "JAMB Premium Biology Pack 007B"
+  },
+  {
+    "exam_type": "jamb",
+    "subject": "Biology",
+    "topic": "Respiration",
+    "year": 2026,
+    "question": "The process by which cells release energy from food is",
+    "options": ["digestion", "respiration", "excretion", "circulation"],
+    "answer": "respiration",
+    "explanation": "Cellular respiration breaks down food molecules to release energy.",
+    "source": "JAMB Premium Biology Pack 007B"
+  },
+  {
+    "exam_type": "jamb",
+    "subject": "Biology",
+    "topic": "Immunity",
+    "year": 2026,
+    "question": "White blood cells primarily function in",
+    "options": ["oxygen transport", "body defense", "blood clotting", "nutrient transport"],
+    "answer": "body defense",
+    "explanation": "White blood cells protect the body against infection and disease.",
+    "source": "JAMB Premium Biology Pack 007B"
+  },
+  {
+    "exam_type": "jamb",
+    "subject": "Biology",
+    "topic": "Plant Structure",
+    "year": 2026,
+    "question": "Tiny pores on leaves for gaseous exchange are called",
+    "options": ["lenticels", "stomata", "guard cells", "chloroplasts"],
+    "answer": "stomata",
+    "explanation": "Stomata are openings on leaves that allow gas exchange.",
+    "source": "JAMB Premium Biology Pack 007B"
+  },
+  {
+    "exam_type": "jamb",
+    "subject": "Biology",
+    "topic": "Ecology",
+    "year": 2026,
+    "question": "The first trophic level in a food chain consists of",
+    "options": ["carnivores", "decomposers", "producers", "omnivores"],
+    "answer": "producers",
+    "explanation": "Producers capture energy and form the base of food chains.",
+    "source": "JAMB Premium Biology Pack 007B"
+  },
+  {
+    "exam_type": "jamb",
+    "subject": "Biology",
+    "topic": "Human Skeleton",
+    "year": 2026,
+    "question": "The bone that protects the brain is the",
+    "options": ["vertebral column", "cranium", "femur", "pelvis"],
+    "answer": "cranium",
+    "explanation": "The cranium encloses and protects the brain.",
+    "source": "JAMB Premium Biology Pack 007B"
+  },
+  {
+    "exam_type": "jamb",
+    "subject": "Biology",
+    "topic": "Genetics",
+    "year": 2026,
+    "question": "Different forms of the same gene are called",
+    "options": ["chromatids", "alleles", "genomes", "nucleotides"],
+    "answer": "alleles",
+    "explanation": "Alleles are alternative forms of a gene controlling the same trait.",
+    "source": "JAMB Premium Biology Pack 007B"
+  },
+  {
+    "exam_type": "jamb",
+    "subject": "Biology",
+    "topic": "Digestive System",
+    "year": 2026,
+    "question": "Most nutrient absorption in humans occurs in the",
+    "options": ["stomach", "large intestine", "small intestine", "oesophagus"],
+    "answer": "small intestine",
+    "explanation": "The small intestine absorbs digested nutrients through villi.",
+    "source": "JAMB Premium Biology Pack 007B"
+  },
+  {
+    "exam_type": "jamb",
+    "subject": "Biology",
+    "topic": "Growth",
+    "year": 2026,
+    "question": "Growth in living organisms is best defined as",
+    "options": [
+      "increase in age",
+      "permanent increase in size and dry mass",
+      "movement from place to place",
+      "increase in water content only"
+    ],
+    "answer": "permanent increase in size and dry mass",
+    "explanation": "Biological growth involves irreversible increase in size, cell number, and mass.",
+    "source": "JAMB Premium Biology Pack 007B"
+  },
+  {
+    "exam_type": "jamb",
+    "subject": "Biology",
+    "topic": "Enzymes",
+    "year": 2026,
+    "question": "Biological catalysts are known as",
+    "options": ["hormones", "enzymes", "vitamins", "antibodies"],
+    "answer": "enzymes",
+    "explanation": "Enzymes speed up biochemical reactions without being consumed.",
+    "source": "JAMB Premium Biology Pack 007B"
+  }
+]

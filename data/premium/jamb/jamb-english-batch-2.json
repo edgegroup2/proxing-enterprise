@@ -1,0 +1,504 @@
+[
+  {
+    "exam_type":"jamb",
+    "subject":"English Language",
+    "topic":"Lexis and Structure",
+    "year":2026,
+    "question":"The manager asked the staff to ______ the meeting until further notice.",
+    "options":["postpone","cancel","delay off","suspend over"],
+    "answer":"postpone",
+    "explanation":"'Postpone' means to move an event to a later time.",
+    "source":"JAMB Premium Pack v1"
+  },
+  {
+    "exam_type":"jamb",
+    "subject":"English Language",
+    "topic":"Concord",
+    "year":2026,
+    "question":"Neither the teacher nor the students ______ aware of the announcement.",
+    "options":["was","is","were","be"],
+    "answer":"were",
+    "explanation":"With 'neither...nor', the verb agrees with the noun closest to it ('students').",
+    "source":"JAMB Premium Pack v1"
+  },
+  {
+    "exam_type":"jamb",
+    "subject":"English Language",
+    "topic":"Idioms",
+    "year":2026,
+    "question":"To 'hit the nail on the head' means to",
+    "options":["strike a nail correctly","say exactly the right thing","work as a carpenter","cause damage"],
+    "answer":"say exactly the right thing",
+    "explanation":"The idiom means being precisely correct.",
+    "source":"JAMB Premium Pack v1"
+  },
+  {
+    "exam_type":"jamb",
+    "subject":"English Language",
+    "topic":"Sentence Interpretation",
+    "year":2026,
+    "question":"If a candidate is described as 'green', it means the candidate is",
+    "options":["wealthy","inexperienced","angry","strong"],
+    "answer":"inexperienced",
+    "explanation":"'Green' means lacking experience.",
+    "source":"JAMB Premium Pack v1"
+  },
+  {
+    "exam_type":"jamb",
+    "subject":"English Language",
+    "topic":"Register",
+    "year":2026,
+    "question":"Which of these belongs to the legal register?",
+    "options":["diagnosis","plaintiff","syllabus","budget"],
+    "answer":"plaintiff",
+    "explanation":"A plaintiff is a legal term.",
+    "source":"JAMB Premium Pack v1"
+  },
+  {
+    "exam_type":"jamb",
+    "subject":"English Language",
+    "topic":"Lexis",
+    "year":2026,
+    "question":"Choose the word nearest in meaning to 'abundant'.",
+    "options":["scarce","plentiful","tiny","brief"],
+    "answer":"plentiful",
+    "explanation":"Abundant means existing in large quantity.",
+    "source":"JAMB Premium Pack v1"
+  },
+  {
+    "exam_type":"jamb",
+    "subject":"English Language",
+    "topic":"Antonyms",
+    "year":2026,
+    "question":"Choose the opposite of 'hostile'.",
+    "options":["friendly","dangerous","serious","careful"],
+    "answer":"friendly",
+    "explanation":"Hostile means unfriendly; opposite is friendly.",
+    "source":"JAMB Premium Pack v1"
+  },
+  {
+    "exam_type":"jamb",
+    "subject":"English Language",
+    "topic":"Concord",
+    "year":2026,
+    "question":"Each of the boys ______ given a prize.",
+    "options":["were","are","was","have"],
+    "answer":"was",
+    "explanation":"'Each' takes a singular verb.",
+    "source":"JAMB Premium Pack v1"
+  },
+  {
+    "exam_type":"jamb",
+    "subject":"English Language",
+    "topic":"Tenses",
+    "year":2026,
+    "question":"By next month, she ______ her exams.",
+    "options":["completes","will complete","will have completed","completed"],
+    "answer":"will have completed",
+    "explanation":"Future perfect tense is correct.",
+    "source":"JAMB Premium Pack v1"
+  },
+  {
+    "exam_type":"jamb",
+    "subject":"English Language",
+    "topic":"Prepositions",
+    "year":2026,
+    "question":"He is good ______ Mathematics.",
+    "options":["at","on","with","for"],
+    "answer":"at",
+    "explanation":"Correct collocation is 'good at'.",
+    "source":"JAMB Premium Pack v1"
+  },
+
+  {
+    "exam_type":"jamb",
+    "subject":"English Language",
+    "topic":"Sentence Completion",
+    "year":2026,
+    "question":"The principal insisted that every student ______ present.",
+    "options":["is","was","be","are"],
+    "answer":"be",
+    "explanation":"Subjunctive form after 'insisted that'.",
+    "source":"JAMB Premium Pack v1"
+  },
+  {
+    "exam_type":"jamb",
+    "subject":"English Language",
+    "topic":"Vocabulary",
+    "year":2026,
+    "question":"A person who cannot read or write is",
+    "options":["ignorant","illiterate","novice","dull"],
+    "answer":"illiterate",
+    "explanation":"Illiterate means unable to read or write.",
+    "source":"JAMB Premium Pack v1"
+  },
+  {
+    "exam_type":"jamb",
+    "subject":"English Language",
+    "topic":"Idioms",
+    "year":2026,
+    "question":"To 'spill the beans' means to",
+    "options":["cook food","reveal a secret","waste resources","lie openly"],
+    "answer":"reveal a secret",
+    "explanation":"Standard idiomatic meaning.",
+    "source":"JAMB Premium Pack v1"
+  },
+  {
+    "exam_type":"jamb",
+    "subject":"English Language",
+    "topic":"Punctuation",
+    "year":2026,
+    "question":"Which punctuation ends a direct question?",
+    "options":["comma","semicolon","question mark","colon"],
+    "answer":"question mark",
+    "explanation":"Direct questions end with question marks.",
+    "source":"JAMB Premium Pack v1"
+  },
+  {
+    "exam_type":"jamb",
+    "subject":"English Language",
+    "topic":"Homophones",
+    "year":2026,
+    "question":"Choose the correct word: They lost ______ way.",
+    "options":["there","their","they're","thier"],
+    "answer":"their",
+    "explanation":"Possessive pronoun required.",
+    "source":"JAMB Premium Pack v1"
+  },
+
+  {
+    "exam_type":"jamb",
+    "subject":"English Language",
+    "topic":"Comprehension Logic",
+    "year":2026,
+    "question":"A conclusion drawn directly from stated facts is called",
+    "options":["assumption","inference","fiction","bias"],
+    "answer":"inference",
+    "explanation":"Inference comes from textual evidence.",
+    "source":"JAMB Premium Pack v1"
+  },
+  {
+    "exam_type":"jamb",
+    "subject":"English Language",
+    "topic":"Lexis",
+    "year":2026,
+    "question":"Choose the nearest meaning of 'vital'.",
+    "options":["important","weak","uncertain","expensive"],
+    "answer":"important",
+    "explanation":"Vital means essential.",
+    "source":"JAMB Premium Pack v1"
+  },
+  {
+    "exam_type":"jamb",
+    "subject":"English Language",
+    "topic":"Concord",
+    "year":2026,
+    "question":"The committee ______ reached its decision.",
+    "options":["have","has","are","were"],
+    "answer":"has",
+    "explanation":"Collective noun treated as singular here.",
+    "source":"JAMB Premium Pack v1"
+  },
+  {
+    "exam_type":"jamb",
+    "subject":"English Language",
+    "topic":"Figures of Speech",
+    "year":2026,
+    "question":"'The wind whispered through the trees' is",
+    "options":["simile","personification","metaphor","hyperbole"],
+    "answer":"personification",
+    "explanation":"Human quality given to wind.",
+    "source":"JAMB Premium Pack v1"
+  },
+  {
+    "exam_type":"jamb",
+    "subject":"English Language",
+    "topic":"Word Stress",
+    "year":2026,
+    "question":"A syllable pronounced with extra force is called",
+    "options":["accent","stress","pitch","tone"],
+    "answer":"stress",
+    "explanation":"Definition of stress.",
+    "source":"JAMB Premium Pack v1"
+  },
+
+  {
+    "exam_type":"jamb",
+    "subject":"English Language",
+    "topic":"Sentence Interpretation",
+    "year":2026,
+    "question":"If someone is 'under the weather', the person is",
+    "options":["travelling","ill","happy","confused"],
+    "answer":"ill",
+    "explanation":"Idiom meaning unwell.",
+    "source":"JAMB Premium Pack v1"
+  },
+  {
+    "exam_type":"jamb",
+    "subject":"English Language",
+    "topic":"Register",
+    "year":2026,
+    "question":"Which word belongs to medical register?",
+    "options":["prescription","appeal","invoice","ballot"],
+    "answer":"prescription",
+    "explanation":"Medical term.",
+    "source":"JAMB Premium Pack v1"
+  },
+  {
+    "exam_type":"jamb",
+    "subject":"English Language",
+    "topic":"Antonyms",
+    "year":2026,
+    "question":"Opposite of 'expand' is",
+    "options":["increase","stretch","contract","multiply"],
+    "answer":"contract",
+    "explanation":"Correct antonym.",
+    "source":"JAMB Premium Pack v1"
+  },
+  {
+    "exam_type":"jamb",
+    "subject":"English Language",
+    "topic":"Spelling",
+    "year":2026,
+    "question":"Choose the correctly spelt word.",
+    "options":["occassion","occasion","ocassion","ocasian"],
+    "answer":"occasion",
+    "explanation":"Correct spelling.",
+    "source":"JAMB Premium Pack v1"
+  },
+  {
+    "exam_type":"jamb",
+    "subject":"English Language",
+    "topic":"Concord",
+    "year":2026,
+    "question":"Bread and butter ______ my usual breakfast.",
+    "options":["are","is","were","be"],
+    "answer":"is",
+    "explanation":"Single idea takes singular verb.",
+    "source":"JAMB Premium Pack v1"
+  },
+
+  {
+    "exam_type":"jamb",
+    "subject":"English Language",
+    "topic":"Grammar",
+    "year":2026,
+    "question":"Choose the correct indirect speech form: He said, 'I am tired.'",
+    "options":["He said he is tired","He said he was tired","He says he was tired","He said I was tired"],
+    "answer":"He said he was tired",
+    "explanation":"Backshift in reported speech.",
+    "source":"JAMB Premium Pack v1"
+  },
+  {
+    "exam_type":"jamb",
+    "subject":"English Language",
+    "topic":"Lexis",
+    "year":2026,
+    "question":"Nearest meaning of 'fragile'.",
+    "options":["strong","breakable","expensive","heavy"],
+    "answer":"breakable",
+    "explanation":"Fragile means easily broken.",
+    "source":"JAMB Premium Pack v1"
+  },
+  {
+    "exam_type":"jamb",
+    "subject":"English Language",
+    "topic":"Phrasal Verbs",
+    "year":2026,
+    "question":"'Give up' means",
+    "options":["continue","surrender","lift","distribute"],
+    "answer":"surrender",
+    "explanation":"Meaning of phrasal verb.",
+    "source":"JAMB Premium Pack v1"
+  },
+  {
+    "exam_type":"jamb",
+    "subject":"English Language",
+    "topic":"Comprehension",
+    "year":2026,
+    "question":"The central idea of a passage is called",
+    "options":["tone","theme","register","plot"],
+    "answer":"theme",
+    "explanation":"Theme is the main idea.",
+    "source":"JAMB Premium Pack v1"
+  },
+  {
+    "exam_type":"jamb",
+    "subject":"English Language",
+    "topic":"Vocabulary",
+    "year":2026,
+    "question":"A person who writes books is an",
+    "options":["author","editor","printer","critic"],
+    "answer":"author",
+    "explanation":"Correct occupational term.",
+    "source":"JAMB Premium Pack v1"
+  },
+
+  {
+    "exam_type":"jamb",
+    "subject":"English Language",
+    "topic":"Grammar",
+    "year":2026,
+    "question":"Choose the correct sentence.",
+    "options":["She don't know","She doesn't knows","She doesn't know","She don't knows"],
+    "answer":"She doesn't know",
+    "explanation":"Correct subject-verb agreement.",
+    "source":"JAMB Premium Pack v1"
+  },
+  {
+    "exam_type":"jamb",
+    "subject":"English Language",
+    "topic":"Idioms",
+    "year":2026,
+    "question":"To 'burn the midnight oil' means to",
+    "options":["cause fire","work late into the night","cook food","be angry"],
+    "answer":"work late into the night",
+    "explanation":"Standard idiom.",
+    "source":"JAMB Premium Pack v1"
+  },
+  {
+    "exam_type":"jamb",
+    "subject":"English Language",
+    "topic":"Concord",
+    "year":2026,
+    "question":"One of the boys ______ missing.",
+    "options":["are","is","were","be"],
+    "answer":"is",
+    "explanation":"Subject is 'one'.",
+    "source":"JAMB Premium Pack v1"
+  },
+  {
+    "exam_type":"jamb",
+    "subject":"English Language",
+    "topic":"Vocabulary",
+    "year":2026,
+    "question":"Nearest meaning of 'brief'.",
+    "options":["short","strong","confusing","careless"],
+    "answer":"short",
+    "explanation":"Brief means short.",
+    "source":"JAMB Premium Pack v1"
+  },
+  {
+    "exam_type":"jamb",
+    "subject":"English Language",
+    "topic":"Figures of Speech",
+    "year":2026,
+    "question":"'As brave as a lion' is",
+    "options":["metaphor","simile","hyperbole","irony"],
+    "answer":"simile",
+    "explanation":"Uses 'as...as' comparison.",
+    "source":"JAMB Premium Pack v1"
+  },
+
+  {
+    "exam_type":"jamb",
+    "subject":"English Language",
+    "topic":"Grammar",
+    "year":2026,
+    "question":"Choose the correct comparative form.",
+    "options":["more better","better","bestest","most better"],
+    "answer":"better",
+    "explanation":"Correct comparative form.",
+    "source":"JAMB Premium Pack v1"
+  },
+  {
+    "exam_type":"jamb",
+    "subject":"English Language",
+    "topic":"Register",
+    "year":2026,
+    "question":"A 'ledger' belongs to which register?",
+    "options":["medical","accounting","legal","education"],
+    "answer":"accounting",
+    "explanation":"Ledger is accounting terminology.",
+    "source":"JAMB Premium Pack v1"
+  },
+  {
+    "exam_type":"jamb",
+    "subject":"English Language",
+    "topic":"Prepositions",
+    "year":2026,
+    "question":"She arrived ______ Lagos yesterday.",
+    "options":["at","in","into","on"],
+    "answer":"in",
+    "explanation":"Cities take 'in'.",
+    "source":"JAMB Premium Pack v1"
+  },
+  {
+    "exam_type":"jamb",
+    "subject":"English Language",
+    "topic":"Lexis",
+    "year":2026,
+    "question":"Nearest meaning of 'accurate'.",
+    "options":["correct","careless","uncertain","confusing"],
+    "answer":"correct",
+    "explanation":"Accurate means correct.",
+    "source":"JAMB Premium Pack v1"
+  },
+  {
+    "exam_type":"jamb",
+    "subject":"English Language",
+    "topic":"Grammar",
+    "year":2026,
+    "question":"The passive form of 'They built the house' is",
+    "options":["The house built them","The house was built","The house is build","The house was builded"],
+    "answer":"The house was built",
+    "explanation":"Correct passive construction.",
+    "source":"JAMB Premium Pack v1"
+  },
+
+  {
+    "exam_type":"jamb",
+    "subject":"English Language",
+    "topic":"Sentence Completion",
+    "year":2026,
+    "question":"Hardly had he entered ______ the rain started.",
+    "options":["than","when","then","that"],
+    "answer":"when",
+    "explanation":"Standard expression: hardly...when.",
+    "source":"JAMB Premium Pack v1"
+  },
+  {
+    "exam_type":"jamb",
+    "subject":"English Language",
+    "topic":"Vocabulary",
+    "year":2026,
+    "question":"A place where books are kept is a",
+    "options":["museum","library","gallery","store"],
+    "answer":"library",
+    "explanation":"Definition.",
+    "source":"JAMB Premium Pack v1"
+  },
+  {
+    "exam_type":"jamb",
+    "subject":"English Language",
+    "topic":"Concord",
+    "year":2026,
+    "question":"Mathematics ______ my favourite subject.",
+    "options":["are","is","were","be"],
+    "answer":"is",
+    "explanation":"Subject name takes singular verb.",
+    "source":"JAMB Premium Pack v1"
+  },
+  {
+    "exam_type":"jamb",
+    "subject":"English Language",
+    "topic":"Idioms",
+    "year":2026,
+    "question":"To 'face the music' means to",
+    "options":["sing loudly","accept consequences","perform on stage","dance publicly"],
+    "answer":"accept consequences",
+    "explanation":"Idiom meaning face punishment/result.",
+    "source":"JAMB Premium Pack v1"
+  },
+  {
+    "exam_type":"jamb",
+    "subject":"English Language",
+    "topic":"Sentence Interpretation",
+    "year":2026,
+    "question":"If a plan is 'feasible', it is",
+    "options":["possible","dangerous","illegal","complex"],
+    "answer":"possible",
+    "explanation":"Feasible means achievable.",
+    "source":"JAMB Premium Pack v1"
+  }
+]

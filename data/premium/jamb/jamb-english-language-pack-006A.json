@@ -1,0 +1,385 @@
+[
+  {
+    "exam_type": "jamb",
+    "subject": "English Language",
+    "topic": "Comprehension",
+    "year": 2020,
+    "question": "Read the passage and answer the question: The writer's main purpose in the passage is to",
+    "options": [
+      "criticize a social habit",
+      "inform readers about a development",
+      "entertain with a fictional story",
+      "praise a public official"
+    ],
+    "answer": "inform readers about a development",
+    "explanation": "The central purpose of the passage is informational.",
+    "source": "JAMB Premium"
+  },
+  {
+    "exam_type": "jamb",
+    "subject": "English Language",
+    "topic": "Comprehension",
+    "year": 2021,
+    "question": "From the passage, the phrase 'in good faith' most nearly means",
+    "options": [
+      "with honesty",
+      "with hesitation",
+      "with anger",
+      "with ignorance"
+    ],
+    "answer": "with honesty",
+    "explanation": "‘In good faith’ means sincerely and honestly.",
+    "source": "JAMB Premium"
+  },
+  {
+    "exam_type": "jamb",
+    "subject": "English Language",
+    "topic": "Sentence Completion",
+    "year": 2019,
+    "question": "If the manager had arrived earlier, the meeting _____ on time.",
+    "options": [
+      "would start",
+      "would have started",
+      "will start",
+      "has started"
+    ],
+    "answer": "would have started",
+    "explanation": "Third conditional structure requires 'would have + past participle'.",
+    "source": "JAMB Premium"
+  },
+  {
+    "exam_type": "jamb",
+    "subject": "English Language",
+    "topic": "Sentence Completion",
+    "year": 2022,
+    "question": "Neither the teachers nor the principal _____ aware of the incident.",
+    "options": [
+      "were",
+      "are",
+      "is",
+      "have"
+    ],
+    "answer": "is",
+    "explanation": "Verb agrees with the nearest subject, 'principal'.",
+    "source": "JAMB Premium"
+  },
+  {
+    "exam_type": "jamb",
+    "subject": "English Language",
+    "topic": "Lexis and Structure",
+    "year": 2020,
+    "question": "Choose the option nearest in meaning to the underlined word: The witness gave a candid response.",
+    "options": [
+      "careful",
+      "frank",
+      "confused",
+      "brief"
+    ],
+    "answer": "frank",
+    "explanation": "Candid means frank or honest.",
+    "source": "JAMB Premium"
+  },
+  {
+    "exam_type": "jamb",
+    "subject": "English Language",
+    "topic": "Lexis and Structure",
+    "year": 2021,
+    "question": "Select the correct word: The committee reached a _____ decision.",
+    "options": [
+      "unanimous",
+      "uniform",
+      "universal",
+      "unitary"
+    ],
+    "answer": "unanimous",
+    "explanation": "‘Unanimous’ means complete agreement.",
+    "source": "JAMB Premium"
+  },
+  {
+    "exam_type": "jamb",
+    "subject": "Idioms",
+    "year": 2018,
+    "question": "To 'spill the beans' means to",
+    "options": [
+      "waste food",
+      "reveal a secret",
+      "make a mistake",
+      "lose money"
+    ],
+    "answer": "reveal a secret",
+    "explanation": "The idiom means disclosing confidential information.",
+    "source": "JAMB Premium"
+  },
+  {
+    "exam_type": "jamb",
+    "subject": "Idioms",
+    "year": 2023,
+    "question": "If someone is 'under the weather', the person is",
+    "options": [
+      "travelling",
+      "ill",
+      "confused",
+      "wet"
+    ],
+    "answer": "ill",
+    "explanation": "The idiom refers to being unwell.",
+    "source": "JAMB Premium"
+  },
+  {
+    "exam_type": "jamb",
+    "subject": "Antonyms",
+    "year": 2019,
+    "question": "Choose the opposite in meaning to 'scarce'.",
+    "options": [
+      "rare",
+      "plentiful",
+      "small",
+      "thin"
+    ],
+    "answer": "plentiful",
+    "explanation": "Scarce means limited; opposite is plentiful.",
+    "source": "JAMB Premium"
+  },
+  {
+    "exam_type": "jamb",
+    "subject": "Synonyms",
+    "year": 2020,
+    "question": "Choose the word nearest in meaning to 'vital'.",
+    "options": [
+      "important",
+      "weak",
+      "temporary",
+      "ordinary"
+    ],
+    "answer": "important",
+    "explanation": "Vital means essential or important.",
+    "source": "JAMB Premium"
+  },
+  {
+    "exam_type": "jamb",
+    "subject": "Grammar",
+    "year": 2021,
+    "question": "She has lived here _____ 2018.",
+    "options": [
+      "for",
+      "since",
+      "from",
+      "during"
+    ],
+    "answer": "since",
+    "explanation": "‘Since’ is used with a specific starting point.",
+    "source": "JAMB Premium"
+  },
+  {
+    "exam_type": "jamb",
+    "subject": "Grammar",
+    "year": 2022,
+    "question": "Each of the players _____ a certificate.",
+    "options": [
+      "have",
+      "were given",
+      "has",
+      "are"
+    ],
+    "answer": "has",
+    "explanation": "‘Each’ takes singular verb agreement.",
+    "source": "JAMB Premium"
+  },
+  {
+    "exam_type": "jamb",
+    "subject": "Concord",
+    "year": 2020,
+    "question": "The news _____ encouraging.",
+    "options": [
+      "are",
+      "were",
+      "is",
+      "have"
+    ],
+    "answer": "is",
+    "explanation": "‘News’ is grammatically singular.",
+    "source": "JAMB Premium"
+  },
+  {
+    "exam_type": "jamb",
+    "subject": "Concord",
+    "year": 2023,
+    "question": "One of the boys _____ absent.",
+    "options": [
+      "were",
+      "is",
+      "are",
+      "have"
+    ],
+    "answer": "is",
+    "explanation": "‘One’ is singular.",
+    "source": "JAMB Premium"
+  },
+  {
+    "exam_type": "jamb",
+    "subject": "Oral English",
+    "topic": "Consonant Sounds",
+    "year": 2021,
+    "question": "Which word contains the /ʃ/ sound?",
+    "options": [
+      "ship",
+      "sip",
+      "zip",
+      "tip"
+    ],
+    "answer": "ship",
+    "explanation": "/ʃ/ is the 'sh' sound.",
+    "source": "JAMB Premium"
+  },
+  {
+    "exam_type": "jamb",
+    "subject": "Oral English",
+    "topic": "Vowel Sounds",
+    "year": 2022,
+    "question": "Which word has the /i:/ vowel sound?",
+    "options": [
+      "seat",
+      "sit",
+      "set",
+      "sat"
+    ],
+    "answer": "seat",
+    "explanation": "/i:/ is the long 'ee' sound.",
+    "source": "JAMB Premium"
+  },
+  {
+    "exam_type": "jamb",
+    "subject": "Prepositions",
+    "year": 2020,
+    "question": "He insisted _____ paying the bill.",
+    "options": [
+      "on",
+      "in",
+      "at",
+      "for"
+    ],
+    "answer": "on",
+    "explanation": "Correct collocation is 'insist on'.",
+    "source": "JAMB Premium"
+  },
+  {
+    "exam_type": "jamb",
+    "subject": "Vocabulary",
+    "year": 2021,
+    "question": "A person who composes poems is a",
+    "options": [
+      "novelist",
+      "critic",
+      "poet",
+      "dramatist"
+    ],
+    "answer": "poet",
+    "explanation": "A poet writes poems.",
+    "source": "JAMB Premium"
+  },
+  {
+    "exam_type": "jamb",
+    "subject": "Phrasal Verbs",
+    "year": 2022,
+    "question": "The meeting was called _____ due to rain.",
+    "options": [
+      "off",
+      "up",
+      "in",
+      "out"
+    ],
+    "answer": "off",
+    "explanation": "'Call off' means cancel.",
+    "source": "JAMB Premium"
+  },
+  {
+    "exam_type": "jamb",
+    "subject": "Sentence Interpretation",
+    "year": 2023,
+    "question": "The statement 'He hardly works' means he",
+    "options": [
+      "works diligently",
+      "rarely works",
+      "works daily",
+      "works carefully"
+    ],
+    "answer": "rarely works",
+    "explanation": "‘Hardly’ means scarcely or rarely.",
+    "source": "JAMB Premium"
+  },
+  {
+    "exam_type": "jamb",
+    "subject": "Stress",
+    "year": 2021,
+    "question": "Identify the stressed syllable in 'education'.",
+    "options": [
+      "ed",
+      "u",
+      "ca",
+      "tion"
+    ],
+    "answer": "ca",
+    "explanation": "Stress falls on the third syllable.",
+    "source": "JAMB Premium"
+  },
+  {
+    "exam_type": "jamb",
+    "subject": "Homophones",
+    "year": 2020,
+    "question": "Choose the correct word: They went _____ the gate.",
+    "options": [
+      "threw",
+      "through",
+      "thorough",
+      "though"
+    ],
+    "answer": "through",
+    "explanation": "‘Through’ indicates movement across.",
+    "source": "JAMB Premium"
+  },
+  {
+    "exam_type": "jamb",
+    "subject": "Usage",
+    "year": 2022,
+    "question": "Choose the correct expression.",
+    "options": [
+      "more better",
+      "much best",
+      "far better",
+      "most superior"
+    ],
+    "answer": "far better",
+    "explanation": "The other options are double comparatives/superlatives.",
+    "source": "JAMB Premium"
+  },
+  {
+    "exam_type": "jamb",
+    "subject": "Comprehension Logic",
+    "year": 2023,
+    "question": "A conclusion drawn directly from stated facts is called",
+    "options": [
+      "assumption",
+      "inference",
+      "prediction",
+      "guess"
+    ],
+    "answer": "inference",
+    "explanation": "Inference is conclusion from evidence.",
+    "source": "JAMB Premium"
+  },
+  {
+    "exam_type": "jamb",
+    "subject": "Register",
+    "year": 2021,
+    "question": "The term 'diagnosis' belongs mainly to the _____ register.",
+    "options": [
+      "legal",
+      "medical",
+      "banking",
+      "agricultural"
+    ],
+    "answer": "medical",
+    "explanation": "Diagnosis is a medical term.",
+    "source": "JAMB Premium"
+  }
+]

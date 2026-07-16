@@ -1,0 +1,402 @@
+[
+  {
+    "exam_type": "JAMB",
+    "subject": "Commerce",
+    "topic": "Warehousing",
+    "year": 2026,
+    "question": "A bonded warehouse is primarily used for",
+    "options": [
+      "storing perishable goods only",
+      "keeping imported goods until customs duties are paid",
+      "displaying goods for retail sale",
+      "storing raw materials for manufacturers"
+    ],
+    "answer": "keeping imported goods until customs duties are paid",
+    "explanation": "Bonded warehouses are approved facilities where imported goods are stored under customs control until duties are settled.",
+    "source": "ProxiNG Premium Commerce Pack 007A"
+  },
+  {
+    "exam_type": "JAMB",
+    "subject": "Commerce",
+    "topic": "Advertising",
+    "year": 2026,
+    "question": "The major objective of informative advertising is to",
+    "options": [
+      "create awareness about a product",
+      "eliminate competition",
+      "reduce production cost",
+      "increase taxation"
+    ],
+    "answer": "create awareness about a product",
+    "explanation": "Informative advertising educates potential customers about the existence, features, or uses of products.",
+    "source": "ProxiNG Premium Commerce Pack 007A"
+  },
+  {
+    "exam_type": "JAMB",
+    "subject": "Commerce",
+    "topic": "Insurance",
+    "year": 2026,
+    "question": "The principle requiring truthful disclosure of all material facts in insurance is",
+    "options": [
+      "indemnity",
+      "subrogation",
+      "utmost good faith",
+      "contribution"
+    ],
+    "answer": "utmost good faith",
+    "explanation": "Insurance contracts require both parties to disclose all relevant information honestly.",
+    "source": "ProxiNG Premium Commerce Pack 007A"
+  },
+  {
+    "exam_type": "JAMB",
+    "subject": "Commerce",
+    "topic": "Transportation",
+    "year": 2026,
+    "question": "Which mode of transport is most suitable for bulky goods over land at relatively low cost?",
+    "options": [
+      "Air",
+      "Rail",
+      "Pipeline",
+      "Sea"
+    ],
+    "answer": "Rail",
+    "explanation": "Rail transport is efficient and relatively economical for moving heavy and bulky goods inland.",
+    "source": "ProxiNG Premium Commerce Pack 007A"
+  },
+  {
+    "exam_type": "JAMB",
+    "subject": "Commerce",
+    "topic": "Retail Trade",
+    "year": 2026,
+    "question": "A supermarket differs from a kiosk mainly because it",
+    "options": [
+      "sells only imported goods",
+      "operates on self-service basis with wide product range",
+      "sells only food items",
+      "offers only wholesale transactions"
+    ],
+    "answer": "operates on self-service basis with wide product range",
+    "explanation": "Supermarkets provide self-service shopping with many consumer goods.",
+    "source": "ProxiNG Premium Commerce Pack 007A"
+  },
+  {
+    "exam_type": "JAMB",
+    "subject": "Commerce",
+    "topic": "Business Finance",
+    "year": 2026,
+    "question": "Debentures are a source of",
+    "options": [
+      "long-term borrowed capital",
+      "owners' equity",
+      "trade discount",
+      "retained losses"
+    ],
+    "answer": "long-term borrowed capital",
+    "explanation": "Debentures are long-term loan instruments issued by companies.",
+    "source": "ProxiNG Premium Commerce Pack 007A"
+  },
+  {
+    "exam_type": "JAMB",
+    "subject": "Commerce",
+    "topic": "Documents Used in Trade",
+    "year": 2026,
+    "question": "A document showing details of goods sent to a buyer before payment is requested is",
+    "options": [
+      "pro forma invoice",
+      "receipt",
+      "cheque",
+      "bill of lading"
+    ],
+    "answer": "pro forma invoice",
+    "explanation": "A pro forma invoice gives advance details of goods and expected charges before final invoicing.",
+    "source": "ProxiNG Premium Commerce Pack 007A"
+  },
+  {
+    "exam_type": "JAMB",
+    "subject": "Commerce",
+    "topic": "Consumer Protection",
+    "year": 2026,
+    "question": "Consumer cooperatives are formed mainly to",
+    "options": [
+      "maximize producer profit",
+      "purchase goods in bulk for members at fair prices",
+      "issue government bonds",
+      "regulate stock exchange"
+    ],
+    "answer": "purchase goods in bulk for members at fair prices",
+    "explanation": "Consumer cooperatives help members obtain goods at reduced and fair prices.",
+    "source": "ProxiNG Premium Commerce Pack 007A"
+  },
+  {
+    "exam_type": "JAMB",
+    "subject": "Commerce",
+    "topic": "Banking",
+    "year": 2026,
+    "question": "The process by which banks transfer funds between branches on behalf of customers is",
+    "options": [
+      "standing order",
+      "credit transfer",
+      "bank reconciliation",
+      "discounting"
+    ],
+    "answer": "credit transfer",
+    "explanation": "Credit transfer enables movement of funds between accounts or branches.",
+    "source": "ProxiNG Premium Commerce Pack 007A"
+  },
+  {
+    "exam_type": "JAMB",
+    "subject": "Commerce",
+    "topic": "E-Commerce",
+    "year": 2026,
+    "question": "A key advantage of e-commerce to buyers is",
+    "options": [
+      "limited product choice",
+      "24-hour access to shopping",
+      "higher transport cost",
+      "delayed communication"
+    ],
+    "answer": "24-hour access to shopping",
+    "explanation": "E-commerce allows transactions at any time regardless of location.",
+    "source": "ProxiNG Premium Commerce Pack 007A"
+  },
+  {
+    "exam_type": "JAMB",
+    "subject": "Commerce",
+    "topic": "Wholesaling",
+    "year": 2026,
+    "question": "Wholesalers assist manufacturers mainly by",
+    "options": [
+      "buying in large quantities",
+      "reducing product quality",
+      "eliminating transport",
+      "collecting taxes"
+    ],
+    "answer": "buying in large quantities",
+    "explanation": "Wholesalers buy in bulk, reducing manufacturers' distribution burden.",
+    "source": "ProxiNG Premium Commerce Pack 007A"
+  },
+  {
+    "exam_type": "JAMB",
+    "subject": "Commerce",
+    "topic": "Communication",
+    "year": 2026,
+    "question": "The fastest means of formal business communication is generally",
+    "options": [
+      "postal mail",
+      "telephone/email",
+      "messenger on foot",
+      "notice board"
+    ],
+    "answer": "telephone/email",
+    "explanation": "Electronic and direct communication channels are fastest in business.",
+    "source": "ProxiNG Premium Commerce Pack 007A"
+  },
+  {
+    "exam_type": "JAMB",
+    "subject": "Commerce",
+    "topic": "Partnership",
+    "year": 2026,
+    "question": "The document governing relations among partners is the",
+    "options": [
+      "memorandum of association",
+      "partnership deed",
+      "prospectus",
+      "bill of exchange"
+    ],
+    "answer": "partnership deed",
+    "explanation": "A partnership deed states rights, duties, and operational rules among partners.",
+    "source": "ProxiNG Premium Commerce Pack 007A"
+  },
+  {
+    "exam_type": "JAMB",
+    "subject": "Commerce",
+    "topic": "Company Formation",
+    "year": 2026,
+    "question": "The document stating a company's objectives is the",
+    "options": [
+      "articles of association",
+      "memorandum of association",
+      "invoice",
+      "cashbook"
+    ],
+    "answer": "memorandum of association",
+    "explanation": "The memorandum defines the scope and objectives of a company.",
+    "source": "ProxiNG Premium Commerce Pack 007A"
+  },
+  {
+    "exam_type": "JAMB",
+    "subject": "Commerce",
+    "topic": "Sales Promotion",
+    "year": 2026,
+    "question": "A temporary incentive to encourage immediate purchase is called",
+    "options": [
+      "sales promotion",
+      "warehousing",
+      "branding",
+      "factoring"
+    ],
+    "answer": "sales promotion",
+    "explanation": "Sales promotion uses short-term incentives to stimulate purchases.",
+    "source": "ProxiNG Premium Commerce Pack 007A"
+  },
+  {
+    "exam_type": "JAMB",
+    "subject": "Commerce",
+    "topic": "Market Research",
+    "year": 2026,
+    "question": "Market research helps businesses to",
+    "options": [
+      "ignore consumer needs",
+      "make informed marketing decisions",
+      "avoid competition completely",
+      "remove all risk"
+    ],
+    "answer": "make informed marketing decisions",
+    "explanation": "Research provides data about customers, competition, and market trends.",
+    "source": "ProxiNG Premium Commerce Pack 007A"
+  },
+  {
+    "exam_type": "JAMB",
+    "subject": "Commerce",
+    "topic": "International Trade",
+    "year": 2026,
+    "question": "A major barrier to international trade is",
+    "options": [
+      "tariff",
+      "branding",
+      "advertising",
+      "retailing"
+    ],
+    "answer": "tariff",
+    "explanation": "Tariffs increase the cost of imports and can restrict trade.",
+    "source": "ProxiNG Premium Commerce Pack 007A"
+  },
+  {
+    "exam_type": "JAMB",
+    "subject": "Commerce",
+    "topic": "Stock Exchange",
+    "year": 2026,
+    "question": "The stock exchange primarily facilitates",
+    "options": [
+      "sale of farm produce",
+      "trading in securities",
+      "wholesale food distribution",
+      "warehouse management"
+    ],
+    "answer": "trading in securities",
+    "explanation": "Stock exchanges provide organized markets for buying and selling shares and bonds.",
+    "source": "ProxiNG Premium Commerce Pack 007A"
+  },
+  {
+    "exam_type": "JAMB",
+    "subject": "Commerce",
+    "topic": "Franchising",
+    "year": 2026,
+    "question": "In franchising, the franchisee mainly receives",
+    "options": [
+      "government subsidy",
+      "right to use established business model/brand",
+      "free warehouse land",
+      "tax exemption automatically"
+    ],
+    "answer": "right to use established business model/brand",
+    "explanation": "Franchising grants rights to operate under an existing brand and system.",
+    "source": "ProxiNG Premium Commerce Pack 007A"
+  },
+  {
+    "exam_type": "JAMB",
+    "subject": "Commerce",
+    "topic": "Credit Instruments",
+    "year": 2026,
+    "question": "A bill of exchange is",
+    "options": [
+      "an unconditional order to pay a stated sum",
+      "a warehouse receipt",
+      "a shipping insurance policy",
+      "a partnership contract"
+    ],
+    "answer": "an unconditional order to pay a stated sum",
+    "explanation": "A bill of exchange instructs payment of a fixed amount to a specified party.",
+    "source": "ProxiNG Premium Commerce Pack 007A"
+  },
+  {
+    "exam_type": "JAMB",
+    "subject": "Commerce",
+    "topic": "Packaging",
+    "year": 2026,
+    "question": "One major function of packaging is to",
+    "options": [
+      "protect goods and promote sales",
+      "increase spoilage",
+      "eliminate branding",
+      "replace advertising completely"
+    ],
+    "answer": "protect goods and promote sales",
+    "explanation": "Packaging safeguards products and enhances attractiveness to buyers.",
+    "source": "ProxiNG Premium Commerce Pack 007A"
+  },
+  {
+    "exam_type": "JAMB",
+    "subject": "Commerce",
+    "topic": "Hire Purchase",
+    "year": 2026,
+    "question": "Ownership under hire purchase passes to the buyer when",
+    "options": [
+      "the agreement is signed",
+      "initial deposit is paid",
+      "all installments are fully paid",
+      "goods are delivered"
+    ],
+    "answer": "all installments are fully paid",
+    "explanation": "Ownership remains with seller until complete payment.",
+    "source": "ProxiNG Premium Commerce Pack 007A"
+  },
+  {
+    "exam_type": "JAMB",
+    "subject": "Commerce",
+    "topic": "Trade Associations",
+    "year": 2026,
+    "question": "A chamber of commerce mainly promotes",
+    "options": [
+      "business interests in a locality",
+      "military operations",
+      "religious regulation",
+      "school examinations"
+    ],
+    "answer": "business interests in a locality",
+    "explanation": "Chambers of commerce advocate and support local business development.",
+    "source": "ProxiNG Premium Commerce Pack 007A"
+  },
+  {
+    "exam_type": "JAMB",
+    "subject": "Commerce",
+    "topic": "Retail Pricing",
+    "year": 2026,
+    "question": "Loss leader pricing involves",
+    "options": [
+      "selling selected items below cost to attract customers",
+      "raising all prices sharply",
+      "wholesale export dumping",
+      "government subsidy pricing"
+    ],
+    "answer": "selling selected items below cost to attract customers",
+    "explanation": "Retailers may price some items low to draw traffic and increase overall sales.",
+    "source": "ProxiNG Premium Commerce Pack 007A"
+  },
+  {
+    "exam_type": "JAMB",
+    "subject": "Commerce",
+    "topic": "Marine Insurance",
+    "year": 2026,
+    "question": "Marine insurance mainly covers",
+    "options": [
+      "risks associated with sea transportation",
+      "life expectancy",
+      "factory wages",
+      "retail shelf damage only"
+    ],
+    "answer": "risks associated with sea transportation",
+    "explanation": "Marine insurance protects goods, ships, and related transport risks.",
+    "source": "ProxiNG Premium Commerce Pack 007A"
+  }
+]

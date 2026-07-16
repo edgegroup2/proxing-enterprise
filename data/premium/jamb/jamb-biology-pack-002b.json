@@ -1,0 +1,352 @@
+[
+  {
+    "year": 2004,
+    "examType": "JAMB",
+    "subject": "Biology",
+    "question": "The site of photosynthesis in plant cells is the",
+    "options": [
+      "Nucleus",
+      "Chloroplast",
+      "Mitochondrion",
+      "Vacuole"
+    ],
+    "correctAnswer": 1,
+    "explanation": "Chloroplast contains chlorophyll and is the organelle where photosynthesis takes place."
+  },
+  {
+    "year": 2006,
+    "examType": "JAMB",
+    "subject": "Biology",
+    "question": "The organ responsible for pumping blood in humans is the",
+    "options": [
+      "Liver",
+      "Heart",
+      "Lung",
+      "Kidney"
+    ],
+    "correctAnswer": 1,
+    "explanation": "The heart pumps blood throughout the circulatory system."
+  },
+  {
+    "year": 2007,
+    "examType": "JAMB",
+    "subject": "Biology",
+    "question": "Which process results in the production of offspring identical to the parent?",
+    "options": [
+      "Sexual reproduction",
+      "Asexual reproduction",
+      "Meiosis",
+      "Fertilization"
+    ],
+    "correctAnswer": 1,
+    "explanation": "Asexual reproduction produces genetically identical offspring."
+  },
+  {
+    "year": 2008,
+    "examType": "JAMB",
+    "subject": "Biology",
+    "question": "The liquid waste removed by the kidneys is called",
+    "options": [
+      "Sweat",
+      "Urine",
+      "Bile",
+      "Plasma"
+    ],
+    "correctAnswer": 1,
+    "explanation": "The kidneys filter blood and produce urine as waste."
+  },
+  {
+    "year": 2009,
+    "examType": "JAMB",
+    "subject": "Biology",
+    "question": "The breakdown of food substances to release energy is",
+    "options": [
+      "Photosynthesis",
+      "Respiration",
+      "Excretion",
+      "Digestion"
+    ],
+    "correctAnswer": 1,
+    "explanation": "Respiration releases energy from food molecules."
+  },
+  {
+    "year": 2010,
+    "examType": "JAMB",
+    "subject": "Biology",
+    "question": "Which structure protects the brain?",
+    "options": [
+      "Spinal cord",
+      "Skull",
+      "Rib cage",
+      "Vertebra"
+    ],
+    "correctAnswer": 1,
+    "explanation": "The skull protects the brain from physical damage."
+  },
+  {
+    "year": 2011,
+    "examType": "JAMB",
+    "subject": "Biology",
+    "question": "The transfer of pollen grains to the stigma is called",
+    "options": [
+      "Fertilization",
+      "Pollination",
+      "Germination",
+      "Budding"
+    ],
+    "correctAnswer": 1,
+    "explanation": "Pollination is the transfer of pollen from anther to stigma."
+  },
+  {
+    "year": 2012,
+    "examType": "JAMB",
+    "subject": "Biology",
+    "question": "Which part of the digestive system absorbs digested nutrients?",
+    "options": [
+      "Stomach",
+      "Small intestine",
+      "Large intestine",
+      "Esophagus"
+    ],
+    "correctAnswer": 1,
+    "explanation": "The small intestine absorbs nutrients through villi."
+  },
+  {
+    "year": 2013,
+    "examType": "JAMB",
+    "subject": "Biology",
+    "question": "The red pigment in blood is",
+    "options": [
+      "Chlorophyll",
+      "Haemoglobin",
+      "Melanin",
+      "Plasma"
+    ],
+    "correctAnswer": 1,
+    "explanation": "Haemoglobin gives blood its red color and transports oxygen."
+  },
+  {
+    "year": 2014,
+    "examType": "JAMB",
+    "subject": "Biology",
+    "question": "Which organ removes carbon dioxide from the body?",
+    "options": [
+      "Kidney",
+      "Lungs",
+      "Liver",
+      "Heart"
+    ],
+    "correctAnswer": 1,
+    "explanation": "The lungs remove carbon dioxide during exhalation."
+  },
+  {
+    "year": 2015,
+    "examType": "JAMB",
+    "subject": "Biology",
+    "question": "The process of cell division for growth is",
+    "options": [
+      "Meiosis",
+      "Mitosis",
+      "Fertilization",
+      "Mutation"
+    ],
+    "correctAnswer": 1,
+    "explanation": "Mitosis produces identical daughter cells for growth and repair."
+  },
+  {
+    "year": 2016,
+    "examType": "JAMB",
+    "subject": "Biology",
+    "question": "Which organ stores bile?",
+    "options": [
+      "Pancreas",
+      "Gall bladder",
+      "Liver",
+      "Kidney"
+    ],
+    "correctAnswer": 1,
+    "explanation": "The gall bladder stores bile produced by the liver."
+  },
+  {
+    "year": 2017,
+    "examType": "JAMB",
+    "subject": "Biology",
+    "question": "The female reproductive organ in flowering plants is the",
+    "options": [
+      "Stamen",
+      "Carpel",
+      "Anther",
+      "Sepal"
+    ],
+    "correctAnswer": 1,
+    "explanation": "The carpel (pistil) is the female reproductive organ."
+  },
+  {
+    "year": 2018,
+    "examType": "JAMB",
+    "subject": "Biology",
+    "question": "Which blood component helps in clotting?",
+    "options": [
+      "Red blood cells",
+      "Platelets",
+      "White blood cells",
+      "Plasma"
+    ],
+    "correctAnswer": 1,
+    "explanation": "Platelets help stop bleeding by forming clots."
+  },
+  {
+    "year": 2019,
+    "examType": "JAMB",
+    "subject": "Biology",
+    "question": "The exchange of gases in plants occurs mainly through",
+    "options": [
+      "Roots",
+      "Stomata",
+      "Stem",
+      "Flowers"
+    ],
+    "correctAnswer": 1,
+    "explanation": "Stomata allow gaseous exchange in leaves."
+  },
+  {
+    "year": 2020,
+    "examType": "JAMB",
+    "subject": "Biology",
+    "question": "The structure that carries food in plants is",
+    "options": [
+      "Xylem",
+      "Phloem",
+      "Cambium",
+      "Cortex"
+    ],
+    "correctAnswer": 1,
+    "explanation": "Phloem transports food substances through the plant."
+  },
+  {
+    "year": 2021,
+    "examType": "JAMB",
+    "subject": "Biology",
+    "question": "The longest bone in the human body is the",
+    "options": [
+      "Humerus",
+      "Femur",
+      "Tibia",
+      "Radius"
+    ],
+    "correctAnswer": 1,
+    "explanation": "The femur is the longest and strongest human bone."
+  },
+  {
+    "year": 2022,
+    "examType": "JAMB",
+    "subject": "Biology",
+    "question": "The organ that controls body activities is the",
+    "options": [
+      "Heart",
+      "Brain",
+      "Liver",
+      "Lungs"
+    ],
+    "correctAnswer": 1,
+    "explanation": "The brain coordinates and controls body functions."
+  },
+  {
+    "year": 2023,
+    "examType": "JAMB",
+    "subject": "Biology",
+    "question": "Which process produces variation among offspring?",
+    "options": [
+      "Asexual reproduction",
+      "Sexual reproduction",
+      "Budding",
+      "Binary fission"
+    ],
+    "correctAnswer": 1,
+    "explanation": "Sexual reproduction creates variation through gene recombination."
+  },
+  {
+    "year": 2024,
+    "examType": "JAMB",
+    "subject": "Biology",
+    "question": "The movement of dissolved substances across membranes requiring energy is",
+    "options": [
+      "Diffusion",
+      "Active transport",
+      "Osmosis",
+      "Respiration"
+    ],
+    "correctAnswer": 1,
+    "explanation": "Active transport requires energy to move substances against concentration gradient."
+  },
+  {
+    "year": 2005,
+    "examType": "JAMB",
+    "subject": "Biology",
+    "question": "The unit of classification below kingdom is",
+    "options": [
+      "Order",
+      "Phylum",
+      "Family",
+      "Class"
+    ],
+    "correctAnswer": 1,
+    "explanation": "Phylum comes directly below kingdom in biological classification."
+  },
+  {
+    "year": 2003,
+    "examType": "JAMB",
+    "subject": "Biology",
+    "question": "Which organelle controls cell activities?",
+    "options": [
+      "Mitochondrion",
+      "Nucleus",
+      "Ribosome",
+      "Golgi body"
+    ],
+    "correctAnswer": 1,
+    "explanation": "The nucleus contains genetic material and controls cell activities."
+  },
+  {
+    "year": 2010,
+    "examType": "JAMB",
+    "subject": "Biology",
+    "question": "The respiratory surface in fish is the",
+    "options": [
+      "Skin",
+      "Gills",
+      "Lungs",
+      "Fins"
+    ],
+    "correctAnswer": 1,
+    "explanation": "Fish use gills for gaseous exchange in water."
+  },
+  {
+    "year": 2016,
+    "examType": "JAMB",
+    "subject": "Biology",
+    "question": "Which hormone regulates blood sugar level?",
+    "options": [
+      "Adrenaline",
+      "Insulin",
+      "Thyroxine",
+      "Testosterone"
+    ],
+    "correctAnswer": 1,
+    "explanation": "Insulin lowers blood glucose by promoting uptake and storage."
+  },
+  {
+    "year": 2018,
+    "examType": "JAMB",
+    "subject": "Biology",
+    "question": "The movement response of plant roots to gravity is",
+    "options": [
+      "Phototropism",
+      "Geotropism",
+      "Hydrotropism",
+      "Thigmotropism"
+    ],
+    "correctAnswer": 1,
+    "explanation": "Roots show positive geotropism by growing toward gravity."
+  }
+]

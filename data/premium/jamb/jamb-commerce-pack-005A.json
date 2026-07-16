@@ -1,0 +1,386 @@
+[
+  {
+    "exam_type": "jamb",
+    "subject": "Commerce",
+    "topic": "Insurance",
+    "year": 2026,
+    "question": "Insurance is best described as",
+    "options": [
+      "a contract to compensate for specified losses in return for premium payment",
+      "a method of increasing product prices",
+      "a system of storing goods in warehouses",
+      "a legal requirement for all businesses to export"
+    ],
+    "answer": "a contract to compensate for specified losses in return for premium payment",
+    "explanation": "Insurance is a contract in which an insurer agrees to compensate the insured for covered losses in exchange for premium payment.",
+    "source": "JAMB Premium Commerce Pack 005A"
+  },
+  {
+    "exam_type": "jamb",
+    "subject": "Commerce",
+    "topic": "Principle of Indemnity",
+    "year": 2026,
+    "question": "The principle of indemnity ensures that the insured",
+    "options": [
+      "is restored to the financial position before the loss",
+      "always makes profit after a loss",
+      "receives compensation greater than the loss",
+      "can insure another person's property without interest"
+    ],
+    "answer": "is restored to the financial position before the loss",
+    "explanation": "Indemnity prevents the insured from profiting from insurance claims.",
+    "source": "JAMB Premium Commerce Pack 005A"
+  },
+  {
+    "exam_type": "jamb",
+    "subject": "Commerce",
+    "topic": "Utmost Good Faith",
+    "year": 2026,
+    "question": "The principle of utmost good faith requires both insurer and insured to",
+    "options": [
+      "disclose all material facts honestly",
+      "avoid signing written contracts",
+      "share profits equally",
+      "insure only imported goods"
+    ],
+    "answer": "disclose all material facts honestly",
+    "explanation": "Insurance contracts depend on full disclosure of relevant information by both parties.",
+    "source": "JAMB Premium Commerce Pack 005A"
+  },
+  {
+    "exam_type": "jamb",
+    "subject": "Commerce",
+    "topic": "Insurable Interest",
+    "year": 2026,
+    "question": "Insurable interest means that the insured must",
+    "options": [
+      "stand to suffer financial loss if the insured event occurs",
+      "be a registered exporter",
+      "own a warehouse",
+      "pay customs duty before insurance"
+    ],
+    "answer": "stand to suffer financial loss if the insured event occurs",
+    "explanation": "A valid insurance contract requires insurable interest in the subject matter.",
+    "source": "JAMB Premium Commerce Pack 005A"
+  },
+  {
+    "exam_type": "jamb",
+    "subject": "Commerce",
+    "topic": "Subrogation",
+    "year": 2026,
+    "question": "Subrogation gives the insurer the right to",
+    "options": [
+      "recover compensation from a third party responsible for the loss",
+      "increase premium after every claim automatically",
+      "cancel all future policies",
+      "force the insured to buy another policy"
+    ],
+    "answer": "recover compensation from a third party responsible for the loss",
+    "explanation": "Subrogation allows insurers to recover claim payments from responsible third parties.",
+    "source": "JAMB Premium Commerce Pack 005A"
+  },
+  {
+    "exam_type": "jamb",
+    "subject": "Commerce",
+    "topic": "Contribution",
+    "year": 2026,
+    "question": "The principle of contribution applies when",
+    "options": [
+      "the same risk is insured with more than one insurer",
+      "goods are sold on credit",
+      "a broker arranges a transaction",
+      "goods are exported by air"
+    ],
+    "answer": "the same risk is insured with more than one insurer",
+    "explanation": "Contribution prevents the insured from collecting full compensation from multiple insurers for the same loss.",
+    "source": "JAMB Premium Commerce Pack 005A"
+  },
+  {
+    "exam_type": "jamb",
+    "subject": "Commerce",
+    "topic": "Fire Insurance",
+    "year": 2026,
+    "question": "Fire insurance mainly covers loss caused by",
+    "options": [
+      "fire-related damage to insured property",
+      "employee resignation",
+      "exchange rate fluctuation",
+      "decline in sales revenue"
+    ],
+    "answer": "fire-related damage to insured property",
+    "explanation": "Fire insurance protects against losses resulting from fire damage.",
+    "source": "JAMB Premium Commerce Pack 005A"
+  },
+  {
+    "exam_type": "jamb",
+    "subject": "Commerce",
+    "topic": "Marine Insurance",
+    "year": 2026,
+    "question": "Marine insurance primarily covers",
+    "options": [
+      "goods and vessels involved in sea transport",
+      "office stationery losses",
+      "retail cash shortages",
+      "postal stamp damage"
+    ],
+    "answer": "goods and vessels involved in sea transport",
+    "explanation": "Marine insurance protects cargo and ships against sea transport risks.",
+    "source": "JAMB Premium Commerce Pack 005A"
+  },
+  {
+    "exam_type": "jamb",
+    "subject": "Commerce",
+    "topic": "Life Assurance",
+    "year": 2026,
+    "question": "Life assurance differs from general insurance because it",
+    "options": [
+      "pays on the occurrence of death or maturity",
+      "covers warehouse goods only",
+      "requires customs approval",
+      "is based strictly on indemnity"
+    ],
+    "answer": "pays on the occurrence of death or maturity",
+    "explanation": "Life assurance pays agreed sums upon death or policy maturity and is not strictly indemnity-based.",
+    "source": "JAMB Premium Commerce Pack 005A"
+  },
+  {
+    "exam_type": "jamb",
+    "subject": "Commerce",
+    "topic": "Banking",
+    "year": 2026,
+    "question": "A commercial bank primarily exists to",
+    "options": [
+      "accept deposits and provide financial services",
+      "manufacture currency notes",
+      "regulate foreign trade laws",
+      "issue warehouse warrants"
+    ],
+    "answer": "accept deposits and provide financial services",
+    "explanation": "Commercial banks provide deposit, lending, transfer, and payment services.",
+    "source": "JAMB Premium Commerce Pack 005A"
+  },
+  {
+    "exam_type": "jamb",
+    "subject": "Commerce",
+    "topic": "Current Account",
+    "year": 2026,
+    "question": "A major feature of a current account is",
+    "options": [
+      "frequent withdrawals through cheque usage",
+      "fixed maturity before access",
+      "compulsory long notice before withdrawal",
+      "exclusive use for minors only"
+    ],
+    "answer": "frequent withdrawals through cheque usage",
+    "explanation": "Current accounts allow regular transactions and cheque operations.",
+    "source": "JAMB Premium Commerce Pack 005A"
+  },
+  {
+    "exam_type": "jamb",
+    "subject": "Commerce",
+    "topic": "Savings Account",
+    "year": 2026,
+    "question": "Savings accounts are mainly suitable for",
+    "options": [
+      "encouraging personal savings with interest",
+      "international marine cargo insurance",
+      "share underwriting",
+      "company liquidation"
+    ],
+    "answer": "encouraging personal savings with interest",
+    "explanation": "Savings accounts encourage deposit accumulation and often pay modest interest.",
+    "source": "JAMB Premium Commerce Pack 005A"
+  },
+  {
+    "exam_type": "jamb",
+    "subject": "Commerce",
+    "topic": "Cheque",
+    "year": 2026,
+    "question": "A cheque is",
+    "options": [
+      "a written order instructing a bank to pay money",
+      "an insurance certificate",
+      "a warehouse ownership document",
+      "a transport manifest"
+    ],
+    "answer": "a written order instructing a bank to pay money",
+    "explanation": "A cheque directs a bank to pay a stated amount to a named person or bearer.",
+    "source": "JAMB Premium Commerce Pack 005A"
+  },
+  {
+    "exam_type": "jamb",
+    "subject": "Commerce",
+    "topic": "Crossed Cheque",
+    "year": 2026,
+    "question": "A crossed cheque can generally be",
+    "options": [
+      "paid only through a bank account",
+      "cashed over any shop counter",
+      "used as customs clearance proof",
+      "converted into insurance automatically"
+    ],
+    "answer": "paid only through a bank account",
+    "explanation": "Crossing improves security by requiring deposit into a bank account.",
+    "source": "JAMB Premium Commerce Pack 005A"
+  },
+  {
+    "exam_type": "jamb",
+    "subject": "Commerce",
+    "topic": "Bank Overdraft",
+    "year": 2026,
+    "question": "An overdraft allows a customer to",
+    "options": [
+      "withdraw more than the available balance up to a limit",
+      "avoid repaying bank loans permanently",
+      "store goods in a warehouse",
+      "insure goods automatically"
+    ],
+    "answer": "withdraw more than the available balance up to a limit",
+    "explanation": "An overdraft is short-term credit extended to account holders.",
+    "source": "JAMB Premium Commerce Pack 005A"
+  },
+  {
+    "exam_type": "jamb",
+    "subject": "Commerce",
+    "topic": "Loan",
+    "year": 2026,
+    "question": "A bank loan differs from an overdraft because it is usually",
+    "options": [
+      "a fixed amount advanced for a specified period",
+      "an unlimited withdrawal right",
+      "available without repayment obligation",
+      "used only for insurance claims"
+    ],
+    "answer": "a fixed amount advanced for a specified period",
+    "explanation": "Loans are usually approved as fixed sums with repayment terms.",
+    "source": "JAMB Premium Commerce Pack 005A"
+  },
+  {
+    "exam_type": "jamb",
+    "subject": "Commerce",
+    "topic": "Central Bank",
+    "year": 2026,
+    "question": "One major function of the central bank is to",
+    "options": [
+      "regulate the banking system",
+      "sell groceries to consumers",
+      "operate chain stores",
+      "insure marine cargo directly"
+    ],
+    "answer": "regulate the banking system",
+    "explanation": "Central banks supervise monetary stability and banking regulation.",
+    "source": "JAMB Premium Commerce Pack 005A"
+  },
+  {
+    "exam_type": "jamb",
+    "subject": "Commerce",
+    "topic": "Credit Transfer",
+    "year": 2026,
+    "question": "Credit transfer enables",
+    "options": [
+      "movement of money from one bank account to another",
+      "movement of cargo by sea",
+      "warehouse ownership change",
+      "insurance policy cancellation"
+    ],
+    "answer": "movement of money from one bank account to another",
+    "explanation": "Credit transfer electronically or manually moves funds between accounts.",
+    "source": "JAMB Premium Commerce Pack 005A"
+  },
+  {
+    "exam_type": "jamb",
+    "subject": "Commerce",
+    "topic": "Standing Order",
+    "year": 2026,
+    "question": "A standing order is useful for",
+    "options": [
+      "making regular fixed payments automatically",
+      "auctioning goods weekly",
+      "clearing imported cargo",
+      "selling shares publicly"
+    ],
+    "answer": "making regular fixed payments automatically",
+    "explanation": "Standing orders automate repeated payments such as rent or subscriptions.",
+    "source": "JAMB Premium Commerce Pack 005A"
+  },
+  {
+    "exam_type": "jamb",
+    "subject": "Commerce",
+    "topic": "Electronic Banking",
+    "year": 2026,
+    "question": "Electronic banking allows customers to",
+    "options": [
+      "conduct banking transactions digitally",
+      "avoid all security measures",
+      "store physical goods online",
+      "register insurance claims without documentation"
+    ],
+    "answer": "conduct banking transactions digitally",
+    "explanation": "E-banking includes online transfers, balance checks, and payments.",
+    "source": "JAMB Premium Commerce Pack 005A"
+  },
+  {
+    "exam_type": "jamb",
+    "subject": "Commerce",
+    "topic": "ATM",
+    "year": 2026,
+    "question": "An ATM mainly enables customers to",
+    "options": [
+      "withdraw cash and perform selected banking transactions",
+      "ship international cargo",
+      "issue insurance contracts",
+      "register companies"
+    ],
+    "answer": "withdraw cash and perform selected banking transactions",
+    "explanation": "ATMs provide automated banking access including withdrawals and inquiries.",
+    "source": "JAMB Premium Commerce Pack 005A"
+  },
+  {
+    "exam_type": "jamb",
+    "subject": "Commerce",
+    "topic": "Bank Draft",
+    "year": 2026,
+    "question": "A bank draft is commonly used when",
+    "options": [
+      "secure payment is required",
+      "selling goods through hawking",
+      "storing imported goods",
+      "conducting auction sales"
+    ],
+    "answer": "secure payment is required",
+    "explanation": "Bank drafts provide relatively secure payment backed by a bank.",
+    "source": "JAMB Premium Commerce Pack 005A"
+  },
+  {
+    "exam_type": "jamb",
+    "subject": "Commerce",
+    "topic": "Bill of Exchange",
+    "year": 2026,
+    "question": "A bill of exchange is",
+    "options": [
+      "a written order demanding payment at a future date",
+      "an insurance premium receipt",
+      "a warehouse licence",
+      "a transport ticket"
+    ],
+    "answer": "a written order demanding payment at a future date",
+    "explanation": "Bills of exchange are negotiable instruments used in credit transactions.",
+    "source": "JAMB Premium Commerce Pack 005A"
+  },
+  {
+    "exam_type": "jamb",
+    "subject": "Commerce",
+    "topic": "Promissory Note",
+    "year": 2026,
+    "question": "A promissory note contains",
+    "options": [
+      "a written promise to pay a specified sum",
+      "warehouse storage instructions",
+      "marine cargo schedules",
+      "share dividend announcements"
+    ],
+    "answer": "a written promise to pay a specified sum",
+    "explanation": "A promissory note is a negotiable instrument promising payment under stated terms.",
+    "source": "JAMB Premium Commerce Pack 005A"
+  }
+]

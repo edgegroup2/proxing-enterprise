@@ -1,0 +1,1324 @@
+===== INDEX =====
+'use strict';
+
+const express = require('express');
+const cors = require('cors');
+const helmet = require('helmet');
+const http = require('http');
+
+const logger = require('./util/logger');
+const initialiseCron = require('./cron');
+const db = require('./db');
+
+// Socket + realtime
+const { initSocket } = require('./socket');
+const { initBus } = require('./realtime/bus');
+const { initRedis } = require('./realtime/redisClient');
+
+const app = express();
+const server = http.createServer(app);
+
+// ---- init socket.io on SAME server ----
+const io = initSocket(server);
+
+// ---- init redis + bus (fanout) ----
+const REDIS_URL = process.env.REDIS_URL || 'redis://127.0.0.1:6379';
+initRedis(REDIS_URL)
+  .then(() => initBus(io, REDIS_URL))
+  .catch((e) => console.error('Realtime init failed', e));
+
+const PORT = process.env.PORT || 4000;
+
+// Optional jobs (do not crash server if missing)
+let reconcileCommissions = null;
+try {
+  ({ reconcileCommissions } = require('./jobs/commissionReconcile'));
+} catch (e) {
+  reconcileCommissions = null;
+  logger.warn({
+    message:
+      'commissionReconcile job not loaded (./jobs/commissionReconcile). Skipping reconcile interval.',
+    error: e?.message,
+  });
+}
+
+let startMonnifyRetryJob = null;
+try {
+//  ({ startMonnifyRetryJob } = require('./jobs/monnifyWebhookRetry'));
+} catch (e) {
+  // optional
+}
+
+// ---------------- SECURITY ----------------
+app.set('trust proxy', 1);
+app.use(helmet());
+
+// ---------------- CORS ----------------
+app.use(
+  cors({
+    origin: true,
+    credentials: true,
+  })
+);
+
+// ---------------- RAW BODY (webhooks) MUST be before express.json() ----------------
+app.use('/api/paystack/webhook', express.raw({ type: 'application/json' }));
+app.use('/api/monnify/webhook', express.raw({ type: '*/*' }));
+
+// ---------------- PARSERS ----------------
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+
+// ---------------- ROUTES ----------------
+app.use('/api/auth', require('./routes/auth'));
+app.use('/api/user', require('./routes/user'));
+
+app.use('/api/wallet', require('./routes/wallet'));
+app.use('/api/vtpass', require('./routes/vtpass'));
+app.get('/api/service-variations', async (req, res) => {
+  try {
+    const { serviceID } = req.query;
+
+    if (!serviceID) {
+      return res.status(400).json({
+        success: false,
+        error: 'Missing serviceID',
+      });
+    }
+
+    const vtpassClient = require('./services/vtpassClient');
+    const data = await vtpassClient.serviceVariations(String(serviceID));
+
+    return res.json(data);
+  } catch (err) {
+    console.error('SERVICE_VARIATIONS_ALIAS_ERROR:', err?.message || err);
+    return res.status(500).json({
+      success: false,
+      error: err?.message || 'Failed to fetch service variations',
+    });
+  }
+});
+
+app.use('/api/admin', require('./routes/adminAudit'));
+app.use('/api/admin', require('./routes/adminReconcile'));
+
+app.use('/api/paystack', require('./routes/paystack'));
+app.use('/api/paystack', require('./routes/paystackVA'));
+
+app.use('/api/monnify', require('./routes/monnify'));
+app.use('/api/monnify', require('./routes/monnifyWebhook'));
+
+app.use('/api/payments', require('../routes/payments'));
+
+// Existing safe adds (yours)
+app.use('/api/provider', require('./routes/provider'));
+app.use('/api/sessions', require('./routes/sessions'));
+
+// Matching (Redis Streams → worker)
+app.use('/api/match', require('./routes/match'));
+
+// Live commerce engine
+app.use('/api/live', require('./routes/live'));
+
+// Discovery engine
+app.use('/api/discovery', require('./routes/discovery'));
+
+// SMS forwarder integration (offline system)
+app.use('/api/sms', require('./routes/sms'));
+
+// ---------------- HEALTH CHECK ----------------
+const healthHandler = async (req, res) => {
+  try {
+    await db.query('SELECT 1');
+    return res.json({ status: 'OK' });
+  } catch (err) {
+    logger.error(err);
+    return res.status(500).json({ status: 'DB_ERROR' });
+  }
+};
+
+// original health endpoint
+app.get('/health', healthHandler);
+
+// API-prefixed health endpoint for nginx proxy
+app.get('/api/health', healthHandler);
+
+// ---------------- GLOBAL ERROR HANDLER ----------------
+app.use((err, req, res, next) => {
+  logger.error({ message: err?.message, stack: err?.stack });
+
+  if (err && err.message === 'CORS blocked') {
+    return res.status(403).json({ error: 'CORS blocked' });
+  }
+  return res.status(500).json({ error: 'Internal server error' });
+});
+
+// ---------------- CRON ----------------
+if (typeof initialiseCron === 'function') {
+  try {
+    initialiseCron();
+    logger.info({ message: 'Cron jobs initialised' });
+  } catch (e) {
+    logger.error({ message: 'Cron init failed', error: e?.message });
+  }
+}
+
+if (typeof startMonnifyRetryJob === 'function') {
+  try {
+    startMonnifyRetryJob();
+  } catch (e) {
+    logger.error({ message: 'Monnify retry job init failed', error: e?.message });
+  }
+}
+
+if (typeof reconcileCommissions === 'function') {
+  setTimeout(() => {
+    reconcileCommissions().catch((e) =>
+      logger.error({
+        message: 'commissionReconcile initial run failed',
+        error: e?.message,
+        stack: e?.stack,
+      })
+    );
+  }, 10_000);
+
+  setInterval(() => {
+    reconcileCommissions().catch((e) =>
+      logger.error({
+        message: 'commissionReconcile interval failed',
+        error: e?.message,
+        stack: e?.stack,
+      })
+    );
+  }, 300_000);
+}
+
+// ---------------- START SERVER ----------------
+server.listen(PORT, () => {
+  logger.info({ message: `🚀 Server running on port ${PORT}` });
+});
+
+module.exports = app;
+
+===== MONNIFY ROUTE =====
+'use strict';
+
+const express = require('express');
+const router = express.Router();
+
+const db = require('../db');
+const authModule = require('../middleware/auth');
+
+const authMiddleware =
+  typeof authModule === 'function'
+    ? authModule
+    : (authModule.requireAuth ||
+       authModule.authMiddleware ||
+       authModule.auth ||
+       authModule.userAuth ||
+       authModule.default);
+
+if (typeof authMiddleware !== 'function') {
+  throw new Error(
+    `Auth middleware is not a function. Exported keys: ${Object.keys(authModule || {}).join(', ')}`
+  );
+}
+const logger = require('../utils/logger');
+
+const { createReservedAccountStrict } = require('../services/monnifyService');
+
+// ------------------------- helpers -------------------------
+
+function digitsOnly(v) {
+  return String(v || '').replace(/\D/g, '');
+}
+
+async function fetchSavedMonnifyVA(userId) {
+  const r = await db.query(
+    `
+    SELECT bank_name, account_number, account_name
+    FROM virtual_accounts
+    WHERE user_id = $1 AND provider = 'monnify'
+    ORDER BY created_at DESC
+    LIMIT 1
+    `,
+    [userId]
+  );
+  return r.rows[0] || null;
+}
+
+function isUniqueViolation(e) {
+  return e && (e.code === '23505' || e.code === 23505);
+}
+
+// If you have a named constraint, keep this as a safe fallback check too
+function isProviderAccountUniqueConflict(err) {
+  if (!err) return false;
+  if (isUniqueViolation(err)) return true;
+  const msg = String(err.message || '');
+  // add your real constraint name(s) here if you have them
+  return (
+    msg.includes('uniq_virtual_accounts_provider_account') ||
+    msg.includes('virtual_accounts_provider_account') ||
+    msg.includes('provider_account_number') ||
+    msg.includes('unique')
+  );
+}
+
+// Monnify success shape you confirmed in Postman:
+// res.data.responseBody.accounts[0] = { bankName, bankCode, accountNumber, accountName }
+function extractAccountFromMonnify(raw) {
+  const body =
+    raw?.responseBody ||
+    raw?.data?.responseBody ||
+    raw?.data ||
+    raw;
+
+  const acct = Array.isArray(body?.accounts) ? body.accounts[0] : null;
+
+  const accountNumber = digitsOnly(acct?.accountNumber);
+  const bankName = acct?.bankName || body?.bankName || 'Monnify';
+  const accountName = acct?.accountName || body?.accountName || null;
+
+  return { accountNumber, bankName, accountName, body };
+}
+
+// ------------------------- route -------------------------
+
+// POST /api/monnify/generate-account
+router.post('/generate-account', authMiddleware, async (req, res) => {
+  const userId = req?.user?.id;
+
+  logger.info({
+    type: 'MONNIFY_GENERATE_ROUTE_HIT',
+    path: req.originalUrl,
+    userId,
+  });
+
+  try {
+    if (!userId) {
+      return res.status(401).json({ success: false, error: 'Unauthorized' });
+    }
+
+    // 1) Return existing saved VA (single source of truth)
+    const existing = await fetchSavedMonnifyVA(userId);
+    if (existing?.account_number) {
+      return res.json({
+        success: true,
+        reused: true,
+        provider: 'monnify',
+        bankName: existing.bank_name,
+        accountNumber: existing.account_number,
+        accountName: existing.account_name || null,
+
+        // snake_case convenience (if frontend expects it)
+        bank_name: existing.bank_name,
+        account_number: existing.account_number,
+        account_name: existing.account_name || null,
+      });
+    }
+
+    // 2) Load user details (email/name/phone)
+    const userRes = await db.query(
+      `SELECT id, email, name, phone FROM users WHERE id = $1 LIMIT 1`,
+      [userId]
+    );
+
+    if (!userRes.rows.length) {
+      return res.status(401).json({ success: false, error: 'Unauthorized' });
+    }
+
+    const user = userRes.rows[0];
+
+    // 3) BVN/NIN must be provided by frontend for LIVE (Monnify enforces it)
+    const bvn = req?.body?.bvn ? digitsOnly(req.body.bvn) : null;
+    const nin = req?.body?.nin ? digitsOnly(req.body.nin) : null;
+
+    if (!bvn && !nin) {
+      return res.status(400).json({
+        success: false,
+        error: 'BVN or NIN is required to generate Monnify account',
+      });
+    }
+
+    // Optional: allow frontend to pass preferredBanks
+    // Example: ["50515"] (Moniepoint MFB)
+    const preferredBanks =
+      Array.isArray(req?.body?.preferredBanks) && req.body.preferredBanks.length
+        ? req.body.preferredBanks.map(String)
+        : null;
+
+    const MAX_TRIES = 3;
+
+    for (let attempt = 1; attempt <= MAX_TRIES; attempt++) {
+      logger.info({
+        type: 'MONNIFY_CREATE_ATTEMPT',
+        userId,
+        attempt,
+        hasBVN: !!bvn,
+        hasNIN: !!nin,
+        preferredBanksCount: preferredBanks ? preferredBanks.length : 0,
+      });
+
+      // 4) Call Monnify STRICT service (API only, no DB writes)
+      const created = await createReservedAccountStrict({
+        userId,
+        email: user.email || `${digitsOnly(user.phone)}@proxng.online`,
+        name: user.name || 'ProxNG Wallet',
+        bvn,
+        nin,
+
+        // IMPORTANT: satisfy Monnify rule:
+        // either preferredBanks OR getAllAvailableBanks: true
+        preferredBanks,
+        getAllAvailableBanks: preferredBanks ? false : true,
+      });
+
+      const raw = created?.raw ?? created;
+
+      // 5) Extract from the exact shape you confirmed: responseBody.accounts[0]
+      const { accountNumber, bankName, accountName, body } = extractAccountFromMonnify(raw);
+
+      logger.info({
+        type: 'MONNIFY_VA_EXTRACTED',
+        userId,
+        attempt,
+        bankName,
+        accountNumber,
+        accountName,
+      });
+
+      if (!accountNumber) {
+        logger.error({
+          type: 'MONNIFY_VA_CREATE_NO_ACCOUNT_NUMBER',
+          userId,
+          attempt,
+          // Keep raw out of response to client; log only
+          debugKeys: Object.keys(body || {}),
+        });
+
+        // retry
+        if (attempt < MAX_TRIES) continue;
+
+        return res.status(502).json({
+          success: false,
+          error: 'Monnify did not return accountNumber',
+        });
+      }
+
+      // 6) Save to DB (single source of truth)
+      try {
+        await db.query(
+          `
+          INSERT INTO virtual_accounts (user_id, provider, bank_name, account_number, account_name)
+          VALUES ($1, 'monnify', $2, $3, $4)
+          ON CONFLICT (user_id, provider)
+          DO UPDATE SET
+            bank_name = EXCLUDED.bank_name,
+            account_number = EXCLUDED.account_number,
+            account_name = EXCLUDED.account_name
+          `,
+          [userId, bankName, String(accountNumber), accountName]
+        );
+
+        // REQUIRED LOG (you asked for this EXACTLY)
+        logger.info({
+          type: 'MONNIFY_VA_DB_SAVED_CONFIRMED',
+          userId,
+          accountNumber,
+        });
+      } catch (e) {
+        if (isProviderAccountUniqueConflict(e)) {
+          logger.warn({
+            type: 'MONNIFY_VA_DB_CONFLICT_RETRY',
+            userId,
+            attempt,
+            error: e.message,
+          });
+
+          // retry
+          if (attempt < MAX_TRIES) continue;
+
+          return res.status(409).json({
+            success: false,
+            error: 'Monnify VA conflict, please retry',
+          });
+        }
+
+        logger.error({
+          type: 'MONNIFY_VA_DB_ERROR',
+          userId,
+          attempt,
+          error: e.message,
+          stack: e.stack,
+        });
+
+        return res.status(500).json({ success: false, error: 'DB save failed' });
+      }
+
+      // 7) Re-fetch from DB and return ONLY DB row (single source of truth)
+      const saved = await fetchSavedMonnifyVA(userId);
+
+      if (!saved?.account_number) {
+        logger.error({
+
+===== MONNIFY WEBHOOK =====
+'use strict';
+
+const express = require('express');
+const router = express.Router();
+const crypto = require('crypto');
+
+const db = require('../db');
+const logger = require('../utils/logger');
+const walletEngine = require('../engine/walletEngine'); // ✅ ensure this file exists in src/engine/walletEngine.js
+
+function digitsOnly(v) {
+  return String(v ?? '').replace(/\D/g, '');
+}
+
+function safeJsonParse(buf) {
+  try {
+    return JSON.parse(buf.toString('utf8'));
+  } catch {
+    return null;
+  }
+}
+
+function pick(obj, paths) {
+  for (const path of paths) {
+    const value = path.split('.').reduce((acc, key) => (acc && acc[key] !== undefined ? acc[key] : undefined), obj);
+    if (value !== undefined && value !== null && String(value).trim() !== '') return value;
+  }
+  return null;
+}
+
+// Monnify payload can vary; you showed eventData structure.
+function normalizeEvent(payload) {
+  const body = payload?.eventData || payload?.data || payload;
+  return body || {};
+}
+
+router.post('/webhook', async (req, res) => {
+  // Always respond 200-ish to avoid retry storms; but we log everything
+  try {
+    const signature =
+      req.headers['monnify-signature'] ||
+      req.headers['x-monnify-signature'] ||
+      req.headers['x-monnify-signature-256'] || // just in case (some integrations vary)
+      null;
+
+    const secret = process.env.MONNIFY_SECRET_KEY;
+    if (!secret) {
+      logger.error({ type: 'MONNIFY_WEBHOOK_NO_SECRET' });
+      return res.status(200).json({ received: true });
+    }
+
+    // req.body may be Buffer if express.raw applied
+    let rawBody = req.body;
+    let payload = req.body;
+
+    if (Buffer.isBuffer(req.body)) {
+      rawBody = req.body;
+      payload = safeJsonParse(req.body) || {};
+    } else {
+      // If already parsed JSON, we must reconstruct a deterministic string for hashing is risky.
+      // But since you are using express.raw at the path, this should be Buffer.
+      rawBody = Buffer.from(JSON.stringify(req.body || {}), 'utf8');
+      payload = req.body || {};
+    }
+
+    // Verify signature (Monnify uses sha512 of raw body)
+    if (signature) {
+      const expected = crypto.createHmac('sha512', secret).update(rawBody).digest('hex');
+
+      if (String(signature).trim() !== expected) {
+        logger.error({
+          type: 'MONNIFY_WEBHOOK_BAD_SIGNATURE',
+          got: String(signature).slice(0, 10),
+          expected: String(expected).slice(0, 10)
+        });
+        return res.status(200).json({ received: true, badSignature: true });
+      }
+    } else {
+      logger.warn({ type: 'MONNIFY_WEBHOOK_MISSING_SIGNATURE_HEADER' });
+      // Still accept but log; some environments misconfigure header forwarding
+    }
+
+    const eventData = normalizeEvent(payload);
+
+    // Extract paymentReference (idempotency key)
+    const paymentReference = pick(eventData, [
+      'paymentReference',
+      'transactionReference',
+      'reference',
+      'eventReference'
+    ]);
+
+    // Extract destination account number from common fields
+    const destAccountNumber = digitsOnly(
+      pick(eventData, [
+        'destinationAccountNumber',
+        'destinationAccountInformation.accountNumber',
+        'destinationAccount.accountNumber',
+        'product.destinationAccountNumber',
+        'product.destinationAccount.accountNumber'
+      ])
+    );
+
+    const amountPaid = Number(
+      pick(eventData, [
+        'amountPaid',
+        'amount',
+        'paidAmount',
+        'transactionAmount'
+      ]) || 0
+    );
+
+    logger.info({
+      type: 'MONNIFY_WEBHOOK_RECEIVED',
+      paymentReference,
+      destAccountNumber,
+      amountPaid
+    });
+
+    if (!paymentReference) {
+      logger.error({ type: 'MONNIFY_WEBHOOK_MISSING_PAYMENT_REFERENCE', eventData });
+      return res.status(200).json({ received: true });
+    }
+
+    // Save webhook event idempotently (optional but strong)
+    await db.query(
+      `
+      INSERT INTO monnify_webhook_events (payment_reference, dest_account_number, payload)
+      VALUES ($1, $2, $3)
+      ON CONFLICT (payment_reference) DO NOTHING
+      `,
+      [String(paymentReference), destAccountNumber || null, payload]
+    );
+
+    // If already processed, stop
+    const already = await db.query(
+      `
+      SELECT processed_at
+      FROM monnify_webhook_events
+      WHERE payment_reference = $1
+      LIMIT 1
+      `,
+      [String(paymentReference)]
+    );
+
+    if (already.rows[0]?.processed_at) {
+      return res.status(200).json({ received: true, duplicate: true });
+    }
+
+    // Resolve user by account number
+    if (!destAccountNumber) {
+      logger.error({
+        type: 'MONNIFY_WEBHOOK_NO_DEST_ACCOUNT',
+        paymentReference
+      });
+      return res.status(202).json({ received: true, pending: true });
+    }
+
+    const va = await db.query(
+      `
+      SELECT user_id
+      FROM virtual_accounts
+      WHERE provider = 'monnify'
+        AND regexp_replace(account_number, '\\D', '', 'g') = $1
+      LIMIT 1
+      `,
+      [destAccountNumber]
+    );
+
+    const userId = va.rows[0]?.user_id;
+
+    if (!userId) {
+      logger.error({
+        type: 'MONNIFY_WEBHOOK_USER_RESOLVE_FAILED',
+        paymentReference,
+        destAccountNumber
+      });
+      return res.status(202).json({ received: true, pending: true });
+    }
+
+    if (!amountPaid || amountPaid <= 0) {
+      logger.error({
+        type: 'MONNIFY_WEBHOOK_INVALID_AMOUNT',
+        paymentReference,
+        amountPaid
+      });
+      return res.status(200).json({ received: true });
+    }
+
+    // ✅ Credit wallet using your engine (idempotent via ledger reference)
+    // Reference must be unique per paymentReference
+    await walletEngine.credit({
+      userId,
+      amount: amountPaid,
+      reference: `monnify_${paymentReference}`,
+      provider: 'monnify'
+    });
+
+    await db.query(
+      `
+      UPDATE monnify_webhook_events
+      SET processed_at = now(),
+          resolved_user_id = $2
+      WHERE payment_reference = $1
+      `,
+      [String(paymentReference), userId]
+    );
+
+    logger.info({
+      type: 'MONNIFY_CREDIT_SUCCESS',
+      userId,
+      paymentReference,
+      amountPaid
+    });
+
+    return res.status(200).json({ received: true, success: true });
+  } catch (err) {
+    logger.error({
+      type: 'MONNIFY_WEBHOOK_ERROR',
+      error: err?.message,
+      stack: err?.stack
+    });
+    // return 200 to avoid retry storms
+    return res.status(200).json({ received: true });
+  }
+});
+
+module.exports = router;
+
+===== WALLET SERVICE =====
+'use strict';
+
+/**
+ * Wallet Service
+ *
+ * Purpose:
+ * - Central business logic for wallet funding
+ * - Frontend should call wallet routes only
+ * - Service decides which provider to use
+ *
+ * Flow:
+ * route -> walletService -> provider
+ */
+
+const paystackProvider = require('../providers/paystackProvider');
+const monnifyProvider = require('../providers/monnifyProvider');
+
+/**
+ * Start card funding flow
+ * Used by route: POST /api/payments/wallet/fund/card
+ */
+async function initiateCardFunding(userId, payload = {}) {
+  const amount = Number(payload.amount || 0);
+  const email = payload.email || null;
+  const phone = payload.phone || null;
+  const paymentMethod = payload.paymentMethod || 'card';
+
+  if (!userId) {
+    throw new Error('Unauthorized');
+  }
+
+  if (!amount || Number.isNaN(amount) || amount <= 0) {
+    throw new Error('Invalid amount');
+  }
+
+  const response = await paystackProvider.initializeTransaction({
+    email: email || `user_${String(userId)}@proxing.online`,
+    amount: Math.round(amount * 100), // Paystack expects kobo
+    metadata: {
+      user_id: userId,
+      phone,
+      paymentMethod,
+      ...(payload.metadata || {}),
+    },
+  });
+
+  return response;
+}
+
+/**
+ * Create or fetch reserved virtual account
+ * Used by route: POST /api/payments/wallet/virtual-account
+ *
+ * Safe compatibility logic:
+ * - supports createReservedAccount
+ * - supports createReservedAccountStrict
+ * - supports reserveAccount
+ */
+async function createVirtualAccount(userId, payload = {}) {
+  const email = payload.email || null;
+  const name = payload.name || null;
+  const bvn = payload.bvn || null;
+  const nin = payload.nin || null;
+  const preferredBanks = payload.preferredBanks || null;
+
+  if (!userId) {
+    throw new Error('Unauthorized');
+  }
+
+  const createFn =
+    monnifyProvider.createReservedAccount ||
+    monnifyProvider.createReservedAccountStrict ||
+    monnifyProvider.reserveAccount;
+
+  if (typeof createFn !== 'function') {
+    throw new Error(
+      `Monnify provider has no usable account creation function. Exported keys: ${Object.keys(monnifyProvider || {}).join(', ')}`
+    );
+  }
+
+  const result = await createFn({
+    userId,
+    email,
+    name,
+    bvn,
+    nin,
+    preferredBanks,
+  });
+
+  return result;
+}
+
+module.exports = {
+  initiateCardFunding,
+  createVirtualAccount,
+};
+
+===== MONNIFY SERVICE =====
+'use strict';
+
+const axios = require('axios');
+const logger = require('../utils/logger');
+
+const BASE_URL = process.env.MONNIFY_BASE_URL || 'https://api.monnify.com';
+
+let cachedAccessToken = null;
+let cachedTokenExpiresAt = 0;
+
+function safeStr(v) {
+  if (v === null || v === undefined) return '';
+  return String(v);
+}
+
+function digitsOnly(v) {
+  return safeStr(v).replace(/\D/g, '');
+}
+
+function getBasicAuthHeader() {
+  const apiKey = safeStr(process.env.MONNIFY_API_KEY).trim();
+  const secretKey = safeStr(process.env.MONNIFY_SECRET_KEY).trim();
+
+  if (!apiKey || !secretKey) {
+    throw new Error('Missing Monnify credentials | MONNIFY_API_KEY / MONNIFY_SECRET_KEY');
+  }
+
+  const token = Buffer.from(`${apiKey}:${secretKey}`).toString('base64');
+  return `Basic ${token}`;
+}
+
+async function getAccessToken() {
+  const now = Date.now();
+
+  // reuse cached token (refresh 60s before expiry)
+  if (cachedAccessToken && now < cachedTokenExpiresAt - 60_000) return cachedAccessToken;
+
+  // Safe auth debug (no secret leaks)
+  logger.info({
+    type: 'MONNIFY_AUTH_DEBUG',
+    baseUrl: BASE_URL,
+    hasApiKey: !!process.env.MONNIFY_API_KEY,
+    hasSecretKey: !!process.env.MONNIFY_SECRET_KEY,
+    contractCodeLen: safeStr(process.env.MONNIFY_CONTRACT_CODE).length,
+  });
+
+  const url = `${BASE_URL}/api/v1/auth/login`;
+  const Authorization = getBasicAuthHeader();
+
+  // Log auth header prefix only (NOT the value)
+  logger.info({
+    type: 'MONNIFY_AUTH_HEADER_TYPE',
+    authorizationStartsWith: safeStr(Authorization).slice(0, 5), // expect "Basic"
+  });
+
+  const res = await axios.post(url, null, {
+    headers: {
+      Authorization,
+      Accept: 'application/json',
+    },
+    timeout: 15000,
+  });
+
+  const body = res?.data;
+  const accessToken = body?.responseBody?.accessToken;
+  const expiresIn = Number(body?.responseBody?.expiresIn || 0);
+
+  if (!accessToken) {
+    throw new Error('Monnify login succeeded but no accessToken returned');
+  }
+
+  cachedAccessToken = accessToken;
+  cachedTokenExpiresAt = Date.now() + (expiresIn > 0 ? expiresIn * 1000 : 55 * 60 * 1000);
+
+  logger.info({
+    type: 'MONNIFY_LOGIN_OK',
+    expiresIn,
+  });
+
+  return accessToken;
+}
+
+/**
+ * STRICT reserved account generator (SERVICE LAYER ONLY)
+ * - Gets access token
+ * - Calls Monnify reserved-accounts endpoint
+ * - DOES NOT TOUCH DB (route owns persistence)
+ *
+ * Expected input:
+ * { userId, email, name, bvn?, nin?, preferredBanks?, getAllAvailableBanks? }
+ */
+async function createReservedAccountStrict({
+  userId,
+  email,
+  name,
+  bvn = null,
+  nin = null,
+  preferredBanks = null,
+  getAllAvailableBanks = null,
+} = {}) {
+  const contractCode = safeStr(process.env.MONNIFY_CONTRACT_CODE).trim();
+  if (!contractCode) throw new Error('Missing MONNIFY_CONTRACT_CODE');
+
+  if (!userId) throw new Error('Missing userId');
+
+  const cleanedBVN = digitsOnly(bvn);
+  const cleanedNIN = digitsOnly(nin);
+
+  // Enforce BVN or NIN (because Monnify returns responseCode "99" without it)
+  if (!cleanedBVN && !cleanedNIN) {
+    throw new Error('BVN or NIN is required (service validation)');
+  }
+
+  // Decide banks rule:
+  // If preferredBanks provided -> use it
+  // Else default to getAllAvailableBanks = true (matches Monnify guidance)
+  let banks = preferredBanks;
+  if (Array.isArray(banks)) banks = banks.filter(Boolean).map(String);
+  if (!banks || banks.length === 0) banks = null;
+
+  const allowAllBanks =
+    getAllAvailableBanks === true || (!banks && getAllAvailableBanks !== false);
+
+  const accessToken = await getAccessToken();
+
+  const url = `${BASE_URL}/api/v2/bank-transfer/reserved-accounts`;
+
+  const payload = {
+    accountReference: `user_${safeStr(userId)}`,
+    accountName: safeStr(name) || `User ${safeStr(userId)}`,
+    currencyCode: 'NGN',
+    contractCode,
+    customerEmail: safeStr(email) || `${digitsOnly(userId)}@proxng.online`,
+    customerName: safeStr(name) || `User ${safeStr(userId)}`,
+
+    // Identity (Monnify enforces at least one)
+    ...(cleanedBVN ? { bvn: cleanedBVN } : {}),
+    ...(cleanedNIN ? { nin: cleanedNIN } : {}),
+
+    // Banks rule (Monnify enforces one of these)
+    ...(banks ? { preferredBanks: banks } : {}),
+    ...(allowAllBanks ? { getAllAvailableBanks: true } : {}),
+  };
+
+  // IMPORTANT: reserved-accounts uses Bearer access token
+  const headers = {
+    Authorization: `Bearer ${accessToken}`,
+    'Content-Type': 'application/json',
+    Accept: 'application/json',
+  };
+
+  logger.info({
+    type: 'MONNIFY_RESERVED_ACCOUNT_CALL',
+    url,
+    authPrefix: safeStr(headers.Authorization).slice(0, 6), // "Bearer"
+    hasPreferredBanks: !!banks,
+    preferredBanksCount: banks ? banks.length : 0,
+    getAllAvailableBanks: !!payload.getAllAvailableBanks,
+    hasBVN: !!cleanedBVN,
+    hasNIN: !!cleanedNIN,
+  });
+
+  try {
+    const res = await axios.post(url, payload, { headers, timeout: 20000 });
+
+    logger.info({
+      type: 'MONNIFY_RESERVED_ACCOUNT_OK',
+      userId,
+      responseCode: res?.data?.responseCode,
+      requestSuccessful: res?.data?.requestSuccessful,
+    });
+
+    return res.data;
+  } catch (err) {
+    const details = err?.response?.data || err?.message || err;
+
+    logger.error({
+      type: 'MONNIFY_RESERVED_CREATE_FAILED',
+      userId,
+      details,
+    });
+
+    throw err;
+  }
+}
+
+module.exports = {
+  createReservedAccountStrict,
+};
+
+===== MONNIFY PROVIDER =====
+'use strict';
+
+const axios = require('axios');
+
+const MONNIFY_BASE_URL =
+  process.env.MONNIFY_BASE_URL || 'https://api.monnify.com';
+
+const MONNIFY_API_KEY = process.env.MONNIFY_API_KEY;
+const MONNIFY_SECRET_KEY = process.env.MONNIFY_SECRET_KEY;
+const MONNIFY_CONTRACT_CODE = process.env.MONNIFY_CONTRACT_CODE;
+
+/**
+ * Get Monnify access token
+ */
+async function getToken() {
+  const auth = Buffer.from(
+    `${MONNIFY_API_KEY}:${MONNIFY_SECRET_KEY}`
+  ).toString('base64');
+
+  const res = await axios.post(
+    `${MONNIFY_BASE_URL}/api/v1/auth/login`,
+    {},
+    {
+      headers: {
+        Authorization: `Basic ${auth}`,
+      },
+      timeout: 15000,
+    }
+  );
+
+  return res.data.responseBody.accessToken;
+}
+
+/**
+ * Create reserved virtual account
+ */
+async function createReservedAccount(payload = {}) {
+  const token = await getToken();
+
+  const accountReference =
+    payload.accountReference || `proxing_${Date.now()}`;
+
+  const body = {
+    accountReference,
+    accountName: payload.name || 'PROXING USER',
+    currencyCode: 'NGN',
+    contractCode: MONNIFY_CONTRACT_CODE,
+    customerEmail: payload.email || 'wallet@proxing.online',
+    customerName: payload.name || 'Proxing User',
+    bvn: payload.bvn || null,
+    nin: payload.nin || null,
+    getAllAvailableBanks: true,
+  };
+
+  const res = await axios.post(
+    `${MONNIFY_BASE_URL}/api/v2/bank-transfer/reserved-accounts`,
+    body,
+    {
+      headers: {
+        Authorization: `Bearer ${token}`,
+        'Content-Type': 'application/json',
+      },
+      timeout: 20000,
+    }
+  );
+
+  return res.data;
+}
+
+module.exports = {
+  createReservedAccount,
+};
+
+===== JOB SEARCH =====
+src/index.js:9:const initialiseCron = require('./cron');
+src/index.js:31:// Optional jobs (do not crash server if missing)
+src/index.js:32:let reconcileCommissions = null;
+src/index.js:34:  ({ reconcileCommissions } = require('./jobs/commissionReconcile'));
+src/index.js:36:  reconcileCommissions = null;
+src/index.js:39:      'commissionReconcile job not loaded (./jobs/commissionReconcile). Skipping reconcile interval.',
+src/index.js:44:let startMonnifyRetryJob = null;
+src/index.js:46://  ({ startMonnifyRetryJob } = require('./jobs/monnifyWebhookRetry'));
+src/index.js:63:// ---------------- RAW BODY (webhooks) MUST be before express.json() ----------------
+src/index.js:64:app.use('/api/paystack/webhook', express.raw({ type: 'application/json' }));
+src/index.js:65:app.use('/api/monnify/webhook', express.raw({ type: '*/*' }));
+src/index.js:102:app.use('/api/admin', require('./routes/adminReconcile'));
+src/index.js:108:app.use('/api/monnify', require('./routes/monnifyWebhook'));
+src/index.js:155:// ---------------- CRON ----------------
+src/index.js:156:if (typeof initialiseCron === 'function') {
+src/index.js:158:    initialiseCron();
+src/index.js:159:    logger.info({ message: 'Cron jobs initialised' });
+src/index.js:161:    logger.error({ message: 'Cron init failed', error: e?.message });
+src/index.js:165:if (typeof startMonnifyRetryJob === 'function') {
+src/index.js:167:    startMonnifyRetryJob();
+src/index.js:169:    logger.error({ message: 'Monnify retry job init failed', error: e?.message });
+src/index.js:173:if (typeof reconcileCommissions === 'function') {
+src/index.js:175:    reconcileCommissions().catch((e) =>
+src/index.js:177:        message: 'commissionReconcile initial run failed',
+src/index.js:185:    reconcileCommissions().catch((e) =>
+src/index.js:187:        message: 'commissionReconcile interval failed',
+src/providers/paystackProvider.js:30:async function verifyTransaction(reference) {
+src/providers/paystackProvider.js:31:  const url = `${PAYSTACK_BASE_URL}/transaction/verify/${encodeURIComponent(reference)}`;
+src/providers/paystackProvider.js:54:  verifyTransaction,
+src/providers/vtpassProvider.js:35:async function verifyMerchant(payload) {
+src/providers/vtpassProvider.js:37:    `${VTPASS_BASE_URL}/merchant-verify`,
+src/providers/vtpassProvider.js:59:  verifyMerchant,
+src/middleware.js:8:    const decoded = jwt.verify(token, process.env.JWT_SECRET);
+src/queues/transactionQueue.js:8: * Push transaction job into Redis queue
+src/queues/transactionQueue.js:9: * job shape:
+src/queues/transactionQueue.js:17:async function enqueueTransaction(job) {
+src/queues/transactionQueue.js:18:  if (!job || typeof job !== 'object') {
+src/queues/transactionQueue.js:19:    throw new Error('enqueueTransaction requires a job object');
+src/queues/transactionQueue.js:25:    reference: job.reference || null,
+src/queues/transactionQueue.js:26:    channel: job.channel || 'api',
+src/queues/transactionQueue.js:27:    from: job.from || null,
+src/queues/transactionQueue.js:28:    intent: job.intent || {}
+src/queues/transactionQueue.js:36:    reference: job.reference || null
+src/queues/transactionQueue.js:42: * Returns parsed job object or null on timeout
+src/monnify.js:5:router.post("/webhook", async (req, res) => {
+src/socket.js:20:    return jwt.verify(token, process.env.JWT_SECRET || 'dev-secret-change-me');
+src/socket/index.js:36:    // If your middleware is Express-only, do a small JWT verify here instead.
+src/socket/index.js:39:    const payload = jwt.verify(token, process.env.JWT_SECRET || 'dev-secret-change-me');
+src/sms/intentParser.js:16:classifier.addDocument('verify meter number', 'POWER_VERIFY');
+src/sms/intentParser.js:17:classifier.addDocument('verify electricity meter', 'POWER_VERIFY');
+src/sms/intentParser.js:19:classifier.addDocument('verify gotv card', 'TV_VERIFY');
+src/sms/intentParser.js:140:  // ELECTRICITY VERIFY
+src/sms/intentParser.js:142:  if (text.includes('verify')) {
+src/sms/intentParser.js:148:        type: 'POWER_VERIFY',
+src/sms/intentParser.js:174:  // TV VERIFY
+src/sms/intentParser.js:176:  if (text.includes('tv') && text.includes('verify')) {
+src/sms/intentParser.js:183:          type: 'TV_VERIFY',
+src/engine/liquidityEngine.js:19:      "❌ Liquidity cron error:",
+src/engine/reconciliationEngine.js:3:async function reconcileSystemIntegrity() {
+src/engine/reconciliationEngine.js:45:module.exports = { reconcileSystemIntegrity };
+src/engine/transactionEngine.js:256:async function verifyElectricityMeter({ serviceID, billersCode, type }) {
+src/engine/transactionEngine.js:266:  const res = await axios.post(`${base}/merchant-verify`, payload, {
+src/engine/transactionEngine.js:284:async function verifyTvAccount({ serviceID, billersCode }) {
+src/engine/transactionEngine.js:293:  const res = await axios.post(`${base}/merchant-verify`, payload, {
+src/engine/transactionEngine.js:709:    const verifyData = await verifyElectricityMeter({
+src/engine/transactionEngine.js:720:      customerName: extractVerifiedCustomerName(verifyData)
+src/engine/transactionEngine.js:748:    const verifyData = await verifyTvAccount({
+src/engine/transactionEngine.js:757:      customerName: extractVerifiedCustomerName(verifyData)
+src/workers/transactionWorker.js:12:async function processOne(job) {
+src/workers/transactionWorker.js:13:  const reference = job?.reference || null;
+src/workers/transactionWorker.js:14:  const channel = job?.channel || null;
+src/workers/transactionWorker.js:15:  const intent = job?.intent || {};
+src/workers/transactionWorker.js:19:      type: 'TX_QUEUE_JOB_RECEIVED',
+src/workers/transactionWorker.js:30:      type: 'TX_QUEUE_JOB_DONE',
+src/workers/transactionWorker.js:41:      type: 'TX_QUEUE_JOB_FAILED',
+src/workers/transactionWorker.js:66:      const job = await dequeueTransaction(5);
+src/workers/transactionWorker.js:68:      if (!job) {
+src/workers/transactionWorker.js:72:      await processOne(job);
+src/workers/matchWorker.js:101:            // don't ack -> retry later
+src/jobs/reconcile_paystack_fundings.js:12:async function verifyPaystack(reference) {
+src/jobs/reconcile_paystack_fundings.js:14:    `https://api.paystack.co/transaction/verify/${reference}`,
+src/jobs/reconcile_paystack_fundings.js:26:async function reconcilePaystackFundings() {
+src/jobs/reconcile_paystack_fundings.js:42:      console.log("[reconcile] No Paystack fundings to reconcile");
+src/jobs/reconcile_paystack_fundings.js:49:      const tx = await verifyPaystack(funding.reference);
+src/jobs/reconcile_paystack_fundings.js:95:        `[reconcile] Credited Paystack funding ${funding.reference}`
+src/jobs/reconcile_paystack_fundings.js:99:    console.error("[reconcile] Error:", err);
+src/jobs/reconcile_paystack_fundings.js:105:reconcilePaystackFundings()
+src/jobs/reconcile_paystack_fundings.js:107:    console.log('[reconcile] Done');
+src/jobs/reconcile_paystack_fundings.js:111:    console.error('[reconcile] Fatal error:', err);
+src/jobs/commissionReconcile.js:6:async function reconcileCommissions() {
+src/jobs/commissionReconcile.js:29:      console.error('Commission reconcile failed', {
+src/jobs/commissionReconcile.js:37:module.exports = { reconcileCommissions };
+src/jobs/reconcile_paystack.js:4:async function reconcilePaystackPayment(paymentData) {
+src/jobs/reconcile_paystack.js:31:module.exports = { reconcilePaystackPayment };
+src/jobs/monnifyWebhookRetry.js:28:      type: 'MONNIFY_RETRY_STILL_UNRESOLVED',
+src/jobs/monnifyWebhookRetry.js:47:    UPDATE monnify_webhook_events
+src/jobs/monnifyWebhookRetry.js:55:    type: 'MONNIFY_RETRY_CREDITED',
+src/jobs/monnifyWebhookRetry.js:62:function startMonnifyRetryJob() {
+src/jobs/monnifyWebhookRetry.js:70:          FROM monnify_webhook_events
+src/jobs/monnifyWebhookRetry.js:82:          type: 'MONNIFY_RETRY_JOB_ERROR',
+src/jobs/monnifyWebhookRetry.js:93:module.exports = { startMonnifyRetryJob };
+src/jobs/runCommissionReconcileOnce.js:1:// src/jobs/runCommissionReconcileOnce.js
+src/jobs/runCommissionReconcileOnce.js:4:const { reconcileCommissions } = require('./commissionReconcile');
+src/jobs/runCommissionReconcileOnce.js:8:  console.log(`[reconcile-once] started at ${new Date().toISOString()}`);
+src/jobs/runCommissionReconcileOnce.js:11:    await reconcileCommissions();
+src/jobs/runCommissionReconcileOnce.js:12:    console.log(`[reconcile-once] done in ${Date.now() - startedAt}ms`);
+src/jobs/runCommissionReconcileOnce.js:15:    console.error(`[reconcile-once] failed in ${Date.now() - startedAt}ms`, e?.message || e);
+src/services/vtpassClient.js:57:// Meter / smartcard verification (VTpass merchant-verify)
+src/services/vtpassClient.js:58:async function merchantVerify(payload) {
+src/services/vtpassClient.js:59:  const url = `${baseUrl()}/merchant-verify`;
+src/services/vtpassClient.js:70:  merchantVerify,
+src/services/reconciliationService.js:3:async function reconcileVTpassBalance() {
+src/services/reconciliationService.js:18:module.exports = { reconcileVTpassBalance };
+src/services/vtpassFloatManager.js:211: * MAIN AUTO TOPUP FUNCTION (called by cron)
+src/services/paystackService.js:33:async function verifyPayment(reference) {
+src/services/paystackService.js:36:  const result = await paystackProvider.verifyTransaction(reference);
+src/services/paystackService.js:40:    message: result?.message || 'Paystack verify completed',
+src/services/paystackService.js:77:  verifyPayment,
+src/middleware/auth.js:12:    req.user = jwt.verify(token, secret);
+src/routes/vtpass.js.bak:600:// POST /api/vtpass/merchant-verify
+src/routes/vtpass.js.bak:602:router.post('/merchant-verify', authMiddleware, async (req, res) => {
+src/routes/vtpass.js.bak:610:    const data = await vtpassClient.merchantVerify({
+src/routes/vtpass.js.bak:618:    logger.error({ type: 'VTPASS_VERIFY_FAILED', error: err?.message, stack: err?.stack });
+src/routes/monnify.js:197:        // retry
+src/routes/monnify.js:230:            type: 'MONNIFY_VA_DB_CONFLICT_RETRY',
+src/routes/monnify.js:236:          // retry
+src/routes/monnify.js:241:            error: 'Monnify VA conflict, please retry',
+src/routes/vtpass.js:600:// POST /api/vtpass/merchant-verify
+src/routes/vtpass.js:602:router.post('/merchant-verify', authMiddleware, async (req, res) => {
+src/routes/vtpass.js:610:    const data = await vtpassClient.merchantVerify({
+src/routes/vtpass.js:618:    logger.error({ type: 'VTPASS_VERIFY_FAILED', error: err?.message, stack: err?.stack });
+src/routes/monnifyWebhook.js:37:router.post('/webhook', async (req, res) => {
+src/routes/monnifyWebhook.js:38:  // Always respond 200-ish to avoid retry storms; but we log everything
+src/routes/monnifyWebhook.js:48:      logger.error({ type: 'MONNIFY_WEBHOOK_NO_SECRET' });
+src/routes/monnifyWebhook.js:66:    // Verify signature (Monnify uses sha512 of raw body)
+src/routes/monnifyWebhook.js:72:          type: 'MONNIFY_WEBHOOK_BAD_SIGNATURE',
+src/routes/monnifyWebhook.js:79:      logger.warn({ type: 'MONNIFY_WEBHOOK_MISSING_SIGNATURE_HEADER' });
+src/routes/monnifyWebhook.js:114:      type: 'MONNIFY_WEBHOOK_RECEIVED',
+src/routes/monnifyWebhook.js:121:      logger.error({ type: 'MONNIFY_WEBHOOK_MISSING_PAYMENT_REFERENCE', eventData });
+src/routes/monnifyWebhook.js:125:    // Save webhook event idempotently (optional but strong)
+src/routes/monnifyWebhook.js:128:      INSERT INTO monnify_webhook_events (payment_reference, dest_account_number, payload)
+src/routes/monnifyWebhook.js:139:      FROM monnify_webhook_events
+src/routes/monnifyWebhook.js:153:        type: 'MONNIFY_WEBHOOK_NO_DEST_ACCOUNT',
+src/routes/monnifyWebhook.js:174:        type: 'MONNIFY_WEBHOOK_USER_RESOLVE_FAILED',
+src/routes/monnifyWebhook.js:183:        type: 'MONNIFY_WEBHOOK_INVALID_AMOUNT',
+src/routes/monnifyWebhook.js:201:      UPDATE monnify_webhook_events
+src/routes/monnifyWebhook.js:219:      type: 'MONNIFY_WEBHOOK_ERROR',
+src/routes/monnifyWebhook.js:223:    // return 200 to avoid retry storms
+src/routes/paystack.js.bak:60:          user_id: user.id // Used for webhook resolution
+src/routes/paystack.js.bak:88:   2️⃣ PAYSTACK WEBHOOK (CARD + DVA)
+src/routes/paystack.js.bak:91:router.post('/webhook', async (req, res) => {
+src/routes/paystack.js.bak:208:      'PAYSTACK WEBHOOK ERROR'
+src/routes/paystack.js.bak:211:    // Always return 200 to prevent Paystack retry storm
+src/routes/adminReconcile.js:6:const { reconcileCommissions } = require("../jobs/commissionReconcile");
+src/routes/adminReconcile.js:20:// Run reconcile (optionally limit batch size)
+src/routes/adminReconcile.js:21:router.post("/reconcile-commissions", requireAdmin, async (req, res) => {
+src/routes/adminReconcile.js:24:    const result = await reconcileCommissions({ limit });
+src/routes/adminAudit.js:3:const { runReconciliation } = require("../cron/reconciliation");
+src/routes/adminAudit.js:20:router.post("/reconcile", authMiddleware, async (req, res) => {
+src/routes/monnify.js.bak:197:        // retry
+src/routes/monnify.js.bak:230:            type: 'MONNIFY_VA_DB_CONFLICT_RETRY',
+src/routes/monnify.js.bak:236:          // retry
+src/routes/monnify.js.bak:241:            error: 'Monnify VA conflict, please retry',
+src/routes/adminWithdrawals.js:54: * POST /api/admin/withdrawals/:id/retry
+src/routes/adminWithdrawals.js:55: * Retry a FAILED withdrawal safely
+src/routes/adminWithdrawals.js:58:router.post("/withdrawals/:id/retry", async (req, res) => {
+src/routes/adminWithdrawals.js:68:        retry_count = 0,
+src/routes/adminWithdrawals.js:86:      message: "Withdrawal successfully queued for retry"
+src/routes/adminWithdrawals.js:89:    console.error("❌ Admin retry error:", err);
+src/routes/adminWithdrawals.js:92:      error: "Retry failed"
+src/routes/paystack.js:60:          user_id: user.id // Used for webhook resolution
+src/routes/paystack.js:88:   2️⃣ PAYSTACK WEBHOOK (CARD + DVA)
+src/routes/paystack.js:91:router.post('/webhook', async (req, res) => {
+src/routes/paystack.js:208:      'PAYSTACK WEBHOOK ERROR'
+src/routes/paystack.js:211:    // Always return 200 to prevent Paystack retry storm
+src/cron/index.js:4:const { startVtpassFloatCron } = require('./vtpassFloatCron');
+src/cron/index.js:6:// keep your existing crons
+src/cron/index.js:10:let startReconciliationCron = null;
+src/cron/index.js:16:try { startReconciliationCron = require('./reconciliationCron').startReconciliationCron; } catch (_) {}
+src/cron/index.js:19:function initialiseCron() {
+src/cron/index.js:20:  const enabled = String(process.env.ENABLE_CRONS || 'false') === 'true';
+src/cron/index.js:22:    logger.info({ type: 'CRON_DISABLED' }, 'Cron disabled by ENV');
+src/cron/index.js:27:    logger.info({ type: 'CRON_CLUSTER_GUARD', instance: process.env.NODE_APP_INSTANCE }, 'Cron disabled on this instance');
+src/cron/index.js:31:  logger.info({ type: 'CRON_INIT_START' }, 'Initialising cron jobs...');
+src/cron/index.js:34:  startVtpassFloatCron();
+src/cron/index.js:40:  if (typeof startReconciliationCron === 'function') startReconciliationCron();
+src/cron/index.js:43:  logger.info({ type: 'CRON_INIT_DONE' }, 'All crons initialised');
+src/cron/index.js:46:module.exports = initialiseCron;
+src/cron/dailyRevenueReport.js:182:  const cron = require('node-cron');
+src/cron/dailyRevenueReport.js:184:  const enabled = String(process.env.ENABLE_CRONS || 'false') === 'true';
+src/cron/dailyRevenueReport.js:186:    logger.info({ type: 'DAILY_REVENUE_CRON_DISABLED' }, 'Daily revenue report cron disabled by ENV');
+src/cron/dailyRevenueReport.js:192:      { type: 'DAILY_REVENUE_CRON_CLUSTER_GUARD', instance: process.env.NODE_APP_INSTANCE },
+src/cron/dailyRevenueReport.js:193:      'Daily revenue report cron disabled on this instance'
+src/cron/dailyRevenueReport.js:198:  cron.schedule('0 23 * * *', async () => {
+src/cron/dailyRevenueReport.js:202:  logger.info({ type: 'DAILY_REVENUE_CRON_STARTED' }, 'Daily revenue report cron started (23:00 daily)');
+src/cron/vtpassFloatCron.js:3:const cron = require('node-cron');
+src/cron/vtpassFloatCron.js:25:function startVtpassFloatCron() {
+src/cron/vtpassFloatCron.js:26:  const enabled = String(process.env.ENABLE_CRONS || 'false') === 'true';
+src/cron/vtpassFloatCron.js:28:    logger.info({ type: 'CRON_DISABLED' }, 'VTPass float cron disabled by ENV');
+src/cron/vtpassFloatCron.js:34:    logger.info({ type: 'CRON_CLUSTER_GUARD', instance: process.env.NODE_APP_INSTANCE }, 'Float cron disabled on this instance');
+src/cron/vtpassFloatCron.js:39:  cron.schedule('*/2 * * * *', async () => {
+src/cron/vtpassFloatCron.js:85:      logger.error({ type: 'VTPASS_FLOAT_CRON_ERROR', error: err.message, stack: err.stack }, 'VTPass float cron error');
+src/cron/vtpassFloatCron.js:89:  logger.info({ type: 'VTPASS_FLOAT_CRON_STARTED' }, 'VTpass float cron scheduled (every 2 mins)');
+src/cron/vtpassFloatCron.js:92:module.exports = { startVtpassFloatCron };
+src/cron/reconciliationCron.js:1:const { reconcileVTpassBalance } =
+src/cron/reconciliationCron.js:5:async function reconciliationCron() {
+src/cron/reconciliationCron.js:6:  const balance = await reconcileVTpassBalance();
+src/cron/reconciliationCron.js:10:module.exports = { reconciliationCron };
+src/cron/serverMonitor.js:2: * src/cron/serverMonitor.js
+src/cron/serverMonitor.js:15:const ENABLE_CRONS = process.env.ENABLE_CRONS === "true";
+src/cron/serverMonitor.js:23:  if (!ENABLE_CRONS) return;
+src/cron/vtpassAutoFund.js:4: * VTPASS AUTO FUND CRON - PRODUCTION HARDENED
+src/cron/vtpassAutoFund.js:11: * - ENV guard via ENABLE_CRONS
+src/cron/vtpassAutoFund.js:18:const cron = require('node-cron');
+src/cron/vtpassAutoFund.js:195:// MAIN CRON
+src/cron/vtpassAutoFund.js:198:  const enabled = String(process.env.ENABLE_CRONS || 'false') === 'true';
+src/cron/vtpassAutoFund.js:205:  cron.schedule('*/10 * * * *', async () => {
+src/cron/heartbeat.js:1:const cron = require("node-cron");
+src/cron/heartbeat.js:5:  if (process.env.ENABLE_CRONS !== "true") return;
+src/cron/heartbeat.js:7:  cron.schedule("*/30 * * * *", async () => {
+src/controllers/paystackController.js:17:async function verify(req, res) {
+src/controllers/paystackController.js:20:    const result = await paystackService.verifyPayment(reference);
+src/controllers/paystackController.js:25:      error: err.message || 'Paystack verify failed',
+src/controllers/paystackController.js:44:  verify,
+src/controllers/vtpassController.js:18:async function verify(req, res) {
+src/controllers/vtpassController.js:20:    const result = await vtpassService.verifyCustomer(req.body || {});
+src/controllers/vtpassController.js:44:  verify,
+src/controllers/monnifyController.js:17:async function verify(req, res) {
+src/controllers/monnifyController.js:23:      await monnifyService.verifyMonnifyTransaction(transactionReference);
+src/controllers/monnifyController.js:36:  verify,
+routes/vtpassRoutes.js.save:40:function verifyApiKey(req, res, next) {
+routes/vtpassRoutes.js.save:50:router.post('/airtime', verifyApiKey, async (req, res) => {
+routes/vtpassRoutes.js.save:60:router.post('/data', verifyApiKey, async (req, res) => {
+routes/vtpassRoutes.js.save:70:router.post('/electricity', verifyApiKey, async (req, res) => {
+routes/vtpassRoutes.js.save:81:router.post('/tv', verifyApiKey, async (req, res) => {
+routes/vtpassRoutes.js.save:91:router.post('/waec', verifyApiKey, async (req, res) => {
+routes/vtpassRoutes.js.save:99:router.post('/verify-customer', verifyApiKey, async (req, res) => {
+routes/vtpassRoutes.js.save:102:  const response = await fetch(`${VTPASS_BASE_URL}/merchant-verify`, {
+routes/vtpassRoutes.js.save:112:router.get('/variations/:serviceID', verifyApiKey, async (req, res) => {
+routes/monnify/webhook.js:11:    // 1. Verify Monnify signature
+routes/monnify/webhook.js:16:      .createHmac("sha512", process.env.MONNIFY_WEBHOOK_SECRET)
+routes/monnify/webhook.js:25:    console.log("✅ MONNIFY WEBHOOK RECEIVED");
+routes/monnify/webhook.js:81:    console.error("Monnify Webhook Error:", err);
+routes/smsRoutes.js:88:    // ELECTRICITY VERIFY
+routes/smsRoutes.js:89:    if (action === "VERIFY") {
+routes/smsRoutes.js:94:      const result = await vtpass.verifyMeter(meter, service);
+routes/smsRoutes.js:119:    // TV VERIFY
+routes/smsRoutes.js:120:    if (action === "TVVERIFY") {
+routes/smsRoutes.js:125:      const result = await vtpass.verifyTV(smartcard, service);
+routes/smsRoutes.js:153:      "Invalid command.\nExamples:\nBUY 100 MTN\nDATA 1G MTN\nVERIFY 123456 IBEDC\nTVVERIFY 1212 DSTV"
+routes/payments.js:178: * Verify Paystack transaction
+routes/payments.js:179: * GET /api/payments/paystack/verify/:reference
+routes/payments.js:181:router.get('/paystack/verify/:reference', authMiddleware, async (req, res) => {
+routes/payments.js:193:    const result = await paystackProvider.verifyTransaction(reference);
+routes/payments.js:209:    console.error('[payments] paystack verify error:', err.response?.data || err.message || err);
+routes/payments.js:212:      error: err.message || 'Failed to verify payment',
+services/vtpassService.js:15:// ELECTRICITY VERIFY
+services/vtpassService.js:17:async function verifyElectricity({ disco, meter }) {
+services/vtpassService.js:19:    `${VTPASS_BASE_URL}/merchant-verify`,
+services/vtpassService.js:29:// DSTV / GOTV VERIFY
+services/vtpassService.js:31:async function verifyTV({ iuc, service }) {
+services/vtpassService.js:33:    `${VTPASS_BASE_URL}/merchant-verify`,
+services/vtpassService.js:91:  verifyElectricity,
+services/vtpassService.js:92:  verifyTV,
+controllers/monnifyController.js:18:exports.verify = async (req, res) => {
+controllers/monnifyController.js:44:    console.error("VERIFY ERROR:", err.response?.data || err.message);

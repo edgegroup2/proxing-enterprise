@@ -1,0 +1,282 @@
+[
+  {
+    "exam_type": "jamb",
+    "subject": "Mathematics",
+    "topic": "JAMB Trap",
+    "year": 2026,
+    "question": "A number is increased by 10% and then by another 10%. What is the total percentage increase?",
+    "options": ["20%", "21%", "19%", "22%"],
+    "answer": "21%",
+    "explanation": "Assume 100 → 110 → 121. Increase = 21%.",
+    "source": "JAMB Mathematics Premium Pack 006A"
+  },
+  {
+    "exam_type": "jamb",
+    "subject": "Mathematics",
+    "topic": "Mixed",
+    "year": 2026,
+    "question": "Evaluate: (15 ÷ 3) × (4 + 2)",
+    "options": ["24", "30", "36", "40"],
+    "answer": "30",
+    "explanation": "15 ÷ 3 = 5; 4 + 2 = 6; 5 × 6 = 30.",
+    "source": "JAMB Mathematics Premium Pack 006A"
+  },
+  {
+    "exam_type": "jamb",
+    "subject": "Mathematics",
+    "topic": "Proportion",
+    "year": 2026,
+    "question": "If 12 oranges cost ₦720, how much will 20 oranges cost?",
+    "options": ["₦1,000", "₦1,200", "₦1,400", "₦1,500"],
+    "answer": "₦1,200",
+    "explanation": "Cost per orange = 720/12 = 60. 20 oranges = 20 × 60.",
+    "source": "JAMB Mathematics Premium Pack 006A"
+  },
+  {
+    "exam_type": "jamb",
+    "subject": "Mathematics",
+    "topic": "Decimals",
+    "year": 2026,
+    "question": "Evaluate: 5.25 - 2.87",
+    "options": ["2.28", "2.38", "2.48", "2.58"],
+    "answer": "2.38",
+    "explanation": "5.25 - 2.87 = 2.38.",
+    "source": "JAMB Mathematics Premium Pack 006A"
+  },
+  {
+    "exam_type": "jamb",
+    "subject": "Mathematics",
+    "topic": "Linear Equations",
+    "year": 2026,
+    "question": "Solve: 9x - 7 = 56",
+    "options": ["6", "7", "8", "9"],
+    "answer": "7",
+    "explanation": "9x = 63, x = 7.",
+    "source": "JAMB Mathematics Premium Pack 006A"
+  },
+  {
+    "exam_type": "jamb",
+    "subject": "Mathematics",
+    "topic": "Logic",
+    "year": 2026,
+    "question": "If p is true and q is true, then p AND q is",
+    "options": ["True", "False", "Undefined", "Cannot determine"],
+    "answer": "True",
+    "explanation": "AND is true only when both are true.",
+    "source": "JAMB Mathematics Premium Pack 006A"
+  },
+  {
+    "exam_type": "jamb",
+    "subject": "Mathematics",
+    "topic": "Ratio",
+    "year": 2026,
+    "question": "Simplify the ratio 36:48.",
+    "options": ["3:4", "4:3", "6:8", "9:12"],
+    "answer": "3:4",
+    "explanation": "Divide both by 12.",
+    "source": "JAMB Mathematics Premium Pack 006A"
+  },
+  {
+    "exam_type": "jamb",
+    "subject": "Mathematics",
+    "topic": "Fractions",
+    "year": 2026,
+    "question": "Evaluate: 7/8 - 1/4",
+    "options": ["3/8", "5/8", "6/8", "1/2"],
+    "answer": "5/8",
+    "explanation": "1/4 = 2/8; 7/8 - 2/8 = 5/8.",
+    "source": "JAMB Mathematics Premium Pack 006A"
+  },
+  {
+    "exam_type": "jamb",
+    "subject": "Mathematics",
+    "topic": "Algebraic Fractions",
+    "year": 2026,
+    "question": "Simplify: (4x² + 8x)/(4x)",
+    "options": ["x + 2", "4x + 2", "x + 4", "2x"],
+    "answer": "x + 2",
+    "explanation": "Factor out 4x, then cancel.",
+    "source": "JAMB Mathematics Premium Pack 006A"
+  },
+  {
+    "exam_type": "jamb",
+    "subject": "Mathematics",
+    "topic": "JAMB Trap",
+    "year": 2026,
+    "question": "A man buys an item for ₦800 and sells at ₦920. Find percentage profit.",
+    "options": ["10%", "12%", "15%", "20%"],
+    "answer": "15%",
+    "explanation": "Profit = 120. Profit% = (120/800) × 100 = 15%.",
+    "source": "JAMB Mathematics Premium Pack 006A"
+  },
+  {
+    "exam_type": "jamb",
+    "subject": "Mathematics",
+    "topic": "Mixed",
+    "year": 2026,
+    "question": "Evaluate: 2³ + 5²",
+    "options": ["29", "33", "35", "39"],
+    "answer": "33",
+    "explanation": "8 + 25 = 33.",
+    "source": "JAMB Mathematics Premium Pack 006A"
+  },
+  {
+    "exam_type": "jamb",
+    "subject": "Mathematics",
+    "topic": "Proportion",
+    "year": 2026,
+    "question": "If 6 men complete a task in 10 days, how many days will 12 men take?",
+    "options": ["4", "5", "6", "8"],
+    "answer": "5",
+    "explanation": "Inverse proportion: 6 × 10 = 12 × d.",
+    "source": "JAMB Mathematics Premium Pack 006A"
+  },
+  {
+    "exam_type": "jamb",
+    "subject": "Mathematics",
+    "topic": "Decimals",
+    "year": 2026,
+    "question": "Evaluate: 0.45 + 1.35",
+    "options": ["1.7", "1.8", "1.9", "2.0"],
+    "answer": "1.8",
+    "explanation": "0.45 + 1.35 = 1.80.",
+    "source": "JAMB Mathematics Premium Pack 006A"
+  },
+  {
+    "exam_type": "jamb",
+    "subject": "Mathematics",
+    "topic": "Linear Equations",
+    "year": 2026,
+    "question": "Solve: 4x + 3 = 31",
+    "options": ["6", "7", "8", "9"],
+    "answer": "7",
+    "explanation": "4x = 28.",
+    "source": "JAMB Mathematics Premium Pack 006A"
+  },
+  {
+    "exam_type": "jamb",
+    "subject": "Mathematics",
+    "topic": "Logic",
+    "year": 2026,
+    "question": "If p is false, the negation of p is",
+    "options": ["True", "False", "Undefined", "Impossible"],
+    "answer": "True",
+    "explanation": "Negation reverses truth value.",
+    "source": "JAMB Mathematics Premium Pack 006A"
+  },
+  {
+    "exam_type": "jamb",
+    "subject": "Mathematics",
+    "topic": "Ratio",
+    "year": 2026,
+    "question": "The ratio of men to women is 7:5. If total is 144, how many women?",
+    "options": ["50", "55", "60", "65"],
+    "answer": "60",
+    "explanation": "Total parts = 12. Women = 5/12 × 144.",
+    "source": "JAMB Mathematics Premium Pack 006A"
+  },
+  {
+    "exam_type": "jamb",
+    "subject": "Mathematics",
+    "topic": "Fractions",
+    "year": 2026,
+    "question": "Evaluate: 2/3 × 9/10",
+    "options": ["3/5", "2/5", "4/5", "6/5"],
+    "answer": "3/5",
+    "explanation": "18/30 = 3/5.",
+    "source": "JAMB Mathematics Premium Pack 006A"
+  },
+  {
+    "exam_type": "jamb",
+    "subject": "Mathematics",
+    "topic": "Algebraic Fractions",
+    "year": 2026,
+    "question": "Simplify: (x² - 16)/(x - 4)",
+    "options": ["x + 4", "x - 4", "x² + 4", "4x"],
+    "answer": "x + 4",
+    "explanation": "Difference of squares.",
+    "source": "JAMB Mathematics Premium Pack 006A"
+  },
+  {
+    "exam_type": "jamb",
+    "subject": "Mathematics",
+    "topic": "JAMB Trap",
+    "year": 2026,
+    "question": "A shirt marked ₦2,000 is sold at 10% discount. Selling price is",
+    "options": ["₦1,700", "₦1,800", "₦1,900", "₦2,100"],
+    "answer": "₦1,800",
+    "explanation": "10% of 2000 = 200; 2000 - 200.",
+    "source": "JAMB Mathematics Premium Pack 006A"
+  },
+  {
+    "exam_type": "jamb",
+    "subject": "Mathematics",
+    "topic": "Mixed",
+    "year": 2026,
+    "question": "Find the average of 10, 20, 30, 40.",
+    "options": ["20", "25", "30", "35"],
+    "answer": "25",
+    "explanation": "Sum = 100; divide by 4.",
+    "source": "JAMB Mathematics Premium Pack 006A"
+  },
+  {
+    "exam_type": "jamb",
+    "subject": "Mathematics",
+    "topic": "Proportion",
+    "year": 2026,
+    "question": "If 9 notebooks cost ₦1,350, what will 15 notebooks cost?",
+    "options": ["₦2,100", "₦2,250", "₦2,500", "₦2,700"],
+    "answer": "₦2,250",
+    "explanation": "One notebook = 150.",
+    "source": "JAMB Mathematics Premium Pack 006A"
+  },
+  {
+    "exam_type": "jamb",
+    "subject": "Mathematics",
+    "topic": "Decimals",
+    "year": 2026,
+    "question": "Evaluate: 2.5 × 1.2",
+    "options": ["2", "2.5", "3", "3.5"],
+    "answer": "3",
+    "explanation": "25 × 12 = 300, shift decimals.",
+    "source": "JAMB Mathematics Premium Pack 006A"
+  },
+  {
+    "exam_type": "jamb",
+    "subject": "Mathematics",
+    "topic": "Linear Equations",
+    "year": 2026,
+    "question": "Solve: x/5 = 9",
+    "options": ["35", "40", "45", "50"],
+    "answer": "45",
+    "explanation": "Multiply both sides by 5.",
+    "source": "JAMB Mathematics Premium Pack 006A"
+  },
+  {
+    "exam_type": "jamb",
+    "subject": "Mathematics",
+    "topic": "Logic",
+    "year": 2026,
+    "question": "If 'All birds fly' is false, then",
+    "options": [
+      "No birds fly",
+      "Some birds do not fly",
+      "All birds swim",
+      "Every bird flies"
+    ],
+    "answer": "Some birds do not fly",
+    "explanation": "Negation of all = some not.",
+    "source": "JAMB Mathematics Premium Pack 006A"
+  },
+  {
+    "exam_type": "jamb",
+    "subject": "Mathematics",
+    "topic": "Fractions",
+    "year": 2026,
+    "question": "Simplify: 18/24",
+    "options": ["2/3", "3/4", "4/5", "5/6"],
+    "answer": "3/4",
+    "explanation": "Divide by 6.",
+    "source": "JAMB Mathematics Premium Pack 006A"
+  }
+]

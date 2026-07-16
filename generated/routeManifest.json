@@ -1,0 +1,166 @@
+{
+  "generatedAt": "2026-03-13T17:18:32.652Z",
+  "description": "Real mounted Express routes on api.proxing.online. Used for runtime validation and typed client generation.",
+  "routes": [
+    {
+      "method": "POST",
+      "fullPath": "/api/admin/reconcile"
+    },
+    {
+      "method": "POST",
+      "fullPath": "/api/admin/reconcile-commissions"
+    },
+    {
+      "method": "POST",
+      "fullPath": "/api/auth/login"
+    },
+    {
+      "method": "GET",
+      "fullPath": "/api/discovery/categories"
+    },
+    {
+      "method": "GET",
+      "fullPath": "/api/discovery/online"
+    },
+    {
+      "method": "GET",
+      "fullPath": "/api/discovery/streams/scheduled"
+    },
+    {
+      "method": "POST",
+      "fullPath": "/api/escrow/orders/:id/confirm-delivery"
+    },
+    {
+      "method": "POST",
+      "fullPath": "/api/escrow/orders/:id/dispute"
+    },
+    {
+      "method": "POST",
+      "fullPath": "/api/escrow/orders/:id/refund"
+    },
+    {
+      "method": "POST",
+      "fullPath": "/api/funding/initiate"
+    },
+    {
+      "method": "GET",
+      "fullPath": "/api/funding/ping"
+    },
+    {
+      "method": "POST",
+      "fullPath": "/api/live/auction/bid"
+    },
+    {
+      "method": "POST",
+      "fullPath": "/api/live/auction/start"
+    },
+    {
+      "method": "POST",
+      "fullPath": "/api/live/flash/start"
+    },
+    {
+      "method": "POST",
+      "fullPath": "/api/live/streams/go-live"
+    },
+    {
+      "method": "POST",
+      "fullPath": "/api/live/streams/schedule"
+    },
+    {
+      "method": "POST",
+      "fullPath": "/api/match/request"
+    },
+    {
+      "method": "POST",
+      "fullPath": "/api/monnify/generate-account"
+    },
+    {
+      "method": "POST",
+      "fullPath": "/api/monnify/webhook"
+    },
+    {
+      "method": "POST",
+      "fullPath": "/api/paystack/generate"
+    },
+    {
+      "method": "POST",
+      "fullPath": "/api/paystack/init"
+    },
+    {
+      "method": "GET",
+      "fullPath": "/api/paystack/verify/:reference"
+    },
+    {
+      "method": "POST",
+      "fullPath": "/api/paystack/webhook"
+    },
+    {
+      "method": "POST",
+      "fullPath": "/api/provider/heartbeat"
+    },
+    {
+      "method": "POST",
+      "fullPath": "/api/provider/offline"
+    },
+    {
+      "method": "POST",
+      "fullPath": "/api/provider/online"
+    },
+    {
+      "method": "POST",
+      "fullPath": "/api/sessions/end"
+    },
+    {
+      "method": "POST",
+      "fullPath": "/api/sessions/instant"
+    },
+    {
+      "method": "POST",
+      "fullPath": "/api/sms"
+    },
+    {
+      "method": "POST",
+      "fullPath": "/api/sms/sms"
+    },
+    {
+      "method": "GET",
+      "fullPath": "/api/user/me"
+    },
+    {
+      "method": "PUT",
+      "fullPath": "/api/user/update"
+    },
+    {
+      "method": "POST",
+      "fullPath": "/api/vtpass/airtime"
+    },
+    {
+      "method": "POST",
+      "fullPath": "/api/vtpass/data"
+    },
+    {
+      "method": "POST",
+      "fullPath": "/api/vtpass/electricity"
+    },
+    {
+      "method": "POST",
+      "fullPath": "/api/vtpass/merchant-verify"
+    },
+    {
+      "method": "POST",
+      "fullPath": "/api/vtpass/purchase"
+    },
+    {
+      "method": "GET",
+      "fullPath": "/api/vtpass/service-variations"
+    },
+    {
+      "method": "POST",
+      "fullPath": "/api/vtpass/tv"
+    },
+    {
+      "method": "GET",
+      "fullPath": "/api/wallet"
+    }
+  ]
+}

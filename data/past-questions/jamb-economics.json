@@ -1,0 +1,18 @@
+[
+  {
+    "exam_type": "jamb",
+    "subject": "Economics",
+    "topic": "Demand and Supply",
+    "stem": "According to the law of demand, when price rises, quantity demanded will usually...",
+    "explanation": "The law of demand states that quantity demanded falls as price rises, all else equal.",
+    "difficulty": 1,
+    "year": 2021,
+    "source": "JAMB-style practice",
+    "options": [
+      { "label": "A", "text": "increase", "is_correct": false },
+      { "label": "B", "text": "fall", "is_correct": true },
+      { "label": "C", "text": "remain constant", "is_correct": false },
+      { "label": "D", "text": "become zero", "is_correct": false }
+    ]
+  }
+]

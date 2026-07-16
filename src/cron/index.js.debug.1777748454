@@ -1,0 +1,65 @@
+'use strict';
+
+const logger = require('../utils/logger');
+
+// existing always-on cron
+const { startVtpassFloatCron } = require('./vtpassFloatCron');
+
+// 🔥 NEW TOKEN RECOVERY CRON
+let startTokenRecoveryCron = null;
+try {
+  startTokenRecoveryCron = require('./tokenRecoveryCron').startTokenRecoveryCron;
+} catch (_) {}
+
+// keep your existing crons
+let startVtpassAutoFund = null;
+let startHeartbeat = null;
+let startDailyRevenueReport = null;
+let startReconciliationCron = null;
+let startServerMonitor = null;
+
+try { startVtpassAutoFund = require('./vtpassAutoFund').startVtpassAutoFund; } catch (_) {}
+try { startHeartbeat = require('./heartbeat').startHeartbeat; } catch (_) {}
+try { startDailyRevenueReport = require('./dailyRevenueReport').startDailyRevenueReport; } catch (_) {}
+try { startReconciliationCron = require('./reconciliationCron').startReconciliationCron; } catch (_) {}
+try { startServerMonitor = require('./serverMonitor').startServerMonitor; } catch (_) {}
+
+function initialiseCron() {
+
+  const enabled = String(process.env.ENABLE_CRONS || 'false') === 'true';
+
+  if (!enabled) {
+    logger.info({ type: 'CRON_DISABLED' }, 'Cron disabled by ENV');
+    return;
+  }
+
+  // Prevent multiple instances (important for PM2 cluster)
+  if (process.env.NODE_APP_INSTANCE && process.env.NODE_APP_INSTANCE !== '0') {
+    logger.info(
+      { type: 'CRON_CLUSTER_GUARD', instance: process.env.NODE_APP_INSTANCE },
+      'Cron disabled on this instance'
+    );
+    return;
+  }
+
+  logger.info({ type: 'CRON_INIT_START' }, 'Initialising cron jobs...');
+
+  // 🔁 FLOAT MONITOR (existing)
+  startVtpassFloatCron();
+
+  // 🔁 EXISTING MODULES
+  if (typeof startVtpassAutoFund === 'function') startVtpassAutoFund();
+  if (typeof startHeartbeat === 'function') startHeartbeat();
+  if (typeof startDailyRevenueReport === 'function') startDailyRevenueReport();
+  if (typeof startReconciliationCron === 'function') startReconciliationCron();
+  if (typeof startServerMonitor === 'function') startServerMonitor();
+
+  // 🔥 NEW TOKEN RECOVERY SYSTEM
+  if (typeof startTokenRecoveryCron === 'function') {
+    startTokenRecoveryCron();
+  }
+
+  logger.info({ type: 'CRON_INIT_DONE' }, 'All cron jobs initialised');
+}
+
+module.exports = initialiseCron;

@@ -1,0 +1,282 @@
+[
+  {
+    "exam_type": "jamb",
+    "subject": "English Language",
+    "topic": "Idioms",
+    "year": 2021,
+    "question": "When the chairman said he would resign, everyone knew he was just _____",
+    "options": ["pulling their legs", "breaking the ice", "spilling the beans", "biting the dust"],
+    "answer": "pulling their legs",
+    "explanation": "‘Pulling their legs’ means joking or teasing, not being serious.",
+    "source": "ProxiNG Original"
+  },
+  {
+    "exam_type": "jamb",
+    "subject": "English Language",
+    "topic": "Concord",
+    "year": 2020,
+    "question": "Either the principal or the teachers _____ attending the seminar.",
+    "options": ["is", "was", "are", "be"],
+    "answer": "are",
+    "explanation": "With either...or, the verb agrees with the noun closest to it; 'teachers' is plural.",
+    "source": "ProxiNG Original"
+  },
+  {
+    "exam_type": "jamb",
+    "subject": "English Language",
+    "topic": "Sentence Completion",
+    "year": 2022,
+    "question": "Had she studied harder, she _____ the examination.",
+    "options": ["passes", "would pass", "would have passed", "will pass"],
+    "answer": "would have passed",
+    "explanation": "This is a third conditional sentence expressing an unreal past condition.",
+    "source": "ProxiNG Original"
+  },
+  {
+    "exam_type": "jamb",
+    "subject": "English Language",
+    "topic": "Antonyms",
+    "year": 2021,
+    "question": "Choose the word opposite in meaning to 'GENEROUS'.",
+    "options": ["kind", "mean", "helpful", "friendly"],
+    "answer": "mean",
+    "explanation": "'Mean' means ungenerous or stingy.",
+    "source": "ProxiNG Original"
+  },
+  {
+    "exam_type": "jamb",
+    "subject": "English Language",
+    "topic": "Grammar",
+    "year": 2020,
+    "question": "The students, along with their teacher, _____ invited to the conference.",
+    "options": ["was", "were", "is", "be"],
+    "answer": "was",
+    "explanation": "The true subject is 'students'? Actually 'along with' doesn't change the subject, but plural subject takes 'were'.",
+    "source": "ProxiNG Original"
+  },
+  {
+    "exam_type": "jamb",
+    "subject": "English Language",
+    "topic": "Register",
+    "year": 2022,
+    "question": "Which term belongs to the medical register?",
+    "options": ["plaintiff", "fracture", "invoice", "curriculum"],
+    "answer": "fracture",
+    "explanation": "'Fracture' is a medical term.",
+    "source": "ProxiNG Original"
+  },
+  {
+    "exam_type": "jamb",
+    "subject": "English Language",
+    "topic": "Synonyms",
+    "year": 2021,
+    "question": "Choose the word nearest in meaning to 'BRIEF'.",
+    "options": ["long", "short", "wide", "heavy"],
+    "answer": "short",
+    "explanation": "'Brief' means short in duration or length.",
+    "source": "ProxiNG Original"
+  },
+  {
+    "exam_type": "jamb",
+    "subject": "English Language",
+    "topic": "Lexis",
+    "year": 2020,
+    "question": "The lawyer filed a _____ in court.",
+    "options": ["petition", "prescription", "syllabus", "catalogue"],
+    "answer": "petition",
+    "explanation": "Legal context requires 'petition'.",
+    "source": "ProxiNG Original"
+  },
+  {
+    "exam_type": "jamb",
+    "subject": "English Language",
+    "topic": "Vocabulary",
+    "year": 2022,
+    "question": "A person who writes poems is called a",
+    "options": ["poet", "artist", "author", "editor"],
+    "answer": "poet",
+    "explanation": "A poet writes poetry.",
+    "source": "ProxiNG Original"
+  },
+  {
+    "exam_type": "jamb",
+    "subject": "English Language",
+    "topic": "Oral English",
+    "year": 2021,
+    "question": "Choose the word with a different vowel sound.",
+    "options": ["sit", "bit", "hit", "site"],
+    "answer": "site",
+    "explanation": "'Site' has /aɪ/, others have /ɪ/.",
+    "source": "ProxiNG Original"
+  },
+  {
+    "exam_type": "jamb",
+    "subject": "English Language",
+    "topic": "Tenses",
+    "year": 2020,
+    "question": "She _____ here since morning.",
+    "options": ["is", "has been", "was", "had"],
+    "answer": "has been",
+    "explanation": "Present perfect continuous context.",
+    "source": "ProxiNG Original"
+  },
+  {
+    "exam_type": "jamb",
+    "subject": "English Language",
+    "topic": "Figures of Speech",
+    "year": 2022,
+    "question": "'Life is a journey' is an example of",
+    "options": ["simile", "metaphor", "personification", "alliteration"],
+    "answer": "metaphor",
+    "explanation": "Direct comparison without 'like' or 'as'.",
+    "source": "ProxiNG Original"
+  },
+  {
+    "exam_type": "jamb",
+    "subject": "English Language",
+    "topic": "Comprehension Skills",
+    "year": 2021,
+    "question": "The central idea of a passage is its",
+    "options": ["theme", "punctuation", "font", "heading style"],
+    "answer": "theme",
+    "explanation": "Theme captures the central message.",
+    "source": "ProxiNG Original"
+  },
+  {
+    "exam_type": "jamb",
+    "subject": "English Language",
+    "topic": "Consonant Sounds",
+    "year": 2020,
+    "question": "Which word begins with the /tʃ/ sound?",
+    "options": ["chair", "share", "jar", "gear"],
+    "answer": "chair",
+    "explanation": "'Chair' starts with /tʃ/.",
+    "source": "ProxiNG Original"
+  },
+  {
+    "exam_type": "jamb",
+    "subject": "English Language",
+    "topic": "Prepositions",
+    "year": 2022,
+    "question": "He is good _____ Mathematics.",
+    "options": ["on", "in", "at", "with"],
+    "answer": "at",
+    "explanation": "Correct expression is 'good at'.",
+    "source": "ProxiNG Original"
+  },
+  {
+    "exam_type": "jamb",
+    "subject": "English Language",
+    "topic": "Stress",
+    "year": 2021,
+    "question": "Where is the stress in 'important'?",
+    "options": ["first", "second", "third", "fourth"],
+    "answer": "second",
+    "explanation": "im-POR-tant.",
+    "source": "ProxiNG Original"
+  },
+  {
+    "exam_type": "jamb",
+    "subject": "English Language",
+    "topic": "Lexis and Structure",
+    "year": 2020,
+    "question": "No sooner had he arrived _____ it began to rain.",
+    "options": ["when", "than", "then", "that"],
+    "answer": "than",
+    "explanation": "Standard structure is 'No sooner... than...'.",
+    "source": "ProxiNG Original"
+  },
+  {
+    "exam_type": "jamb",
+    "subject": "English Language",
+    "topic": "Sentence Interpretation",
+    "year": 2022,
+    "question": "'He kicked the bucket' means he",
+    "options": ["fell down", "died", "became angry", "won a prize"],
+    "answer": "died",
+    "explanation": "This idiom means died.",
+    "source": "ProxiNG Original"
+  },
+  {
+    "exam_type": "jamb",
+    "subject": "English Language",
+    "topic": "Usage",
+    "year": 2021,
+    "question": "Choose the correct sentence.",
+    "options": [
+      "She doesn't knows him.",
+      "She don't know him.",
+      "She doesn't know him.",
+      "She not know him."
+    ],
+    "answer": "She doesn't know him.",
+    "explanation": "Correct auxiliary + base verb usage.",
+    "source": "ProxiNG Original"
+  },
+  {
+    "exam_type": "jamb",
+    "subject": "English Language",
+    "topic": "Spelling",
+    "year": 2020,
+    "question": "Choose the correctly spelt word.",
+    "options": ["accomodation", "accommodation", "acommodation", "accomdation"],
+    "answer": "accommodation",
+    "explanation": "Correct spelling is accommodation.",
+    "source": "ProxiNG Original"
+  },
+  {
+    "exam_type": "jamb",
+    "subject": "English Language",
+    "topic": "Punctuation",
+    "year": 2022,
+    "question": "Which punctuation mark is used to separate items in a list?",
+    "options": ["colon", "comma", "semicolon", "dash"],
+    "answer": "comma",
+    "explanation": "Commas separate listed items.",
+    "source": "ProxiNG Original"
+  },
+  {
+    "exam_type": "jamb",
+    "subject": "English Language",
+    "topic": "Structure",
+    "year": 2021,
+    "question": "Each of the players _____ given a medal.",
+    "options": ["were", "was", "are", "be"],
+    "answer": "was",
+    "explanation": "'Each' takes singular verb.",
+    "source": "ProxiNG Original"
+  },
+  {
+    "exam_type": "jamb",
+    "subject": "English Language",
+    "topic": "Phrasal Verbs",
+    "year": 2020,
+    "question": "Please _____ your shoes before entering.",
+    "options": ["take off", "take on", "put on", "put off"],
+    "answer": "take off",
+    "explanation": "'Take off' means remove.",
+    "source": "ProxiNG Original"
+  },
+  {
+    "exam_type": "jamb",
+    "subject": "English Language",
+    "topic": "Homophones",
+    "year": 2022,
+    "question": "Choose the correct word: 'I want a _____ of cake.'",
+    "options": ["piece", "peace", "peas", "pease"],
+    "answer": "piece",
+    "explanation": "'Piece' means a portion.",
+    "source": "ProxiNG Original"
+  },
+  {
+    "exam_type": "jamb",
+    "subject": "English Language",
+    "topic": "Word Stress",
+    "year": 2021,
+    "question": "Identify the stressed syllable in 'education'.",
+    "options": ["first", "second", "third", "fourth"],
+    "answer": "third",
+    "explanation": "ed-u-CA-tion.",
+    "source": "ProxiNG Original"
+  }
+]

@@ -1,0 +1,541 @@
+'use strict';
+
+/**
+ * src/services/vtpassService.js
+ *
+ * IMPORTANT
+ * - This version does NOT debit wallet directly.
+ * - Wallet debit/refund is handled by unifiedTransactionDispatcher + ledger flow.
+ * - This service only:
+ *   1) validates and normalizes VTPass purchase input
+ *   2) ensures/updates the transaction row
+ *   3) calls VTPass
+ *   4) marks transaction success/failed
+ *   5) stores electricity token details when applicable
+ *   6) returns provider payload for worker-side side effects
+ */
+
+const axios = require('axios');
+const db = require('../db');
+
+const http = axios.create({
+  timeout: 30000
+});
+
+function getVtpassBaseUrl() {
+  const raw = String(process.env.VTPASS_BASE_URL || 'https://vtpass.com/api').trim();
+  return raw.endsWith('/') ? raw.slice(0, -1) : raw;
+}
+
+function getVtpassHeaders() {
+  const apiKey = process.env.VTPASS_API_KEY;
+  const secretKey = process.env.VTPASS_SECRET_KEY;
+  const publicKey = process.env.VTPASS_PUBLIC_KEY;
+
+  if (!apiKey || !secretKey || !publicKey) {
+    throw new Error(
+      'Missing VTPASS keys. Required: VTPASS_API_KEY, VTPASS_SECRET_KEY, VTPASS_PUBLIC_KEY'
+    );
+  }
+
+  return {
+    'Content-Type': 'application/json',
+    'api-key': apiKey,
+    'secret-key': secretKey,
+    'public-key': publicKey
+  };
+}
+
+function normalizeServiceId(serviceId) {
+  const s = String(serviceId || '').trim().toLowerCase();
+  if (s === '9mobile') return 'etisalat';
+  if (s === '9mobile-data') return 'etisalat-data';
+  return s;
+}
+
+function deriveProductType({ product_type, service_id }) {
+  if (product_type) return String(product_type).trim().toLowerCase();
+
+  const sid = String(service_id || '').trim().toLowerCase();
+
+  if (sid.includes('electric')) return 'electricity';
+
+  if (sid.includes('dstv')) return 'tv';
+  if (sid.includes('gotv')) return 'tv';
+  if (sid.includes('startimes')) return 'tv';
+
+  if (sid.includes('waec')) return 'waec';
+
+  if (sid.includes('data')) {
+    if (sid.includes('mtn')) return 'data';
+    if (sid.includes('airtel')) return 'data';
+    if (sid.includes('glo')) return 'data';
+    if (sid.includes('9mobile') || sid.includes('etisalat')) return 'data';
+    return 'data';
+  }
+
+  if (sid.includes('airtime')) {
+    if (sid.includes('mtn')) return 'airtime';
+    if (sid.includes('airtel')) return 'airtime';
+    if (sid.includes('glo')) return 'airtime';
+    if (sid.includes('9mobile') || sid.includes('etisalat')) return 'airtime';
+    return 'airtime';
+  }
+
+  if (sid === 'mtn' || sid === 'airtel' || sid === 'glo' || sid === 'etisalat') {
+    return 'airtime';
+  }
+
+  return 'vtpass';
+}
+
+function extractProviderRef(vtData) {
+  return (
+    vtData?.content?.transactions?.transactionId ||
+    vtData?.content?.transactionId ||
+    vtData?.transactionId ||
+    vtData?.request_id ||
+    vtData?.response_description ||
+    null
+  );
+}
+
+function normalizeVtpassSuccess(vtData) {
+  const code = String(vtData?.code ?? '');
+
+  if (code === '000' || code === '1') return true;
+
+  const responseDescription = String(vtData?.response_description || '').toLowerCase();
+  const contentStatus = String(
+    vtData?.content?.transactions?.status ||
+    vtData?.content?.status ||
+    ''
+  ).toLowerCase();
+
+  return (
+    responseDescription.includes('success') ||
+    contentStatus.includes('success') ||
+    contentStatus === 'delivered' ||
+    contentStatus === 'successful'
+  );
+}
+
+function extractToken(vtData) {
+  return (
+    vtData?.content?.token ||
+    vtData?.token ||
+    vtData?.purchased_code ||
+    vtData?.content?.purchased_code ||
+    vtData?.purchasedCode ||
+    vtData?.content?.transactions?.token ||
+    vtData?.content?.transactions?.purchased_code ||
+    null
+  );
+}
+
+function extractUnits(vtData) {
+  return (
+    vtData?.content?.units ||
+    vtData?.units ||
+    vtData?.content?.transactions?.units ||
+    vtData?.unitsPurchased ||
+    null
+  );
+}
+
+function extractElectricityMeta(vtData, args) {
+  const meter_number =
+    args?.meter_number ||
+    args?.meterNumber ||
+    args?.billersCode ||
+    vtData?.content?.transactions?.meterNumber ||
+    vtData?.content?.meter_number ||
+    vtData?.meterNumber ||
+    null;
+
+  const disco =
+    args?.disco ||
+    args?.service_id ||
+    vtData?.content?.transactions?.disco ||
+    vtData?.content?.disco ||
+    null;
+
+  const customer_name =
+    args?.customer_name ||
+    args?.customerName ||
+    vtData?.content?.customer_name ||
+    vtData?.content?.transactions?.customer_name ||
+    vtData?.name ||
+    null;
+
+  const address =
+    args?.address ||
+    vtData?.content?.address ||
+    vtData?.content?.transactions?.address ||
+    null;
+
+  return {
+    meter_number,
+    disco,
+    customer_name,
+    address,
+    token: extractToken(vtData),
+    units: extractUnits(vtData)
+  };
+}
+
+async function ensureTransactionRow({
+  reference,
+  user_id,
+  product_type,
+  amount,
+  channel,
+  phone,
+  service_id,
+  meta
+}) {
+  const existing = await db.query(
+    `
+      SELECT id, reference, status, provider_ref, meta
+      FROM transactions
+      WHERE reference = $1
+      LIMIT 1
+    `,
+    [reference]
+  );
+
+  if (existing.rowCount > 0) {
+    return existing.rows[0];
+  }
+
+  const inserted = await db.query(
+    `
+      INSERT INTO transactions (
+        user_id,
+        reference,
+        type,
+        amount,
+        status,
+        provider,
+        channel,
+        phone,
+        service_id,
+        provider_ref,
+        meta,
+        created_at,
+        updated_at
+      )
+      VALUES (
+        $1, $2, $3, $4, 'pending', 'vtpass', $5, $6, $7, NULL, $8::jsonb, NOW(), NOW()
+      )
+      RETURNING id, reference, status, provider_ref, meta
+    `,
+    [
+      user_id,
+      reference,
+      product_type || 'purchase',
+      Number(amount || 0),
+      channel || 'web',
+      phone || null,
+      service_id || null,
+      JSON.stringify(meta || {})
+    ]
+  );
+
+  return inserted.rows[0];
+}
+
+async function updateTransactionStatus(reference, { status, providerRef = null, meta = null }) {
+  await db.query(
+    `
+      UPDATE transactions
+      SET
+        status = $1,
+        provider_ref = COALESCE($2, provider_ref),
+        meta = CASE
+          WHEN $3::jsonb IS NULL THEN meta
+          WHEN meta IS NULL THEN $3::jsonb
+          ELSE meta || $3::jsonb
+        END,
+        updated_at = NOW()
+      WHERE reference = $4
+    `,
+    [
+      status,
+      providerRef,
+      meta ? JSON.stringify(meta) : null,
+      reference
+    ]
+  );
+}
+
+async function saveElectricityToken({
+  userId,
+  reference,
+  provider,
+  amount,
+  vtData,
+  args
+}) {
+  const meta = extractElectricityMeta(vtData, args);
+
+  try {
+    await db.query(
+      `
+        INSERT INTO electricity_tokens (
+          user_id,
+          transaction_reference,
+          meter_number,
+          disco,
+          address,
+          customer_name,
+          units,
+          token,
+          created_at
+        )
+        VALUES ($1,$2,$3,$4,$5,$6,$7,$8,NOW())
+        ON CONFLICT (transaction_reference) DO NOTHING
+      `,
+      [
+        userId,
+        reference,
+        meta.meter_number,
+        meta.disco,
+        meta.address,
+        meta.customer_name,
+        meta.units,
+        meta.token
+      ]
+    );
+  } catch (_) {
+    // non-blocking
+  }
+
+  try {
+    await db.query(
+      `
+        INSERT INTO domain_events (
+          event_type,
+          aggregate_type,
+          aggregate_id,
+          reference,
+          payload,
+          status,
+          attempt_count,
+          created_at
+        )
+        VALUES ($1,$2,$3,$4,$5::jsonb,'pending',0,NOW())
+      `,
+      [
+        'electricity.purchase.completed',
+        'wallet',
+        String(userId),
+        reference,
+        JSON.stringify({
+          user_id: userId,
+          amount: Number(amount || 0),
+          reference,
+          meter_number: meta.meter_number,
+          disco: meta.disco,
+          address: meta.address,
+          customer_name: meta.customer_name,
+          units: meta.units,
+          token: meta.token,
+          provider: provider || 'vtpass'
+        })
+      ]
+    );
+  } catch (_) {
+    // non-blocking
+  }
+}
+
+async function processVtpassPurchase(args) {
+  const {
+    reference,
+    user_id,
+    service_id,
+    product_type,
+    phone,
+    amount,
+    variation_code = null,
+    billersCode = null,
+    channel = 'web'
+  } = args || {};
+
+  if (!reference || !user_id || !service_id) {
+    throw new Error('Missing required fields: reference, user_id, service_id');
+  }
+
+  const base = getVtpassBaseUrl();
+  const headers = getVtpassHeaders();
+  const VTPASS_PAY_URL = `${base}/pay`;
+
+  const safePhone =
+    phone ||
+    args?.msisdn ||
+    args?.number ||
+    args?.target ||
+    args?.recipient ||
+    args?.to ||
+    null;
+
+  const normalizedServiceId = normalizeServiceId(service_id);
+
+  const meta = {
+    product_type: deriveProductType({
+      product_type,
+      service_id: normalizedServiceId
+    }),
+    service_id: String(normalizedServiceId),
+    phone: safePhone ? String(safePhone) : null,
+    variation_code: variation_code ? String(variation_code) : null,
+    billersCode: billersCode ? String(billersCode) : null,
+    channel: channel || 'web'
+  };
+
+  const purchaseType = meta.product_type || 'vtu-purchase';
+  const numericAmount = Number(amount) || 0;
+
+  if (numericAmount <= 0) {
+    throw new Error('Invalid amount');
+  }
+
+  const existing = await ensureTransactionRow({
+    reference,
+    user_id,
+    product_type: purchaseType,
+    amount: numericAmount,
+    channel,
+    phone: safePhone,
+    service_id: normalizedServiceId,
+    meta
+  });
+
+  if (existing.status === 'success') {
+    return {
+      success: true,
+      status: 'success',
+      message: 'Already processed',
+      reference,
+      providerRef: existing.provider_ref || null,
+      data: existing.meta || null
+    };
+  }
+
+  await updateTransactionStatus(reference, {
+    status: 'processing',
+    meta: {
+      processing_started_at: new Date().toISOString()
+    }
+  });
+
+  try {
+    const payload = {
+      request_id: reference,
+      serviceID: normalizedServiceId,
+      amount: numericAmount,
+      phone: safePhone ? String(safePhone) : null,
+      ...(billersCode ? { billersCode: String(billersCode) } : {}),
+      ...(variation_code ? { variation_code: String(variation_code) } : {})
+    };
+
+    const vtRes = await http.post(VTPASS_PAY_URL, payload, { headers });
+    const vtData = vtRes.data;
+
+    if (!normalizeVtpassSuccess(vtData)) {
+      throw new Error(
+        vtData?.response_description ||
+        vtData?.message ||
+        'VTPass transaction failed'
+      );
+    }
+
+    const providerRef = extractProviderRef(vtData);
+
+    await updateTransactionStatus(reference, {
+      status: 'success',
+      providerRef,
+      meta: {
+        provider: 'vtpass',
+        successful_at: new Date().toISOString(),
+        vtpass_response: vtData
+      }
+    });
+
+    if (purchaseType === 'electricity') {
+      await saveElectricityToken({
+        userId: user_id,
+        reference,
+        provider: 'vtpass',
+        amount: numericAmount,
+        vtData,
+        args
+      });
+    }
+
+    return {
+      success: true,
+      status: 'success',
+      reference,
+      providerRef,
+      token: extractToken(vtData),
+      units: extractUnits(vtData),
+      data: vtData
+    };
+  } catch (err) {
+    try {
+      await updateTransactionStatus(reference, {
+        status: 'failed',
+        meta: {
+          failed_at: new Date().toISOString(),
+          error: err.message || 'VTPass transaction failed'
+        }
+      });
+    } catch (_) {
+      // non-blocking
+    }
+
+    throw err;
+  }
+}
+
+async function getVariationAmount(service_id, variation_code) {
+  const base = getVtpassBaseUrl();
+  const headers = getVtpassHeaders();
+
+  const url = `${base}/service-variations?serviceID=${encodeURIComponent(String(service_id))}`;
+  const res = await http.get(url, { headers });
+
+  const variations = res?.data?.content?.variations || [];
+  const found = variations.find(
+    (v) => String(v?.variation_code) === String(variation_code)
+  );
+
+  if (!found) {
+    throw new Error('Invalid variation code');
+  }
+
+  return Number(found.variation_amount);
+}
+
+async function getVtpassBalance() {
+  const base = getVtpassBaseUrl();
+  const headers = getVtpassHeaders();
+
+  const res = await http.get(`${base}/balance`, { headers });
+
+  const bal =
+    res?.data?.content?.balance ??
+    res?.data?.content2?.balance ??
+    res?.data?.balance ??
+    0;
+
+  return Number(bal || 0);
+}
+
+module.exports = processVtpassPurchase;
+module.exports.processVtpassPurchase = processVtpassPurchase;
+module.exports.getVariationAmount = getVariationAmount;
+module.exports.getVtpassBalance = getVtpassBalance;
+module.exports.deriveProductType = deriveProductType;

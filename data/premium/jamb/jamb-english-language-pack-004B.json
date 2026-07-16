@@ -1,0 +1,282 @@
+[
+  {
+    "exam_type": "jamb",
+    "subject": "English Language",
+    "topic": "Comprehension",
+    "year": "2022",
+    "question": "In comprehension, the main idea of a passage refers to the",
+    "options": ["first sentence only", "central message of the passage", "hardest vocabulary word", "author's biography"],
+    "answer": "central message of the passage",
+    "explanation": "The main idea is the overall central thought the passage communicates.",
+    "source": "JAMB Premium"
+  },
+  {
+    "exam_type": "jamb",
+    "subject": "English Language",
+    "topic": "Sentence Completion",
+    "year": "2021",
+    "question": "If she had studied harder, she _____ the examination.",
+    "options": ["passes", "would pass", "would have passed", "will pass"],
+    "answer": "would have passed",
+    "explanation": "Third conditional structure uses would have + past participle.",
+    "source": "JAMB Premium"
+  },
+  {
+    "exam_type": "jamb",
+    "subject": "English Language",
+    "topic": "Concord",
+    "year": "2020",
+    "question": "Each of the players _____ given a medal.",
+    "options": ["were", "have", "was", "are"],
+    "answer": "was",
+    "explanation": "'Each' is singular, so singular verb agreement is required.",
+    "source": "JAMB Premium"
+  },
+  {
+    "exam_type": "jamb",
+    "subject": "English Language",
+    "topic": "Idioms",
+    "year": "2021",
+    "question": "To 'hit the nail on the head' means to",
+    "options": ["make a mistake", "speak exactly correctly", "start a fight", "build furniture"],
+    "answer": "speak exactly correctly",
+    "explanation": "The idiom means being exactly right.",
+    "source": "JAMB Premium"
+  },
+  {
+    "exam_type": "jamb",
+    "subject": "English Language",
+    "topic": "Vocabulary",
+    "year": "2019",
+    "question": "Choose the word nearest in meaning to 'fragile'.",
+    "options": ["strong", "delicate", "rigid", "firm"],
+    "answer": "delicate",
+    "explanation": "'Fragile' means easily broken or delicate.",
+    "source": "JAMB Premium"
+  },
+  {
+    "exam_type": "jamb",
+    "subject": "English Language",
+    "topic": "Antonyms",
+    "year": "2020",
+    "question": "The opposite of 'scarcity' is",
+    "options": ["shortage", "abundance", "poverty", "weakness"],
+    "answer": "abundance",
+    "explanation": "Scarcity means shortage; its opposite is abundance.",
+    "source": "JAMB Premium"
+  },
+  {
+    "exam_type": "jamb",
+    "subject": "English Language",
+    "topic": "Synonyms",
+    "year": "2022",
+    "question": "Choose the word nearest in meaning to 'commence'.",
+    "options": ["end", "continue", "begin", "pause"],
+    "answer": "begin",
+    "explanation": "'Commence' means begin.",
+    "source": "JAMB Premium"
+  },
+  {
+    "exam_type": "jamb",
+    "subject": "English Language",
+    "topic": "Lexis and Structure",
+    "year": "2021",
+    "question": "He prefers tea _____ coffee.",
+    "options": ["than", "to", "over", "with"],
+    "answer": "to",
+    "explanation": "Correct expression is 'prefer X to Y'.",
+    "source": "JAMB Premium"
+  },
+  {
+    "exam_type": "jamb",
+    "subject": "English Language",
+    "topic": "Punctuation",
+    "year": "2020",
+    "question": "Choose the correctly punctuated sentence.",
+    "options": [
+      "However we continued the journey.",
+      "However, we continued the journey.",
+      "However we, continued the journey.",
+      "However; we continued, the journey."
+    ],
+    "answer": "However, we continued the journey.",
+    "explanation": "A comma follows introductory conjunctive adverbs.",
+    "source": "JAMB Premium"
+  },
+  {
+    "exam_type": "jamb",
+    "subject": "English Language",
+    "topic": "Prepositions",
+    "year": "2019",
+    "question": "The chairman arrived _____ the meeting late.",
+    "options": ["at", "in", "on", "with"],
+    "answer": "at",
+    "explanation": "We arrive at a meeting/place.",
+    "source": "JAMB Premium"
+  },
+  {
+    "exam_type": "jamb",
+    "subject": "English Language",
+    "topic": "Oral English",
+    "year": "2022",
+    "question": "Which word contains the /θ/ sound?",
+    "options": ["this", "think", "then", "that"],
+    "answer": "think",
+    "explanation": "'Think' contains the voiceless dental fricative /θ/.",
+    "source": "JAMB Premium"
+  },
+  {
+    "exam_type": "jamb",
+    "subject": "English Language",
+    "topic": "Consonant Sounds",
+    "year": "2021",
+    "question": "Which word begins with /tʃ/?",
+    "options": ["chair", "share", "gear", "jar"],
+    "answer": "chair",
+    "explanation": "'Chair' begins with /tʃ/.",
+    "source": "JAMB Premium"
+  },
+  {
+    "exam_type": "jamb",
+    "subject": "English Language",
+    "topic": "Word Stress",
+    "year": "2020",
+    "question": "Which syllable is stressed in the noun 'import'?",
+    "options": ["IM-port", "im-PORT", "equal stress", "none"],
+    "answer": "IM-port",
+    "explanation": "The noun 'import' takes first syllable stress.",
+    "source": "JAMB Premium"
+  },
+  {
+    "exam_type": "jamb",
+    "subject": "English Language",
+    "topic": "Register",
+    "year": "2022",
+    "question": "The word 'plaintiff' belongs to the _____ register.",
+    "options": ["medical", "legal", "journalistic", "commercial"],
+    "answer": "legal",
+    "explanation": "'Plaintiff' is a legal term.",
+    "source": "JAMB Premium"
+  },
+  {
+    "exam_type": "jamb",
+    "subject": "English Language",
+    "topic": "Usage",
+    "year": "2021",
+    "question": "Choose the correct expression.",
+    "options": ["more better", "much best", "better", "most better"],
+    "answer": "better",
+    "explanation": "'Better' is already comparative.",
+    "source": "JAMB Premium"
+  },
+  {
+    "exam_type": "jamb",
+    "subject": "English Language",
+    "topic": "Spelling",
+    "year": "2020",
+    "question": "Choose the correctly spelt word.",
+    "options": ["Accomodation", "Accommodation", "Acommodation", "Accommmodation"],
+    "answer": "Accommodation",
+    "explanation": "Correct spelling is Accommodation.",
+    "source": "JAMB Premium"
+  },
+  {
+    "exam_type": "jamb",
+    "subject": "English Language",
+    "topic": "Phrasal Verbs",
+    "year": "2022",
+    "question": "The meeting was _____ till next week.",
+    "options": ["put off", "put on", "put out", "put in"],
+    "answer": "put off",
+    "explanation": "'Put off' means postponed.",
+    "source": "JAMB Premium"
+  },
+  {
+    "exam_type": "jamb",
+    "subject": "English Language",
+    "topic": "Sentence Interpretation",
+    "year": "2021",
+    "question": "If someone is 'in hot water', the person is",
+    "options": ["bathing", "in trouble", "working hard", "sick"],
+    "answer": "in trouble",
+    "explanation": "The expression means being in difficulty.",
+    "source": "JAMB Premium"
+  },
+  {
+    "exam_type": "jamb",
+    "subject": "English Language",
+    "topic": "Tenses",
+    "year": "2020",
+    "question": "She _____ here since morning.",
+    "options": ["has been", "was", "is being", "had being"],
+    "answer": "has been",
+    "explanation": "Present perfect fits an action continuing till now.",
+    "source": "JAMB Premium"
+  },
+  {
+    "exam_type": "jamb",
+    "subject": "English Language",
+    "topic": "Figures of Speech",
+    "year": "2021",
+    "question": "'Time is a thief' is an example of",
+    "options": ["simile", "metaphor", "hyperbole", "personification"],
+    "answer": "metaphor",
+    "explanation": "Direct comparison without 'like' or 'as'.",
+    "source": "JAMB Premium"
+  },
+  {
+    "exam_type": "jamb",
+    "subject": "English Language",
+    "topic": "Comprehension Logic",
+    "year": "2022",
+    "question": "A conclusion drawn from clues in a passage is called",
+    "options": ["translation", "inference", "summary", "register"],
+    "answer": "inference",
+    "explanation": "Inference is logical deduction from evidence.",
+    "source": "JAMB Premium"
+  },
+  {
+    "exam_type": "jamb",
+    "subject": "English Language",
+    "topic": "Homophones",
+    "year": "2020",
+    "question": "Choose the correct word: They _____ the bell loudly.",
+    "options": ["wrang", "rang", "ringed", "rung"],
+    "answer": "rang",
+    "explanation": "Past tense of ring is rang.",
+    "source": "JAMB Premium"
+  },
+  {
+    "exam_type": "jamb",
+    "subject": "English Language",
+    "topic": "Sentence Completion",
+    "year": "2021",
+    "question": "No sooner had he arrived _____ it began to rain.",
+    "options": ["when", "than", "then", "that"],
+    "answer": "than",
+    "explanation": "Standard expression: no sooner... than.",
+    "source": "JAMB Premium"
+  },
+  {
+    "exam_type": "jamb",
+    "subject": "English Language",
+    "topic": "Lexis",
+    "year": "2022",
+    "question": "A person who talks too much is",
+    "options": ["taciturn", "verbose", "silent", "modest"],
+    "answer": "verbose",
+    "explanation": "Verbose means wordy or excessively talkative.",
+    "source": "JAMB Premium"
+  },
+  {
+    "exam_type": "jamb",
+    "subject": "English Language",
+    "topic": "Oral English",
+    "year": "2020",
+    "question": "Which pair contains words with the same vowel sound?",
+    "options": ["seat / beat", "cat / cut", "ship / sheep", "cot / coat"],
+    "answer": "seat / beat",
+    "explanation": "Both contain /iː/ vowel sound.",
+    "source": "JAMB Premium"
+  }
+]

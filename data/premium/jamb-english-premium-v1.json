@@ -1,0 +1,113 @@
+[
+  {
+    "exam_type": "jamb",
+    "subject": "English Language",
+    "topic": "Comprehension",
+    "year": 2026,
+    "question": "Read the sentence: 'The chairman's speech was brief but persuasive.' What does 'persuasive' mean?",
+    "options": ["Convincing", "Confusing", "Lengthy", "Angry"],
+    "correct_index": 0,
+    "explanation": "Persuasive means able to convince someone to accept an idea.",
+    "source": "JAMB Premium Pack v1"
+  },
+  {
+    "exam_type": "jamb",
+    "subject": "English Language",
+    "topic": "Vocabulary",
+    "year": 2026,
+    "question": "Choose the word nearest in meaning to 'reluctant'.",
+    "options": ["Willing", "Unwilling", "Excited", "Careless"],
+    "correct_index": 1,
+    "explanation": "Reluctant means unwilling or hesitant to do something.",
+    "source": "JAMB Premium Pack v1"
+  },
+  {
+    "exam_type": "jamb",
+    "subject": "English Language",
+    "topic": "Vocabulary",
+    "year": 2026,
+    "question": "Choose the word opposite in meaning to 'scarce'.",
+    "options": ["Rare", "Limited", "Abundant", "Small"],
+    "correct_index": 2,
+    "explanation": "Scarce means not enough; abundant means more than enough.",
+    "source": "JAMB Premium Pack v1"
+  },
+  {
+    "exam_type": "jamb",
+    "subject": "English Language",
+    "topic": "Sentence Completion",
+    "year": 2026,
+    "question": "Neither the teacher nor the students ___ present at the meeting.",
+    "options": ["was", "were", "is", "has"],
+    "correct_index": 1,
+    "explanation": "With 'neither...nor', the verb agrees with the nearer subject, 'students'.",
+    "source": "JAMB Premium Pack v1"
+  },
+  {
+    "exam_type": "jamb",
+    "subject": "English Language",
+    "topic": "Concord",
+    "year": 2026,
+    "question": "The list of items ___ on the table.",
+    "options": ["are", "were", "is", "have"],
+    "correct_index": 2,
+    "explanation": "The subject is 'list', which is singular.",
+    "source": "JAMB Premium Pack v1"
+  },
+  {
+    "exam_type": "jamb",
+    "subject": "English Language",
+    "topic": "Idioms",
+    "year": 2026,
+    "question": "To 'turn a blind eye' means to",
+    "options": ["look carefully", "ignore deliberately", "become blind", "search everywhere"],
+    "correct_index": 1,
+    "explanation": "The idiom means to pretend not to notice something.",
+    "source": "JAMB Premium Pack v1"
+  },
+  {
+    "exam_type": "jamb",
+    "subject": "English Language",
+    "topic": "Oral English",
+    "year": 2026,
+    "question": "Choose the word that has the same vowel sound as 'seat'.",
+    "options": ["sit", "set", "meat", "met"],
+    "correct_index": 2,
+    "explanation": "'Seat' and 'meat' contain the long /i:/ vowel sound.",
+    "source": "JAMB Premium Pack v1"
+  },
+  {
+    "exam_type": "jamb",
+    "subject": "English Language",
+    "topic": "Oral English",
+    "year": 2026,
+    "question": "Choose the word with a different consonant sound.",
+    "options": ["thin", "thank", "then", "thief"],
+    "correct_index": 2,
+    "explanation": "'Then' has voiced /ð/ while the others have voiceless /θ/.",
+    "source": "JAMB Premium Pack v1"
+  },
+  {
+    "exam_type": "jamb",
+    "subject": "English Language",
+    "topic": "Register",
+    "year": 2026,
+    "question": "In legal language, a person who brings a case to court is the",
+    "options": ["defendant", "plaintiff", "witness", "judge"],
+    "correct_index": 1,
+    "explanation": "The plaintiff is the person who initiates a legal action.",
+    "source": "JAMB Premium Pack v1"
+  },
+  {
+    "exam_type": "jamb",
+    "subject": "English Language",
+    "topic": "Antonyms",
+    "year": 2026,
+    "question": "Choose the word opposite in meaning to 'hostile'.",
+    "options": ["Friendly", "Cruel", "Angry", "Dangerous"],
+    "correct_index": 0,
+    "explanation": "Hostile means unfriendly; friendly is the opposite.",
+    "source": "JAMB Premium Pack v1"
+  }
+]
+

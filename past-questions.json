@@ -1,0 +1,13 @@
+[
+  {
+    "exam_type": "jamb",
+    "subject": "English Language",
+    "topic": "Comprehension",
+    "year": 2022,
+    "question": "Sample question text here",
+    "options": ["A. Option one", "B. Option two", "C. Option three", "D. Option four"],
+    "answer": "B",
+    "explanation": "Short explanation",
+    "source": "manual"
+  }
+]

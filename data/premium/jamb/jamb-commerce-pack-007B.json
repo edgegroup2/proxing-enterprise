@@ -1,0 +1,402 @@
+[
+  {
+    "exam_type": "JAMB",
+    "subject": "Commerce",
+    "topic": "Foreign Trade",
+    "year": 2026,
+    "question": "A document issued by customs authorities permitting imported goods to enter a country is the",
+    "options": [
+      "bill of exchange",
+      "import licence",
+      "certificate of incorporation",
+      "waybill"
+    ],
+    "answer": "import licence",
+    "explanation": "An import licence authorizes the importation of specified goods into a country where import control applies.",
+    "source": "ProxiNG Premium Commerce Pack 007B"
+  },
+  {
+    "exam_type": "JAMB",
+    "subject": "Commerce",
+    "topic": "Insurance",
+    "year": 2026,
+    "question": "The insurance principle that prevents an insured from profiting from a loss is",
+    "options": [
+      "indemnity",
+      "contribution",
+      "proximity",
+      "goodwill"
+    ],
+    "answer": "indemnity",
+    "explanation": "Indemnity ensures compensation restores the insured to their previous financial position, not beyond it.",
+    "source": "ProxiNG Premium Commerce Pack 007B"
+  },
+  {
+    "exam_type": "JAMB",
+    "subject": "Commerce",
+    "topic": "Warehousing",
+    "year": 2026,
+    "question": "A warehouse receipt serves primarily as",
+    "options": [
+      "proof of ownership or storage of goods",
+      "evidence of company registration",
+      "proof of insurance premium payment",
+      "evidence of tax clearance"
+    ],
+    "answer": "proof of ownership or storage of goods",
+    "explanation": "Warehouse receipts confirm goods are stored and may serve as title documents.",
+    "source": "ProxiNG Premium Commerce Pack 007B"
+  },
+  {
+    "exam_type": "JAMB",
+    "subject": "Commerce",
+    "topic": "Retail Trade",
+    "year": 2026,
+    "question": "Impulse buying is most encouraged by",
+    "options": [
+      "attractive product display",
+      "high taxation",
+      "long delivery time",
+      "strict credit policy"
+    ],
+    "answer": "attractive product display",
+    "explanation": "Strategic display can trigger spontaneous purchasing decisions.",
+    "source": "ProxiNG Premium Commerce Pack 007B"
+  },
+  {
+    "exam_type": "JAMB",
+    "subject": "Commerce",
+    "topic": "Banking",
+    "year": 2026,
+    "question": "A cheque marked 'not negotiable' means",
+    "options": [
+      "it cannot be transferred at all",
+      "the transferee cannot get better title than the transferor",
+      "it must be paid in cash only",
+      "it has expired"
+    ],
+    "answer": "the transferee cannot get better title than the transferor",
+    "explanation": "A not negotiable cheque restricts title transfer advantages.",
+    "source": "ProxiNG Premium Commerce Pack 007B"
+  },
+  {
+    "exam_type": "JAMB",
+    "subject": "Commerce",
+    "topic": "Transportation",
+    "year": 2026,
+    "question": "Pipeline transport is best suited for moving",
+    "options": [
+      "liquid and gaseous products",
+      "livestock",
+      "electronics",
+      "passengers"
+    ],
+    "answer": "liquid and gaseous products",
+    "explanation": "Pipelines efficiently move petroleum, gas, and similar substances.",
+    "source": "ProxiNG Premium Commerce Pack 007B"
+  },
+  {
+    "exam_type": "JAMB",
+    "subject": "Commerce",
+    "topic": "Business Finance",
+    "year": 2026,
+    "question": "Retained profit is a source of",
+    "options": [
+      "internal finance",
+      "external borrowing",
+      "government taxation",
+      "trade credit"
+    ],
+    "answer": "internal finance",
+    "explanation": "Retained earnings are internally generated business funds.",
+    "source": "ProxiNG Premium Commerce Pack 007B"
+  },
+  {
+    "exam_type": "JAMB",
+    "subject": "Commerce",
+    "topic": "Advertising",
+    "year": 2026,
+    "question": "Reminder advertising is most useful when a product is",
+    "options": [
+      "already established in the market",
+      "completely unknown",
+      "under legal ban",
+      "out of production"
+    ],
+    "answer": "already established in the market",
+    "explanation": "Reminder advertising reinforces awareness of familiar products.",
+    "source": "ProxiNG Premium Commerce Pack 007B"
+  },
+  {
+    "exam_type": "JAMB",
+    "subject": "Commerce",
+    "topic": "Communication",
+    "year": 2026,
+    "question": "A memorandum in business is mainly used for",
+    "options": [
+      "internal communication",
+      "international shipping",
+      "external advertising",
+      "tax remittance"
+    ],
+    "answer": "internal communication",
+    "explanation": "Memoranda are internal office communication tools.",
+    "source": "ProxiNG Premium Commerce Pack 007B"
+  },
+  {
+    "exam_type": "JAMB",
+    "subject": "Commerce",
+    "topic": "Company Accounts",
+    "year": 2026,
+    "question": "The dividend paid to shareholders comes from",
+    "options": [
+      "company profits",
+      "bank overdraft only",
+      "trade discount",
+      "import duty"
+    ],
+    "answer": "company profits",
+    "explanation": "Dividends are distributions from company earnings.",
+    "source": "ProxiNG Premium Commerce Pack 007B"
+  },
+  {
+    "exam_type": "JAMB",
+    "subject": "Commerce",
+    "topic": "Wholesaling",
+    "year": 2026,
+    "question": "One service provided by wholesalers to retailers is",
+    "options": [
+      "breaking bulk",
+      "issuing passports",
+      "customs clearance only",
+      "manufacturing raw materials"
+    ],
+    "answer": "breaking bulk",
+    "explanation": "Wholesalers divide large quantities into smaller retail quantities.",
+    "source": "ProxiNG Premium Commerce Pack 007B"
+  },
+  {
+    "exam_type": "JAMB",
+    "subject": "Commerce",
+    "topic": "Consumer Protection",
+    "year": 2026,
+    "question": "Standard Organization quality marks mainly help consumers by",
+    "options": [
+      "indicating product compliance with standards",
+      "reducing import volume",
+      "setting retail prices",
+      "eliminating competition"
+    ],
+    "answer": "indicating product compliance with standards",
+    "explanation": "Quality certification helps assure consumers of product safety and standards.",
+    "source": "ProxiNG Premium Commerce Pack 007B"
+  },
+  {
+    "exam_type": "JAMB",
+    "subject": "Commerce",
+    "topic": "Partnership",
+    "year": 2026,
+    "question": "A dormant partner is one who",
+    "options": [
+      "contributes capital but does not actively manage",
+      "has unlimited legal immunity",
+      "cannot share profits",
+      "must be a minor"
+    ],
+    "answer": "contributes capital but does not actively manage",
+    "explanation": "Dormant partners invest but are not active in day-to-day operations.",
+    "source": "ProxiNG Premium Commerce Pack 007B"
+  },
+  {
+    "exam_type": "JAMB",
+    "subject": "Commerce",
+    "topic": "International Trade",
+    "year": 2026,
+    "question": "Dumping occurs when goods are sold abroad",
+    "options": [
+      "below home market price",
+      "above production capacity",
+      "through retail cooperatives only",
+      "without invoices"
+    ],
+    "answer": "below home market price",
+    "explanation": "Dumping involves selling abroad at unusually low prices, often below domestic pricing.",
+    "source": "ProxiNG Premium Commerce Pack 007B"
+  },
+  {
+    "exam_type": "JAMB",
+    "subject": "Commerce",
+    "topic": "Sales Promotion",
+    "year": 2026,
+    "question": "A free sample is an example of",
+    "options": [
+      "sales promotion",
+      "market segmentation",
+      "capital formation",
+      "wholesaling"
+    ],
+    "answer": "sales promotion",
+    "explanation": "Free samples are promotional tools encouraging trial purchases.",
+    "source": "ProxiNG Premium Commerce Pack 007B"
+  },
+  {
+    "exam_type": "JAMB",
+    "subject": "Commerce",
+    "topic": "Credit Transactions",
+    "year": 2026,
+    "question": "Trade credit allows buyers to",
+    "options": [
+      "pay at a later agreed date",
+      "avoid all payments permanently",
+      "obtain tax exemption",
+      "purchase only imports"
+    ],
+    "answer": "pay at a later agreed date",
+    "explanation": "Trade credit permits deferred payment for goods purchased.",
+    "source": "ProxiNG Premium Commerce Pack 007B"
+  },
+  {
+    "exam_type": "JAMB",
+    "subject": "Commerce",
+    "topic": "E-Commerce",
+    "year": 2026,
+    "question": "A major risk in e-commerce is",
+    "options": [
+      "cyber fraud",
+      "lack of branding",
+      "absence of customers",
+      "no communication tools"
+    ],
+    "answer": "cyber fraud",
+    "explanation": "Online transactions can be vulnerable to fraud and security threats.",
+    "source": "ProxiNG Premium Commerce Pack 007B"
+  },
+  {
+    "exam_type": "JAMB",
+    "subject": "Commerce",
+    "topic": "Stock Exchange",
+    "year": 2026,
+    "question": "Ordinary shareholders are owners of a company because they hold",
+    "options": [
+      "equity shares",
+      "debentures",
+      "treasury bills",
+      "insurance policies"
+    ],
+    "answer": "equity shares",
+    "explanation": "Ordinary shares represent ownership stakes in a company.",
+    "source": "ProxiNG Premium Commerce Pack 007B"
+  },
+  {
+    "exam_type": "JAMB",
+    "subject": "Commerce",
+    "topic": "Documents Used in Trade",
+    "year": 2026,
+    "question": "A consignment note is commonly used in",
+    "options": [
+      "transport documentation",
+      "insurance claims",
+      "share registration",
+      "bank reconciliation"
+    ],
+    "answer": "transport documentation",
+    "explanation": "Consignment notes provide details of goods being transported.",
+    "source": "ProxiNG Premium Commerce Pack 007B"
+  },
+  {
+    "exam_type": "JAMB",
+    "subject": "Commerce",
+    "topic": "Marketing",
+    "year": 2026,
+    "question": "Market segmentation involves dividing a market into",
+    "options": [
+      "groups with similar characteristics",
+      "separate legal entities",
+      "tax regions only",
+      "production departments"
+    ],
+    "answer": "groups with similar characteristics",
+    "explanation": "Segmentation helps businesses target specific customer groups effectively.",
+    "source": "ProxiNG Premium Commerce Pack 007B"
+  },
+  {
+    "exam_type": "JAMB",
+    "subject": "Commerce",
+    "topic": "Hire Purchase",
+    "year": 2026,
+    "question": "The seller in a hire purchase agreement may repossess goods if the buyer",
+    "options": [
+      "defaults in payment",
+      "pays fully",
+      "requests a receipt",
+      "insures the item"
+    ],
+    "answer": "defaults in payment",
+    "explanation": "Ownership remains with seller until obligations are met.",
+    "source": "ProxiNG Premium Commerce Pack 007B"
+  },
+  {
+    "exam_type": "JAMB",
+    "subject": "Commerce",
+    "topic": "Trade Associations",
+    "year": 2026,
+    "question": "A trade association primarily protects the interests of",
+    "options": [
+      "members in a specific industry",
+      "all consumers equally",
+      "government ministries",
+      "foreign diplomats"
+    ],
+    "answer": "members in a specific industry",
+    "explanation": "Trade associations represent businesses in common sectors.",
+    "source": "ProxiNG Premium Commerce Pack 007B"
+  },
+  {
+    "exam_type": "JAMB",
+    "subject": "Commerce",
+    "topic": "Branding",
+    "year": 2026,
+    "question": "Branding mainly helps a product by",
+    "options": [
+      "creating product identity",
+      "removing competition completely",
+      "eliminating advertising",
+      "reducing customs duties"
+    ],
+    "answer": "creating product identity",
+    "explanation": "Branding differentiates products and builds recognition.",
+    "source": "ProxiNG Premium Commerce Pack 007B"
+  },
+  {
+    "exam_type": "JAMB",
+    "subject": "Commerce",
+    "topic": "Marine Insurance",
+    "year": 2026,
+    "question": "General average in marine insurance means loss",
+    "options": [
+      "shared by all interested parties",
+      "borne by captain alone",
+      "paid only by customs",
+      "ignored by insurers"
+    ],
+    "answer": "shared by all interested parties",
+    "explanation": "General average losses are proportionally shared among cargo stakeholders.",
+    "source": "ProxiNG Premium Commerce Pack 007B"
+  },
+  {
+    "exam_type": "JAMB",
+    "subject": "Commerce",
+    "topic": "Public Enterprises",
+    "year": 2026,
+    "question": "A public corporation is established mainly to",
+    "options": [
+      "provide essential services",
+      "operate secret partnerships",
+      "avoid regulation",
+      "sell imported luxury goods only"
+    ],
+    "answer": "provide essential services",
+    "explanation": "Public corporations often exist to deliver strategic or public-interest services.",
+    "source": "ProxiNG Premium Commerce Pack 007B"
+  }
+]

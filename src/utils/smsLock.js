@@ -1,22 +1,10 @@
-const locks = new Map();
+'use strict';
 
-const LOCK_TTL = 30 * 1000; // 30 seconds
-
-function isDuplicateSMS(from, message) {
-  const key = `${from}:${message.toLowerCase().trim()}`;
-  const now = Date.now();
-
-  if (locks.has(key)) {
-    const lastTime = locks.get(key);
-    if (now - lastTime < LOCK_TTL) {
-      return true;
-    }
-  }
-
-  locks.set(key, now);
-
-  // Auto cleanup
-  setTimeout(() => locks.delete(key), LOCK_TTL);
+/**
+ * SMS duplicate lock disabled.
+ * Always allow processing.
+ */
+function isDuplicateSMS() {
   return false;
 }
 

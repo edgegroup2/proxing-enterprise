@@ -1,0 +1,130 @@
+[
+  {
+    "exam_type": "jamb",
+    "subject": "Economics",
+    "topic": "Demand and Supply",
+    "year": 2025,
+    "stem": "According to the law of demand, when price rises, quantity demanded will usually...",
+    "explanation": "The law of demand states that quantity demanded falls as price rises, ceteris paribus.",
+    "difficulty": 2,
+    "source": "JAMB Premium Pack v1",
+    "options": [
+      {
+        "label": "A",
+        "text": "increase",
+        "is_correct": false
+      },
+      {
+        "label": "B",
+        "text": "fall",
+        "is_correct": true
+      },
+      {
+        "label": "C",
+        "text": "remain constant",
+        "is_correct": false
+      },
+      {
+        "label": "D",
+        "text": "become zero",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "exam_type": "jamb",
+    "subject": "Economics",
+    "topic": "Demand and Supply",
+    "year": 2025,
+    "stem": "A rightward shift in supply indicates...",
+    "explanation": "A rightward shift means more quantity supplied at each price.",
+    "difficulty": 2,
+    "source": "JAMB Premium Pack v1",
+    "options": [
+      {
+        "label": "A",
+        "text": "decrease in supply",
+        "is_correct": false
+      },
+      {
+        "label": "B",
+        "text": "increase in supply",
+        "is_correct": true
+      },
+      {
+        "label": "C",
+        "text": "higher prices only",
+        "is_correct": false
+      },
+      {
+        "label": "D",
+        "text": "market failure",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "exam_type": "jamb",
+    "subject": "Economics",
+    "topic": "Opportunity Cost",
+    "year": 2025,
+    "stem": "Opportunity cost refers to...",
+    "explanation": "Opportunity cost is the value of the best alternative sacrificed.",
+    "difficulty": 2,
+    "source": "JAMB Premium Pack v1",
+    "options": [
+      {
+        "label": "A",
+        "text": "money spent only",
+        "is_correct": false
+      },
+      {
+        "label": "B",
+        "text": "next best alternative forgone",
+        "is_correct": true
+      },
+      {
+        "label": "C",
+        "text": "production cost",
+        "is_correct": false
+      },
+      {
+        "label": "D",
+        "text": "fixed cost",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "exam_type": "jamb",
+    "subject": "Economics",
+    "topic": "Elasticity",
+    "year": 2025,
+    "stem": "Demand is elastic when...",
+    "explanation": "Elastic demand means quantity responds more than proportionately.",
+    "difficulty": 2,
+    "source": "JAMB Premium Pack v1",
+    "options": [
+      {
+        "label": "A",
+        "text": "PED > 1",
+        "is_correct": true
+      },
+      {
+        "label": "B",
+        "text": "PED < 1",
+        "is_correct": false
+      },
+      {
+        "label": "C",
+        "text": "PED = 0",
+        "is_correct": false
+      },
+      {
+        "label": "D",
+        "text": "PED = 1",
+        "is_correct": false
+      }
+    ]
+  }
+]

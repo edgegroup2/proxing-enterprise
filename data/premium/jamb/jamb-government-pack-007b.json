@@ -1,0 +1,402 @@
+[
+  {
+    "exam_type": "jamb",
+    "subject": "Government",
+    "topic": "Political Parties",
+    "year": 2026,
+    "question": "A major function of a political party in a democratic state is to",
+    "options": [
+      "appoint judges directly",
+      "contest elections and seek political power",
+      "draft the national constitution alone",
+      "control the armed forces independently"
+    ],
+    "answer": "contest elections and seek political power",
+    "explanation": "Political parties organize candidates, mobilize voters, and compete for governmental power through elections.",
+    "source": "ProxiNG Original"
+  },
+  {
+    "exam_type": "jamb",
+    "subject": "Government",
+    "topic": "Electoral Systems",
+    "year": 2026,
+    "question": "In a simple majority electoral system, the winner is the candidate who",
+    "options": [
+      "wins all regions",
+      "obtains the highest number of votes cast",
+      "secures exactly half of the votes",
+      "is endorsed by the judiciary"
+    ],
+    "answer": "obtains the highest number of votes cast",
+    "explanation": "Simple majority or first-past-the-post requires only more votes than competitors.",
+    "source": "ProxiNG Original"
+  },
+  {
+    "exam_type": "jamb",
+    "subject": "Government",
+    "topic": "Pressure Groups",
+    "year": 2026,
+    "question": "Pressure groups differ from political parties because they primarily aim to",
+    "options": [
+      "capture governmental power",
+      "influence public policy without seeking office",
+      "organize military rule",
+      "conduct national censuses"
+    ],
+    "answer": "influence public policy without seeking office",
+    "explanation": "Pressure groups advocate interests and influence decision-making rather than directly governing.",
+    "source": "ProxiNG Original"
+  },
+  {
+    "exam_type": "jamb",
+    "subject": "Government",
+    "topic": "Citizenship",
+    "year": 2026,
+    "question": "Citizenship by naturalization is granted to a person who",
+    "options": [
+      "was born abroad to national parents",
+      "acquires citizenship after fulfilling legal conditions",
+      "belongs to the military",
+      "votes in local elections"
+    ],
+    "answer": "acquires citizenship after fulfilling legal conditions",
+    "explanation": "Naturalization is a legal process for non-citizens to become citizens.",
+    "source": "ProxiNG Original"
+  },
+  {
+    "exam_type": "jamb",
+    "subject": "Government",
+    "topic": "Rule of Law",
+    "year": 2026,
+    "question": "The principle that all persons are equal before the law refers to",
+    "options": [
+      "judicial review",
+      "constitutional supremacy",
+      "equality before the law",
+      "delegated legislation"
+    ],
+    "answer": "equality before the law",
+    "explanation": "Rule of law emphasizes equal legal treatment regardless of status.",
+    "source": "ProxiNG Original"
+  },
+  {
+    "exam_type": "jamb",
+    "subject": "Government",
+    "topic": "Legislature",
+    "year": 2026,
+    "question": "An important oversight function of the legislature is to",
+    "options": [
+      "interpret laws",
+      "audit and scrutinize executive activities",
+      "appoint military officers",
+      "issue passports"
+    ],
+    "answer": "audit and scrutinize executive activities",
+    "explanation": "Legislatures monitor executive conduct through investigations and committees.",
+    "source": "ProxiNG Original"
+  },
+  {
+    "exam_type": "jamb",
+    "subject": "Government",
+    "topic": "Executive",
+    "year": 2026,
+    "question": "In a presidential system, the president serves as",
+    "options": [
+      "head of judiciary",
+      "head of state and government",
+      "speaker of parliament",
+      "leader of opposition"
+    ],
+    "answer": "head of state and government",
+    "explanation": "The presidential model combines ceremonial and executive leadership in one office.",
+    "source": "ProxiNG Original"
+  },
+  {
+    "exam_type": "jamb",
+    "subject": "Government",
+    "topic": "Judiciary",
+    "year": 2026,
+    "question": "Judicial independence is important because it helps judges to",
+    "options": [
+      "campaign for elections",
+      "decide cases without external interference",
+      "control legislation",
+      "appoint governors"
+    ],
+    "answer": "decide cases without external interference",
+    "explanation": "Independent courts uphold justice impartially.",
+    "source": "ProxiNG Original"
+  },
+  {
+    "exam_type": "jamb",
+    "subject": "Government",
+    "topic": "Constitution",
+    "year": 2026,
+    "question": "A rigid constitution can be amended only through",
+    "options": [
+      "ordinary legislative procedure",
+      "special and difficult procedures",
+      "executive decree",
+      "court proclamation"
+    ],
+    "answer": "special and difficult procedures",
+    "explanation": "Rigid constitutions require stricter amendment mechanisms than ordinary laws.",
+    "source": "ProxiNG Original"
+  },
+  {
+    "exam_type": "jamb",
+    "subject": "Government",
+    "topic": "Federalism",
+    "year": 2026,
+    "question": "Federalism is characterized by",
+    "options": [
+      "concentration of all powers at the center",
+      "division of powers between central and regional governments",
+      "abolition of local government",
+      "military administration"
+    ],
+    "answer": "division of powers between central and regional governments",
+    "explanation": "Federal systems constitutionally divide authority across levels of government.",
+    "source": "ProxiNG Original"
+  },
+  {
+    "exam_type": "jamb",
+    "subject": "Government",
+    "topic": "Local Government",
+    "year": 2026,
+    "question": "One major purpose of local government is to",
+    "options": [
+      "handle community-level administration",
+      "conduct foreign diplomacy",
+      "print currency",
+      "declare war"
+    ],
+    "answer": "handle community-level administration",
+    "explanation": "Local governments bring governance closer to the people.",
+    "source": "ProxiNG Original"
+  },
+  {
+    "exam_type": "jamb",
+    "subject": "Government",
+    "topic": "Democracy",
+    "year": 2026,
+    "question": "Representative democracy allows citizens to govern through",
+    "options": [
+      "traditional rulers",
+      "elected representatives",
+      "military officers",
+      "appointed judges"
+    ],
+    "answer": "elected representatives",
+    "explanation": "Citizens elect officials to make decisions on their behalf.",
+    "source": "ProxiNG Original"
+  },
+  {
+    "exam_type": "jamb",
+    "subject": "Government",
+    "topic": "Monarchy",
+    "year": 2026,
+    "question": "In an absolute monarchy, political authority is mainly held by the",
+    "options": [
+      "prime minister",
+      "parliament",
+      "monarch",
+      "judiciary"
+    ],
+    "answer": "monarch",
+    "explanation": "Absolute monarchies centralize state power in the ruler.",
+    "source": "ProxiNG Original"
+  },
+  {
+    "exam_type": "jamb",
+    "subject": "Government",
+    "topic": "Military Rule",
+    "year": 2026,
+    "question": "A common feature of military rule is",
+    "options": [
+      "frequent competitive elections",
+      "rule by decrees",
+      "strict judicial supremacy",
+      "multi-party cabinet selection"
+    ],
+    "answer": "rule by decrees",
+    "explanation": "Military governments often govern through decrees instead of legislative processes.",
+    "source": "ProxiNG Original"
+  },
+  {
+    "exam_type": "jamb",
+    "subject": "Government",
+    "topic": "Public Opinion",
+    "year": 2026,
+    "question": "Public opinion is best described as",
+    "options": [
+      "judicial interpretation of laws",
+      "views held by citizens on public matters",
+      "executive orders",
+      "party constitutions"
+    ],
+    "answer": "views held by citizens on public matters",
+    "explanation": "Public opinion reflects collective attitudes on political and social issues.",
+    "source": "ProxiNG Original"
+  },
+  {
+    "exam_type": "jamb",
+    "subject": "Government",
+    "topic": "Civil Service",
+    "year": 2026,
+    "question": "The civil service mainly assists government by",
+    "options": [
+      "forming political parties",
+      "implementing policies administratively",
+      "electing presidents",
+      "interpreting constitutions"
+    ],
+    "answer": "implementing policies administratively",
+    "explanation": "Civil servants provide continuity and administrative execution.",
+    "source": "ProxiNG Original"
+  },
+  {
+    "exam_type": "jamb",
+    "subject": "Government",
+    "topic": "Separation of Powers",
+    "year": 2026,
+    "question": "Separation of powers aims primarily to",
+    "options": [
+      "strengthen dictatorship",
+      "prevent abuse of governmental authority",
+      "eliminate political parties",
+      "increase military influence"
+    ],
+    "answer": "prevent abuse of governmental authority",
+    "explanation": "Dividing powers reduces concentration and abuse.",
+    "source": "ProxiNG Original"
+  },
+  {
+    "exam_type": "jamb",
+    "subject": "Government",
+    "topic": "Checks and Balances",
+    "year": 2026,
+    "question": "Checks and balances ensure that",
+    "options": [
+      "government branches control one another",
+      "only parliament governs",
+      "judiciary makes all laws",
+      "executive controls elections"
+    ],
+    "answer": "government branches control one another",
+    "explanation": "Each arm restrains others to preserve accountability.",
+    "source": "ProxiNG Original"
+  },
+  {
+    "exam_type": "jamb",
+    "subject": "Government",
+    "topic": "Human Rights",
+    "year": 2026,
+    "question": "A fundamental human right is the right to",
+    "options": [
+      "arbitrary detention",
+      "personal liberty",
+      "unlawful discrimination",
+      "forced labour"
+    ],
+    "answer": "personal liberty",
+    "explanation": "Fundamental rights protect essential freedoms and dignity.",
+    "source": "ProxiNG Original"
+  },
+  {
+    "exam_type": "jamb",
+    "subject": "Government",
+    "topic": "Political Socialization",
+    "year": 2026,
+    "question": "Political socialization refers to the process by which people",
+    "options": [
+      "join the military",
+      "acquire political values and attitudes",
+      "become judges",
+      "draft constitutions"
+    ],
+    "answer": "acquire political values and attitudes",
+    "explanation": "Political beliefs are shaped through family, school, media, and society.",
+    "source": "ProxiNG Original"
+  },
+  {
+    "exam_type": "jamb",
+    "subject": "Government",
+    "topic": "Sovereignty",
+    "year": 2026,
+    "question": "Sovereignty means the",
+    "options": [
+      "temporary authority of legislators",
+      "supreme power of a state over its affairs",
+      "power of local councils",
+      "control by foreign governments"
+    ],
+    "answer": "supreme power of a state over its affairs",
+    "explanation": "Sovereignty denotes ultimate authority within a territory.",
+    "source": "ProxiNG Original"
+  },
+  {
+    "exam_type": "jamb",
+    "subject": "Government",
+    "topic": "International Organizations",
+    "year": 2026,
+    "question": "One purpose of international organizations is to",
+    "options": [
+      "promote cooperation among states",
+      "abolish national governments",
+      "replace constitutions",
+      "conduct local elections"
+    ],
+    "answer": "promote cooperation among states",
+    "explanation": "International bodies facilitate diplomacy, peace, and collaboration.",
+    "source": "ProxiNG Original"
+  },
+  {
+    "exam_type": "jamb",
+    "subject": "Government",
+    "topic": "Electoral Commission",
+    "year": 2026,
+    "question": "An electoral commission is established mainly to",
+    "options": [
+      "conduct and supervise elections",
+      "pass appropriation bills",
+      "appoint ministers",
+      "interpret criminal law"
+    ],
+    "answer": "conduct and supervise elections",
+    "explanation": "Electoral commissions ensure election administration and integrity.",
+    "source": "ProxiNG Original"
+  },
+  {
+    "exam_type": "jamb",
+    "subject": "Government",
+    "topic": "Cabinet System",
+    "year": 2026,
+    "question": "In the cabinet system, ministers are usually",
+    "options": [
+      "members of the legislature",
+      "career judges",
+      "military commanders",
+      "traditional chiefs only"
+    ],
+    "answer": "members of the legislature",
+    "explanation": "Parliamentary cabinet ministers are commonly drawn from parliament.",
+    "source": "ProxiNG Original"
+  },
+  {
+    "exam_type": "jamb",
+    "subject": "Government",
+    "topic": "Delegated Legislation",
+    "year": 2026,
+    "question": "Delegated legislation refers to laws made by",
+    "options": [
+      "subordinate authorities under legislative authority",
+      "only supreme courts",
+      "foreign ambassadors",
+      "electoral bodies independently"
+    ],
+    "answer": "subordinate authorities under legislative authority",
+    "explanation": "Legislatures may authorize agencies or ministers to make regulations.",
+    "source": "ProxiNG Original"
+  }
+]

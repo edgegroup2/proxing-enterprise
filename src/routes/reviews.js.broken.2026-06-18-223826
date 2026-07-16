@@ -1,0 +1,359 @@
+'use strict';
+
+const express = require('express');
+const router = express.Router();
+const db = require('../db');
+const { requireAuth } = require('../middleware/auth');
+
+/**
+ * GET due review questions
+ * GET /api/reviews/due
+ */
+router.get('/due', requireAuth, async (req, res) => {
+  try {
+    const userId = req.user.id;
+
+    const result = await db.query(
+      `
+      SELECT
+        rq.id AS review_id,
+        rq.source_table,
+        rq.source_question_id,
+        rq.question_id,
+        rq.subject,
+        rq.exam_type,
+        rq.topic_id,
+        rq.topic_name,
+        rq.reason,
+        rq.interval_days,
+        rq.repetitions,
+        rq.due_at,
+
+        COALESCE(q.question, q.stem, pq.question) AS question,
+        COALESCE(q.explanation, pq.explanation) AS explanation,
+CASE
+  WHEN rq.source_table = 'questions' THEN (
+    SELECT qo.label
+    FROM question_options qo
+    WHERE qo.question_id = rq.question_id
+      AND qo.is_correct = true
+    LIMIT 1
+  )
+  ELSE pq.answer
+END AS answer,
+
+        CASE
+          WHEN rq.source_table = 'questions' THEN (
+            SELECT COALESCE(
+              jsonb_agg(
+                jsonb_build_object(
+                  'id', qo.id,
+                  'label', qo.label,
+                  'text', qo.text,
+                  'is_correct', qo.is_correct
+                )
+                ORDER BY qo.label
+              ),
+              '[]'::jsonb
+            )
+            FROM question_options qo
+            WHERE qo.question_id = rq.question_id
+          )
+
+          WHEN rq.source_table = 'past_questions' THEN (
+            SELECT COALESCE(
+              jsonb_agg(
+                jsonb_build_object(
+                  'id', opt.key,
+                  'label', opt.key,
+                  'text', opt.value
+                )
+                ORDER BY opt.key
+              ),
+              '[]'::jsonb
+            )
+            FROM (
+              SELECT key, value::text
+              FROM jsonb_each_text(pq.options)
+              WHERE jsonb_typeof(pq.options) = 'object'
+
+              UNION ALL
+
+              SELECT chr(64 + ordinality::int), value::text
+              FROM jsonb_array_elements_text(pq.options) WITH ORDINALITY AS arr(value, ordinality)
+              WHERE jsonb_typeof(pq.options) = 'array'
+            ) opt
+          )
+
+          ELSE '[]'::jsonb
+        END AS options
+
+      FROM student_review_queue rq
+
+      LEFT JOIN questions q
+        ON rq.source_table = 'questions'
+       AND q.id = rq.question_id
+
+      LEFT JOIN past_questions pq
+        ON rq.source_table = 'past_questions'
+       AND pq.id = rq.source_question_id
+
+      WHERE rq.user_id = $1
+        AND rq.status = 'due'
+        AND rq.due_at <= now()
+
+      ORDER BY rq.due_at ASC, rq.created_at ASC
+      LIMIT 20
+      `,
+      [userId]
+    );
+
+    return res.json({
+      success: true,
+      data: result.rows
+    });
+  } catch (err) {
+    console.error('[REVIEW_DUE_ERROR]', err);
+    return res.status(500).json({
+      success: false,
+      error: err.message || 'Failed to fetch review queue'
+    });
+  }
+});
+
+/**
+ * Submit review answer
+ * POST /api/reviews/submit
+ */
+router.post('/submit', requireAuth, async (req, res) => {
+  try {
+    const userId = req.user.id;
+    const {
+      review_id,
+      is_correct,
+      response_time
+    } = req.body;
+
+    if (!review_id) {
+      return res.status(400).json({
+        success: false,
+        error: 'review_id is required'
+      });
+    }
+
+    const current = await db.query(
+      `
+      SELECT *
+      FROM student_review_queue
+      WHERE id = $1 AND user_id = $2
+      LIMIT 1
+      `,
+      [review_id, userId]
+    );
+
+    if (!current.rows.length) {
+      return res.status(404).json({
+        success: false,
+        error: 'Review item not found'
+      });
+    }
+
+    const item = current.rows[0];
+
+    let intervalDays = Number(item.interval_days || 1);
+    let repetitions = Number(item.repetitions || 0);
+
+    if (is_correct) {
+      repetitions += 1;
+
+      if (repetitions === 1) intervalDays = 3;
+      else if (repetitions === 2) intervalDays = 7;
+      else if (repetitions === 3) intervalDays = 14;
+      else if (repetitions === 4) intervalDays = 30;
+      else intervalDays = 60;
+    } else {
+      repetitions = 0;
+      intervalDays = 1;
+    }
+
+    const updated = await db.query(
+      `
+      UPDATE student_review_queue
+      SET
+        last_is_correct = $1,
+        last_response_time = $2,
+        repetitions = $3,
+        interval_days = $4,
+        due_at = now() + ($4::int * interval '1 day'),
+        status = 'due',
+        updated_at = now()
+      WHERE id = $5 AND user_id = $6
+      RETURNING *
+      `,
+      [
+        Boolean(is_correct),
+        response_time || null,
+        repetitions,
+        intervalDays,
+        review_id,
+        userId
+      ]
+    );
+
+    return res.json({
+      success: true,
+      data: updated.rows[0]
+    });
+  } catch (err) {
+    console.error('[REVIEW_SUBMIT_ERROR]', err);
+    return res.status(500).json({
+      success: false,
+      error: err.message || 'Failed to submit review'
+    });
+  }
+});
+
+/**
+ * GET review stats
+ * GET /api/reviews/stats
+ */
+router.get('/stats', requireAuth, async (req, res) => {
+  try {
+    const userId = req.user.id;
+
+    const result = await db.query(
+      `
+      SELECT
+        COUNT(*)::int AS total_items,
+        COUNT(*) FILTER (
+          WHERE status = 'due' AND due_at <= now()
+        )::int AS due_now,
+        COUNT(*) FILTER (
+          WHERE last_is_correct = true
+        )::int AS recently_correct,
+        COUNT(*) FILTER (
+          WHERE last_is_correct = false
+        )::int AS recently_wrong
+      FROM student_review_queue
+      WHERE user_id = $1
+      `,
+      [userId]
+    );
+
+    return res.json({
+      success: true,
+      data: result.rows[0]
+    });
+  } catch (err) {
+    console.error('[REVIEW_STATS_ERROR]', err);
+    return res.status(500).json({
+      success: false,
+      error: err.message || 'Failed to fetch review stats'
+    });
+  }
+});
+
+router.post('/:reviewId/submit', requireAuth, async (req, res) => {
+  try {
+    const userId = req.user.id;
+    const { reviewId } = req.params;
+    const { selectedAnswer, responseTime = 0 } = req.body || {};
+
+    if (!selectedAnswer) {
+      return res.status(400).json({
+        success: false,
+        error: 'selectedAnswer is required',
+      });
+    }
+
+    const result = await db.query(
+      `
+      SELECT
+        rq.*,
+        CASE
+          WHEN rq.source_table = 'questions' THEN q.answer
+          WHEN rq.source_table = 'past_questions' THEN pq.answer
+        END AS correct_answer,
+        CASE
+          WHEN rq.source_table = 'questions' THEN q.explanation
+          WHEN rq.source_table = 'past_questions' THEN pq.explanation
+        END AS explanation
+      FROM student_review_queue rq
+      LEFT JOIN questions q
+        ON rq.source_table = 'questions'
+       AND rq.source_question_id = q.id
+      LEFT JOIN past_questions pq
+        ON rq.source_table = 'past_questions'
+       AND rq.source_question_id = pq.id
+      WHERE rq.id = $1
+        AND rq.user_id = $2
+        AND rq.status = 'due'
+      LIMIT 1
+      `,
+      [reviewId, userId]
+    );
+
+    if (!result.rows.length) {
+      return res.status(404).json({
+        success: false,
+        error: 'Review not found',
+      });
+    }
+
+    const review = result.rows[0];
+
+    const normalize = (v) =>
+      String(v || '')
+        .trim()
+        .toLowerCase()
+        .replace(/\s+/g, ' ');
+
+    const isCorrect =
+      normalize(selectedAnswer) === normalize(review.correct_answer);
+
+    const nextInterval = isCorrect
+      ? Math.min((review.interval_days || 1) * 2, 30)
+      : 1;
+
+    const nextDue = isCorrect
+      ? `NOW() + INTERVAL '${nextInterval} days'`
+      : `NOW() + INTERVAL '1 day'`;
+
+    await db.query(
+      `
+      UPDATE student_review_queue
+      SET
+        last_is_correct = $1,
+        last_response_time = $2,
+        repetitions = COALESCE(repetitions, 0) + 1,
+        interval_days = $3,
+        due_at = ${nextDue},
+        status = 'due',
+        updated_at = NOW()
+      WHERE id = $4
+        AND user_id = $5
+      `,
+      [isCorrect, responseTime, nextInterval, reviewId, userId]
+    );
+
+    return res.json({
+      success: true,
+      data: {
+        correct: isCorrect,
+        correctAnswer: review.correct_answer,
+        explanation: review.explanation,
+        nextReviewInDays: nextInterval,
+      },
+    });
+  } catch (err) {
+  console.error('[REVIEW_SUBMIT_ERROR]');
+  console.error(err);
+  console.error(err.stack);
+
+  return res.status(500).json({
+    success: false,
+    error: err.message,
+  });
+}
+
+module.exports = router;

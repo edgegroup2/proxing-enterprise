@@ -1,0 +1,402 @@
+[
+  {
+    "exam_type": "jamb",
+    "subject": "English Language",
+    "topic": "Comprehension",
+    "year": 2023,
+    "question": "From the passage, the central argument of the writer is that",
+    "options": [
+      "technology should be completely banned",
+      "education must adapt to changing realities",
+      "students should avoid innovation",
+      "teachers are no longer useful"
+    ],
+    "answer": "education must adapt to changing realities",
+    "explanation": "The writer's main thesis supports adaptation in education.",
+    "source": "JAMB Premium"
+  },
+  {
+    "exam_type": "jamb",
+    "subject": "English Language",
+    "topic": "Comprehension",
+    "year": 2022,
+    "question": "The phrase 'at loggerheads' as used in the passage means",
+    "options": [
+      "in agreement",
+      "in conflict",
+      "in celebration",
+      "in confusion"
+    ],
+    "answer": "in conflict",
+    "explanation": "'At loggerheads' means being in serious disagreement.",
+    "source": "JAMB Premium"
+  },
+  {
+    "exam_type": "jamb",
+    "subject": "English Language",
+    "topic": "Sentence Completion",
+    "year": 2021,
+    "question": "If I _____ enough money, I would have bought the laptop.",
+    "options": [
+      "have",
+      "had",
+      "had had",
+      "would have"
+    ],
+    "answer": "had had",
+    "explanation": "Third conditional requires past perfect in the if-clause.",
+    "source": "JAMB Premium"
+  },
+  {
+    "exam_type": "jamb",
+    "subject": "English Language",
+    "topic": "Sentence Completion",
+    "year": 2020,
+    "question": "Scarcely had the game started _____ the rain began.",
+    "options": [
+      "than",
+      "when",
+      "that",
+      "then"
+    ],
+    "answer": "when",
+    "explanation": "Correct expression is 'Scarcely... when'.",
+    "source": "JAMB Premium"
+  },
+  {
+    "exam_type": "jamb",
+    "subject": "English Language",
+    "topic": "Idioms",
+    "year": 2023,
+    "question": "To 'burn the midnight oil' means to",
+    "options": [
+      "waste electricity",
+      "study or work late into the night",
+      "start a fire",
+      "stay outside at night"
+    ],
+    "answer": "study or work late into the night",
+    "explanation": "The idiom refers to working late.",
+    "source": "JAMB Premium"
+  },
+  {
+    "exam_type": "jamb",
+    "subject": "English Language",
+    "topic": "Idioms",
+    "year": 2022,
+    "question": "Someone who 'keeps an ear to the ground' is",
+    "options": [
+      "sleeping",
+      "well-informed",
+      "hard of hearing",
+      "careless"
+    ],
+    "answer": "well-informed",
+    "explanation": "The idiom means staying informed about developments.",
+    "source": "JAMB Premium"
+  },
+  {
+    "exam_type": "jamb",
+    "subject": "English Language",
+    "topic": "Antonyms",
+    "year": 2021,
+    "question": "Choose the opposite in meaning to 'hostile'.",
+    "options": [
+      "friendly",
+      "violent",
+      "angry",
+      "strict"
+    ],
+    "answer": "friendly",
+    "explanation": "Hostile means unfriendly.",
+    "source": "JAMB Premium"
+  },
+  {
+    "exam_type": "jamb",
+    "subject": "English Language",
+    "topic": "Synonyms",
+    "year": 2020,
+    "question": "Choose the word nearest in meaning to 'precise'.",
+    "options": [
+      "careless",
+      "exact",
+      "wide",
+      "rough"
+    ],
+    "answer": "exact",
+    "explanation": "Precise means exact.",
+    "source": "JAMB Premium"
+  },
+  {
+    "exam_type": "jamb",
+    "subject": "English Language",
+    "topic": "Grammar",
+    "year": 2023,
+    "question": "He has been waiting here _____ two hours.",
+    "options": [
+      "since",
+      "for",
+      "during",
+      "from"
+    ],
+    "answer": "for",
+    "explanation": "'For' is used with duration.",
+    "source": "JAMB Premium"
+  },
+  {
+    "exam_type": "jamb",
+    "subject": "English Language",
+    "topic": "Grammar",
+    "year": 2022,
+    "question": "Not only the students but also the teacher _____ present.",
+    "options": [
+      "are",
+      "were",
+      "is",
+      "have"
+    ],
+    "answer": "is",
+    "explanation": "Verb agrees with nearest singular subject 'teacher'.",
+    "source": "JAMB Premium"
+  },
+  {
+    "exam_type": "jamb",
+    "subject": "English Language",
+    "topic": "Concord",
+    "year": 2021,
+    "question": "The furniture in the office _____ old.",
+    "options": [
+      "are",
+      "were",
+      "is",
+      "have"
+    ],
+    "answer": "is",
+    "explanation": "'Furniture' is uncountable and singular.",
+    "source": "JAMB Premium"
+  },
+  {
+    "exam_type": "jamb",
+    "subject": "English Language",
+    "topic": "Lexis and Structure",
+    "year": 2020,
+    "question": "Choose the correct expression.",
+    "options": [
+      "request for information",
+      "request information",
+      "request about information",
+      "request on information"
+    ],
+    "answer": "request information",
+    "explanation": "'Request' works directly as a transitive verb.",
+    "source": "JAMB Premium"
+  },
+  {
+    "exam_type": "jamb",
+    "subject": "English Language",
+    "topic": "Register",
+    "year": 2023,
+    "question": "The term 'deposition' belongs mainly to the _____ register.",
+    "options": [
+      "engineering",
+      "legal",
+      "medical",
+      "education"
+    ],
+    "answer": "legal",
+    "explanation": "Deposition is a legal term.",
+    "source": "JAMB Premium"
+  },
+  {
+    "exam_type": "jamb",
+    "subject": "English Language",
+    "topic": "Oral English",
+    "year": 2022,
+    "question": "Which word contains the /dʒ/ sound?",
+    "options": [
+      "judge",
+      "ship",
+      "thin",
+      "cat"
+    ],
+    "answer": "judge",
+    "explanation": "/dʒ/ is the 'j' sound.",
+    "source": "JAMB Premium"
+  },
+  {
+    "exam_type": "jamb",
+    "subject": "English Language",
+    "topic": "Oral English",
+    "year": 2021,
+    "question": "Which word has the /æ/ vowel sound?",
+    "options": [
+      "cat",
+      "cut",
+      "cot",
+      "coat"
+    ],
+    "answer": "cat",
+    "explanation": "/æ/ is the short vowel in 'cat'.",
+    "source": "JAMB Premium"
+  },
+  {
+    "exam_type": "jamb",
+    "subject": "English Language",
+    "topic": "Vocabulary",
+    "year": 2023,
+    "question": "A person who writes dictionaries is called a",
+    "options": [
+      "biographer",
+      "lexicographer",
+      "editor",
+      "novelist"
+    ],
+    "answer": "lexicographer",
+    "explanation": "A lexicographer compiles dictionaries.",
+    "source": "JAMB Premium"
+  },
+  {
+    "exam_type": "jamb",
+    "subject": "English Language",
+    "topic": "Phrasal Verbs",
+    "year": 2022,
+    "question": "The pilot had to _____ the flight because of bad weather.",
+    "options": [
+      "call off",
+      "call in",
+      "call up",
+      "call on"
+    ],
+    "answer": "call off",
+    "explanation": "'Call off' means cancel.",
+    "source": "JAMB Premium"
+  },
+  {
+    "exam_type": "jamb",
+    "subject": "English Language",
+    "topic": "Prepositions",
+    "year": 2021,
+    "question": "He apologized _____ the mistake.",
+    "options": [
+      "about",
+      "for",
+      "to",
+      "on"
+    ],
+    "answer": "for",
+    "explanation": "Correct collocation is 'apologize for'.",
+    "source": "JAMB Premium"
+  },
+  {
+    "exam_type": "jamb",
+    "subject": "English Language",
+    "topic": "Sentence Interpretation",
+    "year": 2023,
+    "question": "The expression 'She turned a deaf ear' means she",
+    "options": [
+      "became ill",
+      "ignored the advice",
+      "could not hear",
+      "was frightened"
+    ],
+    "answer": "ignored the advice",
+    "explanation": "The idiom means deliberate refusal to listen.",
+    "source": "JAMB Premium"
+  },
+  {
+    "exam_type": "jamb",
+    "subject": "English Language",
+    "topic": "Stress",
+    "year": 2022,
+    "question": "Which syllable is stressed in 'development'?",
+    "options": [
+      "de",
+      "vel",
+      "op",
+      "ment"
+    ],
+    "answer": "vel",
+    "explanation": "Primary stress falls on the second syllable.",
+    "source": "JAMB Premium"
+  },
+  {
+    "exam_type": "jamb",
+    "subject": "English Language",
+    "topic": "Homophones",
+    "year": 2021,
+    "question": "Choose the correct word: I want to _____ the package now.",
+    "options": [
+      "send",
+      "scent",
+      "cent",
+      "sent"
+    ],
+    "answer": "send",
+    "explanation": "The verb required is 'send'.",
+    "source": "JAMB Premium"
+  },
+  {
+    "exam_type": "jamb",
+    "subject": "English Language",
+    "topic": "Usage",
+    "year": 2023,
+    "question": "Choose the correct sentence.",
+    "options": [
+      "He is senior than me",
+      "He is senior to me",
+      "He is senior over me",
+      "He is senior with me"
+    ],
+    "answer": "He is senior to me",
+    "explanation": "Correct usage is 'senior to'.",
+    "source": "JAMB Premium"
+  },
+  {
+    "exam_type": "jamb",
+    "subject": "English Language",
+    "topic": "Comprehension Logic",
+    "year": 2022,
+    "question": "A statement directly supported by textual evidence is called a",
+    "options": [
+      "fact",
+      "guess",
+      "assumption",
+      "prediction"
+    ],
+    "answer": "fact",
+    "explanation": "Facts are directly supported by stated information.",
+    "source": "JAMB Premium"
+  },
+  {
+    "exam_type": "jamb",
+    "subject": "English Language",
+    "topic": "Lexis and Structure",
+    "year": 2021,
+    "question": "Choose the best word: Her argument was logically _____.",
+    "options": [
+      "sound",
+      "noise",
+      "break",
+      "damage"
+    ],
+    "answer": "sound",
+    "explanation": "'Sound' means valid or logical.",
+    "source": "JAMB Premium"
+  },
+  {
+    "exam_type": "jamb",
+    "subject": "English Language",
+    "topic": "Concord",
+    "year": 2020,
+    "question": "None of the answers _____ correct.",
+    "options": [
+      "is",
+      "are",
+      "was",
+      "has"
+    ],
+    "answer": "are",
+    "explanation": "With plural complement, plural agreement is acceptable here.",
+    "source": "JAMB Premium"
+  }
+]

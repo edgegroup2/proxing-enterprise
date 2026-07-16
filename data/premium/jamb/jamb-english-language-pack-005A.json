@@ -1,0 +1,282 @@
+[
+  {
+    "exam_type": "jamb",
+    "subject": "English Language",
+    "topic": "Summary",
+    "year": "2022",
+    "question": "A good summary should primarily",
+    "options": ["copy the passage word for word", "capture the main points concisely", "include personal opinions", "focus only on examples"],
+    "answer": "capture the main points concisely",
+    "explanation": "A summary presents the key ideas briefly and clearly.",
+    "source": "JAMB Premium"
+  },
+  {
+    "exam_type": "jamb",
+    "subject": "English Language",
+    "topic": "Comprehension",
+    "year": "2021",
+    "question": "The author's tone in a passage refers to the author's",
+    "options": ["handwriting style", "attitude toward the subject", "educational level", "paragraph arrangement"],
+    "answer": "attitude toward the subject",
+    "explanation": "Tone reflects the author's feeling or attitude.",
+    "source": "JAMB Premium"
+  },
+  {
+    "exam_type": "jamb",
+    "subject": "English Language",
+    "topic": "Cloze Test",
+    "year": "2020",
+    "question": "The students were asked to _____ the form carefully.",
+    "options": ["fill in", "fill on", "fill over", "fill at"],
+    "answer": "fill in",
+    "explanation": "'Fill in' is the correct phrasal usage for completing forms.",
+    "source": "JAMB Premium"
+  },
+  {
+    "exam_type": "jamb",
+    "subject": "English Language",
+    "topic": "Concord",
+    "year": "2022",
+    "question": "Either John or his friends _____ responsible.",
+    "options": ["is", "are", "was", "has"],
+    "answer": "are",
+    "explanation": "Verb agrees with the nearest subject.",
+    "source": "JAMB Premium"
+  },
+  {
+    "exam_type": "jamb",
+    "subject": "English Language",
+    "topic": "Lexis and Structure",
+    "year": "2021",
+    "question": "Hardly had we arrived _____ the meeting started.",
+    "options": ["than", "when", "then", "that"],
+    "answer": "when",
+    "explanation": "Correct expression: Hardly...when.",
+    "source": "JAMB Premium"
+  },
+  {
+    "exam_type": "jamb",
+    "subject": "English Language",
+    "topic": "Idioms",
+    "year": "2020",
+    "question": "To 'beat about the bush' means to",
+    "options": ["fight in the forest", "avoid the main point", "hunt animals", "speak aggressively"],
+    "answer": "avoid the main point",
+    "explanation": "The idiom means being indirect.",
+    "source": "JAMB Premium"
+  },
+  {
+    "exam_type": "jamb",
+    "subject": "English Language",
+    "topic": "Register",
+    "year": "2022",
+    "question": "The term 'editorial' belongs mainly to the _____ register.",
+    "options": ["medical", "journalistic", "legal", "banking"],
+    "answer": "journalistic",
+    "explanation": "'Editorial' is journalism-related terminology.",
+    "source": "JAMB Premium"
+  },
+  {
+    "exam_type": "jamb",
+    "subject": "English Language",
+    "topic": "Word Stress",
+    "year": "2021",
+    "question": "Which word has stress on the second syllable?",
+    "options": ["teacher", "hotel", "garden", "window"],
+    "answer": "hotel",
+    "explanation": "ho-TEL has second syllable stress.",
+    "source": "JAMB Premium"
+  },
+  {
+    "exam_type": "jamb",
+    "subject": "English Language",
+    "topic": "Oral English",
+    "year": "2020",
+    "question": "Which word contains the /ʒ/ sound?",
+    "options": ["measure", "mission", "chair", "gate"],
+    "answer": "measure",
+    "explanation": "'Measure' contains /ʒ/.",
+    "source": "JAMB Premium"
+  },
+  {
+    "exam_type": "jamb",
+    "subject": "English Language",
+    "topic": "Minimal Pairs",
+    "year": "2022",
+    "question": "Which pair illustrates vowel contrast?",
+    "options": ["ship/sheep", "bat/bat", "man/man", "cat/cat"],
+    "answer": "ship/sheep",
+    "explanation": "/ɪ/ vs /iː/ contrast.",
+    "source": "JAMB Premium"
+  },
+  {
+    "exam_type": "jamb",
+    "subject": "English Language",
+    "topic": "Sentence Interpretation",
+    "year": "2021",
+    "question": "If a person is 'under the weather', the person is",
+    "options": ["traveling", "unwell", "working outside", "confused"],
+    "answer": "unwell",
+    "explanation": "The idiom means feeling ill.",
+    "source": "JAMB Premium"
+  },
+  {
+    "exam_type": "jamb",
+    "subject": "English Language",
+    "topic": "Vocabulary",
+    "year": "2020",
+    "question": "Choose the word nearest in meaning to 'meticulous'.",
+    "options": ["careless", "careful", "quick", "rude"],
+    "answer": "careful",
+    "explanation": "Meticulous means very careful.",
+    "source": "JAMB Premium"
+  },
+  {
+    "exam_type": "jamb",
+    "subject": "English Language",
+    "topic": "Antonyms",
+    "year": "2022",
+    "question": "Opposite of 'optimistic' is",
+    "options": ["hopeful", "joyful", "pessimistic", "excited"],
+    "answer": "pessimistic",
+    "explanation": "Direct antonym.",
+    "source": "JAMB Premium"
+  },
+  {
+    "exam_type": "jamb",
+    "subject": "English Language",
+    "topic": "Synonyms",
+    "year": "2021",
+    "question": "Nearest in meaning to 'generous' is",
+    "options": ["mean", "kind", "hostile", "strict"],
+    "answer": "kind",
+    "explanation": "Generous aligns closely with kindness.",
+    "source": "JAMB Premium"
+  },
+  {
+    "exam_type": "jamb",
+    "subject": "English Language",
+    "topic": "Punctuation",
+    "year": "2020",
+    "question": "Choose the correctly punctuated sentence.",
+    "options": [
+      "My brother who lives in Lagos is a doctor.",
+      "My brother, who lives in Lagos, is a doctor.",
+      "My brother who lives, in Lagos is a doctor.",
+      "My brother who, lives in Lagos is a doctor."
+    ],
+    "answer": "My brother, who lives in Lagos, is a doctor.",
+    "explanation": "Nonrestrictive clause takes commas.",
+    "source": "JAMB Premium"
+  },
+  {
+    "exam_type": "jamb",
+    "subject": "English Language",
+    "topic": "Usage",
+    "year": "2022",
+    "question": "Choose the correct sentence.",
+    "options": ["She can sings well.", "She can sing well.", "She can sang well.", "She can sung well."],
+    "answer": "She can sing well.",
+    "explanation": "Modal verbs take base form.",
+    "source": "JAMB Premium"
+  },
+  {
+    "exam_type": "jamb",
+    "subject": "English Language",
+    "topic": "Spelling",
+    "year": "2021",
+    "question": "Choose the correctly spelt word.",
+    "options": ["Embarrassment", "Embarassment", "Embarrasment", "Embarasment"],
+    "answer": "Embarrassment",
+    "explanation": "Correct spelling.",
+    "source": "JAMB Premium"
+  },
+  {
+    "exam_type": "jamb",
+    "subject": "English Language",
+    "topic": "Phrasal Verbs",
+    "year": "2020",
+    "question": "The plane _____ at noon.",
+    "options": ["took off", "took on", "took in", "took over"],
+    "answer": "took off",
+    "explanation": "'Take off' for aircraft departure.",
+    "source": "JAMB Premium"
+  },
+  {
+    "exam_type": "jamb",
+    "subject": "English Language",
+    "topic": "Figures of Speech",
+    "year": "2022",
+    "question": "'As brave as a lion' is an example of",
+    "options": ["metaphor", "simile", "hyperbole", "personification"],
+    "answer": "simile",
+    "explanation": "Uses 'as' for comparison.",
+    "source": "JAMB Premium"
+  },
+  {
+    "exam_type": "jamb",
+    "subject": "English Language",
+    "topic": "Tenses",
+    "year": "2021",
+    "question": "They _____ dinner before we arrived.",
+    "options": ["have eaten", "had eaten", "eat", "were eating"],
+    "answer": "had eaten",
+    "explanation": "Past perfect for earlier past action.",
+    "source": "JAMB Premium"
+  },
+  {
+    "exam_type": "jamb",
+    "subject": "English Language",
+    "topic": "Prepositions",
+    "year": "2020",
+    "question": "She insisted _____ paying the bill.",
+    "options": ["on", "at", "for", "with"],
+    "answer": "on",
+    "explanation": "Correct collocation: insist on.",
+    "source": "JAMB Premium"
+  },
+  {
+    "exam_type": "jamb",
+    "subject": "English Language",
+    "topic": "Homophones",
+    "year": "2022",
+    "question": "Choose the correct word: I need a _____ of shoes.",
+    "options": ["pear", "pare", "pair", "peer"],
+    "answer": "pair",
+    "explanation": "Pair means two matching items.",
+    "source": "JAMB Premium"
+  },
+  {
+    "exam_type": "jamb",
+    "subject": "English Language",
+    "topic": "Sentence Completion",
+    "year": "2021",
+    "question": "Scarcely had he spoken _____ the lights went out.",
+    "options": ["than", "when", "then", "that"],
+    "answer": "when",
+    "explanation": "Standard structure.",
+    "source": "JAMB Premium"
+  },
+  {
+    "exam_type": "jamb",
+    "subject": "English Language",
+    "topic": "Comprehension Logic",
+    "year": "2022",
+    "question": "A writer's unstated meaning is called",
+    "options": ["register", "implication", "title", "headline"],
+    "answer": "implication",
+    "explanation": "Implication is indirectly suggested meaning.",
+    "source": "JAMB Premium"
+  },
+  {
+    "exam_type": "jamb",
+    "subject": "English Language",
+    "topic": "Stress Contrast",
+    "year": "2021",
+    "question": "Which pair shows noun/verb stress contrast?",
+    "options": ["record / record", "cat / cat", "table / table", "book / book"],
+    "answer": "record / record",
+    "explanation": "Noun first syllable; verb second syllable stress.",
+    "source": "JAMB Premium"
+  }
+]

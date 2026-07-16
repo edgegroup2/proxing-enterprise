@@ -1,0 +1,402 @@
+[
+  {
+    "exam_type": "jamb",
+    "subject": "English Language",
+    "topic": "Idioms",
+    "year": 2023,
+    "question": "When the manager said he would 'face the music', he meant he would",
+    "options": [
+      "attend a concert",
+      "accept the consequences",
+      "compose a song",
+      "avoid criticism"
+    ],
+    "answer": "accept the consequences",
+    "explanation": "The idiom means to accept punishment or consequences.",
+    "source": "JAMB Premium"
+  },
+  {
+    "exam_type": "jamb",
+    "subject": "English Language",
+    "topic": "Concord",
+    "year": 2022,
+    "question": "Either the principal or the teachers _____ attending the seminar.",
+    "options": [
+      "is",
+      "was",
+      "are",
+      "has"
+    ],
+    "answer": "are",
+    "explanation": "The verb agrees with the nearest plural subject 'teachers'.",
+    "source": "JAMB Premium"
+  },
+  {
+    "exam_type": "jamb",
+    "subject": "English Language",
+    "topic": "Sentence Completion",
+    "year": 2021,
+    "question": "Had she informed us earlier, we _____ the arrangement.",
+    "options": [
+      "would change",
+      "would have changed",
+      "will change",
+      "changed"
+    ],
+    "answer": "would have changed",
+    "explanation": "This is a third conditional sentence.",
+    "source": "JAMB Premium"
+  },
+  {
+    "exam_type": "jamb",
+    "subject": "English Language",
+    "topic": "Antonyms",
+    "year": 2020,
+    "question": "Choose the opposite in meaning to 'diligent'.",
+    "options": [
+      "careless",
+      "hardworking",
+      "honest",
+      "patient"
+    ],
+    "answer": "careless",
+    "explanation": "Diligent means hardworking; opposite is careless/lazy.",
+    "source": "JAMB Premium"
+  },
+  {
+    "exam_type": "jamb",
+    "subject": "English Language",
+    "topic": "Synonyms",
+    "year": 2019,
+    "question": "Choose the word nearest in meaning to 'abundant'.",
+    "options": [
+      "scarce",
+      "plentiful",
+      "hidden",
+      "uncertain"
+    ],
+    "answer": "plentiful",
+    "explanation": "Abundant means plentiful.",
+    "source": "JAMB Premium"
+  },
+  {
+    "exam_type": "jamb",
+    "subject": "English Language",
+    "topic": "Comprehension",
+    "year": 2023,
+    "question": "From the passage, the author's tone is best described as",
+    "options": [
+      "sarcastic",
+      "objective",
+      "hostile",
+      "playful"
+    ],
+    "answer": "objective",
+    "explanation": "The passage presents facts neutrally.",
+    "source": "JAMB Premium"
+  },
+  {
+    "exam_type": "jamb",
+    "subject": "English Language",
+    "topic": "Comprehension",
+    "year": 2022,
+    "question": "The phrase 'a blessing in disguise' in the passage means",
+    "options": [
+      "a hidden danger",
+      "an unexpected benefit",
+      "a planned deception",
+      "an obvious success"
+    ],
+    "answer": "an unexpected benefit",
+    "explanation": "The idiomatic meaning is a hidden advantage.",
+    "source": "JAMB Premium"
+  },
+  {
+    "exam_type": "jamb",
+    "subject": "English Language",
+    "topic": "Grammar",
+    "year": 2021,
+    "question": "By this time tomorrow, they _____ the journey.",
+    "options": [
+      "complete",
+      "will complete",
+      "will have completed",
+      "completed"
+    ],
+    "answer": "will have completed",
+    "explanation": "Future perfect tense fits the time expression.",
+    "source": "JAMB Premium"
+  },
+  {
+    "exam_type": "jamb",
+    "subject": "English Language",
+    "topic": "Grammar",
+    "year": 2020,
+    "question": "She prefers tea _____ coffee.",
+    "options": [
+      "than",
+      "to",
+      "with",
+      "over than"
+    ],
+    "answer": "to",
+    "explanation": "Correct expression is 'prefer X to Y'.",
+    "source": "JAMB Premium"
+  },
+  {
+    "exam_type": "jamb",
+    "subject": "English Language",
+    "topic": "Lexis and Structure",
+    "year": 2023,
+    "question": "Choose the correct expression.",
+    "options": [
+      "discuss about the issue",
+      "discuss the issue",
+      "discuss on the issue",
+      "discuss over the issue"
+    ],
+    "answer": "discuss the issue",
+    "explanation": "'Discuss' does not take 'about'.",
+    "source": "JAMB Premium"
+  },
+  {
+    "exam_type": "jamb",
+    "subject": "English Language",
+    "topic": "Register",
+    "year": 2022,
+    "question": "The expression 'plaintiff' belongs to the _____ register.",
+    "options": [
+      "medical",
+      "legal",
+      "banking",
+      "engineering"
+    ],
+    "answer": "legal",
+    "explanation": "Plaintiff is a legal term.",
+    "source": "JAMB Premium"
+  },
+  {
+    "exam_type": "jamb",
+    "subject": "English Language",
+    "topic": "Oral English",
+    "year": 2021,
+    "question": "Which word contains the /θ/ sound?",
+    "options": [
+      "think",
+      "this",
+      "then",
+      "those"
+    ],
+    "answer": "think",
+    "explanation": "/θ/ is the voiceless 'th' sound.",
+    "source": "JAMB Premium"
+  },
+  {
+    "exam_type": "jamb",
+    "subject": "English Language",
+    "topic": "Oral English",
+    "year": 2020,
+    "question": "Which word has the same vowel sound as 'seat'?",
+    "options": [
+      "beat",
+      "bit",
+      "bet",
+      "bat"
+    ],
+    "answer": "beat",
+    "explanation": "Both contain the /i:/ sound.",
+    "source": "JAMB Premium"
+  },
+  {
+    "exam_type": "jamb",
+    "subject": "English Language",
+    "topic": "Phrasal Verbs",
+    "year": 2023,
+    "question": "The workers called _____ the strike after negotiations.",
+    "options": [
+      "up",
+      "off",
+      "out",
+      "in"
+    ],
+    "answer": "off",
+    "explanation": "'Call off' means cancel.",
+    "source": "JAMB Premium"
+  },
+  {
+    "exam_type": "jamb",
+    "subject": "English Language",
+    "topic": "Prepositions",
+    "year": 2022,
+    "question": "She is good _____ Mathematics.",
+    "options": [
+      "in",
+      "at",
+      "on",
+      "with"
+    ],
+    "answer": "at",
+    "explanation": "Correct collocation is 'good at'.",
+    "source": "JAMB Premium"
+  },
+  {
+    "exam_type": "jamb",
+    "subject": "English Language",
+    "topic": "Vocabulary",
+    "year": 2021,
+    "question": "A person who studies stars and planets is an",
+    "options": [
+      "astrologer",
+      "astronomer",
+      "biologist",
+      "geologist"
+    ],
+    "answer": "astronomer",
+    "explanation": "Astronomers study celestial objects scientifically.",
+    "source": "JAMB Premium"
+  },
+  {
+    "exam_type": "jamb",
+    "subject": "English Language",
+    "topic": "Sentence Interpretation",
+    "year": 2023,
+    "question": "The statement 'He is economical with the truth' means he",
+    "options": [
+      "speaks briefly",
+      "lies or avoids full truth",
+      "speaks wisely",
+      "is financially prudent"
+    ],
+    "answer": "lies or avoids full truth",
+    "explanation": "It implies not being fully truthful.",
+    "source": "JAMB Premium"
+  },
+  {
+    "exam_type": "jamb",
+    "subject": "English Language",
+    "topic": "Stress",
+    "year": 2020,
+    "question": "Which syllable is stressed in 'photograph'?",
+    "options": [
+      "pho",
+      "to",
+      "graph",
+      "equal stress"
+    ],
+    "answer": "pho",
+    "explanation": "Primary stress falls on the first syllable.",
+    "source": "JAMB Premium"
+  },
+  {
+    "exam_type": "jamb",
+    "subject": "English Language",
+    "topic": "Homophones",
+    "year": 2021,
+    "question": "Choose the correct word: Please _____ your shoes outside.",
+    "options": [
+      "leave",
+      "live",
+      "leaf",
+      "lief"
+    ],
+    "answer": "leave",
+    "explanation": "The sentence requires the verb 'leave'.",
+    "source": "JAMB Premium"
+  },
+  {
+    "exam_type": "jamb",
+    "subject": "English Language",
+    "topic": "Usage",
+    "year": 2022,
+    "question": "Choose the correct sentence.",
+    "options": [
+      "She is married with a doctor",
+      "She is married to a doctor",
+      "She is married by a doctor",
+      "She is married from a doctor"
+    ],
+    "answer": "She is married to a doctor",
+    "explanation": "Correct idiomatic usage is 'married to'.",
+    "source": "JAMB Premium"
+  },
+  {
+    "exam_type": "jamb",
+    "subject": "English Language",
+    "topic": "Concord",
+    "year": 2021,
+    "question": "Mathematics _____ my favourite subject.",
+    "options": [
+      "are",
+      "were",
+      "is",
+      "have"
+    ],
+    "answer": "is",
+    "explanation": "Academic subjects are treated as singular.",
+    "source": "JAMB Premium"
+  },
+  {
+    "exam_type": "jamb",
+    "subject": "English Language",
+    "topic": "Lexis and Structure",
+    "year": 2023,
+    "question": "Choose the word that best completes the sentence: His explanation was completely _____.",
+    "options": [
+      "coherent",
+      "chaos",
+      "break",
+      "damage"
+    ],
+    "answer": "coherent",
+    "explanation": "The adjective fits grammatically and semantically.",
+    "source": "JAMB Premium"
+  },
+  {
+    "exam_type": "jamb",
+    "subject": "English Language",
+    "topic": "Sentence Completion",
+    "year": 2020,
+    "question": "No sooner had he arrived _____ the rain started.",
+    "options": [
+      "when",
+      "than",
+      "then",
+      "that"
+    ],
+    "answer": "than",
+    "explanation": "Correct expression is 'No sooner... than'.",
+    "source": "JAMB Premium"
+  },
+  {
+    "exam_type": "jamb",
+    "subject": "English Language",
+    "topic": "Idioms",
+    "year": 2022,
+    "question": "To 'hit the nail on the head' means to",
+    "options": [
+      "make an exact point",
+      "injure someone",
+      "build something",
+      "act carelessly"
+    ],
+    "answer": "make an exact point",
+    "explanation": "The idiom means being precisely correct.",
+    "source": "JAMB Premium"
+  },
+  {
+    "exam_type": "jamb",
+    "subject": "English Language",
+    "topic": "Comprehension Logic",
+    "year": 2023,
+    "question": "An idea implied but not directly stated in a passage is called",
+    "options": [
+      "fact",
+      "inference",
+      "quotation",
+      "summary"
+    ],
+    "answer": "inference",
+    "explanation": "Inference is deduced from textual evidence.",
+    "source": "JAMB Premium"
+  }
+]

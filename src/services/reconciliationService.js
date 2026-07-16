@@ -1,13 +1,15 @@
-const axios = require("axios");
+'use strict';
 
-async function reconcileVTpassBalance() {
+const axios = require('axios');
+
+async function reconcileVtpassBalance() {
   const res = await axios.get(
     `${process.env.VTPASS_BASE_URL}/balance`,
     {
       headers: {
-        "api-key": process.env.VTPASS_API_KEY,
-        "public-key": process.env.VTPASS_PUBLIC_KEY,
-        "secret-key": process.env.VTPASS_SECRET_KEY,
+        'api-key': process.env.VTPASS_API_KEY,
+        'public-key': process.env.VTPASS_PUBLIC_KEY,
+        'secret-key': process.env.VTPASS_SECRET_KEY,
       },
     }
   );
@@ -15,4 +17,7 @@ async function reconcileVTpassBalance() {
   return Number(res.data?.content?.balance || 0);
 }
 
-module.exports = { reconcileVTpassBalance };
+module.exports = {
+  reconcileVtpassBalance,
+  reconcileBalance: reconcileVtpassBalance,
+};

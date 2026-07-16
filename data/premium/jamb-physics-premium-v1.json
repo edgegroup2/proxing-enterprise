@@ -1,0 +1,113 @@
+[
+  {
+    "exam_type": "jamb",
+    "subject": "Physics",
+    "topic": "Motion",
+    "year": 2026,
+    "question": "A car accelerates uniformly from rest to 20 m/s in 5 seconds. Find its acceleration.",
+    "options": ["2 m/s²", "4 m/s²", "5 m/s²", "10 m/s²"],
+    "correct_index": 1,
+    "explanation": "Acceleration = change in velocity/time = (20 - 0)/5 = 4 m/s².",
+    "source": "JAMB Premium Pack v1"
+  },
+  {
+    "exam_type": "jamb",
+    "subject": "Physics",
+    "topic": "Force",
+    "year": 2026,
+    "question": "A force of 50 N acts on a body of mass 10 kg. Find the acceleration produced.",
+    "options": ["2 m/s²", "5 m/s²", "10 m/s²", "50 m/s²"],
+    "correct_index": 1,
+    "explanation": "Using F = ma, acceleration = F/m = 50/10 = 5 m/s².",
+    "source": "JAMB Premium Pack v1"
+  },
+  {
+    "exam_type": "jamb",
+    "subject": "Physics",
+    "topic": "Work, Energy and Power",
+    "year": 2026,
+    "question": "The work done when a force of 20 N moves an object through 5 m in the direction of the force is",
+    "options": ["4 J", "25 J", "100 J", "200 J"],
+    "correct_index": 2,
+    "explanation": "Work done = force × distance = 20 × 5 = 100 J.",
+    "source": "JAMB Premium Pack v1"
+  },
+  {
+    "exam_type": "jamb",
+    "subject": "Physics",
+    "topic": "Pressure",
+    "year": 2026,
+    "question": "Pressure is defined as",
+    "options": ["force × area", "force per unit area", "mass per unit volume", "work done per unit time"],
+    "correct_index": 1,
+    "explanation": "Pressure = force/area, so it is force per unit area.",
+    "source": "JAMB Premium Pack v1"
+  },
+  {
+    "exam_type": "jamb",
+    "subject": "Physics",
+    "topic": "Heat",
+    "year": 2026,
+    "question": "The transfer of heat through a metal rod is mainly by",
+    "options": ["conduction", "convection", "radiation", "evaporation"],
+    "correct_index": 0,
+    "explanation": "Heat transfer in solids, especially metals, occurs mainly by conduction.",
+    "source": "JAMB Premium Pack v1"
+  },
+  {
+    "exam_type": "jamb",
+    "subject": "Physics",
+    "topic": "Waves",
+    "year": 2026,
+    "question": "The distance between two successive crests of a wave is called",
+    "options": ["amplitude", "frequency", "wavelength", "period"],
+    "correct_index": 2,
+    "explanation": "Wavelength is the distance between two successive points in phase, such as crest to crest.",
+    "source": "JAMB Premium Pack v1"
+  },
+  {
+    "exam_type": "jamb",
+    "subject": "Physics",
+    "topic": "Sound",
+    "year": 2026,
+    "question": "Sound cannot travel through",
+    "options": ["air", "water", "steel", "vacuum"],
+    "correct_index": 3,
+    "explanation": "Sound requires a material medium and cannot travel through a vacuum.",
+    "source": "JAMB Premium Pack v1"
+  },
+  {
+    "exam_type": "jamb",
+    "subject": "Physics",
+    "topic": "Light",
+    "year": 2026,
+    "question": "The bending of light as it passes from one medium to another is called",
+    "options": ["reflection", "refraction", "diffraction", "dispersion"],
+    "correct_index": 1,
+    "explanation": "Refraction is the change in direction of light when it passes between media of different optical densities.",
+    "source": "JAMB Premium Pack v1"
+  },
+  {
+    "exam_type": "jamb",
+    "subject": "Physics",
+    "topic": "Electricity",
+    "year": 2026,
+    "question": "If a current of 2 A flows through a resistance of 5 Ω, find the potential difference.",
+    "options": ["2.5 V", "7 V", "10 V", "20 V"],
+    "correct_index": 2,
+    "explanation": "Using Ohm's law, V = IR = 2 × 5 = 10 V.",
+    "source": "JAMB Premium Pack v1"
+  },
+  {
+    "exam_type": "jamb",
+    "subject": "Physics",
+    "topic": "Magnetism",
+    "year": 2026,
+    "question": "The region around a magnet where magnetic force can be felt is called",
+    "options": ["electric field", "magnetic field", "gravitational field", "force field"],
+    "correct_index": 1,
+    "explanation": "A magnetic field is the region around a magnet where magnetic effects are experienced.",
+    "source": "JAMB Premium Pack v1"
+  }
+]
+

@@ -20,3 +20,30 @@ log/
 # temp / backups
 *.save
 *.bak
+
+*.swp
+*.swo
+*.bak
+*.save
+*~
+
+
+# BEGIN PROXING REPOSITORY HYGIENE
+node_modules/
+backup/
+backups/
+audit/
+audits/
+
+.env
+.env.*
+!.env.example
+!.env.sample
+
+*.dump
+*.bak
+*.save
+*.save.*
+*.sql.gz
+*.tar.gz
+# END PROXING REPOSITORY HYGIENE

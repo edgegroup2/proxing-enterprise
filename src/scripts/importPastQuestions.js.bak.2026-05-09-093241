@@ -1,0 +1,77 @@
+'use strict';
+
+const fs = require('fs');
+const path = require('path');
+const db = require('../db');
+
+function normalizeOptions(value) {
+  if (!value) return [];
+  if (Array.isArray(value)) return value;
+
+  try {
+    const parsed = JSON.parse(value);
+    return Array.isArray(parsed) ? parsed : [];
+  } catch (_) {
+    return String(value)
+      .split('|')
+      .map((x) => x.trim())
+      .filter(Boolean);
+  }
+}
+
+async function importJson(filePath) {
+  const fullPath = path.resolve(filePath);
+  const raw = fs.readFileSync(fullPath, 'utf8');
+  const rows = JSON.parse(raw);
+
+  if (!Array.isArray(rows)) {
+    throw new Error('JSON file must contain an array');
+  }
+
+  let inserted = 0;
+
+  for (const row of rows) {
+    if (!row.exam_type || !row.subject || !row.question) {
+      console.warn('[skip] missing exam_type, subject, or question');
+      continue;
+    }
+
+    await db.query(
+      `
+      INSERT INTO past_questions (
+        exam_type, subject, topic, year, question, options, answer, explanation, source
+      )
+      VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9)
+      `,
+      [
+        String(row.exam_type).toLowerCase().trim(),
+        String(row.subject).trim(),
+        row.topic ? String(row.topic).trim() : null,
+        row.year ? Number(row.year) : null,
+        String(row.question).trim(),
+        JSON.stringify(normalizeOptions(row.options)),
+        row.answer ? String(row.answer).trim() : null,
+        row.explanation ? String(row.explanation).trim() : null,
+        row.source ? String(row.source).trim() : null
+      ]
+    );
+
+    inserted++;
+  }
+
+  console.log(`[importPastQuestions] inserted ${inserted}`);
+}
+
+const file = process.argv[2];
+
+if (!file) {
+  console.error('Usage: node src/scripts/importPastQuestions.js ./past-questions.json');
+  process.exit(1);
+}
+
+importJson(file)
+  .then(() => process.exit(0))
+  .catch((err) => {
+    console.error('[importPastQuestions] failed:', err.message);
+    process.exit(1);
+  });

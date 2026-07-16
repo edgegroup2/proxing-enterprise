@@ -1,0 +1,979 @@
+'use strict';
+
+const express = require('express');
+const authModule = require('../middleware/auth');
+const walletService = require('../services/walletService');
+const vtpassClient = require('../services/vtpassClient');
+const { evaluateFloatHealth } = require('../services/vtpassFloatManager');
+const logger = require('../utils/logger');
+const db = require('../db');
+
+let processCommission = null;
+try {
+  ({ processCommission } = require('../services/commissionEngine'));
+} catch (_) {
+  processCommission = null;
+}
+
+let sendTransactionSuccessAlert = async () => {};
+try {
+  const telegramAlertModule = require('../services/telegramAlert');
+  sendTransactionSuccessAlert =
+    typeof telegramAlertModule?.sendTransactionSuccessAlert === 'function'
+      ? telegramAlertModule.sendTransactionSuccessAlert
+      : async () => {};
+} catch (_) {
+  sendTransactionSuccessAlert = async () => {};
+}
+
+let sendUserTransactionReceipt = async () => ({ sent: false });
+try {
+  ({ sendUserTransactionReceipt } = require('../services/userTelegramService'));
+} catch (_) {
+  sendUserTransactionReceipt = async () => ({ sent: false });
+}
+
+const authMiddleware =
+  typeof authModule === 'function'
+    ? authModule
+    : (
+        authModule.requireAuth ||
+        authModule.authMiddleware ||
+        authModule.auth ||
+        authModule.userAuth ||
+        authModule.default
+      );
+
+if (typeof authMiddleware !== 'function') {
+  throw new Error(
+    `Auth middleware is not a function. Exported keys: ${Object.keys(authModule || {}).join(', ')}`
+  );
+}
+
+const router = express.Router();
+
+function makeReference(prefix) {
+  return `${prefix}-${Date.now()}-${Math.random().toString(16).slice(2)}`;
+}
+
+/**
+ * Normalize product type.
+ * IMPORTANT:
+ * - Do not default to airtime
+ * - Missing product_type must fail fast
+ */
+function normalizeProductType(body) {
+  const raw =
+    body.product_type ||
+    body.productType ||
+    body.type ||
+    body.product ||
+    null;
+
+  return raw ? String(raw).trim().toLowerCase() : null;
+}
+
+/**
+ * Map common network names => VTpass airtime serviceID
+ */
+function networkToAirtimeServiceId(network) {
+  const n = String(network || '').trim().toLowerCase();
+  if (!n) return null;
+
+  if (n === 'mtn') return 'mtn';
+  if (n === 'airtel') return 'airtel';
+  if (n === 'glo') return 'glo';
+  if (n === '9mobile' || n === 'etisalat' || n === '9 mobile') return 'etisalat';
+
+  return n;
+}
+
+/**
+ * Map common network names => VTpass data serviceID
+ */
+function networkToDataServiceId(network) {
+  const n = String(network || '').trim().toLowerCase();
+  if (!n) return null;
+
+  if (n.includes('-data')) return n;
+
+  if (n === 'mtn') return 'mtn-data';
+  if (n === 'airtel') return 'airtel-data';
+  if (n === 'glo') return 'glo-data';
+  if (n === '9mobile' || n === 'etisalat' || n === '9 mobile') return 'etisalat-data';
+
+  return n;
+}
+
+/**
+ * Disco map for electricity
+ */
+function discoToServiceId(disco) {
+  const d = String(disco || '').trim().toLowerCase();
+  if (!d) return null;
+
+  const map = {
+    ikedc: 'ikeja-electric',
+    ikeja: 'ikeja-electric',
+    ekedc: 'eko-electric',
+    eko: 'eko-electric',
+    phed: 'portharcourt-electric',
+    pharcourt: 'portharcourt-electric',
+    aedc: 'abuja-electric',
+    abuja: 'abuja-electric',
+    kedco: 'kaduna-electric',
+    kaduna: 'kaduna-electric',
+    ibedc: 'ibadan-electric',
+    ibadan: 'ibadan-electric',
+    jed: 'jos-electric',
+    jos: 'jos-electric',
+    bedc: 'benin-electric',
+    benin: 'benin-electric',
+    eedc: 'enugu-electric',
+    enugu: 'enugu-electric',
+  };
+
+  return map[d] || d;
+}
+
+function pickVariationCode(body) {
+  return (
+    body.variation_code ||
+    body.variationCode ||
+    body.planCode ||
+    body.bundleCode ||
+    body.variationId ||
+    body.meter_type ||
+    body.meterType ||
+    null
+  );
+}
+
+/**
+ * VTpass sometimes returns { code: '000', response_description: '...' }
+ * Some endpoints may return numeric code or success boolean.
+ */
+function normalizeVtpassSuccess(vtData) {
+  const code = String(vtData?.code ?? '');
+
+  if (code === '000' || code === '001') return true;
+
+  if (
+    vtData?.response_description &&
+    String(vtData.response_description).toLowerCase().includes('success')
+  ) {
+    return true;
+  }
+
+  if (vtData?.success === true) return true;
+  if (vtData?.status === true) return true;
+
+  return false;
+}
+
+/**
+ * Fetch a variation price from VTpass and return Number(amount)
+ * Works for data/tv/waec/intl if VTpass provides amount/variation_amount/price.
+ */
+async function getVariationAmount(serviceID, variation_code) {
+  const variations = await vtpassClient.serviceVariations(serviceID);
+
+  const candidates = [
+    variations?.content?.variations,
+    variations?.variations,
+    variations?.content,
+    variations?.content?.variation,
+    variations?.content?.options,
+    variations?.response_description,
+  ];
+
+  let list = [];
+  for (const item of candidates) {
+    if (Array.isArray(item)) {
+      list = item;
+      break;
+    }
+  }
+
+  const normalizedVariation = String(variation_code || '').trim().toLowerCase();
+
+  const found = list.find((v) => {
+    const codes = [
+      v?.variation_code,
+      v?.variationCode,
+      v?.code,
+      v?.variation_amount_code,
+      v?.name,
+    ]
+      .filter(Boolean)
+      .map((x) => String(x).trim().toLowerCase());
+
+    return codes.includes(normalizedVariation);
+  });
+
+  if (!found) {
+    throw new Error(`Invalid variation_code for ${serviceID}`);
+  }
+
+  const rawAmount =
+    found?.variation_amount ??
+    found?.amount ??
+    found?.price ??
+    found?.['variation-price'] ??
+    found?.price_amount ??
+    null;
+
+  const n = Number(rawAmount);
+  if (!n || Number.isNaN(n)) {
+    throw new Error(`Could not determine amount for variation_code=${variation_code}`);
+  }
+
+  return n;
+}
+
+function safePhone(value) {
+  if (value === undefined || value === null) return undefined;
+  const s = String(value).trim();
+  return s || undefined;
+}
+
+function extractToken(vtRes) {
+  return (
+    vtRes?.content?.token ||
+    vtRes?.token ||
+    vtRes?.purchased_code ||
+    vtRes?.mainToken ||
+    vtRes?.content2?.purchased_code ||
+    vtRes?.purchasedCode ||
+    vtRes?.content?.transactions?.token ||
+    vtRes?.content?.transactions?.purchased_code ||
+    vtRes?.purchased_code2?.token ||
+    null
+  );
+}
+
+function extractUnits(vtRes) {
+  return (
+    vtRes?.content?.units ||
+    vtRes?.units ||
+    vtRes?.content?.transactions?.units ||
+    vtRes?.unitsPurchased ||
+    null
+  );
+}
+
+function extractElectricityAddress(vtRes) {
+  return (
+    vtRes?.content?.address ||
+    vtRes?.content?.customer_Address ||
+    vtRes?.content?.customerAddress ||
+    vtRes?.content?.transactions?.address ||
+    vtRes?.content?.transactions?.customer_address ||
+    vtRes?.content?.transactions?.customerAddress ||
+    vtRes?.address ||
+    vtRes?.customer_address ||
+    vtRes?.customerAddress ||
+    null
+  );
+}
+
+function extractElectricityCustomerName(vtRes) {
+  return (
+    vtRes?.content?.customer_name ||
+    vtRes?.content?.customerName ||
+    vtRes?.content?.name ||
+    vtRes?.content?.transactions?.customer_name ||
+    vtRes?.content?.transactions?.customerName ||
+    vtRes?.customer_name ||
+    vtRes?.customerName ||
+    vtRes?.name ||
+    null
+  );
+}
+
+function buildTelegramMeta(productType, payload, vtRes) {
+  const base = {
+    productType,
+    serviceID: payload?.serviceID ?? null,
+    billersCode: payload?.billersCode ?? null,
+    phone: payload?.phone ?? null,
+    variation_code: payload?.variation_code ?? null,
+    token: extractToken(vtRes),
+    units: extractUnits(vtRes),
+  };
+
+  if (productType === 'electricity') {
+    return {
+      ...base,
+      disco: payload?.serviceID ?? null,
+      meter_number: payload?.billersCode ?? null,
+      meter_type: payload?.variation_code ?? null,
+      customer_name: extractElectricityCustomerName(vtRes),
+      address: extractElectricityAddress(vtRes),
+    };
+  }
+
+  return base;
+}
+
+async function triggerCommissionByReference(reference) {
+  if (!reference || !processCommission) return;
+
+  try {
+    const txRes = await db.query(
+      `SELECT * FROM transactions WHERE reference = $1 LIMIT 1`,
+      [reference]
+    );
+
+    const transactionRow = txRes.rows[0];
+    if (!transactionRow) return;
+
+    await processCommission(transactionRow);
+  } catch (err) {
+    logger.error({
+      type: 'VTPASS_COMMISSION_TRIGGER_FAILED',
+      reference,
+      error: err.message,
+      stack: err.stack,
+    });
+  }
+}
+
+/**
+ * Central safe purchase
+ * - checks float breaker
+ * - debits wallet using approved service
+ * - calls VTpass
+ * - refunds on failure
+ * - records generic transaction
+ * - triggers admin telegram
+ * - triggers user telegram
+ * - triggers commission separately
+ */
+async function safePurchase({ userId, amount, payload, providerRef, productType }) {
+  const health = await evaluateFloatHealth();
+  if (!health?.okForPurchase) {
+    throw new Error('Service temporarily unavailable (provider float low). Try again shortly.');
+  }
+
+  const reference = providerRef || makeReference('vtpass');
+
+  await walletService.debitWallet(
+    String(userId),
+    Number(amount),
+    String(reference),
+    'purchase',
+    'vtpass',
+    {
+      channel: 'wallet',
+      service: 'vtpass',
+      productType: payload?.product_type || productType || null,
+      serviceID: payload?.serviceID || null,
+      phone: payload?.phone || payload?.phoneNumber || null,
+    }
+  );
+
+  // Enrich the debit row created by walletService.debitWallet so Recent Transactions can classify it
+  await db.query(
+    `
+      UPDATE transactions
+      SET
+        provider = COALESCE(provider, 'vtpass'),
+        channel = 'web',
+        meta = COALESCE(meta, '{}'::jsonb) || $2::jsonb
+      WHERE reference = $1
+    `,
+    [
+      String(reference),
+      JSON.stringify({
+        product_type: payload?.product_type || productType || null,
+        service_id: payload?.serviceID || null,
+        phone: payload?.phone || payload?.phoneNumber || null,
+        billersCode: payload?.billersCode || null,
+        variation_code: payload?.variation_code || null,
+        source: 'vtpass',
+      }),
+    ]
+  );
+
+  try {
+    const vtRes = await vtpassClient.pay({
+      request_id: reference,
+      ...payload,
+      amount: Number(amount),
+    });
+
+    if (!normalizeVtpassSuccess(vtRes)) {
+      throw new Error(
+        vtRes?.response_description ||
+          vtRes?.message ||
+          'VTpass transaction failed'
+      );
+    }
+
+    logger.info({
+      type: 'VTPASS_PURCHASE_SUCCESS',
+      userId,
+      reference,
+      amount,
+      service: payload?.serviceID,
+      productType: payload?.product_type || productType || null,
+    });
+
+    if ((productType || payload?.product_type) === 'electricity') {
+      try {
+        const token = extractToken(vtRes);
+        const units = extractUnits(vtRes);
+
+        await db.query(
+          `
+            INSERT INTO electricity_tokens (
+              user_id,
+              transaction_reference,
+              meter_number,
+              disco,
+              token,
+              units,
+              created_at
+            )
+            VALUES ($1, $2, $3, $4, $5, $6, NOW())
+            ON CONFLICT (transaction_reference) DO NOTHING
+          `,
+          [
+            userId,
+            reference,
+            payload?.billersCode || null,
+            payload?.serviceID || null,
+            token,
+            units,
+          ]
+        );
+      } catch (err) {
+        logger.error({
+          type: 'VTPASS_ELECTRICITY_TOKEN_SAVE_FAILED',
+          reference,
+          error: err.message,
+          stack: err.stack,
+        });
+      }
+    }
+
+    // UPSERT success transaction row so incomplete existing rows get completed instead of ignored
+    await db.query(
+      `
+        INSERT INTO transactions (
+          user_id,
+          type,
+          amount,
+          provider,
+          reference,
+          status,
+          meta,
+          channel,
+          created_at
+        )
+        VALUES ($1, 'debit', $2, 'vtpass', $3, 'success', $4::jsonb, 'web', NOW())
+        ON CONFLICT (reference)
+        DO UPDATE SET
+          status = EXCLUDED.status,
+          provider = EXCLUDED.provider,
+          channel = EXCLUDED.channel,
+          meta = COALESCE(transactions.meta, '{}'::jsonb) || COALESCE(EXCLUDED.meta, '{}'::jsonb)
+      `,
+      [
+        userId,
+        Number(amount),
+        reference,
+        JSON.stringify({
+          product_type: payload?.product_type || productType || null,
+          service_id: payload?.serviceID || null,
+          channel: 'web',
+          phone: payload?.phone || null,
+          billersCode: payload?.billersCode || null,
+          variation_code: payload?.variation_code || null,
+          provider_ref:
+            vtRes?.content?.transactions?.transactionId ||
+            vtRes?.requestId ||
+            vtRes?.transactionId ||
+            null,
+        }),
+      ]
+    );
+
+    try {
+      await sendTransactionSuccessAlert({
+        userId,
+        amount,
+        reference,
+        productType: productType || payload?.product_type || null,
+        payload,
+        vtRes,
+        meta: buildTelegramMeta(productType || payload?.product_type || null, payload, vtRes),
+      });
+    } catch (err) {
+      logger.error({
+        type: 'VTPASS_ADMIN_TELEGRAM_FAILED',
+        reference,
+        error: err.message,
+        stack: err.stack,
+      });
+    }
+
+    try {
+      await sendUserTransactionReceipt({
+        userId,
+        amount,
+        reference,
+        productType: productType || payload?.product_type || null,
+        payload,
+        vtRes,
+        meta: buildTelegramMeta(productType || payload?.product_type || null, payload, vtRes),
+      });
+    } catch (err) {
+      logger.error({
+        type: 'VTPASS_USER_RECEIPT_FAILED',
+        reference,
+        error: err.message,
+        stack: err.stack,
+      });
+    }
+
+    try {
+      await triggerCommissionByReference(reference);
+    } catch (err) {
+      logger.error({
+        type: 'VTPASS_COMMISSION_TRIGGER_FAILED',
+        reference,
+        error: err.message,
+        stack: err.stack,
+      });
+    }
+
+    return { success: true, reference, vtRes };
+  } catch (err) {
+    try {
+      await walletService.creditWallet(
+        userId,
+        Number(amount),
+        `${reference}-refund`,
+        'vtpass-refund',
+        'vtpass-refund'
+      );
+    } catch (refundErr) {
+      logger.error({
+        type: 'VTPASS_REFUND_FAILED',
+        reference,
+        error: refundErr.message,
+        stack: refundErr.stack,
+      });
+    }
+
+    throw err;
+  }
+}
+
+/**
+ * NEW: /purchase alias endpoint
+ * Requires explicit product_type.
+ */
+const { prepareQueuedTransaction } = require('../services/unifiedTransactionDispatcher');
+
+router.post('/purchase', authMiddleware, async (req, res) => {
+  try {
+    const userId = req.user.id;
+    const productType = normalizeProductType(req.body);
+
+    if (!productType) {
+      return res.status(400).json({
+        success: false,
+        error: 'Missing product_type',
+      });
+    }
+
+    // ===== COMMON FIELDS =====
+    const amount = Number(req.body.amount);
+
+    const phone =
+      req.body.phone ||
+      req.body.phoneNumber ||
+      req.body.msisdn ||
+      null;
+
+    const network =
+      req.body.network ||
+      req.body.serviceID ||
+      req.body.service_id ||
+      req.body['service-id'] ||
+      null;
+
+    const meter =
+      req.body.meter ||
+      req.body.billersCode ||
+      req.body.meter_number ||
+      null;
+
+    const smartcard =
+      req.body.smartcard ||
+      req.body.iuc ||
+      null;
+
+    const disco =
+      req.body.disco ||
+      req.body.serviceID ||
+      null;
+
+    const intent = {
+      userId,
+      channel: 'app',
+      amount,
+      service: productType,
+
+      // Airtime/Data
+      phone,
+      target_phone: phone,
+      network,
+
+      // Electricity
+      meter,
+      billersCode: meter,
+      disco,
+
+      // TV
+      smartcard,
+      iuc: smartcard,
+
+      // pass raw body too
+      ...req.body,
+    };
+
+    // ===== VALIDATION =====
+    if (!amount || amount <= 0) {
+      return res.status(400).json({
+        success: false,
+        error: 'Invalid amount',
+      });
+    }
+
+    if (productType === 'airtime' || productType === 'data') {
+      if (!phone || !network) {
+        return res.status(400).json({
+          success: false,
+          error: 'Missing phone or network',
+        });
+      }
+    }
+
+    if (productType === 'electricity') {
+      if (!meter || !disco) {
+        return res.status(400).json({
+          success: false,
+          error: 'Missing meter or disco',
+        });
+      }
+    }
+
+    if (productType === 'tv') {
+      if (!smartcard) {
+        return res.status(400).json({
+          success: false,
+          error: 'Missing smartcard/IUC',
+        });
+      }
+    }
+
+    // ===== QUEUE DISPATCH =====
+    const result = await prepareQueuedTransaction(intent);
+
+    return res.json({
+      success: true,
+      status: 'queued',
+      reference: result.reference,
+      amount: result.amount,
+      productType: result.productType,
+      message: 'Transaction is being processed',
+    });
+  } catch (err) {
+    console.error('❌ PURCHASE ERROR:', err);
+
+    return res.status(500).json({
+      success: false,
+      error: err.message || 'Purchase failed',
+    });
+  }
+});
+
+/**
+ * Existing endpoints (kept working)
+ */
+
+// AIRTIME
+router.post('/airtime', authMiddleware, async (req, res) => {
+  try {
+    const userId = req.user.id;
+    const { amount, phone, network } = req.body;
+
+    if (!amount || !phone || !network) {
+      return res.status(400).json({ success: false, error: 'Missing parameters' });
+    }
+
+    const serviceID = networkToAirtimeServiceId(network);
+
+    const payload = {
+      serviceID: String(serviceID).toLowerCase(),
+      amount: Number(amount),
+      phone: String(phone),
+      product_type: 'airtime',
+    };
+
+    const r = await safePurchase({
+      userId,
+      amount: Number(amount),
+      payload,
+      providerRef: null,
+      productType: 'airtime',
+    });
+
+    return res.json({ success: true, reference: r.reference, data: r.vtRes });
+  } catch (err) {
+    logger.error({
+      type: 'VTPASS_AIRTIME_FAILED',
+      error: err.message,
+      stack: err.stack,
+    });
+
+    return res.status(500).json({ success: false, error: err.message });
+  }
+});
+
+// DATA
+router.post('/data', authMiddleware, async (req, res) => {
+  try {
+    const userId = req.user.id;
+    const { phone, network } = req.body;
+    const variation_code = pickVariationCode(req.body);
+
+    if (!phone || !network || !variation_code) {
+      return res.status(400).json({ success: false, error: 'Missing parameters' });
+    }
+
+    const serviceID = networkToDataServiceId(network);
+    const amount = await getVariationAmount(serviceID, variation_code);
+
+    const payload = {
+      serviceID: String(serviceID).toLowerCase(),
+      phone: String(phone),
+      variation_code: String(variation_code),
+      product_type: 'data',
+    };
+
+    const r = await safePurchase({
+      userId,
+      amount,
+      payload,
+      providerRef: null,
+      productType: 'data',
+    });
+
+    return res.json({ success: true, reference: r.reference, data: r.vtRes });
+  } catch (err) {
+    logger.error({
+      type: 'VTPASS_DATA_FAILED',
+      error: err.message,
+      stack: err.stack,
+    });
+
+    return res.status(500).json({ success: false, error: err.message });
+  }
+});
+
+// TV
+router.post('/tv', authMiddleware, async (req, res) => {
+  try {
+    const userId = req.user.id;
+    const serviceID = req.body.serviceID;
+    const billersCode =
+      req.body.billersCode || req.body.smartcard_number || req.body.iuc;
+    const variation_code = pickVariationCode(req.body);
+
+    if (!serviceID || !billersCode || !variation_code) {
+      return res.status(400).json({ success: false, error: 'Missing parameters' });
+    }
+
+    const amount = await getVariationAmount(serviceID, variation_code);
+
+    const phone =
+      req.body.phone ||
+      req.body.phoneNumber ||
+      req.user?.phone ||
+      '08000000000';
+
+    const payload = {
+      serviceID: String(serviceID).trim().toLowerCase(),
+      billersCode: String(billersCode).trim(),
+      variation_code: String(variation_code).trim(),
+      phone: String(phone).trim(),
+      product_type: 'tv',
+    };
+
+    const reference = makeReference('vtpass');
+
+    logger.info({
+      type: 'VTPASS_PAYLOAD_DEBUG',
+      productType: 'tv',
+      reference,
+      payload: {
+        request_id: reference,
+        ...payload,
+        amount: Number(amount),
+      },
+    });
+
+    const r = await safePurchase({
+      userId,
+      amount,
+      payload,
+      providerRef: reference,
+      productType: 'tv',
+    });
+
+    return res.json({ success: true, reference: r.reference, data: r.vtRes });
+  } catch (err) {
+    logger.error({
+      type: 'VTPASS_TV_FAILED',
+      error: err.message,
+      stack: err.stack,
+    });
+
+    return res.status(500).json({ success: false, error: err.message });
+  }
+});
+
+// ELECTRICITY
+router.post('/electricity', authMiddleware, async (req, res) => {
+  try {
+    const userId = req.user.id;
+
+    const disco = req.body.discoServiceID || req.body.serviceID || req.body.disco;
+    const serviceID = discoToServiceId(disco);
+
+    const billersCode =
+      req.body.billerCode ||
+      req.body.billersCode ||
+      req.body.meterNumber ||
+      req.body.meter_number;
+
+    const meter_type =
+      req.body.meter_type ||
+      req.body.meterType ||
+      req.body.variation_code;
+
+    const amount = Number(req.body.amount);
+    const phone = req.body.phone ? String(req.body.phone) : undefined;
+
+    if (!serviceID || !billersCode || !meter_type || !amount) {
+      return res.status(400).json({ success: false, error: 'Missing parameters' });
+    }
+
+    const payload = {
+      serviceID: String(serviceID).toLowerCase(),
+      billersCode: String(billersCode),
+      variation_code: String(meter_type).toLowerCase(),
+      amount: Number(amount),
+      phone,
+      product_type: 'electricity',
+    };
+
+    const r = await safePurchase({
+      userId,
+      amount: Number(amount),
+      payload,
+      providerRef: null,
+      productType: 'electricity',
+    });
+
+    return res.json({ success: true, reference: r.reference, data: r.vtRes });
+  } catch (err) {
+    logger.error({
+      type: 'VTPASS_ELECTRICITY_FAILED',
+      error: err.message,
+      stack: err.stack,
+    });
+
+    return res.status(500).json({ success: false, error: err.message });
+  }
+});
+
+/**
+ * Support endpoints for frontend
+ */
+
+// GET /api/vtpass/service-variations?serviceID=mtn-data
+router.get('/service-variations', async (req, res) => {
+  try {
+    const serviceID = req.query.serviceID;
+    if (!serviceID) {
+      return res.status(400).json({ success: false, error: 'Missing serviceID' });
+    }
+
+    const data = await vtpassClient.serviceVariations(serviceID);
+    return res.json({ success: true, data });
+  } catch (err) {
+    logger.error({
+      type: 'VTPASS_VARIATIONS_FAILED',
+      error: err.message,
+      stack: err.stack,
+    });
+
+    return res.status(500).json({ success: false, error: err.message });
+  }
+});
+
+// POST /api/vtpass/merchant-verify
+// body: { serviceID, billersCode, type }
+router.post('/merchant-verify', authMiddleware, async (req, res) => {
+  try {
+    const { serviceID, billersCode, type } = req.body;
+
+    if (!serviceID || !billersCode || !type) {
+      return res.status(400).json({ success: false, error: 'Missing parameters' });
+    }
+
+    const data = await vtpassClient.merchantVerify({
+      serviceID: String(serviceID).toLowerCase(),
+      billersCode: String(billersCode),
+      type: String(type),
+    });
+
+    return res.json({
+      success: true,
+      data,
+      customer_name:
+        data?.content?.Customer_Name ||
+        data?.content?.customer_name ||
+        data?.content?.customerName ||
+        data?.name ||
+        null,
+      address:
+        data?.content?.Address ||
+        data?.content?.address ||
+        data?.content?.customer_address ||
+        data?.content?.customerAddress ||
+        data?.address ||
+        null,
+      meter_number: billersCode,
+    });
+  } catch (err) {
+    logger.error({
+      type: 'VTPASS_VERIFY_FAILED',
+      error: err.message,
+      stack: err.stack,
+    });
+
+    return res.status(500).json({
+      success: false,
+      error: err.message || 'Merchant verification failed',
+    });
+  }
+});
+
+module.exports = router;

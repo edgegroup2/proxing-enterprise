@@ -1,0 +1,102 @@
+[
+  {
+    "exam_type": "jamb",
+    "subject": "Mathematics",
+    "topic": "Number Bases",
+    "year": 2026,
+    "question": "Convert 1011₂ to base ten.",
+    "options": ["9", "10", "11", "13"],
+    "answer": "11",
+    "explanation": "1011₂ = 1×8 + 0×4 + 1×2 + 1×1 = 11."
+  },
+  {
+    "exam_type": "jamb",
+    "subject": "Mathematics",
+    "topic": "Number Bases",
+    "year": 2026,
+    "question": "Convert 25₁₀ to base two.",
+    "options": ["11001₂", "10101₂", "11100₂", "10011₂"],
+    "answer": "11001₂",
+    "explanation": "25 = 16 + 8 + 1, so 25₁₀ = 11001₂."
+  },
+  {
+    "exam_type": "jamb",
+    "subject": "Mathematics",
+    "topic": "Fractions",
+    "year": 2026,
+    "question": "Simplify 3/4 + 2/3.",
+    "options": ["5/7", "17/12", "13/12", "7/12"],
+    "answer": "17/12",
+    "explanation": "The LCM of 4 and 3 is 12. So 3/4 = 9/12 and 2/3 = 8/12. Therefore, the sum is 17/12."
+  },
+  {
+    "exam_type": "jamb",
+    "subject": "Mathematics",
+    "topic": "Decimals",
+    "year": 2026,
+    "question": "Express 0.375 as a fraction in its lowest terms.",
+    "options": ["3/8", "5/8", "7/20", "15/40"],
+    "answer": "3/8",
+    "explanation": "0.375 = 375/1000. Dividing numerator and denominator by 125 gives 3/8."
+  },
+  {
+    "exam_type": "jamb",
+    "subject": "Mathematics",
+    "topic": "Percentages",
+    "year": 2026,
+    "question": "A shirt costs ₦8,000 after a 20% discount. What was the original price?",
+    "options": ["₦9,000", "₦9,600", "₦10,000", "₦11,000"],
+    "answer": "₦10,000",
+    "explanation": "After a 20% discount, the selling price is 80% of the original price. Original price = 8000 ÷ 0.8 = ₦10,000."
+  },
+  {
+    "exam_type": "jamb",
+    "subject": "Mathematics",
+    "topic": "Ratio",
+    "year": 2026,
+    "question": "Divide ₦7,200 in the ratio 5:7.",
+    "options": ["₦2,000 and ₦5,200", "₦3,000 and ₦4,200", "₦3,200 and ₦4,000", "₦3,600 and ₦3,600"],
+    "answer": "₦3,000 and ₦4,200",
+    "explanation": "Total ratio parts = 5 + 7 = 12. The shares are 5/12 × 7200 = ₦3,000 and 7/12 × 7200 = ₦4,200."
+  },
+  {
+    "exam_type": "jamb",
+    "subject": "Mathematics",
+    "topic": "Proportion",
+    "year": 2026,
+    "question": "If 6 workers complete a job in 10 days, how many days will 15 workers take at the same rate?",
+    "options": ["2 days", "4 days", "6 days", "25 days"],
+    "answer": "4 days",
+    "explanation": "This is inverse proportion. 6 × 10 = 15 × d, so d = 60/15 = 4 days."
+  },
+  {
+    "exam_type": "jamb",
+    "subject": "Mathematics",
+    "topic": "Indices",
+    "year": 2026,
+    "question": "Simplify 3² × 3⁴.",
+    "options": ["3⁶", "3⁸", "9⁶", "6⁶"],
+    "answer": "3⁶",
+    "explanation": "When multiplying powers with the same base, add the indices: 3² × 3⁴ = 3⁶."
+  },
+  {
+    "exam_type": "jamb",
+    "subject": "Mathematics",
+    "topic": "Indices",
+    "year": 2026,
+    "question": "Simplify 5⁶ ÷ 5².",
+    "options": ["5³", "5⁴", "5⁸", "25⁴"],
+    "answer": "5⁴",
+    "explanation": "When dividing powers with the same base, subtract the indices: 5⁶ ÷ 5² = 5⁴."
+  },
+  {
+    "exam_type": "jamb",
+    "subject": "Mathematics",
+    "topic": "Surds",
+    "year": 2026,
+    "question": "Simplify √50.",
+    "options": ["5√2", "2√5", "10√5", "25√2"],
+    "answer": "5√2",
+    "explanation": "√50 = √(25 × 2) = 5√2."
+  }
+]

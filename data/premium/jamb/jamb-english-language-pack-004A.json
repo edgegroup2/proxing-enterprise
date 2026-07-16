@@ -1,0 +1,282 @@
+[
+  {
+    "exam_type": "jamb",
+    "subject": "English Language",
+    "topic": "Word Stress",
+    "year": "2020",
+    "question": "Which syllable is stressed in the word 'photography'?",
+    "options": ["PHO-to-gra-phy", "pho-TO-gra-phy", "pho-to-GRA-phy", "pho-to-gra-PHY"],
+    "answer": "pho-TO-gra-phy",
+    "explanation": "The primary stress in 'photography' falls on the second syllable.",
+    "source": "JAMB Premium"
+  },
+  {
+    "exam_type": "jamb",
+    "subject": "English Language",
+    "topic": "Homophones",
+    "year": "2021",
+    "question": "Choose the correctly completed sentence: The children ran _____ the field.",
+    "options": ["through", "threw", "thru", "throw"],
+    "answer": "through",
+    "explanation": "'Through' indicates movement across an area.",
+    "source": "JAMB Premium"
+  },
+  {
+    "exam_type": "jamb",
+    "subject": "English Language",
+    "topic": "Punctuation",
+    "year": "2019",
+    "question": "Choose the correctly punctuated sentence.",
+    "options": [
+      "Its a beautiful day.",
+      "It's a beautiful day.",
+      "Its' a beautiful day.",
+      "It,s a beautiful day."
+    ],
+    "answer": "It's a beautiful day.",
+    "explanation": "'It's' is the contraction for 'it is'.",
+    "source": "JAMB Premium"
+  },
+  {
+    "exam_type": "jamb",
+    "subject": "English Language",
+    "topic": "Lexis and Structure",
+    "year": "2022",
+    "question": "If I _____ enough money, I would buy a new car.",
+    "options": ["have", "had", "has", "having"],
+    "answer": "had",
+    "explanation": "Second conditional uses past tense in the if-clause.",
+    "source": "JAMB Premium"
+  },
+  {
+    "exam_type": "jamb",
+    "subject": "English Language",
+    "topic": "Register",
+    "year": "2020",
+    "question": "The term 'diagnosis' belongs mainly to which register?",
+    "options": ["Legal", "Medical", "Commercial", "Engineering"],
+    "answer": "Medical",
+    "explanation": "'Diagnosis' is a medical term.",
+    "source": "JAMB Premium"
+  },
+  {
+    "exam_type": "jamb",
+    "subject": "English Language",
+    "topic": "Oral English",
+    "year": "2021",
+    "question": "Which word contains a diphthong?",
+    "options": ["boy", "bit", "cat", "pen"],
+    "answer": "boy",
+    "explanation": "/ɔɪ/ in 'boy' is a diphthong.",
+    "source": "JAMB Premium"
+  },
+  {
+    "exam_type": "jamb",
+    "subject": "English Language",
+    "topic": "Phrasal Verbs",
+    "year": "2018",
+    "question": "She decided to _____ the offer.",
+    "options": ["turn down", "turn up", "turn in", "turn over"],
+    "answer": "turn down",
+    "explanation": "'Turn down' means reject.",
+    "source": "JAMB Premium"
+  },
+  {
+    "exam_type": "jamb",
+    "subject": "English Language",
+    "topic": "Sentence Interpretation",
+    "year": "2022",
+    "question": "The statement 'He kicked the bucket' means:",
+    "options": ["He played football", "He died", "He got angry", "He ran away"],
+    "answer": "He died",
+    "explanation": "It is an idiomatic expression.",
+    "source": "JAMB Premium"
+  },
+  {
+    "exam_type": "jamb",
+    "subject": "English Language",
+    "topic": "Comprehension",
+    "year": "2020",
+    "question": "A passage mainly discussing climate change would most likely focus on:",
+    "options": ["Entertainment", "Environmental effects", "Sports", "Fashion"],
+    "answer": "Environmental effects",
+    "explanation": "Climate change relates to environment.",
+    "source": "JAMB Premium"
+  },
+  {
+    "exam_type": "jamb",
+    "subject": "English Language",
+    "topic": "Vocabulary",
+    "year": "2019",
+    "question": "Choose the word nearest in meaning to 'abundant'.",
+    "options": ["Scarce", "Plentiful", "Tiny", "Weak"],
+    "answer": "Plentiful",
+    "explanation": "'Abundant' means plentiful.",
+    "source": "JAMB Premium"
+  },
+  {
+    "exam_type": "jamb",
+    "subject": "English Language",
+    "topic": "Usage",
+    "year": "2021",
+    "question": "Choose the correct expression.",
+    "options": ["between you and I", "between you and me", "between I and you", "between me and I"],
+    "answer": "between you and me",
+    "explanation": "Object pronoun is required after preposition.",
+    "source": "JAMB Premium"
+  },
+  {
+    "exam_type": "jamb",
+    "subject": "English Language",
+    "topic": "Spelling",
+    "year": "2018",
+    "question": "Choose the correctly spelt word.",
+    "options": ["Occassion", "Occasion", "Ocassion", "Occasionn"],
+    "answer": "Occasion",
+    "explanation": "Correct spelling is Occasion.",
+    "source": "JAMB Premium"
+  },
+  {
+    "exam_type": "jamb",
+    "subject": "English Language",
+    "topic": "Idioms",
+    "year": "2022",
+    "question": "To 'spill the beans' means:",
+    "options": ["Cook food", "Reveal a secret", "Waste money", "Argue loudly"],
+    "answer": "Reveal a secret",
+    "explanation": "Common idiom.",
+    "source": "JAMB Premium"
+  },
+  {
+    "exam_type": "jamb",
+    "subject": "English Language",
+    "topic": "Concord",
+    "year": "2020",
+    "question": "Neither the teacher nor the students _____ ready.",
+    "options": ["is", "are", "was", "be"],
+    "answer": "are",
+    "explanation": "Verb agrees with nearest subject.",
+    "source": "JAMB Premium"
+  },
+  {
+    "exam_type": "jamb",
+    "subject": "English Language",
+    "topic": "Tenses",
+    "year": "2021",
+    "question": "By next year, she _____ her degree.",
+    "options": ["completes", "completed", "will have completed", "has completed"],
+    "answer": "will have completed",
+    "explanation": "Future perfect tense.",
+    "source": "JAMB Premium"
+  },
+  {
+    "exam_type": "jamb",
+    "subject": "English Language",
+    "topic": "Figures of Speech",
+    "year": "2019",
+    "question": "'The wind whispered through the trees' is:",
+    "options": ["Metaphor", "Personification", "Hyperbole", "Irony"],
+    "answer": "Personification",
+    "explanation": "Human quality given to wind.",
+    "source": "JAMB Premium"
+  },
+  {
+    "exam_type": "jamb",
+    "subject": "English Language",
+    "topic": "Antonyms",
+    "year": "2022",
+    "question": "Opposite of 'hostile' is:",
+    "options": ["Aggressive", "Friendly", "Harsh", "Cold"],
+    "answer": "Friendly",
+    "explanation": "Antonym of hostile.",
+    "source": "JAMB Premium"
+  },
+  {
+    "exam_type": "jamb",
+    "subject": "English Language",
+    "topic": "Synonyms",
+    "year": "2020",
+    "question": "Nearest in meaning to 'rapid':",
+    "options": ["Slow", "Fast", "Heavy", "Weak"],
+    "answer": "Fast",
+    "explanation": "Rapid means fast.",
+    "source": "JAMB Premium"
+  },
+  {
+    "exam_type": "jamb",
+    "subject": "English Language",
+    "topic": "Prepositions",
+    "year": "2021",
+    "question": "He is interested _____ music.",
+    "options": ["on", "in", "at", "for"],
+    "answer": "in",
+    "explanation": "Correct collocation.",
+    "source": "JAMB Premium"
+  },
+  {
+    "exam_type": "jamb",
+    "subject": "English Language",
+    "topic": "Stress",
+    "year": "2018",
+    "question": "Which word has first syllable stress?",
+    "options": ["record (noun)", "record (verb)", "permit (verb)", "conduct (verb)"],
+    "answer": "record (noun)",
+    "explanation": "Noun stress pattern.",
+    "source": "JAMB Premium"
+  },
+  {
+    "exam_type": "jamb",
+    "subject": "English Language",
+    "topic": "Comprehension Logic",
+    "year": "2022",
+    "question": "An inference is:",
+    "options": ["Directly stated fact", "Logical conclusion", "Main title", "Vocabulary clue"],
+    "answer": "Logical conclusion",
+    "explanation": "Inference requires reasoning.",
+    "source": "JAMB Premium"
+  },
+  {
+    "exam_type": "jamb",
+    "subject": "English Language",
+    "topic": "Lexis",
+    "year": "2020",
+    "question": "A 'novice' is:",
+    "options": ["Expert", "Beginner", "Leader", "Teacher"],
+    "answer": "Beginner",
+    "explanation": "Meaning of novice.",
+    "source": "JAMB Premium"
+  },
+  {
+    "exam_type": "jamb",
+    "subject": "English Language",
+    "topic": "Sentence Completion",
+    "year": "2021",
+    "question": "The principal, together with the teachers, _____ present.",
+    "options": ["are", "is", "were", "be"],
+    "answer": "is",
+    "explanation": "Main subject is singular.",
+    "source": "JAMB Premium"
+  },
+  {
+    "exam_type": "jamb",
+    "subject": "English Language",
+    "topic": "Consonant Sounds",
+    "year": "2019",
+    "question": "Which word begins with /ʃ/?",
+    "options": ["ship", "sip", "chip", "zip"],
+    "answer": "ship",
+    "explanation": "/ʃ/ sound.",
+    "source": "JAMB Premium"
+  },
+  {
+    "exam_type": "jamb",
+    "subject": "English Language",
+    "topic": "Oral English",
+    "year": "2020",
+    "question": "Which pair are homophones?",
+    "options": ["see/sea", "cat/cut", "pen/pain", "man/men"],
+    "answer": "see/sea",
+    "explanation": "Same pronunciation.",
+    "source": "JAMB Premium"
+  }
+]

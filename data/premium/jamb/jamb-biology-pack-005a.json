@@ -1,0 +1,227 @@
+[
+  {
+    "year": 2001,
+    "examType": "JAMB",
+    "subject": "Biology",
+    "question": "The basic structural and functional unit of life is the",
+    "options": ["Cell", "Tissue", "Organ", "Organelle"],
+    "correctAnswer": 0,
+    "explanation": "The cell is the smallest unit capable of carrying out all life processes."
+  },
+  {
+    "year": 2002,
+    "examType": "JAMB",
+    "subject": "Biology",
+    "question": "Which organelle is responsible for protein synthesis?",
+    "options": ["Ribosome", "Mitochondrion", "Golgi apparatus", "Lysosome"],
+    "correctAnswer": 0,
+    "explanation": "Ribosomes are the sites where proteins are synthesized."
+  },
+  {
+    "year": 2003,
+    "examType": "JAMB",
+    "subject": "Biology",
+    "question": "The process by which green plants manufacture food is called",
+    "options": ["Photosynthesis", "Respiration", "Transpiration", "Digestion"],
+    "correctAnswer": 0,
+    "explanation": "Photosynthesis is the process where plants use sunlight to make food."
+  },
+  {
+    "year": 2004,
+    "examType": "JAMB",
+    "subject": "Biology",
+    "question": "The movement of water molecules from a region of higher concentration to lower concentration through a semi-permeable membrane is",
+    "options": ["Osmosis", "Diffusion", "Active transport", "Plasmolysis"],
+    "correctAnswer": 0,
+    "explanation": "Osmosis involves movement of water molecules through a selectively permeable membrane."
+  },
+  {
+    "year": 2005,
+    "examType": "JAMB",
+    "subject": "Biology",
+    "question": "Which blood vessel carries oxygenated blood from the lungs to the heart?",
+    "options": ["Pulmonary vein", "Pulmonary artery", "Aorta", "Vena cava"],
+    "correctAnswer": 0,
+    "explanation": "The pulmonary vein carries oxygen-rich blood from the lungs to the heart."
+  },
+  {
+    "year": 2006,
+    "examType": "JAMB",
+    "subject": "Biology",
+    "question": "The male reproductive organ in flowering plants is the",
+    "options": ["Stamen", "Carpel", "Sepal", "Petal"],
+    "correctAnswer": 0,
+    "explanation": "The stamen is the male reproductive structure in flowering plants."
+  },
+  {
+    "year": 2007,
+    "examType": "JAMB",
+    "subject": "Biology",
+    "question": "The hormone responsible for the development of female secondary sexual characteristics is",
+    "options": ["Oestrogen", "Testosterone", "Insulin", "Adrenaline"],
+    "correctAnswer": 0,
+    "explanation": "Oestrogen regulates female reproductive development and secondary sexual traits."
+  },
+  {
+    "year": 2008,
+    "examType": "JAMB",
+    "subject": "Biology",
+    "question": "Which part of the eye controls the amount of light entering?",
+    "options": ["Iris", "Lens", "Retina", "Cornea"],
+    "correctAnswer": 0,
+    "explanation": "The iris adjusts pupil size to regulate light entry."
+  },
+  {
+    "year": 2009,
+    "examType": "JAMB",
+    "subject": "Biology",
+    "question": "The excretory product removed by the skin is mainly",
+    "options": ["Sweat", "Urea", "Carbon dioxide", "Bile"],
+    "correctAnswer": 0,
+    "explanation": "The skin excretes sweat containing water, salts, and traces of urea."
+  },
+  {
+    "year": 2010,
+    "examType": "JAMB",
+    "subject": "Biology",
+    "question": "The site of gaseous exchange in mammals is the",
+    "options": ["Alveoli", "Bronchi", "Trachea", "Larynx"],
+    "correctAnswer": 0,
+    "explanation": "Alveoli provide a large surface area for gaseous exchange."
+  },
+  {
+    "year": 2011,
+    "examType": "JAMB",
+    "subject": "Biology",
+    "question": "Which process produces gametes in animals?",
+    "options": ["Meiosis", "Mitosis", "Binary fission", "Budding"],
+    "correctAnswer": 0,
+    "explanation": "Meiosis reduces chromosome number to produce gametes."
+  },
+  {
+    "year": 2012,
+    "examType": "JAMB",
+    "subject": "Biology",
+    "question": "The pigment responsible for carrying oxygen in blood is",
+    "options": ["Haemoglobin", "Chlorophyll", "Melanin", "Plasma"],
+    "correctAnswer": 0,
+    "explanation": "Haemoglobin binds oxygen in red blood cells."
+  },
+  {
+    "year": 2013,
+    "examType": "JAMB",
+    "subject": "Biology",
+    "question": "Which kingdom includes bacteria?",
+    "options": ["Monera", "Protista", "Fungi", "Plantae"],
+    "correctAnswer": 0,
+    "explanation": "Bacteria belong to Kingdom Monera."
+  },
+  {
+    "year": 2014,
+    "examType": "JAMB",
+    "subject": "Biology",
+    "question": "The transfer of pollen grains from anther to stigma is",
+    "options": ["Pollination", "Fertilization", "Germination", "Budding"],
+    "correctAnswer": 0,
+    "explanation": "Pollination is the transfer of pollen to the stigma."
+  },
+  {
+    "year": 2015,
+    "examType": "JAMB",
+    "subject": "Biology",
+    "question": "The longest bone in the human body is the",
+    "options": ["Femur", "Humerus", "Tibia", "Fibula"],
+    "correctAnswer": 0,
+    "explanation": "The femur is the longest and strongest human bone."
+  },
+  {
+    "year": 2016,
+    "examType": "JAMB",
+    "subject": "Biology",
+    "question": "Which structure connects the foetus to the placenta?",
+    "options": ["Umbilical cord", "Amnion", "Chorion", "Yolk sac"],
+    "correctAnswer": 0,
+    "explanation": "The umbilical cord connects the foetus to the placenta for nutrient exchange."
+  },
+  {
+    "year": 2017,
+    "examType": "JAMB",
+    "subject": "Biology",
+    "question": "The process by which organisms maintain a stable internal environment is",
+    "options": ["Homeostasis", "Respiration", "Nutrition", "Adaptation"],
+    "correctAnswer": 0,
+    "explanation": "Homeostasis keeps internal body conditions stable."
+  },
+  {
+    "year": 2018,
+    "examType": "JAMB",
+    "subject": "Biology",
+    "question": "Which microorganism causes malaria?",
+    "options": ["Plasmodium", "Trypanosome", "Bacterium", "Virus"],
+    "correctAnswer": 0,
+    "explanation": "Malaria is caused by Plasmodium parasites."
+  },
+  {
+    "year": 2019,
+    "examType": "JAMB",
+    "subject": "Biology",
+    "question": "The movement response of a plant shoot toward light is",
+    "options": ["Phototropism", "Geotropism", "Hydrotropism", "Thigmotropism"],
+    "correctAnswer": 0,
+    "explanation": "Phototropism is growth toward light."
+  },
+  {
+    "year": 2020,
+    "examType": "JAMB",
+    "subject": "Biology",
+    "question": "Which nutrient is mainly responsible for body building?",
+    "options": ["Protein", "Carbohydrate", "Fat", "Vitamin"],
+    "correctAnswer": 0,
+    "explanation": "Proteins are essential for growth and tissue repair."
+  },
+  {
+    "year": 2021,
+    "examType": "JAMB",
+    "subject": "Biology",
+    "question": "The chamber of the heart that pumps blood to the body is the",
+    "options": ["Left ventricle", "Right ventricle", "Left atrium", "Right atrium"],
+    "correctAnswer": 0,
+    "explanation": "The left ventricle pumps oxygenated blood to the body."
+  },
+  {
+    "year": 2022,
+    "examType": "JAMB",
+    "subject": "Biology",
+    "question": "Which process releases energy from food in cells?",
+    "options": ["Respiration", "Photosynthesis", "Excretion", "Digestion"],
+    "correctAnswer": 0,
+    "explanation": "Cellular respiration releases usable energy from food."
+  },
+  {
+    "year": 2023,
+    "examType": "JAMB",
+    "subject": "Biology",
+    "question": "The protective covering of the brain is called",
+    "options": ["Meninges", "Cranium", "Vertebrae", "Skull plate"],
+    "correctAnswer": 0,
+    "explanation": "The meninges are membranes protecting the brain and spinal cord."
+  },
+  {
+    "year": 2024,
+    "examType": "JAMB",
+    "subject": "Biology",
+    "question": "Which component of blood is responsible for defense against infection?",
+    "options": ["White blood cells", "Red blood cells", "Platelets", "Plasma"],
+    "correctAnswer": 0,
+    "explanation": "White blood cells help protect the body against infections."
+  },
+  {
+    "year": 2025,
+    "examType": "JAMB",
+    "subject": "Biology",
+    "question": "The opening and closing of stomata are controlled by",
+    "options": ["Guard cells", "Epidermal cells", "Mesophyll cells", "Xylem vessels"],
+    "correctAnswer": 0,
+    "explanation": "Guard cells regulate stomatal opening and closing."
+  }
+]

@@ -1,74 +1,208 @@
-const db = require("../db");
-const axios = require("axios");
+'use strict';
 
-const TELEGRAM_TOKEN = process.env.TELEGRAM_BOT_TOKEN;
-const TELEGRAM_CHAT_ID = process.env.TELEGRAM_CHAT_ID;
+const db = require('../db');
+const logger = require('../util/logger');
+const { sendTelegramAlert } = require('../services/telegramAlert');
 
-async function sendTelegram(message) {
-  if (!TELEGRAM_TOKEN || !TELEGRAM_CHAT_ID) return;
+function naira(value) {
+  const n = Number(value || 0);
+  return `₦${n.toLocaleString('en-NG', {
+    minimumFractionDigits: 2,
+    maximumFractionDigits: 2
+  })}`;
+}
 
-  await axios.post(
-    `https://api.telegram.org/bot${TELEGRAM_TOKEN}/sendMessage`,
-    {
-      chat_id: TELEGRAM_CHAT_ID,
-      text: message,
-      parse_mode: "Markdown",
-    }
-  );
+function pct(part, total) {
+  const p = Number(part || 0);
+  const t = Number(total || 0);
+  if (!t) return '0.00%';
+  return `${((p / t) * 100).toFixed(2)}%`;
 }
 
 async function runDailyRevenueReport() {
-  const result = await db.query(`
-    SELECT
-      meta->>'product' AS product,
-      COUNT(*) AS transactions,
-      SUM(amount)::numeric AS total_sales,
-      SUM((meta->>'vtpass_cost')::numeric) AS vtpass_cost,
-      SUM((meta->>'platform_revenue')::numeric) AS platform_revenue,
-      SUM((meta->>'vtpass_commission')::numeric) AS vtpass_commission
-    FROM transactions
-    WHERE status = 'SUCCESS'
-      AND created_at >= NOW() - INTERVAL '1 day'
-    GROUP BY product
-    ORDER BY product;
-  `);
+  try {
+    const salesQ = await db.query(
+      `
+      SELECT
+        COUNT(*)::int AS total_count,
+        COALESCE(SUM(amount), 0)::numeric AS total_amount
+      FROM transactions
+      WHERE provider = 'vtpass'
+        AND status = 'success'
+        AND created_at >= NOW() - INTERVAL '24 hours'
+      `
+    );
 
-  if (result.rows.length === 0) {
-    await sendTelegram("📊 *Daily Revenue Report*\n\nNo transactions in the last 24 hours.");
-    return;
+    const totalCount = Number(salesQ.rows[0]?.total_count || 0);
+    const totalAmount = Number(salesQ.rows[0]?.total_amount || 0);
+
+    const productQ = await db.query(
+      `
+      SELECT
+        COALESCE(NULLIF(LOWER(meta->>'product_type'), ''), 'unknown') AS product_type,
+        COUNT(*)::int AS tx_count,
+        COALESCE(SUM(amount), 0)::numeric AS total_amount
+      FROM transactions
+      WHERE provider = 'vtpass'
+        AND status = 'success'
+        AND created_at >= NOW() - INTERVAL '24 hours'
+      GROUP BY 1
+      ORDER BY total_amount DESC, tx_count DESC
+      `
+    );
+
+    const channelQ = await db.query(
+      `
+      SELECT
+        COALESCE(NULLIF(LOWER(channel), ''), 'unknown') AS channel,
+        COUNT(*)::int AS tx_count,
+        COALESCE(SUM(amount), 0)::numeric AS total_amount
+      FROM transactions
+      WHERE provider = 'vtpass'
+        AND status = 'success'
+        AND created_at >= NOW() - INTERVAL '24 hours'
+      GROUP BY 1
+      ORDER BY total_amount DESC, tx_count DESC
+      `
+    );
+
+    let totalCommission = 0;
+    let commissionRows = [];
+
+    try {
+      const commissionQ = await db.query(
+        `
+        SELECT
+          COALESCE(SUM(commission_amount), 0)::numeric AS total_commission
+        FROM commission_ledger
+        WHERE created_at >= NOW() - INTERVAL '24 hours'
+        `
+      );
+
+      totalCommission = Number(commissionQ.rows[0]?.total_commission || 0);
+
+      const byProductCommissionQ = await db.query(
+        `
+        SELECT
+          COALESCE(NULLIF(LOWER(product_type), ''), 'unknown') AS product_type,
+          COUNT(*)::int AS entry_count,
+          COALESCE(SUM(commission_amount), 0)::numeric AS total_commission
+        FROM commission_ledger
+        WHERE created_at >= NOW() - INTERVAL '24 hours'
+        GROUP BY 1
+        ORDER BY total_commission DESC, entry_count DESC
+        `
+      );
+
+      commissionRows = byProductCommissionQ.rows || [];
+    } catch (err) {
+      logger.warn({
+        message: 'Daily revenue report: commission ledger unavailable, continuing without commission totals',
+        error: err.message
+      });
+    }
+
+    let message = `📊<b>Daily Revenue Report (Last 24 Hours)</b>\n\n`;
+
+    if (!totalCount) {
+      message += `• No VTpass transactions in the last 24 hours.`;
+      await sendTelegramAlert(message);
+
+      logger.info({
+        message: 'Daily revenue report sent',
+        totalCount: 0,
+        totalAmount: 0,
+        totalCommission: 0
+      });
+      return;
+    }
+
+    message += [
+      `• Transactions: <b>${totalCount}</b>`,
+      `• Total Sales: <b>${naira(totalAmount)}</b>`,
+      `• Total Commission: <b>${naira(totalCommission)}</b>`
+    ].join('\n');
+
+    if (productQ.rows.length) {
+      message += `\n\n<b>By Product</b>\n`;
+      for (const row of productQ.rows) {
+        const productType = row.product_type || 'unknown';
+        const txCount = Number(row.tx_count || 0);
+        const amt = Number(row.total_amount || 0);
+        message += `• ${productType}: ${naira(amt)} (${txCount} tx, ${pct(amt, totalAmount)})\n`;
+      }
+    }
+
+    if (commissionRows.length) {
+      message += `\n<b>Commission By Product</b>\n`;
+      for (const row of commissionRows) {
+        const productType = row.product_type || 'unknown';
+        const entryCount = Number(row.entry_count || 0);
+        const amt = Number(row.total_commission || 0);
+        message += `• ${productType}: ${naira(amt)} (${entryCount} entries)\n`;
+      }
+    }
+
+    if (channelQ.rows.length) {
+      message += `\n<b>By Channel</b>\n`;
+      for (const row of channelQ.rows) {
+        const channel = row.channel || 'unknown';
+        const txCount = Number(row.tx_count || 0);
+        const amt = Number(row.total_amount || 0);
+        message += `• ${channel}: ${naira(amt)} (${txCount} tx)\n`;
+      }
+    }
+
+    await sendTelegramAlert(message);
+
+    logger.info({
+      message: 'Daily revenue report sent',
+      totalCount,
+      totalAmount,
+      totalCommission
+    });
+  } catch (err) {
+    logger.error({
+      message: 'Daily revenue report failed',
+      error: err.message,
+      stack: err.stack
+    });
+
+    try {
+      await sendTelegramAlert(
+        `❌<b>Daily Revenue Report Failed</b>\n\n<code>${String(err.message || 'Unknown error')}</code>`
+      );
+    } catch (_) {
+      // ignore
+    }
   }
-
-  let message = `📊 *Daily Revenue Report*\n🗓 ${new Date().toDateString()}\n\n`;
-
-  let grandRevenue = 0;
-
-  for (const row of result.rows) {
-    const revenue = Number(row.platform_revenue || 0);
-    grandRevenue += revenue;
-
-    message +=
-      `*${row.product}*\n` +
-      `• Transactions: ${row.transactions}\n` +
-      `• Sales: ₦${Number(row.total_sales).toLocaleString()}\n` +
-      `• VTpass Cost: ₦${Number(row.vtpass_cost).toLocaleString()}\n` +
-      `• Revenue: ₦${revenue.toLocaleString()}\n\n`;
-  }
-
-  message += `💰 *Total Platform Revenue*: ₦${grandRevenue.toLocaleString()}`;
-
-  await sendTelegram(message);
 }
 
 function startDailyRevenueReport() {
-  if (!process.env.ENABLE_CRONS) return;
+  const cron = require('node-cron');
 
-  // Run once daily at 00:05 server time
-  setInterval(runDailyRevenueReport, 24 * 60 * 60 * 1000);
+  const enabled = String(process.env.ENABLE_CRONS || 'false') === 'true';
+  if (!enabled) {
+    logger.info({ type: 'DAILY_REVENUE_CRON_DISABLED' }, 'Daily revenue report cron disabled by ENV');
+    return;
+  }
 
-  // Optional: run immediately on boot
-  setTimeout(runDailyRevenueReport, 15000);
+  if (process.env.NODE_APP_INSTANCE && process.env.NODE_APP_INSTANCE !== '0') {
+    logger.info(
+      { type: 'DAILY_REVENUE_CRON_CLUSTER_GUARD', instance: process.env.NODE_APP_INSTANCE },
+      'Daily revenue report cron disabled on this instance'
+    );
+    return;
+  }
 
-  console.log("📊 Daily revenue report cron started");
+  cron.schedule('0 23 * * *', async () => {
+    await runDailyRevenueReport();
+  });
+
+  logger.info({ type: 'DAILY_REVENUE_CRON_STARTED' }, 'Daily revenue report cron started (23:00 daily)');
 }
 
-module.exports = { startDailyRevenueReport };
+module.exports = {
+  runDailyRevenueReport,
+  startDailyRevenueReport
+};

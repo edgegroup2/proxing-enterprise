@@ -1,0 +1,402 @@
+[
+  {
+    "exam_type": "jamb",
+    "subject": "Chemistry",
+    "topic": "Electrolysis",
+    "year": 2026,
+    "question": "Electrolysis is the process of",
+    "options": [
+      "heating a compound",
+      "decomposition of an electrolyte by electric current",
+      "mixing two gases",
+      "cooling molten salts"
+    ],
+    "answer": "decomposition of an electrolyte by electric current",
+    "explanation": "Electrolysis uses electrical energy to decompose ionic substances.",
+    "source": "JAMB Premium Chemistry Pack 007B"
+  },
+  {
+    "exam_type": "jamb",
+    "subject": "Chemistry",
+    "topic": "Electrolysis",
+    "year": 2026,
+    "question": "During electrolysis, cations move to the",
+    "options": [
+      "anode",
+      "cathode",
+      "salt bridge",
+      "electrolyte surface"
+    ],
+    "answer": "cathode",
+    "explanation": "Positive ions are attracted to the negative cathode.",
+    "source": "JAMB Premium Chemistry Pack 007B"
+  },
+  {
+    "exam_type": "jamb",
+    "subject": "Chemistry",
+    "topic": "Electrolysis",
+    "year": 2026,
+    "question": "Anions are attracted to the",
+    "options": [
+      "cathode",
+      "neutral point",
+      "anode",
+      "separator"
+    ],
+    "answer": "anode",
+    "explanation": "Negative ions move toward the positive anode.",
+    "source": "JAMB Premium Chemistry Pack 007B"
+  },
+  {
+    "exam_type": "jamb",
+    "subject": "Chemistry",
+    "topic": "Faraday's Laws",
+    "year": 2026,
+    "question": "The mass deposited during electrolysis depends directly on",
+    "options": [
+      "temperature only",
+      "time and current",
+      "pressure only",
+      "electrode color"
+    ],
+    "answer": "time and current",
+    "explanation": "Faraday's law states deposited mass is proportional to quantity of electricity.",
+    "source": "JAMB Premium Chemistry Pack 007B"
+  },
+  {
+    "exam_type": "jamb",
+    "subject": "Chemistry",
+    "topic": "Corrosion",
+    "year": 2026,
+    "question": "Rusting is the corrosion of",
+    "options": [
+      "aluminium",
+      "iron",
+      "copper",
+      "zinc"
+    ],
+    "answer": "iron",
+    "explanation": "Rust is hydrated iron(III) oxide.",
+    "source": "JAMB Premium Chemistry Pack 007B"
+  },
+  {
+    "exam_type": "jamb",
+    "subject": "Chemistry",
+    "topic": "Corrosion Prevention",
+    "year": 2026,
+    "question": "Galvanizing protects iron by coating it with",
+    "options": [
+      "copper",
+      "zinc",
+      "silver",
+      "lead"
+    ],
+    "answer": "zinc",
+    "explanation": "Zinc protects iron sacrificially.",
+    "source": "JAMB Premium Chemistry Pack 007B"
+  },
+  {
+    "exam_type": "jamb",
+    "subject": "Chemistry",
+    "topic": "Redox Reactions",
+    "year": 2026,
+    "question": "Oxidation involves",
+    "options": [
+      "gain of electrons",
+      "loss of electrons",
+      "gain of neutrons",
+      "loss of protons"
+    ],
+    "answer": "loss of electrons",
+    "explanation": "Oxidation is electron loss.",
+    "source": "JAMB Premium Chemistry Pack 007B"
+  },
+  {
+    "exam_type": "jamb",
+    "subject": "Chemistry",
+    "topic": "Redox Reactions",
+    "year": 2026,
+    "question": "Reduction is",
+    "options": [
+      "electron loss",
+      "electron gain",
+      "oxygen gain only",
+      "heat absorption"
+    ],
+    "answer": "electron gain",
+    "explanation": "Reduction involves gain of electrons.",
+    "source": "JAMB Premium Chemistry Pack 007B"
+  },
+  {
+    "exam_type": "jamb",
+    "subject": "Chemistry",
+    "topic": "Oxidizing Agents",
+    "year": 2026,
+    "question": "An oxidizing agent",
+    "options": [
+      "loses electrons",
+      "gains electrons",
+      "is reduced",
+      "both gains electrons and is reduced"
+    ],
+    "answer": "both gains electrons and is reduced",
+    "explanation": "Oxidizing agents accept electrons and undergo reduction.",
+    "source": "JAMB Premium Chemistry Pack 007B"
+  },
+  {
+    "exam_type": "jamb",
+    "subject": "Chemistry",
+    "topic": "Hydrogen",
+    "year": 2026,
+    "question": "Hydrogen is commonly prepared in the laboratory by reacting zinc with",
+    "options": [
+      "water",
+      "dilute acid",
+      "alkali",
+      "oxygen"
+    ],
+    "answer": "dilute acid",
+    "explanation": "Zinc reacts with dilute acids to produce hydrogen gas.",
+    "source": "JAMB Premium Chemistry Pack 007B"
+  },
+  {
+    "exam_type": "jamb",
+    "subject": "Chemistry",
+    "topic": "Oxygen",
+    "year": 2026,
+    "question": "Oxygen supports",
+    "options": [
+      "freezing",
+      "combustion",
+      "electroplating only",
+      "evaporation"
+    ],
+    "answer": "combustion",
+    "explanation": "Oxygen supports burning.",
+    "source": "JAMB Premium Chemistry Pack 007B"
+  },
+  {
+    "exam_type": "jamb",
+    "subject": "Chemistry",
+    "topic": "Nitrogen",
+    "year": 2026,
+    "question": "The major component of air is",
+    "options": [
+      "oxygen",
+      "nitrogen",
+      "argon",
+      "carbon dioxide"
+    ],
+    "answer": "nitrogen",
+    "explanation": "Nitrogen makes up about 78% of air.",
+    "source": "JAMB Premium Chemistry Pack 007B"
+  },
+  {
+    "exam_type": "jamb",
+    "subject": "Chemistry",
+    "topic": "Ammonia",
+    "year": 2026,
+    "question": "Ammonia turns red litmus",
+    "options": [
+      "green",
+      "blue",
+      "yellow",
+      "unchanged"
+    ],
+    "answer": "blue",
+    "explanation": "Ammonia is alkaline.",
+    "source": "JAMB Premium Chemistry Pack 007B"
+  },
+  {
+    "exam_type": "jamb",
+    "subject": "Chemistry",
+    "topic": "Chlorine",
+    "year": 2026,
+    "question": "Chlorine is used in water treatment mainly for",
+    "options": [
+      "coloring",
+      "disinfection",
+      "hardening",
+      "cooling"
+    ],
+    "answer": "disinfection",
+    "explanation": "Chlorine kills harmful microorganisms.",
+    "source": "JAMB Premium Chemistry Pack 007B"
+  },
+  {
+    "exam_type": "jamb",
+    "subject": "Chemistry",
+    "topic": "Sulfur",
+    "year": 2026,
+    "question": "Sulfur is commonly used in the manufacture of",
+    "options": [
+      "nitric acid",
+      "sulfuric acid",
+      "hydrochloric acid",
+      "methane"
+    ],
+    "answer": "sulfuric acid",
+    "explanation": "Sulfur is key in sulfuric acid production.",
+    "source": "JAMB Premium Chemistry Pack 007B"
+  },
+  {
+    "exam_type": "jamb",
+    "subject": "Chemistry",
+    "topic": "Carbon",
+    "year": 2026,
+    "question": "Diamond and graphite are",
+    "options": [
+      "isotopes",
+      "allotropes",
+      "compounds",
+      "mixtures"
+    ],
+    "answer": "allotropes",
+    "explanation": "They are different structural forms of carbon.",
+    "source": "JAMB Premium Chemistry Pack 007B"
+  },
+  {
+    "exam_type": "jamb",
+    "subject": "Chemistry",
+    "topic": "Carbon Compounds",
+    "year": 2026,
+    "question": "Carbon dioxide turns limewater",
+    "options": [
+      "blue",
+      "milky",
+      "red",
+      "green"
+    ],
+    "answer": "milky",
+    "explanation": "CO2 forms calcium carbonate precipitate.",
+    "source": "JAMB Premium Chemistry Pack 007B"
+  },
+  {
+    "exam_type": "jamb",
+    "subject": "Chemistry",
+    "topic": "Organic Chemistry",
+    "year": 2026,
+    "question": "The simplest hydrocarbon is",
+    "options": [
+      "ethane",
+      "methane",
+      "propane",
+      "butane"
+    ],
+    "answer": "methane",
+    "explanation": "Methane (CH4) is the simplest hydrocarbon.",
+    "source": "JAMB Premium Chemistry Pack 007B"
+  },
+  {
+    "exam_type": "jamb",
+    "subject": "Chemistry",
+    "topic": "Alkanes",
+    "year": 2026,
+    "question": "Alkanes are generally",
+    "options": [
+      "unsaturated",
+      "saturated",
+      "ionic",
+      "acidic"
+    ],
+    "answer": "saturated",
+    "explanation": "Alkanes contain only single bonds.",
+    "source": "JAMB Premium Chemistry Pack 007B"
+  },
+  {
+    "exam_type": "jamb",
+    "subject": "Chemistry",
+    "topic": "Alkenes",
+    "year": 2026,
+    "question": "Alkenes contain",
+    "options": [
+      "triple bonds",
+      "double bonds",
+      "ionic bonds",
+      "metallic bonds"
+    ],
+    "answer": "double bonds",
+    "explanation": "Alkenes are unsaturated hydrocarbons with C=C bonds.",
+    "source": "JAMB Premium Chemistry Pack 007B"
+  },
+  {
+    "exam_type": "jamb",
+    "subject": "Chemistry",
+    "topic": "Polymers",
+    "year": 2026,
+    "question": "Polythene is made from",
+    "options": [
+      "methane",
+      "ethene",
+      "ethanol",
+      "ethanoic acid"
+    ],
+    "answer": "ethene",
+    "explanation": "Polythene is formed by polymerization of ethene.",
+    "source": "JAMB Premium Chemistry Pack 007B"
+  },
+  {
+    "exam_type": "jamb",
+    "subject": "Chemistry",
+    "topic": "Alcohols",
+    "year": 2026,
+    "question": "The common alcohol used in laboratories is",
+    "options": [
+      "methanol",
+      "ethanol",
+      "propanol",
+      "butanol"
+    ],
+    "answer": "ethanol",
+    "explanation": "Ethanol is widely used as laboratory alcohol.",
+    "source": "JAMB Premium Chemistry Pack 007B"
+  },
+  {
+    "exam_type": "jamb",
+    "subject": "Chemistry",
+    "topic": "Esters",
+    "year": 2026,
+    "question": "Esters are known for their",
+    "options": [
+      "metallic nature",
+      "pleasant smells",
+      "strong acidity",
+      "electrical conductivity"
+    ],
+    "answer": "pleasant smells",
+    "explanation": "Many esters have fruity odors.",
+    "source": "JAMB Premium Chemistry Pack 007B"
+  },
+  {
+    "exam_type": "jamb",
+    "subject": "Chemistry",
+    "topic": "Soaps and Detergents",
+    "year": 2026,
+    "question": "Soap is less effective in",
+    "options": [
+      "soft water",
+      "distilled water",
+      "hard water",
+      "warm water"
+    ],
+    "answer": "hard water",
+    "explanation": "Hard water forms scum with soap.",
+    "source": "JAMB Premium Chemistry Pack 007B"
+  },
+  {
+    "exam_type": "jamb",
+    "subject": "Chemistry",
+    "topic": "Petroleum",
+    "year": 2026,
+    "question": "Crude oil is separated into fractions by",
+    "options": [
+      "electrolysis",
+      "fractional distillation",
+      "filtration",
+      "chromatography"
+    ],
+    "answer": "fractional distillation",
+    "explanation": "Petroleum refining uses fractional distillation.",
+    "source": "JAMB Premium Chemistry Pack 007B"
+  }
+]
