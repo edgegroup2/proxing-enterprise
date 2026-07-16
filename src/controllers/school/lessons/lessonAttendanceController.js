@@ -1,5 +1,17 @@
 'use strict';
 
+const { randomUUID } = require('crypto');
+
+const {
+  issueLessonRealtimeTicket,
+} = require(
+  '../../../services/school/lessons/lessonRealtimeTicketService'
+);
+
+const {
+  schoolLessonRoom,
+} = require('../../../realtime/schoolLessonRooms');
+
 const {
   getLessonAttendance,
   markLessonAttendance,
@@ -35,6 +47,164 @@ function getIdentity(req) {
       auth.id ||
       null,
   };
+}
+
+function emitLessonAttendanceRealtime(
+  req,
+  identity,
+  lessonId,
+  action,
+  result
+) {
+  try {
+    const io =
+      req.app &&
+      typeof req.app.get === 'function'
+        ? req.app.get('io')
+        : null;
+
+    if (!io || typeof io.to !== 'function') {
+      return false;
+    }
+
+    const schoolId = String(
+      identity.schoolId ||
+      identity.school_id ||
+      ''
+    ).trim();
+
+    const normalizedLessonId =
+      String(lessonId || '').trim();
+
+    if (!schoolId || !normalizedLessonId) {
+      return false;
+    }
+
+    const lesson =
+      result && result.lesson
+        ? result.lesson
+        : null;
+
+    const summary =
+      result && result.summary
+        ? result.summary
+        : null;
+
+    const event = {
+      version: 1,
+      eventId: randomUUID(),
+      type: 'school.lesson.attendance.updated',
+      occurredAt: new Date().toISOString(),
+      schoolId,
+      lessonId: normalizedLessonId,
+      action,
+      actor: {
+        memberId:
+          identity.memberId ||
+          identity.member_id ||
+          null,
+        userId:
+          identity.userId ||
+          identity.user_id ||
+          identity.id ||
+          null,
+        role:
+          identity.role ||
+          identity.schoolRole ||
+          identity.school_role ||
+          null,
+      },
+      attendance: {
+        savedCount:
+          result &&
+          Number.isFinite(
+            Number(result.savedCount)
+          )
+            ? Number(result.savedCount)
+            : null,
+        completion:
+          result && result.completion
+            ? result.completion
+            : null,
+        summary,
+        lessonStatus:
+          lesson && lesson.status
+            ? lesson.status
+            : null,
+        attendanceComplete:
+          lesson &&
+          lesson.attendanceComplete !==
+            undefined
+            ? lesson.attendanceComplete
+            : summary &&
+              summary.attendanceComplete !==
+                undefined
+              ? summary.attendanceComplete
+              : null,
+      },
+    };
+
+    io.to(
+      schoolLessonRoom(
+        schoolId,
+        normalizedLessonId
+      )
+    ).emit(
+      'school:lesson:attendance:updated',
+      event
+    );
+
+    return true;
+  } catch (error) {
+    console.error(
+      '[SCHOOL_LESSON_REALTIME_EMIT_ERROR]',
+      {
+        message: error.message,
+        lessonId,
+      }
+    );
+
+    return false;
+  }
+}
+
+async function issueLessonRealtimeTicketController(
+  req,
+  res
+) {
+  try {
+    const identity = getIdentity(req);
+    const lessonId = req.params.lessonId;
+
+    /*
+     * Reuse the Stage 1 attendance authorization path.
+     * A ticket is issued only when the same actor may read
+     * this lesson's attendance workspace.
+     */
+    await getLessonAttendance(
+      identity,
+      lessonId
+    );
+
+    const result =
+      issueLessonRealtimeTicket(
+        identity,
+        lessonId
+      );
+
+    return res.status(200).json({
+      success: true,
+      message:
+        'Lesson realtime ticket issued successfully',
+      data: result,
+    });
+  } catch (error) {
+    return sendError(
+      res,
+      error,
+      'Failed to issue lesson realtime ticket'
+    );
+  }
 }
 
 function sendError(
@@ -106,6 +276,14 @@ async function markLessonAttendanceController(
         req.body
       );
 
+    emitLessonAttendanceRealtime(
+      req,
+      getIdentity(req),
+      req.params.lessonId,
+      'bulk',
+      result
+    );
+
     return res.status(200).json({
       success: true,
       message:
@@ -134,6 +312,14 @@ async function updateLessonAttendanceController(
         req.body
       );
 
+    emitLessonAttendanceRealtime(
+      req,
+      getIdentity(req),
+      req.params.lessonId,
+      'single',
+      result
+    );
+
     return res.status(200).json({
       success: true,
       message:
@@ -150,6 +336,7 @@ async function updateLessonAttendanceController(
 }
 
 module.exports = {
+  issueLessonRealtimeTicketController,
   getLessonAttendanceController,
   markLessonAttendanceController,
   updateLessonAttendanceController,

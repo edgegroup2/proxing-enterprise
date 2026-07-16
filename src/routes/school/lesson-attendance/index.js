@@ -12,6 +12,7 @@ const {
   getLessonAttendanceController,
   markLessonAttendanceController,
   updateLessonAttendanceController,
+  issueLessonRealtimeTicketController,
 } = require(
   '../../../controllers/school/lessons/lessonAttendanceController'
 );
@@ -19,6 +20,11 @@ const {
 const router = express.Router();
 
 router.use(requireSchoolAuth);
+
+router.post(
+  '/:lessonId/realtime-ticket',
+  issueLessonRealtimeTicketController
+);
 
 router.get(
   '/:lessonId/attendance',
