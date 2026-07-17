@@ -4,7 +4,8 @@
   "main": "server.js",
   "type": "commonjs",
   "scripts": {
-    "start": "node server.js"
+    "start": "node server.js",
+    "test:school-lesson-realtime": "node --test --test-concurrency=1 tests/school/lesson-realtime/*.test.js"
   },
   "dependencies": {
     "agora-access-token": "^2.0.4",
