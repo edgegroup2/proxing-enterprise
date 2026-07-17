@@ -64,4 +64,10 @@ router.get('/dashboard', requireSchoolAuth, getSchoolDashboardController);
 router.use('/lessons', lessonRoutes);
 router.use('/lessons', lessonAttendanceRoutes);
 
+
+const liveClassroomRoutes = require(
+  './live-classroom'
+);
+
+router.use('/live-classroom', liveClassroomRoutes);
 module.exports = router;
