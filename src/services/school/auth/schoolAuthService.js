@@ -10,7 +10,17 @@ function getPool() {
 }
 
 function signSchoolToken(payload) {
-  const secret = process.env.JWT_SECRET || 'PROXING_TEMP_STABLE_SECRET_2026';
+  const secret =
+    typeof process.env.JWT_SECRET === 'string'
+      ? process.env.JWT_SECRET.trim()
+      : '';
+
+  if (!secret) {
+    const err = new Error('JWT_SECRET is not configured');
+    err.statusCode = 500;
+    err.code = 'SCHOOL_JWT_SECRET_MISSING';
+    throw err;
+  }
 
   return jwt.sign(
     {
