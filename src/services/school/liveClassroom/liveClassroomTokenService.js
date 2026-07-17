@@ -16,6 +16,10 @@ const defaultSessionService = require(
   './liveClassroomSessionService'
 );
 
+const defaultAdmissionService = require(
+  './liveClassroomAdmissionService'
+);
+
 const SAFE_IDENTIFIER =
   /^[A-Za-z0-9_-]+$/;
 
@@ -132,6 +136,9 @@ function createLiveClassroomTokenService({
   sessionService =
     defaultSessionService,
 
+  admissionService =
+    defaultAdmissionService,
+
   providerFactory =
     createLiveClassroomProvider,
 
@@ -190,8 +197,7 @@ function createLiveClassroomTokenService({
         503
       );
     }
-
-    const authorization =
+    let authorization =
       await sessionService
         .authorizeLessonLiveClassroomAccess({
           schoolId:
@@ -203,24 +209,59 @@ function createLiveClassroomTokenService({
           pool,
         });
 
-    const permissions =
-      policyService
-        .resolveParticipantPermissions({
-          role:
-            authorization.role,
-          policy,
-        });
+    let effectivePolicy = policy;
 
     if (
       authorization.participantKind ===
       'student'
     ) {
-      throw serviceError(
-        'Student enrollment and waiting-room admission are not yet available',
-        'SCHOOL_LIVE_CLASSROOM_STUDENT_ADMISSION_REQUIRED',
-        403
-      );
+      const studentAccess =
+        await admissionService
+          .authorizeStudentLiveClassroomJoin({
+            identity:
+              normalizedIdentity,
+            lessonId:
+              normalizedLessonId,
+            pool,
+          });
+
+      const studentAuthorization =
+        studentAccess?.authorization;
+
+      if (
+        studentAuthorization
+          ?.participantKind !==
+          'student' ||
+        String(
+          studentAuthorization?.role || ''
+        )
+          .trim()
+          .toLowerCase() !==
+          'student'
+      ) {
+        throw serviceError(
+          'Student admission authorization context is invalid',
+          'SCHOOL_LIVE_CLASSROOM_STUDENT_ADMISSION_CONTEXT_INVALID',
+          500
+        );
+      }
+
+      authorization =
+        studentAuthorization;
+
+      effectivePolicy =
+        studentAccess.policy ||
+        policy;
     }
+
+    const permissions =
+      policyService
+        .resolveParticipantPermissions({
+          role:
+            authorization.role,
+          policy:
+            effectivePolicy,
+        });
 
     const roomName =
       buildLiveClassroomRoomName(
@@ -264,7 +305,7 @@ function createLiveClassroomTokenService({
           participantName:
             normalizedIdentity.memberId,
           ttlSeconds:
-            policy.tokenTtlSeconds,
+            effectivePolicy.tokenTtlSeconds,
           permissions,
           metadata: {
             version: 1,
@@ -313,7 +354,7 @@ function createLiveClassroomTokenService({
           canSubscribe:
             permissions.canSubscribe,
           expiresInSeconds:
-            policy.tokenTtlSeconds,
+            effectivePolicy.tokenTtlSeconds,
         },
         pool,
       });
@@ -338,12 +379,12 @@ function createLiveClassroomTokenService({
       permissions,
 
       expiresInSeconds:
-        policy.tokenTtlSeconds,
+        effectivePolicy.tokenTtlSeconds,
 
       expiresAt:
         new Date(
           issuedAt.getTime() +
-          policy.tokenTtlSeconds * 1000
+          effectivePolicy.tokenTtlSeconds * 1000
         ).toISOString(),
 
       recordingEnabled: false,

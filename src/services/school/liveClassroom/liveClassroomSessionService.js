@@ -93,6 +93,8 @@ async function authorizeLessonLiveClassroomAccess({
       SELECT
         ls.id,
         ls.school_id,
+        ls.class_id,
+        ls.academic_session,
         ls.teacher_member_id,
         ls.status,
         ls.delivery_mode,

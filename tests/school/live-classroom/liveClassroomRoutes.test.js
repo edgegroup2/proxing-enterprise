@@ -13,7 +13,7 @@ const router = require(
 );
 
 test(
-  'exposes authenticated Live Classroom foundation routes',
+  'exposes authenticated Live Classroom waiting-room and token routes',
   () => {
     const authenticationLayer =
       router.stack.find(
@@ -40,6 +40,7 @@ test(
         .map((layer) => ({
           path:
             layer.route.path,
+
           methods:
             Object.keys(
               layer.route.methods
@@ -52,6 +53,26 @@ test(
         {
           path: '/policy',
           methods: ['get'],
+        },
+        {
+          path:
+            '/lessons/:lessonId/admissions/request',
+          methods: ['post'],
+        },
+        {
+          path:
+            '/lessons/:lessonId/admissions',
+          methods: ['get'],
+        },
+        {
+          path:
+            '/lessons/:lessonId/admissions/:admissionId/admit',
+          methods: ['patch'],
+        },
+        {
+          path:
+            '/lessons/:lessonId/admissions/:admissionId/reject',
+          methods: ['patch'],
         },
         {
           path:
