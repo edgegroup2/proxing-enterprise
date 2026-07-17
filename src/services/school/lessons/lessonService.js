@@ -30,6 +30,7 @@ const LESSON_SELECT = `
   l.school_id,
   l.timetable_entry_id,
   l.class_id,
+  l.academic_session,
   l.subject_id,
   l.teacher_member_id,
   l.lesson_date,
@@ -828,12 +829,32 @@ async function createLessonFromTimetable(
     payload.deliveryMode,
   );
 
+  const academicSession =
+    clean(payload.academicSession);
+
+  if (!academicSession) {
+    throw fail(
+      'Academic session is required',
+      400,
+      'SCHOOL_LESSON_ACADEMIC_SESSION_REQUIRED',
+    );
+  }
+
+  if (academicSession.length > 100) {
+    throw fail(
+      'Academic session must not exceed 100 characters',
+      400,
+      'SCHOOL_LESSON_ACADEMIC_SESSION_INVALID',
+    );
+  }
+
   const insertResult = await pool.query(
     `
       INSERT INTO school_lesson_sessions (
         school_id,
         timetable_entry_id,
         class_id,
+        academic_session,
         subject_id,
         teacher_member_id,
         lesson_date,
@@ -877,6 +898,7 @@ async function createLessonFromTimetable(
       member.school_id,
       timetable.id,
       timetable.class_id,
+      academicSession,
       timetable.subject_id,
       timetable.teacher_member_id,
       lessonDate,

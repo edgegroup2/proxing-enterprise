@@ -16,6 +16,19 @@ const {
   '../../../services/school/liveClassroom/liveClassroomTokenService'
 );
 
+const {
+  requestLiveClassroomAdmission:
+    requestAdmission,
+
+  listLiveClassroomAdmissions:
+    listAdmissions,
+
+  decideLiveClassroomAdmission:
+    decideAdmission,
+} = require(
+  '../../../services/school/liveClassroom/liveClassroomAdmissionService'
+);
+
 function requestIdentity(req) {
   const context =
     req.schoolAuth ||
@@ -60,9 +73,11 @@ function errorResponse(
 
   return res.status(statusCode).json({
     success: false,
+
     message:
       error?.message ||
       fallbackMessage,
+
     code:
       error?.code ||
       'SCHOOL_LIVE_CLASSROOM_ERROR',
@@ -84,27 +99,37 @@ async function getLiveClassroomPolicy(
       await getSchoolLiveClassroomPolicy({
         schoolId:
           identity.schoolId,
+
         configuration,
       });
 
     return res.status(200).json({
       success: true,
+
       data: {
         provider:
           policy.provider,
+
         enabled:
           policy.enabled,
+
         waitingRoomEnabled:
           policy.waitingRoomEnabled,
+
         studentJoinEnabled:
           policy.studentJoinEnabled,
+
         studentPublishPolicy:
           policy.studentPublishPolicy,
+
         recordingEnabled: false,
+
         maxParticipants:
           policy.maxParticipants,
+
         tokenTtlSeconds:
           policy.tokenTtlSeconds,
+
         providerConfigured:
           configuration
             .livekit
@@ -120,6 +145,135 @@ async function getLiveClassroomPolicy(
   }
 }
 
+async function requestLiveClassroomAdmission(
+  req,
+  res
+) {
+  try {
+    const result =
+      await requestAdmission({
+        identity:
+          requestIdentity(req),
+
+        lessonId:
+          req.params.lessonId,
+      });
+
+    return res.status(201).json({
+      success: true,
+      data: result,
+    });
+  } catch (error) {
+    return errorResponse(
+      res,
+      error,
+      'Failed to request Live Classroom admission'
+    );
+  }
+}
+
+async function getLiveClassroomAdmissions(
+  req,
+  res
+) {
+  try {
+    const result =
+      await listAdmissions({
+        identity:
+          requestIdentity(req),
+
+        lessonId:
+          req.params.lessonId,
+
+        status:
+          req.query?.status,
+      });
+
+    return res.status(200).json({
+      success: true,
+      data: result,
+    });
+  } catch (error) {
+    return errorResponse(
+      res,
+      error,
+      'Failed to load Live Classroom admissions'
+    );
+  }
+}
+
+async function admitLiveClassroomAdmission(
+  req,
+  res
+) {
+  try {
+    const result =
+      await decideAdmission({
+        identity:
+          requestIdentity(req),
+
+        lessonId:
+          req.params.lessonId,
+
+        admissionId:
+          req.params.admissionId,
+
+        decision:
+          'admitted',
+
+        note:
+          req.body?.note,
+      });
+
+    return res.status(200).json({
+      success: true,
+      data: result,
+    });
+  } catch (error) {
+    return errorResponse(
+      res,
+      error,
+      'Failed to admit the Live Classroom participant'
+    );
+  }
+}
+
+async function rejectLiveClassroomAdmission(
+  req,
+  res
+) {
+  try {
+    const result =
+      await decideAdmission({
+        identity:
+          requestIdentity(req),
+
+        lessonId:
+          req.params.lessonId,
+
+        admissionId:
+          req.params.admissionId,
+
+        decision:
+          'rejected',
+
+        note:
+          req.body?.note,
+      });
+
+    return res.status(200).json({
+      success: true,
+      data: result,
+    });
+  } catch (error) {
+    return errorResponse(
+      res,
+      error,
+      'Failed to reject the Live Classroom participant'
+    );
+  }
+}
+
 async function createLiveClassroomJoinToken(
   req,
   res
@@ -129,6 +283,7 @@ async function createLiveClassroomJoinToken(
       await issueLiveClassroomJoinToken({
         identity:
           requestIdentity(req),
+
         lessonId:
           req.params.lessonId,
       });
@@ -148,5 +303,9 @@ async function createLiveClassroomJoinToken(
 
 module.exports = {
   getLiveClassroomPolicy,
+  requestLiveClassroomAdmission,
+  getLiveClassroomAdmissions,
+  admitLiveClassroomAdmission,
+  rejectLiveClassroomAdmission,
   createLiveClassroomJoinToken,
 };

@@ -195,11 +195,19 @@ function resolveParticipantPermissions({
       );
     }
 
-    throw serviceError(
-      'Student enrollment and waiting-room admission are required before joining',
-      'SCHOOL_LIVE_CLASSROOM_STUDENT_ADMISSION_REQUIRED',
-      403
-    );
+    const publishingEnabled =
+      policy.studentPublishPolicy ===
+      'enabled';
+
+    return Object.freeze({
+      participantKind: 'student',
+      canSubscribe: true,
+      canPublish:
+        publishingEnabled,
+      canPublishData:
+        publishingEnabled,
+      roomAdmin: false,
+    });
   }
 
   throw serviceError(

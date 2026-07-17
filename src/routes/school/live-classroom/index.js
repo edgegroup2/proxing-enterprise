@@ -10,6 +10,10 @@ const {
 
 const {
   getLiveClassroomPolicy,
+  requestLiveClassroomAdmission,
+  getLiveClassroomAdmissions,
+  admitLiveClassroomAdmission,
+  rejectLiveClassroomAdmission,
   createLiveClassroomJoinToken,
 } = require(
   '../../../controllers/school/liveClassroom/liveClassroomController'
@@ -22,6 +26,26 @@ router.use(requireSchoolAuth);
 router.get(
   '/policy',
   getLiveClassroomPolicy
+);
+
+router.post(
+  '/lessons/:lessonId/admissions/request',
+  requestLiveClassroomAdmission
+);
+
+router.get(
+  '/lessons/:lessonId/admissions',
+  getLiveClassroomAdmissions
+);
+
+router.patch(
+  '/lessons/:lessonId/admissions/:admissionId/admit',
+  admitLiveClassroomAdmission
+);
+
+router.patch(
+  '/lessons/:lessonId/admissions/:admissionId/reject',
+  rejectLiveClassroomAdmission
 );
 
 router.post(

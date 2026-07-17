@@ -306,6 +306,21 @@ test(
         sessionService:
           dependencies.sessionService,
 
+        admissionService: {
+          async authorizeStudentLiveClassroomJoin() {
+            const error = new Error(
+              'Waiting-room admission is required before joining'
+            );
+
+            error.code =
+              'SCHOOL_LIVE_CLASSROOM_STUDENT_ADMISSION_REQUIRED';
+
+            error.statusCode = 403;
+
+            throw error;
+          },
+        },
+
         providerFactory:
           dependencies.providerFactory,
       });
