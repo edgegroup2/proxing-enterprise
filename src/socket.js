@@ -14,11 +14,21 @@ function safeDecodeToken(socket) {
     socket.handshake?.headers?.authorization ||
     '';
 
-  const token = String(authToken).replace(/^Bearer\s+/i, '').trim();
+  const token = String(authToken)
+    .replace(/^Bearer\s+/i, '')
+    .trim();
+
   if (!token) return null;
 
+  const secret =
+    typeof process.env.JWT_SECRET === 'string'
+      ? process.env.JWT_SECRET.trim()
+      : '';
+
+  if (!secret) return null;
+
   try {
-    return jwt.verify(token, process.env.JWT_SECRET || 'dev-secret-change-me');
+    return jwt.verify(token, secret);
   } catch (_) {
     return null;
   }

@@ -14,7 +14,18 @@ function requireSchoolAuth(req, res, next) {
       });
     }
 
-    const secret = process.env.JWT_SECRET || 'PROXING_TEMP_STABLE_SECRET_2026';
+    const secret =
+      typeof process.env.JWT_SECRET === 'string'
+        ? process.env.JWT_SECRET.trim()
+        : '';
+
+    if (!secret) {
+      return res.status(500).json({
+        success: false,
+        message: 'JWT_SECRET is not configured',
+      });
+    }
+
     const decoded = jwt.verify(token, secret);
 
     if (!decoded || decoded.scope !== 'school') {
