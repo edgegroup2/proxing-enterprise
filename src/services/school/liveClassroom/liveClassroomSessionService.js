@@ -4,19 +4,13 @@ const db = require('../../../db');
 
 const HOST_ROLES = new Set([
   'teacher',
-  'school_admin',
   'admin',
-  'owner',
   'principal',
-  'head_teacher',
 ]);
 
 const ELEVATED_ROLES = new Set([
-  'school_admin',
   'admin',
-  'owner',
   'principal',
-  'head_teacher',
 ]);
 
 function serviceError(
@@ -68,6 +62,19 @@ async function authorizeLessonLiveClassroomAccess({
   identity,
   pool,
 }) {
+  const authenticatedUserId =
+    identity?.userId ||
+    identity?.user_id ||
+    identity?.id ||
+    null;
+
+  if (!authenticatedUserId) {
+    throw serviceError(
+      'Complete authenticated school-user identity is required',
+      'SCHOOL_LIVE_CLASSROOM_USER_ID_REQUIRED',
+      401
+    );
+  }
   if (
     !schoolId ||
     !lessonId ||
@@ -101,6 +108,7 @@ async function authorizeLessonLiveClassroomAccess({
       INNER JOIN school_members sm
         ON sm.id = $3
         AND sm.school_id = ls.school_id
+        AND sm.user_id = $4
         AND sm.status = 'active'
 
       WHERE ls.school_id = $1
@@ -112,6 +120,7 @@ async function authorizeLessonLiveClassroomAccess({
       schoolId,
       lessonId,
       identity.memberId,
+      authenticatedUserId,
     ]
   );
 
@@ -148,7 +157,7 @@ async function authorizeLessonLiveClassroomAccess({
   }
 
   const role = normalizeRole(
-    identity.role || lesson.actor_role
+    lesson.actor_role
   );
 
   if (!HOST_ROLES.has(role)) {
