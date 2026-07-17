@@ -1,3 +1,4 @@
+
 'use strict';
 
 const express = require('express');
@@ -12,7 +13,25 @@ const {
   getClassSummaryController,
 } = require('../../../controllers/school/reports/reportController');
 
-router.get('/report-card/:studentId', requireSchoolAuth, getReportCardController);
-router.get('/class-summary/:classId', requireSchoolAuth, getClassSummaryController);
+const {
+  getReportsOverviewController,
+} = require('../../../controllers/school/capabilities/schoolCapabilityController');
+
+// Reports capability and overview.
+router.get('/', requireSchoolAuth, getReportsOverviewController);
+router.get('/overview', requireSchoolAuth, getReportsOverviewController);
+
+// Existing real report workflows.
+router.get(
+  '/report-card/:studentId',
+  requireSchoolAuth,
+  getReportCardController
+);
+
+router.get(
+  '/class-summary/:classId',
+  requireSchoolAuth,
+  getClassSummaryController
+);
 
 module.exports = router;
