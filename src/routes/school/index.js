@@ -1,6 +1,9 @@
 'use strict';
 
 const express = require('express');
+const lessonRoutes = require('./lessons');
+const lessonAttendanceRoutes = require('./lesson-attendance');
+
 const router = express.Router();
 
 const authRoutes = require('./auth');
@@ -57,5 +60,8 @@ router.use('/finance', financeRoutes);
 router.use('/intelligence', intelligenceRoutes);
 
 router.get('/dashboard', requireSchoolAuth, getSchoolDashboardController);
+
+router.use('/lessons', lessonRoutes);
+router.use('/lessons', lessonAttendanceRoutes);
 
 module.exports = router;

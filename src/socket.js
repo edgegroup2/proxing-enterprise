@@ -3,6 +3,7 @@
 const { Server } = require('socket.io');
 const jwt = require('jsonwebtoken');
 const presence = require('./services/presenceService');
+const { attachSchoolIdentity, registerSchoolLessonSocket } = require('./realtime/schoolLessonSocket');
 
 let io = null;
 
@@ -31,6 +32,8 @@ function initSocket(server) {
   io.on('connection', (socket) => {
     const decoded = safeDecodeToken(socket);
 
+    attachSchoolIdentity(socket, decoded);
+    registerSchoolLessonSocket(io, socket);
     if (decoded?.id) {
       const userId = String(decoded.id);
       const role = String(decoded.role || 'user');
