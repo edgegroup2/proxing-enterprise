@@ -12,16 +12,12 @@ const {
 
 const HOST_ROLES = new Set([
   'teacher',
-  'school_admin',
   'admin',
-  'owner',
   'principal',
-  'head_teacher',
 ]);
 
 const STUDENT_ROLES = new Set([
   'student',
-  'learner',
 ]);
 
 function serviceError(

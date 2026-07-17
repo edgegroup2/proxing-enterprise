@@ -119,10 +119,6 @@ function normalizeIdentity(identity) {
       'User identifier'
     ),
 
-    role:
-      typeof identity?.role === 'string'
-        ? identity.role.trim().toLowerCase()
-        : '',
   });
 }
 
@@ -211,8 +207,7 @@ function createLiveClassroomTokenService({
       policyService
         .resolveParticipantPermissions({
           role:
-            authorization.role ||
-            normalizedIdentity.role,
+            authorization.role,
           policy,
         });
 
@@ -286,7 +281,7 @@ function createLiveClassroomTokenService({
             userId:
               normalizedIdentity.userId,
             role:
-              normalizedIdentity.role,
+              authorization.role,
             participantKind:
               permissions.participantKind,
           },

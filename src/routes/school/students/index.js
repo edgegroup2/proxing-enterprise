@@ -1,6 +1,8 @@
 'use strict';
 
 const express = require('express');
+const { linkStudentMemberController } = require('../../../controllers/school/students/studentIdentityLinkController');
+
 const router = express.Router();
 
 const {
@@ -20,5 +22,7 @@ router.get('/', requireSchoolAuth, listStudentsController);
 router.get('/:id', requireSchoolAuth, getStudentController);
 router.patch('/:id', requireSchoolAuth, updateStudentController);
 router.delete('/:id', requireSchoolAuth, archiveStudentController);
+
+router.patch('/:id/member-link', requireSchoolAuth, linkStudentMemberController);
 
 module.exports = router;
