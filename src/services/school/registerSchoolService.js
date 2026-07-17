@@ -24,6 +24,23 @@ function hasPreference(payload, word) {
   return list.some((item) => String(item).toLowerCase().includes(word.toLowerCase()));
 }
 
+
+function safeNullableInt(value) {
+  const text = value === undefined || value === null
+    ? ''
+    : String(value).trim();
+
+  if (!text) return null;
+
+  const match = text.replace(/,/g, '').match(/\d+/);
+
+  if (!match) return null;
+
+  const parsed = Number(match[0]);
+
+  return Number.isSafeInteger(parsed) ? parsed : null;
+}
+
 async function hasColumn(client, table, column) {
   const result = await client.query(
     `
@@ -44,7 +61,19 @@ async function registerSchool(payload) {
   const pool = getPool();
   const client = await pool.connect();
 
-  const memberRole = ROLE_MAP[payload.contactRole] || 'admin';
+  const memberRole = ROLE_MAP[payload.contactRole || payload.representativeRole] || 'admin';
+
+const contactName =
+  payload.contactName ?? payload.representativeName;
+
+const contactEmail =
+  payload.contactEmail ?? payload.representativeEmail;
+
+const contactPhone =
+  payload.contactPhone ?? payload.representativePhone;
+
+const contactRole =
+  payload.contactRole ?? payload.representativeRole;
 
   try {
     await client.query('BEGIN');
@@ -93,10 +122,10 @@ async function registerSchool(payload) {
       `,
       [
         school.id,
-        payload.contactName,
+        (payload.contactName || payload.representativeName),
         memberRole,
-        payload.contactEmail,
-        payload.contactPhone,
+        (payload.contactEmail || payload.representativeEmail),
+        (payload.contactPhone || payload.representativePhone),
       ]
     );
 
@@ -116,25 +145,28 @@ async function registerSchool(payload) {
 
     await client.query(
       `
-      INSERT INTO school_estimates (
-        school_id,
-        estimated_students,
-        estimated_teachers,
-        ss3_students,
-        jamb_candidates,
-        expected_launch_date
-      )
-      VALUES ($1,$2,$3,$4,$5,$6)
+        INSERT INTO school_estimates (
+          school_id,
+          estimated_students,
+          estimated_teachers,
+          ss3_students,
+          jamb_candidates,
+          expected_launch_date
+        )
+        VALUES ($1, COALESCE($2, 0), $3, $4, $5, $6)
       `,
       [
         school.id,
-        Number(payload.estimatedStudents),
-        payload.numberOfTeachers ? Number(payload.numberOfTeachers) : null,
-        payload.ss3Students ? Number(payload.ss3Students) : null,
-        payload.jambCandidates ? Number(payload.jambCandidates) : null,
+        safeNullableInt(payload.estimatedStudents),
+        safeNullableInt(
+          payload.numberOfTeachers ?? payload.estimatedTeachers
+        ),
+        safeNullableInt(payload.ss3Students),
+        safeNullableInt(payload.jambCandidates),
         payload.expectedLaunchDate || null,
       ]
     );
+
 
     await client.query(
       `

@@ -4,6 +4,12 @@ const express = require('express');
 const router = express.Router();
 
 const {
+  getCreditsOverviewController,
+  getSubscriptionsOverviewController,
+} = require('../../../controllers/school/capabilities/schoolCapabilityController');
+
+
+const {
     requireSchoolAuth,
 } = require('../../../middlewares/school/schoolAuthMiddleware');
 
@@ -73,5 +79,12 @@ router.get('/reports/revenue', revenueReport);
 router.get('/reports/payments', paymentReport);
 router.get('/reports/outstanding', outstandingReport);
 router.get('/reports/:reportType/export', exportReport);
+
+
+
+// Compatibility alias for the canonical finance dashboard.
+router.get('/', financeDashboardController);
+router.get('/credits', getCreditsOverviewController);
+router.get('/subscriptions', getSubscriptionsOverviewController);
 
 module.exports = router;

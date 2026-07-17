@@ -27,13 +27,37 @@ async function loginSchoolController(req, res) {
 
 async function getMeController(req, res) {
   try {
-    const school = await getSchoolProfile(req.school.schoolId);
+    const auth = req.schoolAuth || req.school || null;
+
+    const schoolId =
+      auth?.schoolId ||
+      auth?.school_id ||
+      auth?.school?.id ||
+      null;
+
+    if (!schoolId) {
+      return res.status(401).json({
+        success: false,
+        message: 'School authentication context is missing',
+        code: 'SCHOOL_AUTH_CONTEXT_MISSING',
+      });
+    }
+
+    const school = await getSchoolProfile({ schoolId });
+
+    if (!school) {
+      return res.status(404).json({
+        success: false,
+        message: 'School not found',
+        code: 'SCHOOL_NOT_FOUND',
+      });
+    }
 
     return res.json({
       success: true,
       data: {
         school,
-        auth: req.school,
+        auth,
       },
     });
   } catch (err) {
@@ -42,6 +66,7 @@ async function getMeController(req, res) {
     return res.status(err.statusCode || 500).json({
       success: false,
       message: err.message || 'Failed to fetch school profile',
+      code: err.code || 'SCHOOL_ME_FAILED',
     });
   }
 }
