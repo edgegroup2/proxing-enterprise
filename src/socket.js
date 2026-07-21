@@ -195,4 +195,18 @@ function getIO() {
   return io;
 }
 
-module.exports = { initSocket, getIO };
+function userRoom(userId) {
+  return `user:${String(userId).trim()}`;
+}
+
+function emitToUser(userId, eventName, payload) {
+  const normalizedUserId = String(userId || '').trim();
+  const normalizedEventName = String(eventName || '').trim();
+
+  if (!io || !normalizedUserId || !normalizedEventName) return false;
+
+  io.to(userRoom(normalizedUserId)).emit(normalizedEventName, payload);
+  return true;
+}
+
+module.exports = { initSocket, getIO, emitToUser, userRoom };
