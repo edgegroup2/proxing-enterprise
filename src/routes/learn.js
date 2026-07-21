@@ -1,4 +1,10 @@
 'use strict';
+const {
+  SUPPORTED_STUDY_ROOM_EXAM_TYPES,
+  normalizeStudyRoomExamType,
+  isSupportedStudyRoomExamType,
+  isStudyRoomExamTypeConstraintViolation,
+} = require('../constants/examCatalogue');
 
 const express = require('express');
 const learnLiveStudyRouter = require('./learnLiveStudy');
@@ -1059,9 +1065,23 @@ router.get('/rooms', async (req, res) => {
 /**
  * POST /api/learn/rooms/create
  */
+function sendInvalidStudyRoomExamType(
+  res
+) {
+  return res.status(400).json({
+    success: false,
+    code: 'INVALID_EXAM_TYPE',
+    error:
+      'exam_type must be one of the supported exam types',
+    allowed_exam_types:
+      SUPPORTED_STUDY_ROOM_EXAM_TYPES,
+  });
+}
+
 router.post('/rooms/create', requireAuth, async (req, res) => {
   try {
     const userId = String(req.user.id);
+
     const {
       name,
       subject_id = null,
@@ -1071,14 +1091,37 @@ router.post('/rooms/create', requireAuth, async (req, res) => {
       is_public = true
     } = req.body;
 
-    if (!name || !exam_type) {
+    const normalizedName =
+      name === null ||
+      name === undefined
+        ? ''
+        : String(name).trim();
+
+    const normalizedExamType =
+      normalizeStudyRoomExamType(
+        exam_type
+      );
+
+    if (!normalizedName) {
       return res.status(400).json({
         success: false,
-        error: 'name and exam_type are required'
+        code: 'VALIDATION_ERROR',
+        error: 'name is required'
       });
     }
 
-    const inviteCode = await generateUniqueInviteCode();
+    if (
+      !isSupportedStudyRoomExamType(
+        normalizedExamType
+      )
+    ) {
+      return sendInvalidStudyRoomExamType(
+        res
+      );
+    }
+
+    const inviteCode =
+      await generateUniqueInviteCode();
 
     const roomResult = await db.query(
       `
@@ -1097,9 +1140,9 @@ router.post('/rooms/create', requireAuth, async (req, res) => {
       RETURNING *
       `,
       [
-        String(name).trim(),
+        normalizedName,
         subject_id,
-        String(exam_type).toLowerCase(),
+        normalizedExamType,
         String(mode).toLowerCase(),
         userId,
         Number(max_members) || 10,
@@ -1124,7 +1167,21 @@ router.post('/rooms/create', requireAuth, async (req, res) => {
       data: room
     });
   } catch (err) {
-    console.error('LEARN_CREATE_ROOM_ERROR', err);
+    if (
+      isStudyRoomExamTypeConstraintViolation(
+        err
+      )
+    ) {
+      return sendInvalidStudyRoomExamType(
+        res
+      );
+    }
+
+    console.error(
+      'LEARN_CREATE_ROOM_ERROR',
+      err
+    );
+
     return res.status(500).json({
       success: false,
       error: 'Failed to create room'
