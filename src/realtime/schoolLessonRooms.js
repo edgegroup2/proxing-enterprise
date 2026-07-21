@@ -40,9 +40,18 @@ function schoolLessonRoom(schoolId, lessonId) {
   ].join(':');
 }
 
+function schoolUserRoom(schoolId, userId) {
+  return [
+    schoolRoom(schoolId),
+    'user',
+    normalizeRoomId(userId, 'User ID'),
+  ].join(':');
+}
+
 module.exports = {
   normalizeRoomId,
   schoolRoom,
   schoolMemberRoom,
   schoolLessonRoom,
+  schoolUserRoom,
 };

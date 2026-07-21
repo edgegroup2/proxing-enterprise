@@ -1,6 +1,9 @@
 'use strict';
 
-const jwt = require('jsonwebtoken');
+const {
+  verifySignedToken,
+  validatePlatformClaims,
+} = require('../security/platformJwt');
 
 function requireAuth(req, res, next) {
   try {
@@ -22,40 +25,146 @@ function requireAuth(req, res, next) {
       });
     }
 
-    const decoded = jwt.verify(token, secret);
+    const decoded =
+      verifySignedToken(
+        token,
+        {
+          secret,
+        }
+      );
 
-    if (!decoded.id) {
-      return res.status(401).json({
-        success: false,
-        error: 'Missing id claim'
+    // SCHOOL_SCOPE_COMPATIBILITY_BRIDGE
+
+    const requestPath = String(req.originalUrl || req.url || '');
+
+    const isSchoolApiPath = /^\/api\/schools?(?:\/|$)/.test(requestPath);
+
+
+    if (decoded && decoded.scope === 'school') {
+
+      if (!isSchoolApiPath) {
+
+        console.warn('[AUTH_WRONG_TOKEN_SCOPE]', {
+
+          method: req.method,
+
+          path: requestPath,
+
+          scope: decoded.scope,
+
+          claimKeys: Object.keys(decoded || {}),
+
+        });
+
+
+        return res.status(401).json({
+
+          success: false,
+
+          error: 'Platform authentication token required',
+
+          code: 'WRONG_TOKEN_SCOPE',
+
+        });
+
+      }
+
+
+      const schoolUserId =
+
+        decoded.userId ||
+
+        decoded.user_id ||
+
+        decoded.sub ||
+
+        null;
+
+
+      const schoolId =
+
+        decoded.schoolId ||
+
+        decoded.school_id ||
+
+        (decoded.school && decoded.school.id) ||
+
+        null;
+
+
+      if (!schoolUserId || !schoolId) {
+
+        return res.status(401).json({
+
+          success: false,
+
+          error: 'Incomplete school authentication context',
+
+          code: 'SCHOOL_AUTH_CONTEXT_MISSING',
+
+        });
+
+      }
+
+
+      decoded.id = String(schoolUserId);
+
+      decoded.userId = String(schoolUserId);
+
+      decoded.schoolId = String(schoolId);
+
+      decoded.role =
+
+        decoded.schoolRole ||
+
+        decoded.school_role ||
+
+        decoded.role ||
+
+        'school_member';
+
+
+      req.schoolAuth = {
+
+        ...decoded,
+
+        memberId: decoded.memberId || decoded.member_id || null,
+
+        schoolRole: decoded.schoolRole || decoded.school_role || decoded.role,
+
+      };
+
+
+      req.school = req.schoolAuth;
+
+
+      console.warn('[SCHOOL_SCOPE_COMPAT_USED]', {
+
+        method: req.method,
+
+        path: requestPath,
+
       });
-    }
 
-    if (!decoded.role) {
-      return res.status(401).json({
-        success: false,
-        error: 'Missing role claim'
-      });
     }
+      let platformIdentity;
 
-    if (decoded.iss !== 'proxing-backend') {
-      return res.status(401).json({
-        success: false,
-        error: 'Invalid issuer'
-      });
-    }
+      try {
+        platformIdentity =
+          validatePlatformClaims(
+            decoded
+          );
+      } catch (error) {
+        return res.status(401).json({
+          success: false,
+          error:
+            error?.message ||
+            'Invalid token claims',
+        });
+      }
 
-    if (decoded.aud && decoded.aud !== 'proxing-web') {
-      return res.status(401).json({
-        success: false,
-        error: 'Invalid audience'
-      });
-    }
-
-    req.user = {
-      id: String(decoded.id),
-      role: decoded.role
-    };
+      req.user =
+        platformIdentity;
 
     next();
   } catch (e) {

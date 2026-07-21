@@ -1,8 +1,12 @@
 'use strict';
 
 const { Server } = require('socket.io');
-const jwt = require('jsonwebtoken');
+const {
+  verifySignedToken,
+  validatePlatformClaims,
+} = require('./security/platformJwt');
 const presence = require('./services/presenceService');
+const db = require('./db');
 const { attachSchoolIdentity, registerSchoolLessonSocket } = require('./realtime/schoolLessonSocket');
 
 let io = null;
@@ -14,11 +18,52 @@ function safeDecodeToken(socket) {
     socket.handshake?.headers?.authorization ||
     '';
 
-  const token = String(authToken).replace(/^Bearer\s+/i, '').trim();
+  const token =
+    String(authToken)
+      .replace(/^Bearer\s+/i, '')
+      .trim();
+
   if (!token) return null;
 
+  const secret =
+    typeof process.env.JWT_SECRET === 'string'
+      ? process.env.JWT_SECRET.trim()
+      : '';
+
+  if (!secret) return null;
+
   try {
-    return jwt.verify(token, process.env.JWT_SECRET || 'dev-secret-change-me');
+    return verifySignedToken(
+      token,
+      {
+        secret,
+      }
+    );
+  } catch (_) {
+    return null;
+  }
+}
+
+function safeResolvePlatformIdentity(
+  decoded
+) {
+  /*
+   * School tokens remain available to the School Lesson Socket
+   * identity layer, but they must never join Exam Prep platform
+   * user rooms.
+   */
+  if (
+    !decoded ||
+    decoded.scope ===
+      'school'
+  ) {
+    return null;
+  }
+
+  try {
+    return validatePlatformClaims(
+      decoded
+    );
   } catch (_) {
     return null;
   }
@@ -30,25 +75,66 @@ function initSocket(server) {
   });
 
   io.on('connection', (socket) => {
-    const decoded = safeDecodeToken(socket);
+    const decoded =
+      safeDecodeToken(
+        socket
+      );
 
     attachSchoolIdentity(socket, decoded);
+
     registerSchoolLessonSocket(io, socket);
-    if (decoded?.id) {
-      const userId = String(decoded.id);
-      const role = String(decoded.role || 'user');
 
-      socket.join(`user:${userId}`);
-      if (role === 'provider') socket.join(`provider:${userId}`);
+    const platformIdentity =
+      safeResolvePlatformIdentity(
+        decoded
+      );
 
-      socket.user = { id: userId, role };
+    if (platformIdentity) {
+      const userId =
+        platformIdentity.id;
+
+      const role =
+        platformIdentity.role;
+
+      socket.join(userRoom(userId));
+
+      if (
+        role ===
+        'provider'
+      ) {
+        socket.join(
+          `provider:${userId}`
+        );
+      }
+
+      socket.user = {
+        id:
+          userId,
+
+        role,
+      };
     }
 
-socket.on('room:join', ({ roomId }) => {
-  const id = String(roomId || '').trim();
-  if (!id) return;
-  socket.join(`room:${id}`);
-});
+socket.on('room:join', async ({ roomId } = {}) => {
+      const id = String(roomId || '').trim();
+      const userId = String(socket.user?.id || '').trim();
+      if (!id || !userId) return;
+
+      try {
+        const membership = await db.query(
+          `SELECT 1
+           FROM study_room_members
+           WHERE room_id = $1 AND user_id = $2
+           LIMIT 1`,
+          [id, userId]
+        );
+
+        if (!membership.rows.length) return;
+        socket.join(`room:${id}`);
+      } catch (_) {
+        return;
+      }
+    });
 
 socket.on('room:leave', ({ roomId }) => {
   const id = String(roomId || '').trim();
@@ -57,11 +143,25 @@ socket.on('room:leave', ({ roomId }) => {
 });
 
 // Squad rooms
-  socket.on('join_squad', ({ squad_id, user_id }) => {
+  socket.on('join_squad', async ({ squad_id } = {}) => {
     const squadId = String(squad_id || '').trim();
-    const userId = String(user_id || socket.user?.id || '').trim();
+    const userId = String(socket.user?.id || '').trim();
 
     if (!squadId || !userId) return;
+      try {
+        const membership = await db.query(
+          `SELECT 1
+           FROM squad_members
+           WHERE squad_id = $1 AND user_id = $2
+           LIMIT 1`,
+          [squadId, userId]
+        );
+
+        if (!membership.rows.length) return;
+      } catch (_) {
+        return;
+      }
+
 
     socket.join(`squad:${squadId}`);
 
@@ -72,9 +172,9 @@ socket.on('room:leave', ({ roomId }) => {
     });
   });
 
-  socket.on('leave_squad', ({ squad_id, user_id }) => {
+  socket.on('leave_squad', ({ squad_id } = {}) => {
     const squadId = String(squad_id || '').trim();
-    const userId = String(user_id || socket.user?.id || '').trim();
+    const userId = String(socket.user?.id || '').trim();
 
     if (!squadId) return;
 
@@ -88,11 +188,26 @@ socket.on('room:leave', ({ roomId }) => {
   });
 
   // Squad challenge rooms
-  socket.on('join_challenge', ({ challenge_id, user_id }) => {
+  socket.on('join_challenge', async ({ challenge_id } = {}) => {
     const challengeId = String(challenge_id || '').trim();
-    const userId = String(user_id || socket.user?.id || '').trim();
+    const userId = String(socket.user?.id || '').trim();
 
     if (!challengeId || !userId) return;
+      try {
+        const membership = await db.query(
+          `SELECT 1
+           FROM squad_challenges c
+           JOIN squad_members sm ON sm.squad_id = c.squad_id
+           WHERE c.id = $1 AND sm.user_id = $2
+           LIMIT 1`,
+          [challengeId, userId]
+        );
+
+        if (!membership.rows.length) return;
+      } catch (_) {
+        return;
+      }
+
 
     socket.join(`challenge:${challengeId}`);
 
@@ -103,9 +218,9 @@ socket.on('room:leave', ({ roomId }) => {
     });
   });
 
-  socket.on('leave_challenge', ({ challenge_id, user_id }) => {
+  socket.on('leave_challenge', ({ challenge_id } = {}) => {
     const challengeId = String(challenge_id || '').trim();
-    const userId = String(user_id || socket.user?.id || '').trim();
+    const userId = String(socket.user?.id || '').trim();
 
     if (!challengeId) return;
 

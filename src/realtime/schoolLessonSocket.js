@@ -6,6 +6,7 @@ const {
   schoolRoom,
   schoolMemberRoom,
   schoolLessonRoom,
+  schoolUserRoom,
 } = require('./schoolLessonRooms');
 
 const MAX_LESSON_ROOMS_PER_SOCKET = 8;
@@ -83,12 +84,13 @@ function attachSchoolIdentity(socket, decoded) {
   }
 
   /*
-   * Existing services already deliver some events through
-   * user:<userId>. Joining it maintains compatibility without
-   * changing the existing platform-token logic.
+   * School-scoped sockets use their own namespaced user room.
+   * They must never join the platform user:<id> namespace.
    */
   if (userId) {
-    socket.join(`user:${userId}`);
+    socket.join(
+      schoolUserRoom(schoolId, userId)
+    );
   }
 
   return identity;
