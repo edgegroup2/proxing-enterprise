@@ -1,7 +1,10 @@
 'use strict';
 
 const express = require('express');
+const learnLiveStudyRouter = require('./learnLiveStudy');
+
 const router = express.Router();
+router.use(learnLiveStudyRouter);
 const { aiJSON } = require('../services/aiRouter');
 const db = require('../db');
 const { recordAttempt } = require('../services/studentAttemptService');
