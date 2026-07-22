@@ -240,6 +240,12 @@ function createLiveStudyController({
   workspaceService =
     defaultWorkspaceService,
 
+
+  revisionService =
+    require(
+      '../services/liveStudy/liveStudyRevisionService'
+    ),
+
   configurationProvider =
     readLiveStudyConfig,
 
@@ -601,6 +607,205 @@ function createLiveStudyController({
       },
     });
 
+  const createRevisionActivity =
+    handler({
+      operation:
+        'create_revision_activity',
+
+      successStatus:
+        201,
+
+      async execute(request) {
+        return revisionService
+          .createActivity({
+            roomId:
+              request.params
+                .roomId,
+
+            sessionId:
+              request.params
+                .sessionId,
+
+            userId:
+              requireAuthenticatedUserId(
+                request
+              ),
+
+            expectedVersion:
+              request.body
+                ?.expected_version,
+
+            questionId:
+              request.body
+                ?.question_id,
+
+            timeLimitSeconds:
+              request.body
+                ?.time_limit_seconds,
+          });
+      },
+    });
+
+  const startRevisionActivity =
+    handler({
+      operation:
+        'start_revision_activity',
+
+      async execute(request) {
+        return revisionService
+          .startActivity({
+            roomId:
+              request.params
+                .roomId,
+
+            sessionId:
+              request.params
+                .sessionId,
+
+            activityId:
+              request.params
+                .activityId,
+
+            userId:
+              requireAuthenticatedUserId(
+                request
+              ),
+
+            expectedVersion:
+              request.body
+                ?.expected_version,
+          });
+      },
+    });
+
+  const submitRevisionAnswer =
+    handler({
+      operation:
+        'submit_revision_answer',
+
+      successStatus:
+        201,
+
+      async execute(request) {
+        return revisionService
+          .submitAnswer({
+            roomId:
+              request.params
+                .roomId,
+
+            sessionId:
+              request.params
+                .sessionId,
+
+            activityId:
+              request.params
+                .activityId,
+
+            userId:
+              requireAuthenticatedUserId(
+                request
+              ),
+
+            answer:
+              request.body
+                ?.answer,
+          });
+      },
+    });
+
+  const revealRevisionActivity =
+    handler({
+      operation:
+        'reveal_revision_activity',
+
+      async execute(request) {
+        return revisionService
+          .revealActivity({
+            roomId:
+              request.params
+                .roomId,
+
+            sessionId:
+              request.params
+                .sessionId,
+
+            activityId:
+              request.params
+                .activityId,
+
+            userId:
+              requireAuthenticatedUserId(
+                request
+              ),
+
+            expectedVersion:
+              request.body
+                ?.expected_version,
+          });
+      },
+    });
+
+  const completeRevisionActivity =
+    handler({
+      operation:
+        'complete_revision_activity',
+
+      async execute(request) {
+        return revisionService
+          .completeActivity({
+            roomId:
+              request.params
+                .roomId,
+
+            sessionId:
+              request.params
+                .sessionId,
+
+            activityId:
+              request.params
+                .activityId,
+
+            userId:
+              requireAuthenticatedUserId(
+                request
+              ),
+
+            expectedVersion:
+              request.body
+                ?.expected_version,
+          });
+      },
+    });
+
+  const getRevisionResults =
+    handler({
+      operation:
+        'get_revision_results',
+
+      async execute(request) {
+        return revisionService
+          .getResults({
+            roomId:
+              request.params
+                .roomId,
+
+            sessionId:
+              request.params
+                .sessionId,
+
+            activityId:
+              request.params
+                .activityId,
+
+            userId:
+              requireAuthenticatedUserId(
+                request
+              ),
+          });
+      },
+    });
+
+
   return Object.freeze({
     getAvailability,
     listSessions,
@@ -615,6 +820,12 @@ function createLiveStudyController({
     initializeWorkspace,
     startWorkspace,
     completeWorkspace,
+    createRevisionActivity,
+    startRevisionActivity,
+    submitRevisionAnswer,
+    revealRevisionActivity,
+    completeRevisionActivity,
+    getRevisionResults,
   });
 }
 

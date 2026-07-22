@@ -119,6 +119,54 @@ const ROUTE_DEFINITIONS =
       handler:
         'completeWorkspace',
     }),
+
+    Object.freeze({
+      method: 'post',
+      path:
+        '/rooms/:roomId/live-study/sessions/:sessionId/workspace/revision/activities',
+      handler:
+        'createRevisionActivity',
+    }),
+
+    Object.freeze({
+      method: 'post',
+      path:
+        '/rooms/:roomId/live-study/sessions/:sessionId/workspace/revision/activities/:activityId/start',
+      handler:
+        'startRevisionActivity',
+    }),
+
+    Object.freeze({
+      method: 'post',
+      path:
+        '/rooms/:roomId/live-study/sessions/:sessionId/workspace/revision/activities/:activityId/submissions',
+      handler:
+        'submitRevisionAnswer',
+    }),
+
+    Object.freeze({
+      method: 'post',
+      path:
+        '/rooms/:roomId/live-study/sessions/:sessionId/workspace/revision/activities/:activityId/reveal',
+      handler:
+        'revealRevisionActivity',
+    }),
+
+    Object.freeze({
+      method: 'post',
+      path:
+        '/rooms/:roomId/live-study/sessions/:sessionId/workspace/revision/activities/:activityId/complete',
+      handler:
+        'completeRevisionActivity',
+    }),
+
+    Object.freeze({
+      method: 'get',
+      path:
+        '/rooms/:roomId/live-study/sessions/:sessionId/workspace/revision/activities/:activityId/results',
+      handler:
+        'getRevisionResults',
+    }),
   ]);
 
 function createLearnLiveStudyRouter({

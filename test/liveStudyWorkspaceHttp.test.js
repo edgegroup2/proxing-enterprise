@@ -199,9 +199,14 @@ test(
       ROUTE_DEFINITIONS
         .filter(
           (definition) =>
-            definition.path
-              .includes(
-                '/workspace'
+            EXPECTED_WORKSPACE_ROUTES
+              .some(
+                (expected) =>
+                  expected.method
+                    === definition.method
+                      .toUpperCase()
+                  && expected.path
+                    === definition.path
               )
         )
         .map(
@@ -236,21 +241,26 @@ test(
 );
 
 test(
-  'router contains nine frozen v1 routes and four additive workspace routes',
+  'router contains nine frozen v1 routes, four workspace lifecycle routes, and six revision routes',
   () => {
     const workspaceRoutes =
       ROUTE_DEFINITIONS
         .filter(
           (definition) =>
-            definition.path
-              .includes(
-                '/workspace'
+            EXPECTED_WORKSPACE_ROUTES
+              .some(
+                (expected) =>
+                  expected.method
+                    === definition.method
+                      .toUpperCase()
+                  && expected.path
+                    === definition.path
               )
         );
 
     assert.equal(
       ROUTE_DEFINITIONS.length,
-      13
+      19
     );
 
     assert.equal(
@@ -290,7 +300,7 @@ test(
 
     assert.equal(
       registeredCount,
-      13
+      19
     );
   }
 );
