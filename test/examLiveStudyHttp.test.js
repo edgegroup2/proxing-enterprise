@@ -907,7 +907,7 @@ test('router registers the complete nested Live Study contract', () => {
 
   assert.equal(
     registered.length,
-    9
+    13
   );
 });
 

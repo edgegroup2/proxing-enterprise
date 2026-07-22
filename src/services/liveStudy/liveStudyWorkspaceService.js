@@ -489,6 +489,27 @@ async function appendWorkspaceEvent({
   );
 }
 
+function synchronizeWorkspaceSequence(
+  workspace,
+  event
+) {
+  if (
+    !workspace
+    || !event
+  ) {
+    return workspace;
+  }
+
+  return Object.freeze({
+    ...workspace,
+
+    last_event_sequence:
+      Number(
+        event.sequence_number
+      ),
+  });
+}
+
 function createLiveStudyWorkspaceService({
   database = defaultDatabase,
 
@@ -723,7 +744,10 @@ function createLiveStudyWorkspaceService({
         transactionResult.created,
 
       workspace:
-        transactionResult.workspace,
+        synchronizeWorkspaceSequence(
+          transactionResult.workspace,
+          transactionResult.event
+        ),
 
       realtime,
     });
@@ -930,7 +954,10 @@ function createLiveStudyWorkspaceService({
 
     return Object.freeze({
       workspace:
-        transactionResult.workspace,
+        synchronizeWorkspaceSequence(
+          transactionResult.workspace,
+          transactionResult.event
+        ),
 
       realtime,
     });
@@ -1077,7 +1104,10 @@ function createLiveStudyWorkspaceService({
 
     return Object.freeze({
       workspace:
-        transactionResult.workspace,
+        synchronizeWorkspaceSequence(
+          transactionResult.workspace,
+          transactionResult.event
+        ),
 
       realtime,
     });
@@ -1110,6 +1140,7 @@ module.exports = {
   acquireClient,
   withTransaction,
   appendWorkspaceEvent,
+  synchronizeWorkspaceSequence,
 
   createLiveStudyWorkspaceService,
 

@@ -16,6 +16,10 @@ const defaultAuthorizationService = require(
   '../services/liveStudy/liveStudyAuthorizationService'
 );
 
+const defaultWorkspaceService = require(
+  '../services/liveStudy/liveStudyWorkspaceService'
+);
+
 const {
   readLiveStudyConfig,
 } = require(
@@ -232,6 +236,9 @@ function createLiveStudyController({
 
   authorizationService =
     defaultAuthorizationService,
+
+  workspaceService =
+    defaultWorkspaceService,
 
   configurationProvider =
     readLiveStudyConfig,
@@ -490,6 +497,110 @@ function createLiveStudyController({
       },
     });
 
+  const getWorkspace =
+    handler({
+      operation:
+        'get_workspace',
+
+      async execute(request) {
+        return workspaceService
+          .getWorkspace({
+            roomId:
+              request.params
+                .roomId,
+
+            sessionId:
+              request.params
+                .sessionId,
+
+            userId:
+              requireAuthenticatedUserId(
+                request
+              ),
+          });
+      },
+    });
+
+  const initializeWorkspace =
+    handler({
+      operation:
+        'initialize_workspace',
+
+      async execute(request) {
+        return workspaceService
+          .initializeWorkspace({
+            roomId:
+              request.params
+                .roomId,
+
+            sessionId:
+              request.params
+                .sessionId,
+
+            userId:
+              requireAuthenticatedUserId(
+                request
+              ),
+          });
+      },
+    });
+
+  const startWorkspace =
+    handler({
+      operation:
+        'start_workspace',
+
+      async execute(request) {
+        return workspaceService
+          .startWorkspace({
+            roomId:
+              request.params
+                .roomId,
+
+            sessionId:
+              request.params
+                .sessionId,
+
+            userId:
+              requireAuthenticatedUserId(
+                request
+              ),
+
+            expectedVersion:
+              request.body
+                ?.expected_version,
+          });
+      },
+    });
+
+  const completeWorkspace =
+    handler({
+      operation:
+        'complete_workspace',
+
+      async execute(request) {
+        return workspaceService
+          .completeWorkspace({
+            roomId:
+              request.params
+                .roomId,
+
+            sessionId:
+              request.params
+                .sessionId,
+
+            userId:
+              requireAuthenticatedUserId(
+                request
+              ),
+
+            expectedVersion:
+              request.body
+                ?.expected_version,
+          });
+      },
+    });
+
   return Object.freeze({
     getAvailability,
     listSessions,
@@ -500,6 +611,10 @@ function createLiveStudyController({
     cancelSession,
     issueJoinToken,
     reportPresence,
+    getWorkspace,
+    initializeWorkspace,
+    startWorkspace,
+    completeWorkspace,
   });
 }
 

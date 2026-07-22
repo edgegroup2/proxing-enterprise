@@ -87,6 +87,38 @@ const ROUTE_DEFINITIONS =
       handler:
         'reportPresence',
     }),
+
+    Object.freeze({
+      method: 'get',
+      path:
+        '/rooms/:roomId/live-study/sessions/:sessionId/workspace',
+      handler:
+        'getWorkspace',
+    }),
+
+    Object.freeze({
+      method: 'post',
+      path:
+        '/rooms/:roomId/live-study/sessions/:sessionId/workspace',
+      handler:
+        'initializeWorkspace',
+    }),
+
+    Object.freeze({
+      method: 'post',
+      path:
+        '/rooms/:roomId/live-study/sessions/:sessionId/workspace/start',
+      handler:
+        'startWorkspace',
+    }),
+
+    Object.freeze({
+      method: 'post',
+      path:
+        '/rooms/:roomId/live-study/sessions/:sessionId/workspace/complete',
+      handler:
+        'completeWorkspace',
+    }),
   ]);
 
 function createLearnLiveStudyRouter({

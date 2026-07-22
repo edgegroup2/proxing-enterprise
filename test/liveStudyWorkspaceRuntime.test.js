@@ -649,6 +649,12 @@ test(
     );
 
     assert.equal(
+      result.workspace
+        .last_event_sequence,
+      1
+    );
+
+    assert.equal(
       realtimeCalls.length,
       1
     );
@@ -956,6 +962,12 @@ test(
 
     assert.equal(
       result.workspace.version,
+      2
+    );
+
+    assert.equal(
+      result.workspace
+        .last_event_sequence,
       2
     );
   }
