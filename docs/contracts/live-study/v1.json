@@ -1,0 +1,437 @@
+{
+  "contractVersion": 1,
+  "product": "proxing-exam-live-study",
+  "generatedFromCommit": "7aecb879ae74d9b8c095dcdcba9be47b2c2e013b",
+  "basePath": "/api/learn",
+  "authentication": {
+    "required": true,
+    "mechanism": "Platform Bearer JWT through requireAuth",
+    "serverControls": [
+      "room identity",
+      "participant identity",
+      "membership role",
+      "session lifecycle",
+      "participant permissions",
+      "capacity",
+      "token expiry",
+      "provider availability"
+    ]
+  },
+  "http": {
+    "successEnvelopeFields": [
+      "success",
+      "data"
+    ],
+    "errorEnvelopeFields": [
+      "success",
+      "error",
+      "code"
+    ],
+    "routes": [
+      {
+        "method": "GET",
+        "path": "/rooms/:roomId/live-study/availability",
+        "successStatus": 200,
+        "access": "room_member"
+      },
+      {
+        "method": "POST",
+        "path": "/rooms/:roomId/live-study/sessions/:sessionId/cancel",
+        "successStatus": 200,
+        "access": "room_host"
+      },
+      {
+        "method": "POST",
+        "path": "/rooms/:roomId/live-study/sessions/:sessionId/end",
+        "successStatus": 200,
+        "access": "room_host"
+      },
+      {
+        "method": "POST",
+        "path": "/rooms/:roomId/live-study/sessions/:sessionId/presence",
+        "successStatus": 200,
+        "access": "room_member"
+      },
+      {
+        "method": "POST",
+        "path": "/rooms/:roomId/live-study/sessions/:sessionId/start",
+        "successStatus": 200,
+        "access": "room_host"
+      },
+      {
+        "method": "POST",
+        "path": "/rooms/:roomId/live-study/sessions/:sessionId/token",
+        "successStatus": 200,
+        "access": "room_member"
+      },
+      {
+        "method": "GET",
+        "path": "/rooms/:roomId/live-study/sessions/:sessionId",
+        "successStatus": 200,
+        "access": "room_member"
+      },
+      {
+        "method": "GET",
+        "path": "/rooms/:roomId/live-study/sessions",
+        "successStatus": 200,
+        "access": "room_member"
+      },
+      {
+        "method": "POST",
+        "path": "/rooms/:roomId/live-study/sessions",
+        "successStatus": 201,
+        "access": "room_host"
+      }
+    ]
+  },
+  "requestBodies": {
+    "createSession": {
+      "title": {
+        "required": true,
+        "type": "string",
+        "maximumLength": 160
+      },
+      "description": {
+        "required": false,
+        "nullable": true,
+        "type": "string",
+        "maximumLength": 2000
+      },
+      "scheduledStart": {
+        "required": false,
+        "nullable": true,
+        "type": "ISO-8601 datetime"
+      },
+      "scheduledEnd": {
+        "required": false,
+        "nullable": true,
+        "type": "ISO-8601 datetime",
+        "rule": "Must be later than scheduledStart"
+      },
+      "maxParticipants": {
+        "required": false,
+        "type": "integer",
+        "minimum": 2,
+        "maximum": 500
+      }
+    },
+    "presence": {
+      "action": {
+        "required": true,
+        "allowedValues": [
+          "connected",
+          "heartbeat",
+          "disconnected"
+        ]
+      }
+    },
+    "token": {
+      "bodyRequired": false,
+      "note": "The server derives all token identity and permission information."
+    }
+  },
+  "dataShapes": {
+    "availability": [
+      "available",
+      "enabled",
+      "provider",
+      "providerConfigured",
+      "reason",
+      "capabilities"
+    ],
+    "availabilityCapabilities": [
+      "scheduledSessions",
+      "instantSessions",
+      "joinTokens",
+      "hostMediaPublishing",
+      "memberMediaPublishing",
+      "memberDataPublishing",
+      "waitingRoom",
+      "recording",
+      "dynamicSpeakerPromotion",
+      "presenceSource"
+    ],
+    "session": [
+      "id",
+      "roomId",
+      "title",
+      "description",
+      "status",
+      "scheduledStart",
+      "scheduledEnd",
+      "openedAt",
+      "closedAt",
+      "cancelledAt",
+      "maxParticipants",
+      "waitingRoomEnabled",
+      "memberPublishPolicy",
+      "recordingEnabled",
+      "presenceSource",
+      "canManage",
+      "createdAt",
+      "updatedAt"
+    ],
+    "presence": [
+      "sessionId",
+      "userId",
+      "membershipRole",
+      "participantKind",
+      "action",
+      "status",
+      "stateChanged",
+      "connectionCount",
+      "tokenExpiresAt",
+      "firstConnectedAt",
+      "lastConnectedAt",
+      "lastSeenAt",
+      "disconnectedAt",
+      "presenceSource"
+    ],
+    "joinToken": [
+      "provider",
+      "serverUrl",
+      "participantToken",
+      "roomId",
+      "sessionId",
+      "participantIdentity",
+      "permissions",
+      "expiresInSeconds",
+      "expiresAt",
+      "recordingEnabled",
+      "presenceSource"
+    ],
+    "participantPermissions": [
+      "participantKind",
+      "canSubscribe",
+      "canPublish",
+      "canPublishData"
+    ]
+  },
+  "lifecycle": {
+    "sessionStatuses": [
+      "scheduled",
+      "open",
+      "closed",
+      "cancelled"
+    ],
+    "allowedTransitions": {
+      "scheduled": [
+        "open",
+        "cancelled"
+      ],
+      "open": [
+        "closed"
+      ],
+      "closed": [],
+      "cancelled": []
+    },
+    "membershipRoles": [
+      "host",
+      "member"
+    ],
+    "presenceActions": [
+      "connected",
+      "heartbeat",
+      "disconnected"
+    ]
+  },
+  "permissions": {
+    "host": {
+      "participantKind": "host",
+      "canSubscribe": true,
+      "canPublish": true,
+      "canPublishData": true
+    },
+    "member": {
+      "participantKind": "member",
+      "canSubscribe": true,
+      "canPublish": false,
+      "canPublishData": true
+    }
+  },
+  "availabilityStates": {
+    "available": {
+      "available": true,
+      "enabled": true,
+      "provider": "livekit",
+      "providerConfigured": true,
+      "reason": null,
+      "capabilities": {
+        "scheduledSessions": true,
+        "instantSessions": true,
+        "joinTokens": true,
+        "hostMediaPublishing": true,
+        "memberMediaPublishing": false,
+        "memberDataPublishing": true,
+        "waitingRoom": false,
+        "recording": false,
+        "dynamicSpeakerPromotion": false,
+        "presenceSource": "client_reported"
+      }
+    },
+    "disabled": {
+      "available": false,
+      "enabled": false,
+      "provider": "livekit",
+      "providerConfigured": true,
+      "reason": "LIVE_STUDY_DISABLED",
+      "capabilities": {
+        "scheduledSessions": true,
+        "instantSessions": true,
+        "joinTokens": false,
+        "hostMediaPublishing": true,
+        "memberMediaPublishing": false,
+        "memberDataPublishing": true,
+        "waitingRoom": false,
+        "recording": false,
+        "dynamicSpeakerPromotion": false,
+        "presenceSource": "client_reported"
+      }
+    },
+    "providerUnavailable": {
+      "available": false,
+      "enabled": true,
+      "provider": "livekit",
+      "providerConfigured": false,
+      "reason": "LIVE_STUDY_PROVIDER_NOT_CONFIGURED",
+      "capabilities": {
+        "scheduledSessions": true,
+        "instantSessions": true,
+        "joinTokens": false,
+        "hostMediaPublishing": true,
+        "memberMediaPublishing": false,
+        "memberDataPublishing": true,
+        "waitingRoom": false,
+        "recording": false,
+        "dynamicSpeakerPromotion": false,
+        "presenceSource": "client_reported"
+      }
+    }
+  },
+  "realtime": {
+    "delivery": "Socket.IO personal user channels for active Study Room members",
+    "socketEvents": {
+      "session_created": "live_study:session_created",
+      "session_started": "live_study:session_started",
+      "session_ended": "live_study:session_ended",
+      "session_cancelled": "live_study:session_cancelled",
+      "presence_changed": "live_study:presence_changed"
+    },
+    "sessionEnvelopeFields": [
+      "session",
+      "version",
+      "product",
+      "roomId",
+      "event"
+    ],
+    "presenceEnvelopeFields": [
+      "presence",
+      "version",
+      "product",
+      "roomId",
+      "event"
+    ],
+    "serverOwnedFields": [
+      "version",
+      "product",
+      "roomId",
+      "event"
+    ],
+    "version": 1,
+    "product": "proxing-exam-live-study",
+    "payloadFields": {
+      "session_created": [
+        "session"
+      ],
+      "session_started": [
+        "session"
+      ],
+      "session_ended": [
+        "session"
+      ],
+      "session_cancelled": [
+        "session"
+      ],
+      "presence_changed": [
+        "presence"
+      ]
+    }
+  },
+  "limits": {
+    "tokenTtlSeconds": {
+      "minimum": 60,
+      "maximum": 900,
+      "default": 300
+    },
+    "participants": {
+      "minimum": 2,
+      "maximum": 500,
+      "default": 50
+    }
+  },
+  "errors": {
+    "LIVE_STUDY_AUTH_REQUIRED": 401,
+    "LIVE_STUDY_IDENTIFIER_INVALID": 400,
+    "LIVE_STUDY_ROOM_ACCESS_DENIED": 404,
+    "LIVE_STUDY_HOST_REQUIRED": 403,
+    "LIVE_STUDY_DISABLED": 503,
+    "LIVE_STUDY_PROVIDER_NOT_CONFIGURED": 503,
+    "LIVE_STUDY_TITLE_REQUIRED": 400,
+    "LIVE_STUDY_TITLE_TOO_LONG": 400,
+    "LIVE_STUDY_DESCRIPTION_TOO_LONG": 400,
+    "LIVE_STUDY_SCHEDULE_INVALID": 400,
+    "LIVE_STUDY_PARTICIPANT_LIMIT_INVALID": 400,
+    "LIVE_STUDY_SESSION_NOT_FOUND": 404,
+    "LIVE_STUDY_INVALID_TRANSITION": 409,
+    "LIVE_STUDY_SESSION_NOT_OPEN": 409,
+    "LIVE_STUDY_CAPACITY_REACHED": 409,
+    "LIVE_STUDY_PRESENCE_ACTION_INVALID": 400,
+    "LIVE_STUDY_INTERNAL_ERROR": 500
+  },
+  "unsupported": {
+    "waitingRoom": false,
+    "recording": false,
+    "dynamicSpeakerPromotion": false,
+    "remoteParticipantMuting": false,
+    "providerVerifiedPresence": false,
+    "notes": [
+      "Members cannot publish microphone, camera, or screen media.",
+      "Presence is client-reported and is not proof of provider connectivity.",
+      "Recording controls must not be displayed.",
+      "Waiting-room controls must not be displayed.",
+      "Speaker-promotion controls must not be displayed.",
+      "Remote-mute controls must not be displayed."
+    ]
+  },
+  "frontendRequirements": {
+    "tokenStorage": "memory_only",
+    "requiredStates": [
+      "loading",
+      "empty",
+      "error",
+      "offline",
+      "access_denied",
+      "feature_disabled",
+      "provider_unavailable",
+      "capacity_reached",
+      "session_conflict",
+      "token_expired",
+      "reconnecting"
+    ],
+    "rules": [
+      "Call availability before showing provider-dependent actions.",
+      "Do not invent provider-room or participant identities.",
+      "Do not request a join token before the user explicitly enters a session.",
+      "Clear join tokens when leaving, expiring, or losing authorization.",
+      "Render media publishing controls from server permissions.",
+      "Treat REST responses and Socket.IO events as authoritative server state.",
+      "Do not advertise unsupported capabilities."
+    ]
+  },
+  "verifiedGates": {
+    "browserWebRtc": true,
+    "liveMediaPublished": true,
+    "serverObserverPassed": true,
+    "cleanupPassed": true
+  }
+}
