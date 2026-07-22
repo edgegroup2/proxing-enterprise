@@ -1,0 +1,168 @@
+{
+  "contract": "proxing-exam-live-study",
+  "version": "2.0.0-draft",
+  "status": "draft",
+  "frozen": false,
+  "extends": "docs/contracts/live-study/v1.json",
+  "scope": "mode-workspaces",
+  "invariants": {
+    "v1RoutesRemainUnchanged": true,
+    "v1ResponseShapesRemainUnchanged": true,
+    "workspaceBelongsToExactlyOneSession": true,
+    "workspaceModeIsServerDerived": true,
+    "eventsArePersistedBeforeBroadcast": true,
+    "scoresAndCorrectnessAreServerCalculated": true,
+    "memberMediaPublishingRemainsDisabled": true
+  },
+  "modeMap": {
+    "coop": "revision",
+    "battle": "challenge",
+    "explain": "tutor_led"
+  },
+  "workspace": {
+    "statuses": [
+      "idle",
+      "active",
+      "completed"
+    ],
+    "optimisticConcurrency": {
+      "field": "expected_version",
+      "serverField": "version",
+      "conflictStatus": 409
+    },
+    "eventSequence": {
+      "field": "sequence_number",
+      "startsAt": 1,
+      "scope": "workspace",
+      "generatedByServer": true
+    }
+  },
+  "revision": {
+    "releaseStatus": "implementation-target",
+    "activityStates": [
+      "draft",
+      "active",
+      "revealed",
+      "completed"
+    ],
+    "questionSelection": {
+      "source": "canonical-proxing-question",
+      "requestField": "question_id",
+      "clientMayProvideQuestionSnapshot": false,
+      "serverValidatesExamSubjectAndTopicScope": true
+    },
+    "submissionRules": {
+      "oneSubmissionPerUserPerActivity": true,
+      "clientMayProvideCorrectness": false,
+      "clientMayProvideScore": false,
+      "answerKeyHiddenBeforeReveal": true,
+      "responseTimeUsesServerTimestamps": true
+    },
+    "notes": {
+      "shared": true,
+      "softDelete": true,
+      "maxLength": 4000
+    }
+  },
+  "routes": [
+    {
+      "method": "GET",
+      "path": "/rooms/:roomId/live-study/sessions/:sessionId/workspace",
+      "authorization": "room_member"
+    },
+    {
+      "method": "POST",
+      "path": "/rooms/:roomId/live-study/sessions/:sessionId/workspace",
+      "authorization": "room_host",
+      "idempotent": true,
+      "body": {}
+    },
+    {
+      "method": "POST",
+      "path": "/rooms/:roomId/live-study/sessions/:sessionId/workspace/start",
+      "authorization": "room_host",
+      "body": {
+        "expected_version": "integer"
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/rooms/:roomId/live-study/sessions/:sessionId/workspace/complete",
+      "authorization": "room_host",
+      "body": {
+        "expected_version": "integer"
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/rooms/:roomId/live-study/sessions/:sessionId/workspace/revision/activities",
+      "authorization": "room_host",
+      "body": {
+        "question_id": "uuid",
+        "time_limit_seconds": "integer|null",
+        "expected_version": "integer"
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/rooms/:roomId/live-study/sessions/:sessionId/workspace/revision/activities/:activityId/start",
+      "authorization": "room_host",
+      "body": {
+        "expected_version": "integer"
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/rooms/:roomId/live-study/sessions/:sessionId/workspace/revision/activities/:activityId/submissions",
+      "authorization": "room_member",
+      "body": {
+        "answer": "json"
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/rooms/:roomId/live-study/sessions/:sessionId/workspace/revision/activities/:activityId/reveal",
+      "authorization": "room_host",
+      "body": {
+        "expected_version": "integer"
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/rooms/:roomId/live-study/sessions/:sessionId/workspace/revision/activities/:activityId/complete",
+      "authorization": "room_host",
+      "body": {
+        "expected_version": "integer"
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/rooms/:roomId/live-study/sessions/:sessionId/workspace/revision/activities/:activityId/results",
+      "authorization": "room_member_after_reveal"
+    }
+  ],
+  "realtime": {
+    "event": "live_study:workspace_event",
+    "delivery": "after_database_commit",
+    "envelope": {
+      "version": 2,
+      "product": "proxing-exam-live-study",
+      "roomId": "uuid",
+      "sessionId": "uuid",
+      "workspaceId": "uuid",
+      "sequenceNumber": "integer",
+      "event": "string",
+      "data": "object",
+      "occurredAt": "ISO-8601"
+    }
+  },
+  "reservedForLaterReleases": [
+    "challenge_rounds",
+    "challenge_leaderboards",
+    "tutor_resources",
+    "learner_hand_raise",
+    "dynamic_speaker_promotion",
+    "remote_muting",
+    "recording_and_replay"
+  ]
+}
